@@ -185,36 +185,91 @@
       unitRow.style.display = 'none';
     } else if (rz.mode === 'width') {
       label.textContent = 'Width';
-      v1.value = rz.unit === 'px' ? 800 : rz.unit === 'in' ? 8 : rz.unit === 'cm' ? 21 : 800;
+      v1.value = rz.unit === 'px' ? 800 : rz.unit === 'in' ? 8 : rz.unit === 'cm' ? 21 : 100;
       v2.style.display = 'none';
       unitRow.style.display = '';
     } else if (rz.mode === 'height') {
       label.textContent = 'Height';
-      v1.value = rz.unit === 'px' ? 800 : rz.unit === 'in' ? 8 : rz.unit === 'cm' ? 29 : 800;
+      v1.value = rz.unit === 'px' ? 800 : rz.unit === 'in' ? 8 : rz.unit === 'cm' ? 29 : 100;
       v2.style.display = 'none';
       unitRow.style.display = '';
     } else {
       label.textContent = 'Width \u00d7 Height';
-      v1.value = rz.unit === 'px' ? 800 : rz.unit === 'in' ? 8 : rz.unit === 'cm' ? 21 : 800;
-      v2.value = rz.unit === 'px' ? 600 : rz.unit === 'in' ? 6 : rz.unit === 'cm' ? 15 : 600;
+      v1.value = rz.unit === 'px' ? 800 : rz.unit === 'in' ? 8 : rz.unit === 'cm' ? 21 : 100;
+      v2.value = rz.unit === 'px' ? 600 : rz.unit === 'in' ? 6 : rz.unit === 'cm' ? 15 : 100;
       v2.style.display = 'inline-block';
       unitRow.style.display = '';
     }
   });
 
-  $('#rz-unit').addEventListener('click', function (e) {
-    var btn = e.target.closest('.seg-btn');
-    if (!btn) return;
-    rz.unit = btn.dataset.unit;
-    var buttons = Array.prototype.slice.call(document.querySelectorAll('#rz-unit .seg-btn'));
-    buttons.forEach(function (b) { b.classList.toggle('active', b === btn); });
-  });
-
-  function unitToPx(v, unit) {
+  function unitToPx(v, unit, refPx) {
     if (unit === 'in') return v * 96;
     if (unit === 'cm') return v * 96 / 2.54;
+    if (unit === 'pct') return refPx ? (v / 100) * refPx : v;
     return v;
   }
+
+  function convertUnit(v, fromUnit, toUnit, refPx) {
+    var px;
+    if (fromUnit === 'in') px = v * 96;
+    else if (fromUnit === 'cm') px = v * 96 / 2.54;
+    else if (fromUnit === 'pct') px = refPx ? (v / 100) * refPx : v;
+    else px = v;
+    if (toUnit === 'in') return px / 96;
+    if (toUnit === 'cm') return px * 2.54 / 96;
+    if (toUnit === 'pct') return refPx ? (px / refPx) * 100 : px;
+    return px;
+  }
+
+  function roundVal(v, unit) {
+    if (unit === 'in' || unit === 'cm' || unit === 'pct') return Math.round(v * 100) / 100;
+    return Math.round(v);
+  }
+
+  function loadFirstImageDims() {
+    return new Promise(function (resolve) {
+      if (!rz.files.length) { resolve(null); return; }
+      var url = URL.createObjectURL(rz.files[0]);
+      var img = new Image();
+      img.onload = function () {
+        var d = { w: img.naturalWidth, h: img.naturalHeight };
+        URL.revokeObjectURL(url);
+        resolve(d);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+  }
+
+  $('#rz-unit').addEventListener('click', function (e) {
+    var btn = e.target.closest('.seg-btn');
+    if (!btn || btn.dataset.unit === rz.unit) return;
+    var newUnit = btn.dataset.unit;
+    var oldUnit = rz.unit;
+    var needsRef = oldUnit === 'pct' || newUnit === 'pct';
+    var applyConversion = function (ref) {
+      var refW = ref ? ref.w : 0;
+      var refH = ref ? ref.h : 0;
+      var ref1 = rz.mode === 'height' ? refH : refW;
+      var ref2 = refH;
+      var v1 = $('#rz-value');
+      var v2 = $('#rz-value2');
+      var nv1 = convertUnit(parseFloat(v1.value) || 0, oldUnit, newUnit, ref1);
+      v1.value = roundVal(nv1, newUnit);
+      if (v2.style.display !== 'none') {
+        var nv2 = convertUnit(parseFloat(v2.value) || 0, oldUnit, newUnit, ref2);
+        v2.value = roundVal(nv2, newUnit);
+      }
+      rz.unit = newUnit;
+      var buttons = Array.prototype.slice.call(document.querySelectorAll('#rz-unit .seg-btn'));
+      buttons.forEach(function (b) { b.classList.toggle('active', b === btn); });
+    };
+    if (needsRef) {
+      loadFirstImageDims().then(applyConversion);
+    } else {
+      applyConversion(null);
+    }
+  });
 
   $('#rz-quality').addEventListener('input', function () {
     $('#rz-quality-val').textContent = $('#rz-quality').value + '%';
@@ -227,8 +282,6 @@
     var value2 = Math.max(0.1, parseFloat($('#rz-value2').value) || 0);
     var fmt = $('#rz-format').value;
     var quality = parseInt($('#rz-quality').value, 10) / 100;
-    var vPx = unitToPx(value, rz.unit);
-    var v2Px = unitToPx(value2, rz.unit);
 
     busy('Resizing ' + rz.files.length + ' image(s)...');
     try {
@@ -241,17 +294,19 @@
         var baseH = img.naturalHeight;
         var w, h;
         if (mode === 'percent') {
-          w = Math.max(1, Math.round((baseW * vPx) / 100));
-          h = Math.max(1, Math.round((baseH * vPx) / 100));
+          w = Math.max(1, Math.round((baseW * value) / 100));
+          h = Math.max(1, Math.round((baseH * value) / 100));
         } else if (mode === 'width') {
-          w = Math.max(1, Math.round(vPx));
-          h = Math.max(1, Math.round((vPx / baseW) * baseH));
+          var wPx = unitToPx(value, rz.unit, baseW);
+          w = Math.max(1, Math.round(wPx));
+          h = Math.max(1, Math.round((wPx / baseW) * baseH));
         } else if (mode === 'height') {
-          h = Math.max(1, Math.round(vPx));
-          w = Math.max(1, Math.round((vPx / baseH) * baseW));
+          var hPx = unitToPx(value, rz.unit, baseH);
+          h = Math.max(1, Math.round(hPx));
+          w = Math.max(1, Math.round((hPx / baseH) * baseW));
         } else {
-          w = Math.max(1, Math.round(vPx));
-          h = Math.max(1, Math.round(v2Px));
+          w = Math.max(1, Math.round(unitToPx(value, rz.unit, baseW)));
+          h = Math.max(1, Math.round(unitToPx(value2, rz.unit, baseH)));
         }
 
         var canvas = document.createElement('canvas');
