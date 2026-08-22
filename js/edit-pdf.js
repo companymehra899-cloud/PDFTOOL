@@ -426,7 +426,7 @@
   });
 
   // Extract existing text from PDF page
-  async function extractTextFromPage(pdfJs, pageNum) {
+  async function extractTextFromPage(pdfJs, pageNum, pageWidth, pageHeight) {
     try {
       var page = await pdfJs.getPage(pageNum);
       var textContent = await page.getTextContent();
@@ -436,22 +436,6 @@
       console.error('Error extracting text:', err);
       return [];
     }
-  }
-
-  // Render PDF with text layer hidden using canvas
-  async function renderPageWithHiddenText(pdfJs, pageNum, viewport, canvas) {
-    var page = await pdfJs.getPage(pageNum);
-    var ctx = canvas.getContext('2d');
-    
-    // Render page to canvas (includes text)
-    await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-    
-    // Get text content to determine text areas
-    var textContent = await page.getTextContent();
-    var items = textContent.items || [];
-    
-    // Store text items for reference (we'll create transparent overlays)
-    return items;
   }
 
   async function veLoadPage(idx) {
@@ -480,14 +464,14 @@
       ve.pages[key] = { scale: S, elements: [] };
       
       // Extract existing text from PDF
-      var textItems = await extractTextFromPage(entry.pdfJs, pg.pi + 1);
+      var textItems = await extractTextFromPage(entry.pdfJs, pg.pi + 1, vp1.width, vp1.height);
       textItems.forEach(function (item) {
         if (item.str && item.str.trim()) {
           var el = {
             id: ve.nextId++,
             type: 'text',
-            x: item.transform[4],
-            y: vp1.height - item.transform[5],
+            x: item.transform[4] || 0,
+            y: vp1.height - (item.transform[5] || 0),
             text: item.str,
             sizePt: Math.round(item.height * 0.75) || 12,
             bold: false,
@@ -495,7 +479,7 @@
             underline: false,
             color: '#111111',
             fromPdf: true, // Mark as extracted from PDF
-            opacity: 0.2 // Make transparent to show original PDF text
+            isEditable: true // Mark as editable
           };
           ve.pages[key].elements.push(el);
         }
@@ -577,8 +561,8 @@
       d.style.fontStyle = el.italic ? 'italic' : 'normal';
       d.style.textDecoration = el.underline ? 'underline' : 'none';
       d.style.color = el.color;
-      d.style.opacity = el.opacity != null ? el.opacity : 1;
       d.style.minHeight = el.sizePt * S * 1.2 + 'px';
+      d.style.backgroundColor = el.fromPdf ? 'rgba(255, 255, 200, 0.3)' : 'transparent';
     } else if (el.type === 'rect' || el.type === 'ellipse') {
       d.style.left = el.x * S + 'px';
       d.style.top = el.y * S + 'px';
@@ -680,7 +664,6 @@
       italic: false,
       underline: false,
       color: '#111111',
-      opacity: 1 // New text has full opacity
     };
     ve.els.push(el);
     renderElements();
@@ -952,8 +935,9 @@
   async function drawVeElOnPage(out, page, el, pw, ph, fonts) {
     var C = PDFLib.rgb.apply(null, hexToRgb(el.color || '#111111'));
     try {
-      // Skip transparent PDF text elements when saving (fromPdf flag)
-      if (el.fromPdf) return;
+      // Only save elements that are not from PDF or are edited PDF elements
+      // Skip saving PDF extracted text - keep original PDF text intact
+      if (el.fromPdf && el.text === el.originalText) return;
       
       if (el.type === 'text') {
         var key = 'H';
