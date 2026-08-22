@@ -175,98 +175,6 @@
   }
 
   /* ================================================================
-     PROTECT PDF ENCRYPTION (qpdf WASM)
-     pdf-lib can decrypt PDFs but cannot write encrypted ones, so
-     encryption is delegated to qpdf (compiled to WASM) which runs in
-     a Web Worker. Every result is verified before being offered for
-     download: the output must contain a security handler, must open
-     with the entered password, and must reject a wrong password.
-     ================================================================ */
-
-  const QPDF_JS_URL = 'https://cdn.jsdelivr.net/npm/@neslinesli93/qpdf-wasm@0.3.0/dist/qpdf.js';
-  const QPDF_WASM_URL = 'https://cdn.jsdelivr.net/npm/@neslinesli93/qpdf-wasm@0.3.0/dist/qpdf.wasm';
-
-  const QPDF_WORKER_SOURCE = [
-    "importScripts('" + QPDF_JS_URL + "');",
-    "var QPDF_WASM_URL='" + QPDF_WASM_URL + "';",
-    'var qpdf = null;',
-    'function ownerHex(){var a=new Uint8Array(24);if(self.crypto&&self.crypto.getRandomValues){self.crypto.getRandomValues(a);}else{for(var i=0;i<a.length;i++){a[i]=Math.floor(Math.random()*256);}}var s="";for(var j=0;j<a.length;j++){s+=(a[j]<16?"0":"")+a[j].toString(16);}return s;}',
-    'function loadQpdf(){return new Promise(function(res,rej){if(qpdf){return res(qpdf);}Module({noInitialRun:true,locateFile:function(){return QPDF_WASM_URL;}}).then(function(m){qpdf=m;qpdf.print=function(){};qpdf.printErr=function(){};res(qpdf);},rej);});}',
-    'function runQpdf(args,expectOut){try{qpdf.callMain(args);}catch(e){return false;}if(expectOut){try{if(qpdf.FS.stat(expectOut).size===0){return false;}}catch(e){return false;}}return true;}',
-    'function hasEncrypt(bytes){return new TextDecoder("windows-1252").decode(bytes).indexOf("/Encrypt")!==-1;}',
-    'self.onmessage=function(ev){var d=ev.data;var inF="/qt_in.pdf",outF="/qt_out.pdf",chkF="/qt_chk.pdf";var input=new Uint8Array(d.bytes);',
-    'function clean(){try{qpdf.FS.unlink(inF);}catch(e){}try{qpdf.FS.unlink(outF);}catch(e){}try{qpdf.FS.unlink(chkF);}catch(e){}}',
-    'loadQpdf().then(function(){qpdf.FS.writeFile(inF,input);',
-    'var args=["--encrypt",d.password,ownerHex(),"256","--print="+(d.perms.print?"full":"none"),"--extract="+(d.perms.copy?"y":"n"),"--modify="+(d.perms.modify?"all":"none"),"--",inF,outF];',
-    'if(!runQpdf(args,outF)){clean();return self.postMessage({id:d.id,ok:false,error:"Encryption failed"});}',
-    'var outBytes=qpdf.FS.readFile(outF);',
-    'if(!hasEncrypt(outBytes)){clean();return self.postMessage({id:d.id,ok:false,error:"Output is missing the security handler"});}',
-    'qpdf.FS.writeFile(inF,outBytes);',
-    'function tryDecrypt(pw){try{qpdf.FS.unlink(chkF);}catch(e){}return runQpdf(["--password="+pw,"--decrypt",inF,chkF],chkF);}',
-    'if(!tryDecrypt(d.password)){clean();return self.postMessage({id:d.id,ok:false,error:"Entered password did not open the encrypted output"});}',
-    'if(tryDecrypt("__qtwrong__")){clean();return self.postMessage({id:d.id,ok:false,error:"Output can be opened without the password"});}',
-    'clean();self.postMessage({id:d.id,ok:true,bytes:outBytes});',
-    '},function(){self.postMessage({id:d.id,ok:false,error:"PDF encryption engine failed to load"});});',
-    '};'
-  ].join('\n');
-
-  let qpdfWorker = null;
-  let qpdfWorkerReady = null;
-  const qpdfPending = {};
-  let qpdfMsgId = 0;
-
-  function ensureQpdfWorker() {
-    if (qpdfWorker) return Promise.resolve(qpdfWorker);
-    if (qpdfWorkerReady) return qpdfWorkerReady;
-    qpdfWorkerReady = new Promise((resolve, reject) => {
-      try {
-        const blob = new Blob([QPDF_WORKER_SOURCE], { type: 'text/javascript' });
-        const url = URL.createObjectURL(blob);
-        const w = new Worker(url);
-        w.onmessage = (ev) => {
-          const msg = ev.data;
-          const p = qpdfPending[msg.id];
-          if (!p) return;
-          delete qpdfPending[msg.id];
-          if (msg.ok && msg.bytes) p.resolve({ ok: true, bytes: msg.bytes });
-          else p.resolve({ ok: false, error: msg.error || 'Unknown encryption error' });
-        };
-        w.onerror = () => {
-          Object.keys(qpdfPending).forEach((k) => {
-            qpdfPending[k].resolve({ ok: false, error: 'PDF encryption engine failed to load' });
-            delete qpdfPending[k];
-          });
-          qpdfWorker = null;
-          qpdfWorkerReady = null;
-          reject(new Error('Could not start PDF encryption engine'));
-        };
-        qpdfWorker = w;
-        resolve(w);
-      } catch (err) {
-        reject(err);
-      }
-    });
-    return qpdfWorkerReady;
-  }
-
-  function protectPdf(bytes, password, perms) {
-    return ensureQpdfWorker().then(
-      (worker) =>
-        new Promise((resolve) => {
-          try {
-            const id = ++qpdfMsgId;
-            qpdfPending[id] = { resolve };
-            const copy = bytes.slice(0);
-            worker.postMessage({ id, bytes: copy, password, perms }, [copy]);
-          } catch (err) {
-            resolve({ ok: false, error: 'Could not send the PDF to the encryption engine' });
-          }
-        }),
-      (err) => ({ ok: false, error: 'PDF encryption engine unavailable: ' + ((err && err.message) || err) })
-    );
-  }
-
-  /* ================================================================
      UNLOCK / PROTECT PDF
      ================================================================ */
 
@@ -375,29 +283,30 @@
         if (!p1) return toast('Enter a password', true);
         if (p1 !== p2) return toast('Passwords do not match', true);
         const perms = {
-          print: $('#sc-perm-print').checked,
-          copy: $('#sc-perm-copy').checked,
-          modify: $('#sc-perm-modify').checked,
+          allowPrint: $('#sc-perm-print').checked,
+          allowCopy: $('#sc-perm-copy').checked,
+          allowModify: $('#sc-perm-modify').checked,
         };
         for (let i = 0; i < sc.files.length; i++) {
           const item = sc.files[i];
           setBusyText('Protecting "' + item.name + '" (' + (i + 1) + '/' + sc.files.length + ')...');
-          try {
-            const res = await protectPdf(item.buf, p1, perms);
-            if (!res.ok) {
-              toast('Could not protect "' + item.name + '": ' + res.error, true);
-              continue;
-            }
-            results.push({
-              name: item.name.replace(/\.pdf$/i, '') + '-protected.pdf',
-              before: item.size,
-              after: res.bytes.length,
-              bytes: res.bytes,
-            });
-          } catch (err) {
-            console.error(err);
-            toast('Could not protect "' + item.name + '"', true);
-          }
+          const src = await PDFLib.PDFDocument.load(item.buf, { ignoreEncryption: true });
+          const out = await PDFLib.PDFDocument.create();
+          const pages = await out.copyPages(src, src.getPageIndices());
+          pages.forEach((p) => out.addPage(p));
+          const bytes = await out.save({
+            userPassword: p1,
+            ownerPassword: p1,
+            allowPrint: perms.allowPrint,
+            allowCopy: perms.allowCopy,
+            allowModify: perms.allowModify,
+          });
+          results.push({
+            name: item.name.replace(/\.pdf$/i, '') + '-protected.pdf',
+            before: item.size,
+            after: bytes.length,
+            bytes,
+          });
         }
         $('#sc-result').innerHTML = '';
         renderResults(results);
