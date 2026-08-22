@@ -425,6 +425,19 @@
     openVisualEditor(i);
   });
 
+  // Extract existing text from PDF page
+  async function extractTextFromPage(pdfJs, pageNum) {
+    try {
+      var page = await pdfJs.getPage(pageNum);
+      var textContent = await page.getTextContent();
+      var items = textContent.items || [];
+      return items;
+    } catch (err) {
+      console.error('Error extracting text:', err);
+      return [];
+    }
+  }
+
   async function veLoadPage(idx) {
     if (idx < 0 || idx >= ed.pages.length) return;
     var pg = ed.pages[idx];
@@ -449,6 +462,28 @@
     } else {
       S = clamp((wrap.clientWidth - 24) / vp1.width, 0.4, 2);
       ve.pages[key] = { scale: S, elements: [] };
+      
+      // Extract existing text from PDF
+      var textItems = await extractTextFromPage(entry.pdfJs, pg.pi + 1);
+      textItems.forEach(function (item) {
+        if (item.str && item.str.trim()) {
+          var el = {
+            id: ve.nextId++,
+            type: 'text',
+            x: item.transform[4],
+            y: vp1.height - item.transform[5],
+            text: item.str,
+            sizePt: Math.round(item.height * 0.75) || 12,
+            bold: false,
+            italic: false,
+            underline: false,
+            color: '#111111',
+            fromPdf: true // Mark as extracted from PDF
+          };
+          ve.pages[key].elements.push(el);
+        }
+      });
+      
       snap();
     }
     var vp = page.getViewport({ scale: S });
@@ -461,7 +496,7 @@
     renderElements();
     updateThumbs();
     $('#ve-title').textContent =
-      'Page ' + (idx + 1) + ' / ' + ed.pages.length + ' \u2014 ' + entry.name;
+      'Page ' + (idx + 1) + ' / ' + ed.pages.length + ' — ' + entry.name;
   }
 
   function updateThumbs() {
