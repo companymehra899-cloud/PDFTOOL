@@ -438,6 +438,22 @@
     }
   }
 
+  // Render PDF with text layer hidden using canvas
+  async function renderPageWithHiddenText(pdfJs, pageNum, viewport, canvas) {
+    var page = await pdfJs.getPage(pageNum);
+    var ctx = canvas.getContext('2d');
+    
+    // Render page to canvas (includes text)
+    await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+    
+    // Get text content to determine text areas
+    var textContent = await page.getTextContent();
+    var items = textContent.items || [];
+    
+    // Store text items for reference (we'll create transparent overlays)
+    return items;
+  }
+
   async function veLoadPage(idx) {
     if (idx < 0 || idx >= ed.pages.length) return;
     var pg = ed.pages[idx];
@@ -478,7 +494,8 @@
             italic: false,
             underline: false,
             color: '#111111',
-            fromPdf: true // Mark as extracted from PDF
+            fromPdf: true, // Mark as extracted from PDF
+            opacity: 0.2 // Make transparent to show original PDF text
           };
           ve.pages[key].elements.push(el);
         }
@@ -560,6 +577,7 @@
       d.style.fontStyle = el.italic ? 'italic' : 'normal';
       d.style.textDecoration = el.underline ? 'underline' : 'none';
       d.style.color = el.color;
+      d.style.opacity = el.opacity != null ? el.opacity : 1;
       d.style.minHeight = el.sizePt * S * 1.2 + 'px';
     } else if (el.type === 'rect' || el.type === 'ellipse') {
       d.style.left = el.x * S + 'px';
@@ -662,6 +680,7 @@
       italic: false,
       underline: false,
       color: '#111111',
+      opacity: 1 // New text has full opacity
     };
     ve.els.push(el);
     renderElements();
@@ -933,6 +952,9 @@
   async function drawVeElOnPage(out, page, el, pw, ph, fonts) {
     var C = PDFLib.rgb.apply(null, hexToRgb(el.color || '#111111'));
     try {
+      // Skip transparent PDF text elements when saving (fromPdf flag)
+      if (el.fromPdf) return;
+      
       if (el.type === 'text') {
         var key = 'H';
         var std = PDFLib.StandardFonts.Helvetica;
