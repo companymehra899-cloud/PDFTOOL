@@ -400,6 +400,21 @@
     return pg.fi + '_' + pg.pi;
   }
 
+  // True if a PDF-extracted text element has not been touched by the user
+  // (text, position, size and style all still match what was extracted).
+  function isUnmodifiedPdfText(el) {
+    if (!el.fromPdf) return false;
+    return (
+      el.text === el.originalText &&
+      el.x === el.originalX &&
+      el.y === el.originalY &&
+      el.sizePt === el.originalSizePt &&
+      !el.bold &&
+      !el.italic &&
+      !el.underline
+    );
+  }
+
   function openVisualEditor(pageIdx) {
     if (!ed.pages.length) return;
     var target = pageIdx == null ? Math.max(0, ed.sel) : pageIdx;
@@ -462,30 +477,39 @@
     } else {
       S = clamp((wrap.clientWidth - 24) / vp1.width, 0.4, 2);
       ve.pages[key] = { scale: S, elements: [] };
-
+      
       // Extract existing text from PDF
       var textItems = await extractTextFromPage(entry.pdfJs, pg.pi + 1, vp1.width, vp1.height);
       textItems.forEach(function (item) {
         if (item.str && item.str.trim()) {
+          var exX = item.transform[4] || 0;
+          var exY = vp1.height - (item.transform[5] || 0);
+          var exSize = Math.round(item.height * 0.75) || 12;
           var el = {
             id: ve.nextId++,
             type: 'text',
-            x: item.transform[4] || 0,
-            y: vp1.height - (item.transform[5] || 0),
+            x: exX,
+            y: exY,
             text: item.str,
-            sizePt: Math.round(item.height * 0.75) || 12,
+            sizePt: exSize,
             bold: false,
             italic: false,
             underline: false,
             color: '#111111',
             fromPdf: true, // Mark as extracted from PDF
             isEditable: true, // Mark as editable
-            originalText: item.str // Track original so unedited PDF text is not redrawn on save
+            // Track originals so untouched PDF text is neither redrawn on
+            // save nor shown as a duplicate overlay on top of the real
+            // PDF text rendered on the canvas.
+            originalText: item.str,
+            originalX: exX,
+            originalY: exY,
+            originalSizePt: exSize
           };
           ve.pages[key].elements.push(el);
         }
       });
-
+      
       snap();
     }
     var vp = page.getViewport({ scale: S });
@@ -555,15 +579,19 @@
   function styleVeEl(d, el) {
     var S = ve.scale;
     if (el.type === 'text') {
+      var isUntouchedPdfText = isUnmodifiedPdfText(el) && ve.editingId !== el.id;
       d.style.left = el.x * S + 'px';
       d.style.top = el.y * S + 'px';
       d.style.fontSize = el.sizePt * S + 'px';
       d.style.fontWeight = el.bold ? 'bold' : 'normal';
       d.style.fontStyle = el.italic ? 'italic' : 'normal';
       d.style.textDecoration = el.underline ? 'underline' : 'none';
-      d.style.color = el.color;
+      // Untouched PDF text stays invisible so it doesn't double up with the
+      // real text already rendered on the canvas underneath it. As soon as
+      // it's edited, moved or styled, it becomes visible again.
+      d.style.color = isUntouchedPdfText ? 'transparent' : el.color;
       d.style.minHeight = el.sizePt * S * 1.2 + 'px';
-      d.style.backgroundColor = el.fromPdf ? 'rgba(255, 255, 200, 0.3)' : 'transparent';
+      d.style.backgroundColor = isUntouchedPdfText ? 'transparent' : (el.fromPdf ? 'rgba(255, 255, 200, 0.3)' : 'transparent');
     } else if (el.type === 'rect' || el.type === 'ellipse') {
       d.style.left = el.x * S + 'px';
       d.style.top = el.y * S + 'px';
@@ -938,8 +966,8 @@
     try {
       // Only save elements that are not from PDF or are edited PDF elements
       // Skip saving PDF extracted text - keep original PDF text intact
-      if (el.fromPdf && el.text === el.originalText) return;
-
+      if (isUnmodifiedPdfText(el)) return;
+      
       if (el.type === 'text') {
         var key = 'H';
         var std = PDFLib.StandardFonts.Helvetica;
