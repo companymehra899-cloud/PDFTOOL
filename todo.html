@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App | QuickTools</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="css/todo.css?v=1">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Cpath d='M10 8h9a4 4 0 0 1 4 4v12h-4V13a3 3 0 0 0-3-3h-6V8z' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="brand" aria-label="QuickTools home">
+            <span class="brand-logo">
+                <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#4f46e5"/><path d="M10 8h9a4 4 0 0 1 4 4v12h-4V13a3 3 0 0 0-3-3h-6V8z" fill="#fff"/></svg>
+            </span>
+            Quick<span class="accent">Tools</span>
+        </a>
+        <nav class="site-nav" aria-label="Tools">
+            <a class="nav-link" href="index.html">Tools</a>
+            <a class="nav-link active" href="todo.html" aria-current="page">To-Do List</a>
+            <a class="nav-link" href="edit-pdf.html">Edit PDF</a>
+            <a class="nav-link" href="merge-pdf.html">Merge PDF</a>
+        </nav>
+        <span class="privacy-badge" title="All data saved locally">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4zm-2 15-4-4 1.4-1.4L10 13.2l6.6-6.6L18.2 8.6z"/></svg>
+            100% Local Storage
+        </span>
+    </div>
+</header>
+
+<main class="container">
+    <!-- Hero -->
+    <section class="home-hero tool-hero" aria-labelledby="todo-h1">
+        <div class="hero-badge"><span class="dot"></span> Free · No Sign-up · Local Storage</div>
+        <h1 id="todo-h1">To-Do List Manager</h1>
+        <p class="hero-sub">Organize your tasks with a simple, fast to-do list. All your tasks are saved locally on your device - no server uploads, no account needed.</p>
+    </section>
+
+    <!-- To-Do App -->
+    <section class="tool-area" aria-labelledby="todo-tool-title">
+        <h2 id="todo-tool-title" class="sr-only">To-Do List Tool</h2>
+
+        <div class="todo-container">
+            <div class="todo-header">
+                <h2>My Tasks</h2>
+                <div class="todo-stats">
+                    <span class="stat-item">Total: <strong id="total-count">0</strong></span>
+                    <span class="stat-item">Completed: <strong id="completed-count">0</strong></span>
+                </div>
+            </div>
+
+            <div class="todo-input-section">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="todo-input" 
+                        placeholder="Add a new task..." 
+                        aria-label="New task input"
+                        autocomplete="off"
+                    >
+                    <button id="add-btn" class="btn primary" aria-label="Add task">
+                        <span>+</span> Add Task
+                    </button>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+            </div>
+
+            <div class="todo-list-wrapper">
+                <ul id="todo-list" class="todo-list" aria-label="Task list" role="list">
+                    <!-- Tasks will be rendered here -->
+                </ul>
+                <div id="empty-state" class="empty-state" hidden>
+                    <svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
+                        <path fill="none" stroke="currentColor" stroke-width="1.5" d="M9 12l2 2 4-4m7 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <p>No tasks yet. Add one to get started!</p>
+                </div>
+            </div>
+
+            <div class="todo-actions">
+                <button id="clear-completed-btn" class="btn ghost small" aria-label="Clear completed tasks">
+                    Clear Completed
+                </button>
+                <button id="export-btn" class="btn ghost small" aria-label="Export tasks">
+                    📥 Export
+                </button>
+                <button id="import-btn" class="btn ghost small" aria-label="Import tasks">
+                    📤 Import
+                </button>
+                <input type="file" id="import-input" accept=".json" hidden>
+                <button id="clear-all-btn" class="btn ghost small danger" aria-label="Clear all tasks">
+                    🗑️ Clear All
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="home-section" aria-labelledby="todo-info-title">
+        <div class="home-section-head">
+            <h2 id="todo-info-title">Features</h2>
+            <p>Everything you need for productive task management.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">✓</span>
+                <h3>Quick Add Tasks</h3>
+                <p>Add tasks instantly with the input field. Press Enter or click Add.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">☑</span>
+                <h3>Mark Complete</h3>
+                <p>Click the checkbox to mark tasks as done. Completed tasks are tracked.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">✏️</span>
+                <h3>Edit Tasks</h3>
+                <p>Double-click any task to edit it. Changes are saved automatically.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔍</span>
+                <h3>Filter & Sort</h3>
+                <p>View all, active, or completed tasks. Organize your work easily.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">💾</span>
+                <h3>Local Storage</h3>
+                <p>All tasks saved locally. No internet needed, your privacy is protected.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <h3>Export & Import</h3>
+                <p>Backup your tasks as JSON or restore from a file anytime.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>QuickTools · All data is stored locally on your device. <a href="index.html">Back to all tools</a>.</p>
+    </div>
+</footer>
+
+<div id="toast-wrap"></div>
+
+<script src="js/todo.js?v=1"></script>
+</body>
+</html>
