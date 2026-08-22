@@ -462,7 +462,7 @@
     } else {
       S = clamp((wrap.clientWidth - 24) / vp1.width, 0.4, 2);
       ve.pages[key] = { scale: S, elements: [] };
-      
+
       // Extract existing text from PDF
       var textItems = await extractTextFromPage(entry.pdfJs, pg.pi + 1, vp1.width, vp1.height);
       textItems.forEach(function (item) {
@@ -479,12 +479,13 @@
             underline: false,
             color: '#111111',
             fromPdf: true, // Mark as extracted from PDF
-            isEditable: true // Mark as editable
+            isEditable: true, // Mark as editable
+            originalText: item.str // Track original so unedited PDF text is not redrawn on save
           };
           ve.pages[key].elements.push(el);
         }
       });
-      
+
       snap();
     }
     var vp = page.getViewport({ scale: S });
@@ -938,7 +939,7 @@
       // Only save elements that are not from PDF or are edited PDF elements
       // Skip saving PDF extracted text - keep original PDF text intact
       if (el.fromPdf && el.text === el.originalText) return;
-      
+
       if (el.type === 'text') {
         var key = 'H';
         var std = PDFLib.StandardFonts.Helvetica;
