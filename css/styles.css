@@ -125,6 +125,8 @@ body {
   flex-direction: column;
   gap: 8px;
 }
+a.tool-card { text-decoration: none; color: inherit; }
+a.btn { text-decoration: none; }
 .tool-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
