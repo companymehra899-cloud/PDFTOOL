@@ -415,6 +415,51 @@
     );
   }
 
+  // Approximate bounding box (in PDF-page point space) that the ORIGINAL
+  // extracted text occupied, used to "redact" (white out) that spot once
+  // the user edits/moves/styles the text, so the old text doesn't show
+  // through behind the new one.
+  function getOriginalBBox(el) {
+    var w = el.originalWidth || (String(el.originalText || '').length * el.originalSizePt * 0.55);
+    var h = el.originalSizePt * 1.3;
+    return {
+      x: el.originalX - 1,
+      y: el.originalY - el.originalSizePt * 0.15,
+      w: w + 2,
+      h: h,
+    };
+  }
+
+  // Paint over the original text's spot on the live editing canvas with
+  // white, so an edited/moved/styled element no longer shows the original
+  // PDF text underneath it while you're working in the editor.
+  function redactElementOnCanvas(el) {
+    if (!el.fromPdf || !ve.canvas) return;
+    var box = getOriginalBBox(el);
+    var S = ve.scale;
+    var ctx = ve.canvas.getContext('2d');
+    ctx.save();
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(box.x * S, box.y * S, box.w * S, box.h * S);
+    ctx.restore();
+  }
+
+  // Re-render the page from scratch and re-apply redactions for every
+  // element that's currently modified. Used after undo/redo, since those
+  // don't touch the canvas pixels directly.
+  async function refreshCanvasRedactions() {
+    if (ve.curPage < 0 || ve.curPage >= ed.pages.length) return;
+    var pg = ed.pages[ve.curPage];
+    var entry = ed.files[pg.fi];
+    if (!entry || !ve.canvas) return;
+    var page = await entry.pdfJs.getPage(pg.pi + 1);
+    var vp = page.getViewport({ scale: ve.scale });
+    await page.render({ canvasContext: ve.canvas.getContext('2d'), viewport: vp }).promise;
+    (ve.els || []).forEach(function (el) {
+      if (el.fromPdf && !isUnmodifiedPdfText(el)) redactElementOnCanvas(el);
+    });
+  }
+
   function openVisualEditor(pageIdx) {
     if (!ed.pages.length) return;
     var target = pageIdx == null ? Math.max(0, ed.sel) : pageIdx;
@@ -504,7 +549,8 @@
             originalText: item.str,
             originalX: exX,
             originalY: exY,
-            originalSizePt: exSize
+            originalSizePt: exSize,
+            originalWidth: item.width || null
           };
           ve.pages[key].elements.push(el);
         }
@@ -517,6 +563,13 @@
     ve.canvas.height = Math.floor(vp.height);
     ve.scale = S;
     await page.render({ canvasContext: ve.canvas.getContext('2d'), viewport: vp }).promise;
+
+    // Re-apply redactions for any element that was already edited earlier
+    // in this session, so the freshly-rendered canvas doesn't show the
+    // original text again behind it.
+    (ve.pages[key].elements || []).forEach(function (elx) {
+      if (elx.fromPdf && !isUnmodifiedPdfText(elx)) redactElementOnCanvas(elx);
+    });
 
     ve.els = ve.pages[key].elements;
     renderElements();
@@ -556,6 +609,9 @@
         d.addEventListener('dblclick', function () { veStartEditText(el); });
         d.addEventListener('input', function () {
           el.text = d.innerText;
+          if (el.fromPdf && el.text !== el.originalText) {
+            redactElementOnCanvas(el);
+          }
         });
         d.addEventListener('blur', function () {
           if (ve.editingId === el.id) {
@@ -563,6 +619,7 @@
             d.contentEditable = 'false';
             d.classList.remove('editing');
             snap();
+            renderElements();
           }
         });
       } else if (el.type === 'line') {
@@ -772,6 +829,10 @@
     ve.editingId = null;
     renderElements();
     updateUndoRedo();
+    // Canvas pixels aren't tracked by history, so re-render the page fresh
+    // and re-apply redactions for whatever is still modified after the
+    // undo/redo.
+    refreshCanvasRedactions();
   }
 
   function veUndo() {
@@ -817,6 +878,7 @@
     if (!el || el.type !== 'text') return;
     snap();
     mutate(el);
+    if (el.fromPdf) redactElementOnCanvas(el);
     renderElements();
     updateTextToolbar();
   }
@@ -830,6 +892,7 @@
     if (!el || el.type !== 'text') return;
     snap();
     el.sizePt = clamp(parseFloat($('#ve-size').value) || 16, 6, 200);
+    if (el.fromPdf) redactElementOnCanvas(el);
     renderElements();
   });
 
@@ -838,6 +901,7 @@
     if (!el) return;
     snap();
     el.color = $('#ve-color').value;
+    if (el.fromPdf && el.type === 'text') redactElementOnCanvas(el);
     renderElements();
   });
 
@@ -921,6 +985,11 @@
 
   ve.stage.addEventListener('pointerup', function (e) {
     if (ve.drag) {
+      var draggedEl = getVeEl(ve.drag.id);
+      if (draggedEl && draggedEl.fromPdf && (draggedEl.x !== ve.drag.ox || draggedEl.y !== ve.drag.oy)) {
+        redactElementOnCanvas(draggedEl);
+        renderElements();
+      }
       ve.drag = null;
       return;
     }
@@ -1047,6 +1116,23 @@
         var ph = cp.getHeight();
         var st = ve.pages[pageKey(pg)];
         if (st && st.elements && st.elements.length) {
+          // First, white-out the original spot of any extracted PDF text
+          // that was edited/moved/styled, so the new text replaces it
+          // instead of sitting on top of it.
+          for (var k = 0; k < st.elements.length; k++) {
+            var elk = st.elements[k];
+            if (elk.fromPdf && !isUnmodifiedPdfText(elk)) {
+              var box = getOriginalBBox(elk);
+              cp.drawRectangle({
+                x: box.x,
+                y: ph - box.y - box.h,
+                width: box.w,
+                height: box.h,
+                color: PDFLib.rgb(1, 1, 1),
+                opacity: 1,
+              });
+            }
+          }
           for (var j = 0; j < st.elements.length; j++) {
             await drawVeElOnPage(out, cp, st.elements[j], pw, ph, fonts);
           }
