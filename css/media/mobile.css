@@ -22,23 +22,65 @@
     height: 24px !important;
   }
 
-  /* Hero tool mockup: keep sidebar + upload area fully inside the viewport */
+  /* Hero tool mockup: stacked mobile layout - the left sidebar becomes a
+     wrapping row of tool chips and the drop zone stretches full width */
   .color-tool-preview {
-    grid-template-columns: minmax(70px, auto) minmax(0, 1fr);
-    min-width: 0;
+    grid-template-columns: 1fr;
+    min-height: 0;
   }
   .color-tool-sidebar {
-    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 4px 10px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
   }
   .color-tool {
-    min-width: 0;
+    width: auto;
+    height: 34px;
+    min-height: 34px;
+    margin: 0;
+    padding: 0 12px;
+    flex: 0 0 auto;
+    gap: 8px;
+    font-size: 11px;
+    white-space: nowrap;
   }
-  .color-upload,
+  .mini-icon {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    flex-basis: 22px;
+    border-radius: 6px;
+    font-size: 11px;
+  }
+  .color-upload {
+    margin: 0;
+    min-height: 230px;
+  }
   .upload-inner {
-    min-width: 0;
-    max-width: 100%;
+    padding: 26px 16px;
+  }
+  .cloud {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+  .color-upload b {
+    font-size: 15px;
+  }
+  .color-upload span {
+    font-size: 12px;
+  }
+  .color-upload small {
+    font-size: 10px;
+    margin-top: 10px;
   }
   .float-file {
-    right: 6px;
+    display: none;
   }
 }
