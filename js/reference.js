@@ -38,6 +38,7 @@
     links.classList.toggle('open', open);
     menu.classList.toggle('open', open);
     menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menu.textContent = open ? '\u2715' : '\u2630';
     if (open) {
       closeAllDrops();
       lockScroll(true);
