@@ -84,3 +84,16 @@
     display: none;
   }
 }
+
+/* Hero heading: keep "All Your PDF & Image Tools" on a single line on
+   small screens, with "In One Place" naturally on the next line.
+   Desktop heading (reference.css) is untouched. */
+@media (max-width: 560px) {
+  h1 {
+    font-size: clamp(20px, 6.2vw, 28px);
+  }
+  .hero-line-1 {
+    display: block;
+    white-space: nowrap;
+  }
+}
