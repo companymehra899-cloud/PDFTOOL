@@ -1,0 +1,18 @@
+
+/* Mobile Responsive Overrides (homepage only) */
+@media (max-width: 768px) {
+  /* Homepage "How it works" step icons align with the #how grid column */
+  #how .step-icon {
+    display: grid !important;
+    place-items: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 auto !important;
+    padding: 10px !important;
+    box-sizing: border-box;
+  }
+  #how .step-icon svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
