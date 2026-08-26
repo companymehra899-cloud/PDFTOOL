@@ -21,4 +21,24 @@
     width: 24px !important;
     height: 24px !important;
   }
+
+  /* Hero tool mockup: keep sidebar + upload area fully inside the viewport */
+  .color-tool-preview {
+    grid-template-columns: minmax(70px, auto) minmax(0, 1fr);
+    min-width: 0;
+  }
+  .color-tool-sidebar {
+    min-width: 0;
+  }
+  .color-tool {
+    min-width: 0;
+  }
+  .color-upload,
+  .upload-inner {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .float-file {
+    right: 6px;
+  }
 }
