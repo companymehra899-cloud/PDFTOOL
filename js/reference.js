@@ -133,4 +133,16 @@
       applyTheme(root.hasAttribute('data-theme') ? 'light' : 'dark');
     });
   }
+
+  /* Sticky nav: subtle shadow once the page is scrolled */
+  var navEl = document.querySelector('.nav');
+  function syncNavShadow() {
+    if (!navEl) return;
+    navEl.classList.toggle('scrolled', window.scrollY > 6);
+  }
+  if (navEl) {
+    window.addEventListener('scroll', syncNavShadow, { passive: true });
+    window.addEventListener('resize', syncNavShadow);
+    syncNavShadow();
+  }
 })();
