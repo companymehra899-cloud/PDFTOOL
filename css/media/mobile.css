@@ -1,6 +1,12 @@
 
 /* Mobile Responsive Overrides (homepage only) */
 @media (max-width: 768px) {
+  /* Homepage "How it works": stack steps vertically so every icon circle stays fully visible inside the viewport */
+  #how .steps {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 18px;
+  }
   /* Homepage "How it works" step icons align with the #how grid column */
   #how .step-icon {
     display: grid !important;
