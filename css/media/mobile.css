@@ -85,15 +85,17 @@
   }
 }
 
-/* Hero heading: keep "All Your PDF & Image Tools" on a single line on
-   small screens, with "In One Place" naturally on the next line.
+/* Hero heading on small screens: the headline is now longer, so let it
+   wrap naturally at word boundaries instead of forcing one long line.
    Desktop heading (reference.css) is untouched. */
 @media (max-width: 560px) {
   h1 {
-    font-size: clamp(20px, 6.2vw, 28px);
+    font-size: clamp(22px, 6.4vw, 30px);
   }
   .hero-line-1 {
     display: block;
-    white-space: nowrap;
+  }
+  .hero-line-2 {
+    white-space: normal;
   }
 }
