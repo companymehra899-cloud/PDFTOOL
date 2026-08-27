@@ -130,7 +130,7 @@ h1 strong{color:var(--primary)}
 .c-green{background:#18b868}.c-purple{background:#7250e9}.c-cyan{background:#19b9d0}
 .color-upload{
   margin:26px 20px;
-  border:2px dashed #b09aff;border-radius:0;
+  border:2px dashed #b09aff;border-radius:14px;
   background:
     radial-gradient(circle at 50% -20%,rgba(122,91,255,.15),transparent 55%),
     linear-gradient(180deg,#fff,#fbfaff);
