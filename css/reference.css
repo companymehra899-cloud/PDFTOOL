@@ -270,7 +270,7 @@ h1 strong{color:var(--primary)}
 
 /* FOOTER */
 footer{border-top:1px solid #e9ebf1;padding:42px 0 18px;margin-top:25px}
-.footer-grid{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:35px}
+.footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:35px}
 .footer-brand{display:flex;flex-direction:column;align-items:flex-start;gap:0;color:#13203b;min-width:0}
 .footer-brand .brand-wordmark{font-size:22px}
 .footer-brand .logo{flex:0 0 auto}
@@ -317,7 +317,7 @@ footer li a:hover{color:var(--primary)}
   .popular{grid-template-columns:repeat(3,minmax(0,1fr))}
   .categories{grid-template-columns:repeat(2,1fr)}
   .categories .cat:last-child{grid-column:1/-1}
-  .footer-grid{grid-template-columns:repeat(4,1fr);gap:30px}
+  .footer-grid{grid-template-columns:repeat(3,1fr);gap:30px}
   .footer-brand{grid-column:1/-1;margin-bottom:4px}
 }
 
