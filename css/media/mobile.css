@@ -148,9 +148,10 @@
     margin-bottom: 12px;
   }
   .hero-line-1 {
-    display: block;
+    display: inline;
   }
   .hero-line-2 {
     white-space: normal;
+    display: inline;
   }
 }
