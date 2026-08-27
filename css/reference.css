@@ -19,13 +19,13 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{overflow-x:hidden}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{font-family:Inter,Arial,sans-serif;color:var(--text);background:#fff;line-height:1.5;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 .container{width:100%;max-width:1160px;margin:0 auto;padding:0 20px;box-sizing:border-box}
 
 /* NAV */
-.nav{height:88px;border-bottom:1px solid #e8eaf2;background:#fff;display:flex;align-items:center;position:relative;z-index:20}
+.nav{height:88px;border-bottom:1px solid #e8eaf2;background:#fff;display:flex;align-items:center;position:sticky;top:0;z-index:20}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:28px;min-height:88px}
 .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;white-space:nowrap;flex:0 0 auto;color:#13203b}
 .logo-mark{width:48px;height:48px;display:grid;place-items:center;color:#5234f4}
