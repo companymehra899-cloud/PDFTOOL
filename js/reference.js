@@ -71,6 +71,24 @@
     });
   });
 
+  /* Hover-to-open dropdowns (desktop only). Click still works as a toggle. */
+  Array.prototype.forEach.call(document.querySelectorAll('.drop'), function (drop) {
+    var hoverTimer = null;
+    var desktop = function () {
+      return !(window.matchMedia && window.matchMedia('(hover: hover)').matches && window.innerWidth > 900);
+    };
+    drop.addEventListener('mouseenter', function () {
+      if (desktop()) return;
+      if (hoverTimer) clearTimeout(hoverTimer);
+      openDrop(drop);
+    });
+    drop.addEventListener('mouseleave', function () {
+      if (desktop()) return;
+      if (hoverTimer) clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(closeAllDrops, 180);
+    });
+  });
+
   document.addEventListener('click', function (e) {
     if (!e.target.closest('.drop')) {
       closeAllDrops();
