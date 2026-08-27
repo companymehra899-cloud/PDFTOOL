@@ -91,10 +91,11 @@
     display: none;
   }
 
-  /* Hero trust cards: shrink into one compact horizontal row */
+  /* Hero trust cards: keep compact, but let the row wrap when translated
+     text is long so nothing overflows horizontally */
   .trust {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 6px;
     margin: 16px 0;
   }
