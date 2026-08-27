@@ -841,7 +841,11 @@ html.translated-rtl .trust{flex-wrap:wrap;row-gap:14px}
 html.translated-ltr .hero h1,
 html.translated-rtl .hero h1{line-height:1.22;letter-spacing:0}
 html.translated-ltr .hero-grid,
-html.translated-rtl .hero-grid{align-items:start}
+html.translated-rtl .hero-grid{align-items:stretch}
+html.translated-ltr .mockup,
+html.translated-rtl .mockup{display:flex;flex-direction:column}
+html.translated-ltr .color-tool-preview,
+html.translated-rtl .color-tool-preview{flex:1 1 auto}
 
 /* Header: keep everything on ONE row even when translated labels are longer */
 html.translated-ltr .nav-inner,
