@@ -445,7 +445,7 @@ body.nav-open{padding-right:var(--nav-scrollbar,0px)}
   .brand-wordmark{font-size:20px}
   .brand-wordmark small{font-size:10px;margin-top:5px}
   .logo-mark,.logo-mark svg{width:40px;height:40px}
-  .links{display:none;position:fixed;left:0;right:0;top:66px;bottom:0;background:#fff;flex-direction:column;align-items:stretch;gap:0;margin:0;padding:12px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;z-index:60;border-top:1px solid var(--border)}
+  .links{display:none;position:fixed;left:0;right:0;top:66px;bottom:0;background:#fff;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;margin:0;padding:12px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;z-index:60;border-top:1px solid var(--border)}
   .links.open{display:flex}
   .links>a,.links .drop-toggle{font-size:16px;padding:13px 4px;border-bottom:1px solid #f0f1f6;display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box}
   .drop{display:flex;flex-direction:column;width:100%}
