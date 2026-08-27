@@ -131,9 +131,10 @@
     padding: 0 4px;
   }
   h1 {
-    font-size: clamp(23px, 6.8vw, 32px);
-    line-height: 1.16;
-    letter-spacing: -0.6px;
+    font-size: clamp(20px, 6.2vw, 29px);
+    line-height: 1.12;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
   }
   .hero-line-1 {
     display: block;
