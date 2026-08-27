@@ -830,3 +830,13 @@ h1 strong{
   *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
 }
 
+
+/* Keep hero layout intact when Google Translate makes text longer */
+html.translated-ltr .hero-line-3,
+html.translated-rtl .hero-line-3{white-space:normal;letter-spacing:0}
+html.translated-ltr .trust,
+html.translated-rtl .trust{flex-wrap:wrap;row-gap:14px}
+html.translated-ltr .hero h1,
+html.translated-rtl .hero h1{line-height:1.22;letter-spacing:0}
+html.translated-ltr .hero-grid,
+html.translated-rtl .hero-grid{align-items:start}
