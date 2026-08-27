@@ -152,9 +152,8 @@ h1 strong{color:var(--primary)}
 .upload-inner{padding:26px 20px}
 .cloud{
   width:74px;height:74px;border-radius:22px;margin:0 auto 18px;
-  display:grid;place-items:center;color:#fff;
-  background:linear-gradient(180deg,#38bdf8,#0284c7);
-  box-shadow:0 10px 24px rgba(2,132,199,.35);
+  display:grid;place-items:center;color:#2563eb;
+  background:transparent;
   animation:cloudFloat 3.2s ease-in-out infinite;
 }
 @keyframes cloudFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
