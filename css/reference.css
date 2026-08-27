@@ -18,9 +18,9 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden}
+html{overflow-x:clip}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
-body{font-family:Inter,Arial,sans-serif;color:var(--text);background:#fff;line-height:1.5;overflow-x:hidden}
+body{font-family:Inter,Arial,sans-serif;color:var(--text);background:#fff;line-height:1.5;overflow-x:clip}
 a{text-decoration:none;color:inherit}
 .container{width:100%;max-width:1160px;margin:0 auto;padding:0 20px;box-sizing:border-box}
 
