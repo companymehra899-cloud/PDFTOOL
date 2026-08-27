@@ -58,7 +58,10 @@
   }
   .color-upload {
     margin: 0;
+    width: 100%;
+    max-width: 400px;
     min-height: 230px;
+    height: auto;
   }
   .upload-inner {
     padding: 26px 16px;
