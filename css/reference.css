@@ -843,15 +843,27 @@ html.translated-rtl .hero h1{line-height:1.22;letter-spacing:0}
 html.translated-ltr .hero-grid,
 html.translated-rtl .hero-grid{align-items:start}
 
-/* Header: let translated nav labels wrap so they never overflow the bar */
-html.translated-ltr .nav,
-html.translated-rtl .nav{height:auto;min-height:88px}
+/* Header: keep everything on ONE row even when translated labels are longer */
 html.translated-ltr .nav-inner,
-html.translated-rtl .nav-inner{min-height:88px;padding:6px 0;flex-wrap:wrap;row-gap:2px}
+html.translated-rtl .nav-inner{flex-wrap:nowrap;gap:12px;padding:0}
+html.translated-ltr .brand-wordmark,
+html.translated-rtl .brand-wordmark{font-size:19px;letter-spacing:-.6px}
+html.translated-ltr .brand-wordmark small,
+html.translated-rtl .brand-wordmark small{display:none}
+html.translated-ltr .links,
+html.translated-rtl .links{gap:12px;margin-left:6px;font-size:12px}
 html.translated-ltr .links>a,
 html.translated-ltr .links .drop-toggle,
 html.translated-rtl .links>a,
-html.translated-rtl .links .drop-toggle{white-space:normal;line-height:1.25}
+html.translated-rtl .links .drop-toggle{white-space:nowrap;font-size:12px;padding:6px 2px}
+html.translated-ltr .nav-actions,
+html.translated-rtl .nav-actions{gap:10px}
+html.translated-ltr .lang-toggle,
+html.translated-rtl .lang-toggle{font-size:12px;gap:4px}
+html.translated-ltr .nav-actions .btn,
+html.translated-rtl .nav-actions .btn{min-width:0;padding:0 12px;font-size:12px;height:40px;gap:6px}
+html.translated-ltr .nav-actions .btn svg,
+html.translated-rtl .nav-actions .btn svg{display:none}
 
 /* Equal-height tool cards: keep the CTA pinned to the bottom when translated text wraps */
 html.translated-ltr .card,
