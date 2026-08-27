@@ -33,6 +33,18 @@
     return box ? box.querySelector('.goog-te-combo') : null;
   }
 
+  function ensureEnOption() {
+    var combo = getCombo();
+    if (!combo) return;
+    for (var i = 0; i < combo.options.length; i++) {
+      if (combo.options[i].value === 'en') return;
+    }
+    var opt = document.createElement('option');
+    opt.value = 'en';
+    opt.text = 'English';
+    combo.appendChild(opt);
+  }
+
   function setActive(lang) {
     current = LABELS[lang] ? lang : 'en';
     Array.prototype.forEach.call(document.querySelectorAll('.lang-option'), function (el) {
@@ -46,9 +58,9 @@
   function applyLang(lang) {
     var combo = getCombo();
     if (!combo) return;
-    var value = lang === 'en' ? '' : lang;
-    if (combo.value !== value) {
-      combo.value = value;
+    ensureEnOption();
+    if (combo.value !== lang) {
+      combo.value = lang;
       combo.dispatchEvent(new Event('change', { bubbles: true }));
     }
     setActive(lang);
@@ -99,7 +111,13 @@
     var timer = window.setInterval(function () {
       if (getCombo()) {
         window.clearInterval(timer);
-        applyLang(saved);
+        if (saved !== 'en') {
+          applyLang(saved);
+        } else {
+          ensureEnOption();
+          var c = getCombo();
+          if (c && c.value !== '' && c.value !== 'en') applyLang('en');
+        }
       } else if (++tries > 40) {
         window.clearInterval(timer);
       }
