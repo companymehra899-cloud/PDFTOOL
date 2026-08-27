@@ -288,7 +288,7 @@
 
   /* ---------------- tool pages: import pending file ---------------- */
 
-  var IMPORT_INPUTS = ['#cp-input', '#p2j-input', '#ed-input', '#j2p-input', '#rz-input'];
+  var IMPORT_INPUTS = ['#cp-input', '#p2j-input', '#ed-input', '#j2p-input', '#fileInput', '#rz-input'];
 
   function initImport() {
     if (!/[?&]import=1/.test(window.location.search)) return;
