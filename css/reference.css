@@ -108,6 +108,12 @@ h1 strong{color:var(--primary)}
 .trust-item span{font-size:10px;color:var(--muted);line-height:1.2;overflow-wrap:break-word}
 .hero-buttons{display:flex;flex-wrap:wrap;gap:12px}
 
+/* Hero left column: tighter vertical rhythm between text blocks */
+.hero .badge{margin-bottom:12px}
+.hero h1{margin-bottom:8px}
+.hero .hero-copy{margin-bottom:14px}
+.hero .trust{margin:14px 0}
+
 /* HERO MOCKUP */
 .mockup{background:#fff;border:1px solid #e5e7f0;border-radius:18px;padding:15px;box-shadow:0 22px 60px rgba(42,38,100,.12);position:relative;overflow:visible;display:flex;flex-direction:column}
 .windowbar{display:flex;gap:6px;padding:3px 3px 13px}
