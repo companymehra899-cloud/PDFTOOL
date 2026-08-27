@@ -38,12 +38,12 @@
     background: transparent;
   }
   .color-tool {
-    width: auto;
+    flex: 1 1 calc((100% - 16px) / 3);
+    min-width: 0;
     height: 34px;
     min-height: 34px;
     margin: 0;
-    padding: 0 12px;
-    flex: 0 0 auto;
+    padding: 0 10px;
     gap: 8px;
     font-size: 11px;
     white-space: nowrap;
