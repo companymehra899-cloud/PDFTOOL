@@ -129,7 +129,7 @@ h1 strong{color:var(--primary)}
 .c-red{background:#ef3340}.c-orange{background:#ff9f1c}.c-blue{background:#2879f0}
 .c-green{background:#18b868}.c-purple{background:#7250e9}.c-cyan{background:#19b9d0}
 .color-upload{
-  margin:26px 20px;
+  margin:22px 18px;
   border:2px dashed #b09aff;border-radius:14px;
   background:
     radial-gradient(circle at 50% -20%,rgba(122,91,255,.15),transparent 55%),
@@ -148,7 +148,7 @@ h1 strong{color:var(--primary)}
   transform:translateY(-2px);
 }
 .color-upload.dragover{border-style:solid}
-.upload-inner{padding:40px 22px}
+.upload-inner{padding:28px 20px}
 .cloud{
   width:72px;height:72px;border-radius:22px;margin:0 auto 16px;
   display:grid;place-items:center;color:#fff;
