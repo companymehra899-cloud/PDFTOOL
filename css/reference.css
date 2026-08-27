@@ -69,9 +69,10 @@ a{text-decoration:none;color:inherit}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;position:relative;z-index:1}
 .badge{display:inline-flex;gap:8px;background:#f2efff;color:#6551df;border-radius:30px;padding:7px 13px;font-size:12px;font-weight:700;margin-bottom:18px}
 .badge span{color:#42b77b}
-h1{font-size:clamp(28px,3.6vw,44px);line-height:1.08;letter-spacing:-1.8px;margin-bottom:17px}
-.hero-line-1{display:inline}
-.hero-line-2{white-space:nowrap}
+h1{font-size:clamp(28px,3.6vw,44px);line-height:1.12;letter-spacing:-1.8px;margin-bottom:17px}
+.hero-line-1{display:block}
+.hero-line-2{display:block;white-space:normal}
+@media(min-width:900px){.hero-line-2{white-space:nowrap}}
 h1 strong{color:var(--primary)}
 .hero-copy{font-size:17px;color:var(--muted);max-width:540px;margin-bottom:24px}
 .trust{display:flex;gap:26px;margin:26px 0}
@@ -95,16 +96,57 @@ h1 strong{color:var(--primary)}
 .mini-icon{width:24px;height:24px;min-width:24px;flex:0 0 24px;border-radius:6px;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800}
 .c-red{background:#ef3340}.c-orange{background:#ff9f1c}.c-blue{background:#2879f0}
 .c-green{background:#18b868}.c-purple{background:#7250e9}.c-cyan{background:#19b9d0}
-.color-upload{margin:29px 21px;border:2px dashed #a997ff;border-radius:14px;background:linear-gradient(180deg,#fff,#fbfaff);display:grid;place-items:center;text-align:center;position:relative}
-.upload-inner{padding:28px 18px}
-.cloud{width:58px;height:58px;border-radius:17px;margin:0 auto 13px;display:grid;place-items:center;color:#5b3ff3;background:#f0edff;font-size:35px;font-weight:700}
-.color-upload b{display:block;font-size:17px;color:#17213b;margin-bottom:3px}
-.color-upload span{display:block;font-size:12px;color:#56627a}
-.color-upload small{display:block;font-size:9px;color:#8b93a5;margin-top:12px}
-.float-file{position:absolute;width:54px;height:54px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:12px;box-shadow:0 12px 24px rgba(40,40,80,.14);border:5px solid #fff}
-.float-pdf{right:-25px;top:70px;background:#ef3340}
-.float-img{right:-25px;top:147px;background:#20b866;font-size:20px}
-.float-jpg{right:-25px;top:224px;background:#2879f0}
+.color-upload{
+  margin:29px 21px;
+  border:2px dashed #b09aff;border-radius:18px;
+  background:
+    radial-gradient(circle at 50% -20%,rgba(122,91,255,.15),transparent 55%),
+    linear-gradient(180deg,#fff,#fbfaff);
+  display:grid;place-items:center;text-align:center;position:relative;
+  cursor:pointer;
+  box-shadow:inset 0 2px 12px rgba(81,52,244,.05);
+  transition:border-color .2s ease,background .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.color-upload:hover,.color-upload.dragover{
+  border-color:#6b46ef;
+  background:
+    radial-gradient(circle at 50% -20%,rgba(122,91,255,.22),transparent 55%),
+    linear-gradient(180deg,#fdfbff,#f6f1ff);
+  box-shadow:0 14px 34px rgba(81,52,244,.18);
+  transform:translateY(-2px);
+}
+.color-upload.dragover{border-style:solid}
+.upload-inner{padding:30px 18px}
+.cloud{
+  width:62px;height:62px;border-radius:19px;margin:0 auto 14px;
+  display:grid;place-items:center;color:#fff;
+  background:linear-gradient(180deg,#7a5bff,#5b3ff3);
+  box-shadow:0 10px 24px rgba(91,63,243,.35);
+  animation:cloudFloat 3.2s ease-in-out infinite;
+}
+@keyframes cloudFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.color-upload b{display:block;font-size:17px;color:#17213b;margin-bottom:7px}
+.color-upload span{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:700;color:#5b3ff3;
+  background:#f0edff;border:1px solid #ded7ff;
+  padding:7px 15px;border-radius:999px;
+}
+.color-upload span::after{content:"\2191";font-size:13px;line-height:1}
+.color-upload small{display:block;font-size:10px;color:#8b93a5;margin-top:13px}
+.float-file{
+  position:absolute;width:56px;height:56px;border-radius:50%;
+  display:grid;place-items:center;color:#fff;font-weight:900;font-size:12px;
+  box-shadow:0 12px 26px rgba(40,40,80,.2);border:5px solid #fff;
+  animation:badgeFloat 3.8s ease-in-out infinite;
+}
+.float-pdf{right:-10px;top:58px;background:linear-gradient(180deg,#f4535e,#ef3340);--rot:-10deg;animation-delay:0s}
+.float-img{right:-30px;top:132px;background:linear-gradient(180deg,#2cd07a,#20b866);font-size:20px;--rot:3deg;animation-delay:.35s}
+.float-jpg{right:-10px;top:206px;background:linear-gradient(180deg,#4a8efc,#2879f0);--rot:10deg;animation-delay:.7s}
+@keyframes badgeFloat{
+  0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}
+  50%{transform:translateY(-7px) rotate(var(--rot,0deg))}
+}
 
 /* SECTIONS */
 .section{padding:38px 0}
