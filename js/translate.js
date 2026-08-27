@@ -88,7 +88,7 @@
       pageLanguage: 'en',
       includedLanguages: 'en,hi,es,fr,ar',
       autoDisplay: false,
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      layout: google.translate.TranslateElement.InlineLayout.VERTICAL
     }, 'google_translate_element');
 
     wireDropdown();
