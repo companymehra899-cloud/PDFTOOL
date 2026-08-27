@@ -85,7 +85,7 @@ body{top:0px!important}
 /* HERO */
 .hero{position:relative;overflow:hidden;padding:68px 0 58px;background:radial-gradient(circle at 83% 35%,rgba(117,88,255,.12),transparent 30%),linear-gradient(180deg,#fff,#fbfbff)}
 .hero:after{content:"";position:absolute;width:460px;height:460px;border-radius:50%;right:-180px;top:20px;background:radial-gradient(circle,rgba(112,81,255,.16),rgba(112,81,255,0));pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:stretch;position:relative;z-index:1}
 .hero-grid>*{min-width:0}
 .badge{display:inline-flex;gap:8px;background:#f2efff;color:#6551df;border-radius:30px;padding:7px 13px;font-size:12px;font-weight:700;margin-bottom:18px}
 .badge span{color:#42b77b}
@@ -109,11 +109,11 @@ h1 strong{color:var(--primary)}
 .hero-buttons{display:flex;flex-wrap:wrap;gap:12px}
 
 /* HERO MOCKUP */
-.mockup{background:#fff;border:1px solid #e5e7f0;border-radius:18px;padding:15px;box-shadow:0 22px 60px rgba(42,38,100,.12);position:relative;overflow:visible}
+.mockup{background:#fff;border:1px solid #e5e7f0;border-radius:18px;padding:15px;box-shadow:0 22px 60px rgba(42,38,100,.12);position:relative;overflow:visible;display:flex;flex-direction:column}
 .windowbar{display:flex;gap:6px;padding:3px 3px 13px}
 .dot{width:8px;height:8px;border-radius:50%;background:#ddd}
 .red-dot{background:#ef4444}.yellow-dot{background:#f59e0b}.green-dot{background:#22c55e}
-.color-tool-preview{position:relative;display:grid;grid-template-columns:158px 1fr;min-height:366px;border-top:1px solid #f0f1f6;overflow:visible}
+.color-tool-preview{position:relative;display:grid;grid-template-columns:158px 1fr;min-height:366px;border-top:1px solid #f0f1f6;overflow:visible;flex:1 1 auto}
 .color-tool-sidebar{padding:21px 10px 12px;border-right:1px solid #edf0f5;background:#fff}
 .color-tool{width:100%;height:36px;min-height:36px;margin:0 0 7px;padding:0 7px;display:flex;align-items:center;justify-content:flex-start;gap:10px;border-radius:8px;color:#24304a;font-size:11px;font-weight:600;transition:.2s;white-space:nowrap;overflow:hidden}
 .color-tool:hover{background:#f7f7ff;transform:translateX(2px)}
@@ -840,12 +840,6 @@ html.translated-ltr .trust,
 html.translated-rtl .trust{flex-wrap:wrap;row-gap:14px}
 html.translated-ltr .hero h1,
 html.translated-rtl .hero h1{line-height:1.22;letter-spacing:0}
-html.translated-ltr .hero-grid,
-html.translated-rtl .hero-grid{align-items:stretch}
-html.translated-ltr .mockup,
-html.translated-rtl .mockup{display:flex;flex-direction:column}
-html.translated-ltr .color-tool-preview,
-html.translated-rtl .color-tool-preview{flex:1 1 auto}
 
 /* Header: keep everything on ONE row even when translated labels are longer */
 html.translated-ltr .nav-inner,
