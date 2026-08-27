@@ -147,10 +147,26 @@
 
   var pendingFiles = null;
 
+  function heroToast(msg, isErr) {
+    var wrap = document.getElementById('toast-wrap');
+    if (!wrap) return;
+    var el = document.createElement('div');
+    el.className = 'toast' + (isErr ? ' err' : '');
+    el.textContent = msg;
+    wrap.appendChild(el);
+    setTimeout(function () { el.remove(); }, 3000);
+  }
+
   function go(page) {
-    if (!window.EPDFTransfer) return;
+    if (!window.EPDFTransfer) {
+      window.location.href = page;
+      return;
+    }
     window.EPDFTransfer.storeFiles(pendingFiles || []).then(function () {
       window.location.href = page + '?import=1';
+    }).catch(function () {
+      heroToast('Could not auto-load the file (storage blocked). Please select it on the next page.', true);
+      window.location.href = page;
     });
   }
 
@@ -276,7 +292,16 @@
 
   function initImport() {
     if (!/[?&]import=1/.test(window.location.search)) return;
-    if (!window.EPDFTransfer || !window.DataTransfer) return;
+    if (!window.EPDFTransfer) return;
+
+    /* Safari/iOS do not support the DataTransfer constructor, so the file
+       cannot be injected into the page's file input there. Fall back to a
+       friendly message and let the user re-select the file. */
+    if (!window.DataTransfer) {
+      heroToast('Your browser could not auto-load the file. Please select it below.', true);
+      window.EPDFTransfer.clear().catch(function () {});
+      return;
+    }
 
     window.EPDFTransfer.loadFiles().then(function (items) {
       if (!items || !items.length) return;

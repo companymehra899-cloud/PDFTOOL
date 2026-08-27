@@ -106,9 +106,21 @@
     files: [], // {name, size, file, buf}
   };
 
+  var MAX_PDF_SIZE = 100 * 1024 * 1024; // 100 MB
+
+  function checkSize(files) {
+    var big = files.find(function (f) { return f.size > MAX_PDF_SIZE; });
+    if (big) {
+      toast('"' + big.name + '" exceeds the 100 MB limit', true);
+      return true;
+    }
+    return false;
+  }
+
   setupDropzone('#mg-dropzone', '#mg-input', function (files) {
     var pdfs = files.filter(function (f) { return f.type === 'application/pdf'; });
     if (!pdfs.length) return toast('Please add PDF files', true);
+    if (checkSize(pdfs)) return;
     mg.files.push.apply(mg.files, pdfs.map(function (f) {
       return { name: f.name, size: f.size, file: f, buf: null };
     }));

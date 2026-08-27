@@ -400,7 +400,6 @@
       dl.textContent = 'Download';
       dl.addEventListener('click', function () {
         saveAs(new Blob([r.bytes], { type: 'application/pdf' }), r.name);
-        cpResetUpload();
       });
       item.appendChild(dl);
       wrap.appendChild(item);

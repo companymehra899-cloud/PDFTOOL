@@ -168,7 +168,6 @@
       dl.textContent = 'Download';
       dl.addEventListener('click', () => {
         saveAs(new Blob([r.bytes], { type: 'application/pdf' }), r.name);
-        scResetUpload();
       });
       item.appendChild(dl);
       wrap.appendChild(item);

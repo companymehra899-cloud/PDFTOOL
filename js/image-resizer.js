@@ -269,6 +269,8 @@
     var targetBytes = state.targetKB * 1024;
     var canvas = drawOnCanvas(img, w, h);
     var best = await compressToTargetKB(canvas, targetBytes);
+    var outW = canvas.width;
+    var outH = canvas.height;
 
     if (!best) {
       var scale = 0.9;
@@ -277,7 +279,7 @@
         var ch = Math.max(1, Math.round(h * scale));
         var sc = drawOnCanvas(img, cw, ch);
         var res = await compressToTargetKB(sc, targetBytes);
-        if (res) { best = res; break; }
+        if (res) { best = res; outW = sc.width; outH = sc.height; break; }
         scale -= 0.15;
       }
     }
@@ -288,10 +290,10 @@
 
     return {
       blob: best.blob,
-      w: canvas.width,
-      h: canvas.height,
+      w: outW,
+      h: outH,
       size: best.blob.size,
-      name: baseName(file.name) + '-' + state.targetKB + 'kb-' + canvas.width + 'x' + canvas.height + '.jpg',
+      name: baseName(file.name) + '-' + state.targetKB + 'kb-' + outW + 'x' + outH + '.jpg',
     };
   }
 
