@@ -151,7 +151,7 @@ h1 strong{color:var(--primary)}
 .color-upload.dragover{border-style:solid}
 .upload-inner{padding:26px 20px}
 .cloud{
-  width:74px;height:74px;border-radius:22px;margin:0 auto 18px;
+  width:96px;height:96px;border-radius:22px;margin:0 auto 18px;
   display:grid;place-items:center;color:#2563eb;
   background:transparent;
   animation:cloudFloat 3.2s ease-in-out infinite;
