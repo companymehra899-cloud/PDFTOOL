@@ -83,6 +83,41 @@
   .float-file {
     display: none;
   }
+
+  /* Hero trust cards: shrink into one compact horizontal row */
+  .trust {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    margin: 16px 0;
+  }
+  .trust-item {
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+    padding: 9px 4px;
+  }
+  .trust-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 8px;
+    padding: 5px;
+  }
+  .trust-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  .trust-item b {
+    font-size: 10px;
+  }
+  .trust-item span {
+    font-size: 8px;
+    line-height: 1.15;
+  }
 }
 
 /* Hero heading on small screens: the headline is now longer, so let it
