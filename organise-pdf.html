@@ -152,7 +152,8 @@
   }
   .action-btn:hover { background: #e2e8f0; color: #0f172a; }
   .action-btn.delete { background: #fee2e2; color: #dc2626; }
-  .action-btn.delete:hover { background: #fee2e2; color: #dc2626; }
+  .action-btn.delete:hover { background: #fee2e2; color: #dc2626; animation: clearAllBlink .8s ease-in-out infinite; }
+  @keyframes clearAllBlink { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
   .thumbnails-container {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px;
   }
