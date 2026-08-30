@@ -29,6 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Organise PDF Online Free – Organize PDF Pages | ePDFConverter">
 <meta property="og:description" content="Reorder, delete, rotate or reverse the pages of a PDF, right in your browser. Free, private and no sign-up required.">
@@ -107,6 +108,100 @@
   .seo-prose p { color: var(--text); font-size: 15.5px; line-height: 1.7; margin-bottom: 14px; }
   .tool-area { margin-top: 6px; }
   .tool-area .view { padding: 0 0 26px; }
+  .upload-card {
+    background: #fff;
+    border: 2px dashed #c7d2fe;
+    border-radius: 16px;
+    padding: 48px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .2s;
+  }
+  .upload-card:hover { border-color: var(--primary); background: #f8faff; transform: translateY(-1px); }
+  .upload-card.dragover { border-color: var(--primary); background: var(--primary-soft); }
+  .icon-wrapper {
+    width: 76px; height: 76px; margin: 0 auto 18px;
+    border-radius: 22px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+  }
+  .upload-card h2 { font-size: 22px; color: var(--text); margin-bottom: 8px; }
+  .upload-card p { color: var(--muted); margin-bottom: 22px; }
+  .btn-select {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 30px; border-radius: 12px;
+    background: var(--primary); color: #fff; font-weight: 600; font-size: 15px;
+    cursor: pointer; box-shadow: 0 4px 14px rgba(81,52,244,.3);
+    transition: background .2s, transform .15s, box-shadow .2s;
+  }
+  .btn-select:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .file-list-section { display: none; flex-direction: column; gap: 16px; }
+  .file-list-section.show { display: flex; }
+  .section-title {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    font-size: 15px; font-weight: 700; color: var(--text);
+  }
+  .action-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #f1f5f9; color: #0f172a;
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 9px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .action-btn:hover { background: #e2e8f0; color: #0f172a; }
+  .action-btn.delete:hover { background: #fee2e2; color: #dc2626; }
+  .thumbnails-container {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px;
+  }
+  .thumbnail-card {
+    position: relative; background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 10px; cursor: grab; transition: border-color .2s, box-shadow .2s, transform .2s;
+  }
+  .thumbnail-card:hover { border-color: var(--primary); box-shadow: 0 8px 20px rgba(81,52,244,.12); transform: translateY(-2px); }
+  .thumbnail-card.dragging { opacity: .5; }
+  .thumbnail-card canvas { width: 100%; height: auto; border-radius: 6px; background: var(--bg-soft); display: block; }
+  .page-info-text {
+    display: block; font-size: 12px; color: var(--muted); margin-top: 8px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .page-num {
+    display: inline-block; font-size: 11px; font-weight: 700; color: var(--primary);
+    background: var(--primary-soft); padding: 2px 8px; border-radius: 999px; margin-top: 6px;
+  }
+  .delete-page-btn {
+    position: absolute; top: 6px; right: 6px; width: 26px; height: 26px;
+    border: none; border-radius: 50%; background: #fff; color: var(--muted);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15); transition: background .2s, color .2s;
+  }
+  .delete-page-btn:hover { background: #fee2e2; color: #dc2626; }
+  .bottom-actions { display: flex; justify-content: flex-end; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .btn-merge {
+    background: #10b981; color: white; border: none; padding: 12px 28px; border-radius: 12px;
+    font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;
+    font-size: 1.05rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); transition: all 0.2s;
+  }
+  .btn-merge:hover { background: #059669; transform: translateY(-1px); }
+  html[data-theme="dark"] .upload-card { background: #10182b; border-color: #3a315f; }
+  html[data-theme="dark"] .upload-card:hover, html[data-theme="dark"] .upload-card.dragover { background: #121b33; border-color: var(--primary); }
+  html[data-theme="dark"] .icon-wrapper { background: #221d3f; }
+  html[data-theme="dark"] .upload-card h2 { color: #e7ebf4; }
+  html[data-theme="dark"] .section-title { color: #e7ebf4; }
+  html[data-theme="dark"] .action-btn { background: #131b2f; border-color: #27314a; color: #e7ebf4; }
+  html[data-theme="dark"] .action-btn:hover { background: #1e293b; color: #fff; }
+  html[data-theme="dark"] .action-btn.delete:hover { background: #33151a; color: #f87171; }
+  html[data-theme="dark"] .thumbnail-card { background: #131b2f; border-color: #27314a; }
+  html[data-theme="dark"] .thumbnail-card:hover { border-color: #4a3f7a; }
+  html[data-theme="dark"] .thumbnail-card canvas { background: #10182b; }
+  html[data-theme="dark"] .page-info-text { color: #97a2b9; }
+  html[data-theme="dark"] .delete-page-btn { background: #131b2f; color: #97a2b9; }
+  @media (max-width: 640px) {
+    .upload-card { padding: 36px 18px; }
+    .bottom-actions { justify-content: center; }
+    .section-title { flex-direction: column; align-items: flex-start; }
+  }
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}
@@ -179,54 +274,37 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   <section class="tool-area" aria-labelledby="og-tool-title">
     <h2 id="og-tool-title" class="sr-only">Organise PDF tool</h2>
 
-    <!-- Upload view -->
-    <div id="view-organise" class="view active">
-      <div class="view-head">
-        <h2>Organise Pages</h2>
-        <p class="muted">Delete, reorder and rotate the pages of a PDF. Max 100 MB.</p>
+    <!-- Big Upload Box (Initial state) -->
+    <div class="upload-card" id="dropArea" role="button" tabindex="0" aria-label="Drop PDF files here or browse">
+      <div class="icon-wrapper">
+        <i class="fa-solid fa-file-circle-plus"></i>
       </div>
-    <div class="dropzone" id="og-dropzone" role="button" tabindex="0" aria-label="Drop a PDF here or browse">
-      <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M8 4h9a2 2 0 0 1 2 2v12M8 4H6a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6M8 4v13"/></svg>
-      <p class="dz-title">Drop a PDF here or <span class="dz-browse">browse</span></p>
-      <p class="dz-sub">One PDF, up to 100 MB — rearrange its pages</p>
-      <button type="button" class="dz-btn" aria-label="Upload files">Upload files</button>
-      <input type="file" id="og-input" accept="application/pdf" hidden>
+      <h2>Upload PDF Files to Organise</h2>
+      <p>Select multiple PDF files or drag &amp; drop them here.</p>
+      <span class="btn-select"><i class="fa-solid fa-folder-open"></i> Choose PDF Files</span>
+      <input type="file" id="fileInput" accept=".pdf" multiple style="display: none;" />
     </div>
 
-      <div id="og-files" class="file-list" aria-live="polite"></div>
-      <div class="options-card" id="og-upload-options">
-        <div class="opt-row">
-          <button class="btn primary" id="og-start">Organise Pages &rarr;</button>
-          <button class="btn ghost" id="og-upload-remove">Remove</button>
-        </div>
+    <!-- Single Unified Section Containing All Pages -->
+    <div class="file-list-section" id="fileListSection">
+      <div class="section-title">
+        <span><i class="fa-solid fa-clone" style="color:var(--primary); margin-right:8px;"></i> All Pages Arrangement (Drag cards to reorder)</span>
+        <button class="action-btn" type="button" id="addMoreBtn" style="background: #e0e7ff; color: var(--primary);">
+          <i class="fa-solid fa-plus"></i> Add More PDFs
+        </button>
+        <input type="file" id="fileInputMore" accept=".pdf" multiple style="display: none;" />
       </div>
-    </div>
 
-    <!-- Organise workspace view -->
-    <div id="view-organise-work" class="view">
-      <div class="editor-bar">
-        <button class="btn ghost small" id="og-back">&larr; Back</button>
-        <h2 class="editor-title">Organise Pages</h2>
-      </div>
-      <div class="options-card show" id="og-options">
-        <div class="opt-row">
-          <button class="btn small" id="og-del">Delete selected</button>
-          <button class="btn small" id="og-up">Move up</button>
-          <button class="btn small" id="og-down">Move down</button>
-          <button class="btn small" id="og-rot">Rotate 90&deg;</button>
-          <button class="btn small" id="og-reverse">Reverse order</button>
-          <button class="btn small ghost" id="og-clear">Reset</button>
-        </div>
-        <div class="opt-row">
-          <span class="opt-hint">Drag a page up or down to reorder it. Tick a page to mark it for deletion. Click a page to select it for rotating.</span>
-        </div>
-        <div class="opt-row">
-          <span class="opt-hint" id="og-count"></span>
-        </div>
-      </div>
-      <div id="og-pages" class="page-grid" aria-live="polite"></div>
-      <div class="opt-row" style="justify-content: flex-end; margin-top: 16px;">
-        <button class="btn primary" id="og-save">Save Organised PDF</button>
+      <!-- Global Container for all pages across all files -->
+      <div class="thumbnails-container" id="globalThumbnailsContainer"></div>
+
+      <div class="bottom-actions">
+        <button class="action-btn delete" id="clearAllBtn" type="button">
+          <i class="fa-solid fa-trash"></i> Clear All
+        </button>
+        <button class="btn-merge" id="mergeBtn" type="button">
+          <i class="fa-solid fa-bolt"></i> Save Organized PDF
+        </button>
       </div>
     </div>
   </section>
