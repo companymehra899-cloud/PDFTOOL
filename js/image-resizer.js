@@ -397,6 +397,8 @@
   if (!isNaN(kbParam) && kbParam > 0) {
     selectKb(kbParam);
     document.title = 'Resize Image to ' + kbParam + 'KB Online';
+    var h1 = document.getElementById('ir-h1');
+    if (h1) h1.textContent = 'Resize Image to ' + kbParam + 'KB Online';
   }
 
   $('#ir-run').disabled = true;
