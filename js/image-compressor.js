@@ -9,13 +9,23 @@
 
   var state = {
     files: [],
-    targetKB: 20,
+    targetBytes: 20 * 1024,
   };
 
   function fmtBytes(bytes) {
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function fmtTarget(bytes) {
+    if (bytes >= 1024 * 1024) return (bytes / (1024 * 1024)) + ' MB';
+    return (bytes / 1024) + ' KB';
+  }
+
+  function targetTag(bytes) {
+    if (bytes >= 1024 * 1024) return (bytes / (1024 * 1024)) + 'mb';
+    return (bytes / 1024) + 'kb';
   }
 
   function baseName(name) {
@@ -192,27 +202,41 @@
     if (state.files.length === 0) $('#ic-result').hidden = true;
   }
 
-  function selectKb(kb) {
-    state.targetKB = kb;
+  function selectKb(bytes) {
+    state.targetBytes = bytes;
     $('#ic-kb-custom').value = '';
     var pills = document.querySelectorAll('#ic-kb-pills .kb-pill');
     Array.prototype.forEach.call(pills, function (p) {
-      p.classList.toggle('active', parseInt(p.dataset.kb, 10) === kb);
+      p.classList.toggle('active', parseInt(p.dataset.kb, 10) * 1024 === bytes);
+    });
+    var mpills = document.querySelectorAll('#ic-mb-pills .kb-pill');
+    Array.prototype.forEach.call(mpills, function (p) {
+      p.classList.toggle('active', parseInt(p.dataset.mb, 10) * 1024 * 1024 === bytes);
     });
   }
 
   $('#ic-kb-pills').addEventListener('click', function (e) {
     var pill = e.target.closest('.kb-pill');
     if (!pill || !pill.dataset.kb) return;
-    selectKb(parseInt(pill.dataset.kb, 10));
+    selectKb(parseInt(pill.dataset.kb, 10) * 1024);
+  });
+
+  $('#ic-mb-pills').addEventListener('click', function (e) {
+    var pill = e.target.closest('.kb-pill');
+    if (!pill || !pill.dataset.mb) return;
+    selectKb(parseInt(pill.dataset.mb, 10) * 1024 * 1024);
   });
 
   $('#ic-kb-custom').addEventListener('input', function () {
     var v = parseInt(this.value, 10);
     if (!isNaN(v) && v > 0) {
-      state.targetKB = v;
+      state.targetBytes = v * 1024;
       var pills = document.querySelectorAll('#ic-kb-pills .kb-pill');
       Array.prototype.forEach.call(pills, function (p) {
+        p.classList.remove('active');
+      });
+      var mpills = document.querySelectorAll('#ic-mb-pills .kb-pill');
+      Array.prototype.forEach.call(mpills, function (p) {
         p.classList.remove('active');
       });
     }
@@ -222,7 +246,7 @@
     var img = await loadImage(file);
     var baseW = img.naturalWidth;
     var baseH = img.naturalHeight;
-    var targetBytes = state.targetKB * 1024;
+    var targetBytes = state.targetBytes;
     var mime = $('#ic-format').value;
 
     var canvas = drawOnCanvas(img, baseW, baseH);
@@ -243,7 +267,7 @@
     }
 
     if (!best) {
-      throw new Error('Could not compress "' + file.name + '" under ' + state.targetKB + ' KB. Try a higher target size.');
+      throw new Error('Could not compress "' + file.name + '" under ' + fmtTarget(state.targetBytes) + '. Try a higher target size.');
     }
 
     return {
@@ -251,7 +275,7 @@
       w: outW,
       h: outH,
       size: best.blob.size,
-      name: baseName(file.name) + '-' + state.targetKB + 'kb-' + outW + 'x' + outH + '.' + extFor(mime),
+      name: baseName(file.name) + '-' + targetTag(state.targetBytes) + '-' + outW + 'x' + outH + '.' + extFor(mime),
     };
   }
 
@@ -269,9 +293,9 @@
 
     var stat = document.createElement('div');
     stat.className = 'result-stat';
-    var sizeOk = item.size <= state.targetKB * 1024;
+    var sizeOk = item.size <= state.targetBytes;
     var sizeEl = document.createElement('span');
-    sizeEl.innerHTML = 'Size: <b>' + fmtBytes(item.size) + '</b> (target ' + state.targetKB + ' KB, ' + (sizeOk ? 'ok' : 'over') + ') &middot; ';
+    sizeEl.innerHTML = 'Size: <b>' + fmtBytes(item.size) + '</b> (target ' + fmtTarget(state.targetBytes) + ', ' + (sizeOk ? 'ok' : 'over') + ') &middot; ';
     var dimEl = document.createElement('span');
     dimEl.innerHTML = 'Dimensions: <b>' + item.w + ' &times; ' + item.h + ' px</b>';
     stat.appendChild(sizeEl);
@@ -290,7 +314,7 @@
 
   $('#ic-run').addEventListener('click', async function () {
     if (!state.files.length) return;
-    busy('Compressing ' + state.files.length + ' image(s) to ' + state.targetKB + ' KB...');
+    busy('Compressing ' + state.files.length + ' image(s) to ' + fmtTarget(state.targetBytes) + '...');
     try {
       for (var i = 0; i < state.files.length; i++) {
         var item = await processFile(state.files[i]);

@@ -245,6 +245,21 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         <span class="opt-hint">Custom KB: <input type="number" id="ic-kb-custom" class="input" min="1" placeholder="e.g. 45" style="width:90px"> max</span>
       </div>
       <div class="opt-row">
+        <label class="opt-label">Target size (MB)</label>
+        <div class="kb-pills" id="ic-mb-pills">
+          <button class="kb-pill" data-mb="1" type="button">1 MB</button>
+          <button class="kb-pill" data-mb="2" type="button">2 MB</button>
+          <button class="kb-pill" data-mb="3" type="button">3 MB</button>
+          <button class="kb-pill" data-mb="4" type="button">4 MB</button>
+          <button class="kb-pill" data-mb="5" type="button">5 MB</button>
+          <button class="kb-pill" data-mb="6" type="button">6 MB</button>
+          <button class="kb-pill" data-mb="7" type="button">7 MB</button>
+          <button class="kb-pill" data-mb="8" type="button">8 MB</button>
+          <button class="kb-pill" data-mb="9" type="button">9 MB</button>
+          <button class="kb-pill" data-mb="10" type="button">10 MB</button>
+        </div>
+      </div>
+      <div class="opt-row">
         <label class="opt-label" for="ic-format">Output format</label>
         <select id="ic-format" class="select">
           <option value="image/jpeg" selected>JPG</option>
