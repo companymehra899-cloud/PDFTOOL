@@ -1,0 +1,224 @@
+/* ============================================================
+   ePDFConverter — Corporate Pro theme for tool pages
+   Load AFTER reference.css so these overrides win.
+   Switches the purple theme to a professional blue palette.
+   ============================================================ */
+
+/* ---------- Override primary to blue ---------- */
+:root {
+  --primary: #1e40af;
+  --primary2: #2563eb;
+  --primary-dark: #1e3a8a;
+  --primary-soft: #eff6ff;
+}
+
+/* ---------- Hero section ---------- */
+.home-hero.tool-hero {
+  background: linear-gradient(180deg, #edf2ff 0%, #ffffff 100%);
+  border-bottom: 1px solid #dbeafe;
+}
+
+.hero-badge {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
+}
+
+.home-hero.tool-hero h1 {
+  color: #0f172a;
+}
+
+.home-hero.tool-hero .hero-sub {
+  color: #475569;
+}
+
+/* ---------- Dropzone ---------- */
+.dropzone {
+  border: 2px dashed #3b82f6;
+  background: linear-gradient(180deg, #ffffff, #f8faff);
+  color: #1e40af;
+  border-radius: 14px;
+}
+
+.dropzone:hover,
+.dropzone.dragover {
+  border-color: #1e40af;
+  background: linear-gradient(180deg, #eff6ff, #e0ecff);
+  box-shadow: 0 8px 28px rgba(30, 64, 175, .12);
+}
+
+.dropzone svg {
+  color: #1e40af;
+}
+
+.dz-btn {
+  background: linear-gradient(180deg, #2563eb, #1e40af);
+  box-shadow: 0 6px 18px rgba(30, 64, 175, .25);
+}
+
+.dz-btn:hover {
+  background: linear-gradient(180deg, #1e40af, #1e3a8a);
+  box-shadow: 0 8px 24px rgba(30, 64, 175, .35);
+}
+
+/* ---------- Options card ---------- */
+.options-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, .06);
+}
+
+/* ---------- KB / MB pills ---------- */
+.kb-pill {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+}
+
+.kb-pill:hover {
+  border-color: #2563eb;
+  color: #1e40af;
+  background: #eff6ff;
+}
+
+.kb-pill.active {
+  background: #1e40af;
+  color: #fff;
+  border-color: #1e40af;
+}
+
+/* ---------- Buttons ---------- */
+.btn.primary {
+  background: linear-gradient(180deg, #2563eb, #1e40af);
+  box-shadow: 0 6px 16px rgba(30, 64, 175, .22);
+}
+
+.btn.primary:hover {
+  background: linear-gradient(180deg, #1e40af, #1e3a8a);
+  box-shadow: 0 10px 24px rgba(30, 64, 175, .3);
+}
+
+.hero-btn {
+  background: linear-gradient(180deg, #2563eb, #1e40af);
+  box-shadow: 0 6px 16px rgba(30, 64, 175, .22);
+}
+
+/* ---------- Feature icons ---------- */
+.feature-icon {
+  background: #eff6ff;
+  color: #1e40af;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+}
+
+/* ---------- FAQ: two-column on desktop ---------- */
+@media (min-width: 768px) {
+  .faq-list {
+    max-width: 860px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
+
+/* ---------- CTA banner: dark blue ---------- */
+.cta-banner {
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  border: none;
+  border-radius: 16px;
+  color: #fff;
+}
+
+.cta-banner h2 {
+  color: #fff;
+}
+
+.cta-banner p {
+  color: rgba(255, 255, 255, .85);
+}
+
+.cta-banner .btn.primary {
+  background: #fff;
+  color: #1e40af;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+}
+
+.cta-banner .btn.primary:hover {
+  background: #f1f5f9;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
+}
+
+/* ---------- Privacy banner ---------- */
+.privacy-banner {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.pb-icon {
+  background: #1e40af;
+}
+
+.privacy-banner h3 {
+  color: #0f172a;
+}
+
+/* ---------- Nav dropdown active link ---------- */
+.drop-menu a:hover,
+.drop-menu a.active {
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.nav-actions .btn.btn-primary {
+  background: linear-gradient(180deg, #2563eb, #1e40af);
+}
+
+/* ---------- Tool cards / links hover ---------- */
+.tool-links a:hover {
+  border-color: #93c5fd;
+  background: #f8faff;
+  color: #1e40af;
+}
+
+/* ---------- Dark mode adjustments ---------- */
+html[data-theme="dark"] .home-hero.tool-hero {
+  background: linear-gradient(180deg, #0b1220 0%, #0e1524 100%);
+}
+
+html[data-theme="dark"] .dropzone {
+  border-color: #3b5998;
+  background: linear-gradient(180deg, #10182b, #0e1524);
+  color: #93a8d0;
+}
+
+html[data-theme="dark"] .kb-pill {
+  background: #10182b;
+  border-color: #27314a;
+  color: #97a2b9;
+}
+
+html[data-theme="dark"] .kb-pill.active {
+  background: #1e40af;
+  border-color: #1e40af;
+  color: #fff;
+}
+
+html[data-theme="dark"] .options-card {
+  background: #131b2f;
+  border-color: #27314a;
+}
+
+html[data-theme="dark"] .cta-banner {
+  background: linear-gradient(135deg, #1e3a8a, #172554);
+}
+
+html[data-theme="dark"] .feature-icon {
+  background: #15224a;
+  color: #60a5fa;
+}
+
+html[data-theme="dark"] .privacy-banner {
+  background: #0f1729;
+  border-color: #27314a;
+}
