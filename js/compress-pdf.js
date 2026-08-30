@@ -269,10 +269,10 @@
   });
 
   var CP_LEVELS = {
-    fast: { quality: 0.5 },
-    balanced: { quality: 0.4 },
-    strong: { quality: 0.3 },
-    extreme: { quality: 0.12, maxDim: 1800 },
+    fast: { quality: 0.5, skip: 64 * 1024 },
+    balanced: { quality: 0.4, skip: 48 * 1024 },
+    strong: { quality: 0.3, skip: 32 * 1024 },
+    extreme: { quality: 0.06, maxDim: 1500, skip: 0 },
   };
 
   $('#cp-run').addEventListener('click', async function () {
@@ -378,7 +378,7 @@
       }
 
       var orig = stream.getContents();
-      if (!orig || orig.length < SKIP_SMALL_BYTES) return false;
+      if (!orig || orig.length < (level.skip || SKIP_SMALL_BYTES)) return false;
 
       var bmp = null;
       try {
