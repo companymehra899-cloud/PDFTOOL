@@ -393,5 +393,8 @@
     syncOptions();
   });
 
+  var kbParam = parseInt(new URLSearchParams(window.location.search).get('kb'), 10);
+  if (!isNaN(kbParam) && kbParam > 0) selectKb(kbParam);
+
   $('#ir-run').disabled = true;
 })();
