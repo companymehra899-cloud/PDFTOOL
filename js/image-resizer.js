@@ -9,6 +9,7 @@
   var ACCEPT_TYPES = ['image/jpeg', 'image/png'];
 
   var CM_TO_PX = 96 / 2.54;
+  var MM_TO_PX = 96 / 25.4;
 
   var state = {
     files: [],
@@ -215,7 +216,6 @@
     var pill = e.target.closest('.kb-pill[data-preset]');
     if (!pill) return;
     var p = pill.dataset.preset;
-    var unitRow = $('#ir-unit');
     if (p === 'sig') {
       $('#ir-width').value = '6';
       $('#ir-height').value = '2';
@@ -232,6 +232,42 @@
       $('#ir-width').value = '3.5';
       $('#ir-height').value = '4.5';
       setUnit('cm');
+    } else if (p === 'cm45') {
+      $('#ir-width').value = '4';
+      $('#ir-height').value = '5';
+      setUnit('cm');
+    } else if (p === 'cm4535') {
+      $('#ir-width').value = '4.5';
+      $('#ir-height').value = '3.5';
+      setUnit('cm');
+    } else if (p === 'sig5x2') {
+      $('#ir-width').value = '5';
+      $('#ir-height').value = '2';
+      setUnit('cm');
+    } else if (p === 'mm5020') {
+      $('#ir-width').value = '50';
+      $('#ir-height').value = '20';
+      setUnit('mm');
+    } else if (p === 'mm3545') {
+      $('#ir-width').value = '35';
+      $('#ir-height').value = '45';
+      setUnit('mm');
+    } else if (p === 'mm4050') {
+      $('#ir-width').value = '40';
+      $('#ir-height').value = '50';
+      setUnit('mm');
+    } else if (p === 'mm4535') {
+      $('#ir-width').value = '45';
+      $('#ir-height').value = '35';
+      setUnit('mm');
+    } else if (p === 'px300') {
+      $('#ir-width').value = '300';
+      $('#ir-height').value = '400';
+      setUnit('px');
+    } else if (p === 'px600') {
+      $('#ir-width').value = '600';
+      $('#ir-height').value = '800';
+      setUnit('px');
     }
     void unitRow;
   });
@@ -248,7 +284,7 @@
     var hInput = $('#ir-height').value;
     var unit = currentUnit();
     if (!wInput || !hInput) return null;
-    var scale = unit === 'cm' ? CM_TO_PX : 1;
+    var scale = unit === 'cm' ? CM_TO_PX : (unit === 'mm' ? MM_TO_PX : 1);
     var w = Math.max(1, parseFloat(wInput) * scale);
     var h = Math.max(1, parseFloat(hInput) * scale);
     return { w: Math.round(w), h: Math.round(h) };
