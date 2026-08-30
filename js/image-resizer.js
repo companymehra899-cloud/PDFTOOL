@@ -394,7 +394,10 @@
   });
 
   var kbParam = parseInt(new URLSearchParams(window.location.search).get('kb'), 10);
-  if (!isNaN(kbParam) && kbParam > 0) selectKb(kbParam);
+  if (!isNaN(kbParam) && kbParam > 0) {
+    selectKb(kbParam);
+    document.title = 'Resize Image to ' + kbParam + 'KB Online';
+  }
 
   $('#ir-run').disabled = true;
 })();
