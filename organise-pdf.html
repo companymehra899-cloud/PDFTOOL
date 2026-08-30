@@ -207,7 +207,6 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       <div class="editor-bar">
         <button class="btn ghost small" id="og-back">&larr; Back</button>
         <h2 class="editor-title">Organise Pages</h2>
-        <button class="btn primary" id="og-save">Download PDF</button>
       </div>
       <div class="options-card show" id="og-options">
         <div class="opt-row">
@@ -226,6 +225,9 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         </div>
       </div>
       <div id="og-pages" class="page-grid" aria-live="polite"></div>
+      <div class="opt-row" style="justify-content: flex-end; margin-top: 16px;">
+        <button class="btn primary" id="og-save">Download PDF</button>
+      </div>
     </div>
   </section>
 
