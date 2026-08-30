@@ -140,7 +140,7 @@
   .file-list-section { display: none; flex-direction: column; gap: 16px; }
   .file-list-section.show { display: flex; }
   .section-title {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    display: flex; align-items: center; justify-content: flex-start; gap: 12px; flex-wrap: wrap;
     font-size: 15px; font-weight: 700; color: var(--text);
   }
   .action-btn {
@@ -151,6 +151,7 @@
     transition: background .2s, color .2s, border-color .2s;
   }
   .action-btn:hover { background: #e2e8f0; color: #0f172a; }
+  .action-btn.delete { background: #fee2e2; color: #dc2626; }
   .action-btn.delete:hover { background: #fee2e2; color: #dc2626; }
   .thumbnails-container {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px;
@@ -191,6 +192,7 @@
   html[data-theme="dark"] .section-title { color: #e7ebf4; }
   html[data-theme="dark"] .action-btn { background: #131b2f; border-color: #27314a; color: #e7ebf4; }
   html[data-theme="dark"] .action-btn:hover { background: #1e293b; color: #fff; }
+  html[data-theme="dark"] .action-btn.delete { background: #33151a; color: #f87171; }
   html[data-theme="dark"] .action-btn.delete:hover { background: #33151a; color: #f87171; }
   html[data-theme="dark"] .thumbnail-card { background: #131b2f; border-color: #27314a; }
   html[data-theme="dark"] .thumbnail-card:hover { border-color: #4a3f7a; }
