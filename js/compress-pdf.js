@@ -1,5 +1,7 @@
 /* ePDFConverter - Compress PDF (standalone page).
-   Compression logic reused from js/app.js so behaviour matches the homepage tool. */
+   Compression logic reused from js/app.js so behaviour matches the homepage tool.
+   Optimized: concurrent JPEG recompression, skip-small-images, OffscreenCanvas
+   encoding, createImageBitmap and explicit memory release / URL revocation. */
 (function () {
   'use strict';
 
@@ -7,6 +9,15 @@
   var $$ = function (sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); };
 
   var MAX_PDF_SIZE = 100 * 1024 * 1024; // 100 MB
+  var SKIP_SMALL_BYTES = 32 * 1024; // JPEGs already under this size are left untouched
+
+  // Controlled concurrency. Desktop runs up to 4; touch devices and low-memory
+  // devices are capped at 2 to bound peak memory during parallel decoding.
+  var CONCURRENCY = 4;
+  var isTouch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches &&
+    (window.innerWidth < 900 || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0));
+  if (isTouch) CONCURRENCY = 2;
+  if (navigator.deviceMemory && navigator.deviceMemory < 4) CONCURRENCY = 2;
 
   function fmtBytes(bytes) {
     if (bytes < 1024) return bytes + ' B';
@@ -60,13 +71,61 @@
     return file.arrayBuffer();
   }
 
+  function makeCanvas(w, h) {
+    if (typeof OffscreenCanvas !== 'undefined') return new OffscreenCanvas(w, h);
+    var c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    return c;
+  }
+
   function canvasToBlob(canvas, mime, quality) {
+    if (typeof OffscreenCanvas !== 'undefined' && canvas instanceof OffscreenCanvas) {
+      return canvas.convertToBlob({ type: mime, quality: quality });
+    }
     return new Promise(function (resolve, reject) {
       canvas.toBlob(
         function (b) { return b ? resolve(b) : reject(new Error('Canvas export failed')); },
         mime,
         quality
       );
+    });
+  }
+
+  // Runs `worker` over `items` with at most `limit` tasks in flight at once.
+  // Never rejects: each worker result is captured into the results array.
+  function mapLimit(items, limit, worker) {
+    var total = items.length;
+    if (!total) return Promise.resolve([]);
+    var next = 0;
+    var finished = 0;
+    var results = new Array(total);
+    return new Promise(function (resolve) {
+      function pump() {
+        while (next < total && (next - finished) < limit) {
+          (function (idx) {
+            var p;
+            try {
+              p = Promise.resolve(worker(items[idx]));
+            } catch (e) {
+              p = Promise.resolve();
+            }
+            p.then(function (val) {
+              results[idx] = val;
+              finished++;
+              if (finished === total) resolve(results);
+              else pump();
+            }, function () {
+              results[idx] = null;
+              finished++;
+              if (finished === total) resolve(results);
+              else pump();
+            });
+          })(next);
+          next++;
+        }
+      }
+      pump();
     });
   }
 
@@ -166,10 +225,15 @@
     if (checkSize(pdfs)) return;
     busy('Reading PDFs...');
     try {
+      var fresh = [];
       for (var i = 0; i < pdfs.length; i++) {
         var f = pdfs[i];
         if (cp.files.some(function (x) { return x.name === f.name; })) continue;
-        cp.files.push({ name: f.name, size: f.size, buf: await readBuffer(f) });
+        fresh.push(f);
+      }
+      var bufs = await Promise.all(fresh.map(readBuffer));
+      for (var k = 0; k < fresh.length; k++) {
+        cp.files.push({ name: fresh[k].name, size: fresh[k].size, buf: bufs[k] });
       }
       renderCompressChips();
     } catch (err) {
@@ -273,16 +337,15 @@
       if (subtype && String(subtype) === '/Image') images.push(obj);
     }
 
+    // Recompress JPEG images with a bounded pool of concurrent tasks. A single
+    // failing image keeps its original bytes and never aborts the whole PDF.
     var done = 0;
-    for (var j = 0; j < images.length; j++) {
-      try {
-        await recompressImage(images[j], level);
-      } catch (e) {
-        /* keep the image as-is */
-      }
-      done++;
-      if (onProgress) onProgress(done, images.length);
-    }
+    await mapLimit(images, CONCURRENCY, function (img) {
+      return recompressImage(img, level).then(function () {
+        done++;
+        if (onProgress) onProgress(done, images.length);
+      });
+    });
 
     var bytes = await doc.save({ useObjectStreams: true });
     return bytes.length < buf.byteLength ? bytes : new Uint8Array(buf);
@@ -296,63 +359,69 @@
     return !!filter && String(filter) === '/DCTDecode';
   }
 
+  // Returns true when the image was re-encoded, false when it was kept as-is.
+  // Never throws: any failure simply keeps the original image bytes.
   async function recompressImage(stream, level) {
-    var dict = stream.dict;
-    if (!dict) return;
-    var mask = dict.lookup(PDFLib.PDFName.of('ImageMask'));
-    if (mask instanceof PDFLib.PDFBool && mask.value === true) return;
-    if (dict.get(PDFLib.PDFName.of('DecodeParms'))) return;
-    if (!isDctDecode(dict)) return;
-
-    var cs = dict.lookup(PDFLib.PDFName.of('ColorSpace'));
-    if (cs instanceof PDFLib.PDFArray) return;
-    if (cs instanceof PDFLib.PDFName) {
-      var s = String(cs);
-      if (s === '/DeviceCMYK' || s === '/CalRGB' || s === '/CalGray' || s === '/Indexed') return;
-    }
-
-    var orig = stream.getContents();
-    if (!orig || orig.length < 4096) return;
-
-    var bmp;
     try {
-      bmp = await decodeJpeg(orig);
-    } catch (e) {
-      return;
-    }
-    var w = bmp.naturalWidth || bmp.width;
-    var h = bmp.naturalHeight || bmp.height;
-    if (!w || !h || w > 16000 || h > 16000 || w * h > 100000000) {
+      var dict = stream.dict;
+      if (!dict) return false;
+      var mask = dict.lookup(PDFLib.PDFName.of('ImageMask'));
+      if (mask instanceof PDFLib.PDFBool && mask.value === true) return false;
+      if (dict.get(PDFLib.PDFName.of('DecodeParms'))) return false;
+      if (!isDctDecode(dict)) return false;
+
+      var cs = dict.lookup(PDFLib.PDFName.of('ColorSpace'));
+      if (cs instanceof PDFLib.PDFArray) return false;
+      if (cs instanceof PDFLib.PDFName) {
+        var s = String(cs);
+        if (s === '/DeviceCMYK' || s === '/CalRGB' || s === '/CalGray' || s === '/Indexed') return false;
+      }
+
+      var orig = stream.getContents();
+      if (!orig || orig.length < SKIP_SMALL_BYTES) return false;
+
+      var bmp = null;
+      try {
+        bmp = await decodeJpeg(orig);
+      } catch (e) {
+        return false;
+      }
+      var w = bmp.naturalWidth || bmp.width;
+      var h = bmp.naturalHeight || bmp.height;
+      if (!w || !h || w > 16000 || h > 16000 || w * h > 100000000) {
+        if (bmp.close) bmp.close();
+        return false;
+      }
+
+      var cw = w;
+      var ch = h;
+      var maxDim = level.maxDim;
+      if (maxDim && Math.max(w, h) > maxDim) {
+        var scale = maxDim / Math.max(w, h);
+        cw = Math.max(1, Math.round(w * scale));
+        ch = Math.max(1, Math.round(h * scale));
+      }
+
+      var canvas = makeCanvas(cw, ch);
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(bmp, 0, 0, cw, ch);
       if (bmp.close) bmp.close();
-      return;
+      bmp = null;
+
+      var blob = await canvasToBlob(canvas, 'image/jpeg', level.quality);
+      if (!blob) return false;
+      var bytes = new Uint8Array(await blob.arrayBuffer());
+      if (bytes.length >= orig.length) return false;
+
+      stream.contents = bytes;
+      dict.set(PDFLib.PDFName.of('Filter'), PDFLib.PDFName.of('DCTDecode'));
+      dict.set(PDFLib.PDFName.of('ColorSpace'), PDFLib.PDFName.of('DeviceRGB'));
+      dict.set(PDFLib.PDFName.of('BitsPerComponent'), PDFLib.PDFNumber.of(8));
+      dict.delete(PDFLib.PDFName.of('DecodeParms'));
+      return true;
+    } catch (e) {
+      return false;
     }
-
-    var cw = w;
-    var ch = h;
-    var maxDim = level.maxDim;
-    if (maxDim && Math.max(w, h) > maxDim) {
-      var scale = maxDim / Math.max(w, h);
-      cw = Math.max(1, Math.round(w * scale));
-      ch = Math.max(1, Math.round(h * scale));
-    }
-
-    var canvas = document.createElement('canvas');
-    canvas.width = cw;
-    canvas.height = ch;
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(bmp, 0, 0, cw, ch);
-    if (bmp.close) bmp.close();
-
-    var blob = await canvasToBlob(canvas, 'image/jpeg', level.quality);
-    if (!blob) return;
-    var bytes = new Uint8Array(await blob.arrayBuffer());
-    if (bytes.length >= orig.length) return;
-
-    stream.contents = bytes;
-    dict.set(PDFLib.PDFName.of('Filter'), PDFLib.PDFName.of('DCTDecode'));
-    dict.set(PDFLib.PDFName.of('ColorSpace'), PDFLib.PDFName.of('DeviceRGB'));
-    dict.set(PDFLib.PDFName.of('BitsPerComponent'), PDFLib.PDFNumber.of(8));
-    dict.delete(PDFLib.PDFName.of('DecodeParms'));
   }
 
   async function decodeJpeg(bytes) {
@@ -365,7 +434,10 @@
     return await new Promise(function (resolve, reject) {
       var url = URL.createObjectURL(blob);
       var img = new Image();
-      img.onload = function () { resolve(img); };
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        resolve(img);
+      };
       img.onerror = function () {
         URL.revokeObjectURL(url);
         reject(new Error('Could not decode JPEG'));
