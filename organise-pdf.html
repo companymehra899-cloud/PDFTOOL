@@ -168,12 +168,12 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .page-num {
-    display: inline-block; font-size: 11px; font-weight: 700; color: var(--primary);
+    display: inline-block; font-size: 11px; font-weight: 700; color: #000;
     background: var(--primary-soft); padding: 2px 8px; border-radius: 999px; margin-top: 6px;
   }
   .delete-page-btn {
     position: absolute; top: 6px; right: 6px; width: 26px; height: 26px;
-    border: none; border-radius: 50%; background: #fff; color: var(--muted);
+    border: none; border-radius: 50%; background: #fff; color: #dc2626;
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     box-shadow: 0 2px 6px rgba(0,0,0,.15); transition: background .2s, color .2s;
   }
@@ -198,7 +198,7 @@
   html[data-theme="dark"] .thumbnail-card:hover { border-color: #4a3f7a; }
   html[data-theme="dark"] .thumbnail-card canvas { background: #10182b; }
   html[data-theme="dark"] .page-info-text { color: #97a2b9; }
-  html[data-theme="dark"] .delete-page-btn { background: #131b2f; color: #97a2b9; }
+  html[data-theme="dark"] .delete-page-btn { background: #131b2f; color: #f87171; }
   @media (max-width: 640px) {
     .upload-card { padding: 36px 18px; }
     .bottom-actions { justify-content: center; }
