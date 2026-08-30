@@ -4,33 +4,23 @@
   'use strict';
 
   const fileInput = document.getElementById('fileInput');
-  const fileInputMore = document.getElementById('fileInputMore');
-  const addMoreBtn = document.getElementById('addMoreBtn');
   const dropArea = document.getElementById('dropArea');
   const fileListSection = document.getElementById('fileListSection');
   const globalThumbnailsContainer = document.getElementById('globalThumbnailsContainer');
   const clearAllBtn = document.getElementById('clearAllBtn');
   const mergeBtn = document.getElementById('mergeBtn');
 
-  if (!fileInput || !fileInputMore || !dropArea || !fileListSection || !globalThumbnailsContainer || !mergeBtn) return;
+  if (!fileInput || !dropArea || !fileListSection || !globalThumbnailsContainer || !mergeBtn) return;
 
   let allPagesList = []; // Global flat list of all pages from all files
 
   // Click triggers
   dropArea.addEventListener('click', () => fileInput.click());
-  if (addMoreBtn) addMoreBtn.addEventListener('click', () => fileInputMore.click());
 
   fileInput.addEventListener('change', (e) => {
     if (e.target.files && e.target.files.length > 0) {
       handleFiles(e.target.files);
       fileInput.value = '';
-    }
-  });
-
-  fileInputMore.addEventListener('change', (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      handleFiles(e.target.files);
-      fileInputMore.value = '';
     }
   });
 

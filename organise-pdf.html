@@ -177,7 +177,7 @@
     box-shadow: 0 2px 6px rgba(0,0,0,.15); transition: background .2s, color .2s;
   }
   .delete-page-btn:hover { background: #fee2e2; color: #dc2626; }
-  .bottom-actions { display: flex; justify-content: flex-end; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .bottom-actions { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
   .btn-merge {
     background: #10b981; color: white; border: none; padding: 12px 28px; border-radius: 12px;
     font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;
@@ -289,10 +289,6 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <div class="file-list-section" id="fileListSection">
       <div class="section-title">
         <span><i class="fa-solid fa-clone" style="color:var(--primary); margin-right:8px;"></i> All Pages Arrangement (Drag cards to reorder)</span>
-        <button class="action-btn" type="button" id="addMoreBtn" style="background: #e0e7ff; color: var(--primary);">
-          <i class="fa-solid fa-plus"></i> Add More PDFs
-        </button>
-        <input type="file" id="fileInputMore" accept=".pdf" multiple style="display: none;" />
       </div>
 
       <!-- Global Container for all pages across all files -->
