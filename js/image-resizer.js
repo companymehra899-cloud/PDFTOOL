@@ -269,7 +269,6 @@
       $('#ir-height').value = '800';
       setUnit('px');
     }
-    void unitRow;
   });
 
   function setUnit(unit) {
