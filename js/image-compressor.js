@@ -339,5 +339,16 @@
     syncOptions();
   });
 
+  var targetParam = (new URLSearchParams(window.location.search).get('target') || '').trim().toLowerCase();
+  var m = targetParam.match(/^(\d+(?:\.\d+)?)(kb|mb)$/);
+  if (m) {
+    var bytes = parseFloat(m[1]) * (m[2] === 'mb' ? 1024 * 1024 : 1024);
+    selectKb(bytes);
+    var landingTitle = 'Compress Image to ' + parseFloat(m[1]) + (m[2] === 'mb' ? 'MB' : 'KB') + ' Online';
+    document.title = landingTitle;
+    var h1 = document.getElementById('ic-h1');
+    if (h1) h1.textContent = landingTitle;
+  }
+
   $('#ic-run').disabled = true;
 })();

@@ -123,6 +123,27 @@
     color: #fff;
     border-color: var(--primary);
   }
+  .kb-link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 10px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .kb-link {
+    display: block;
+    text-align: center;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 9px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .15s ease;
+  }
+  .kb-link:hover { border-color: var(--primary); color: var(--primary); }
   .result-box {
     display: flex;
     flex-wrap: wrap;
@@ -272,6 +293,47 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       </div>
     </div>
     <div id="ic-result" class="result-box" hidden></div>
+  </section>
+
+  <!-- Compress to exact KB/MB pages -->
+  <section class="home-section" aria-labelledby="ic-kb-links-title">
+    <div class="home-section-head">
+      <h2 id="ic-kb-links-title">Compress Image to Exact KB</h2>
+      <p>Pick your target size below — each link opens the tool with that size already selected.</p>
+    </div>
+    <div class="kb-link-grid">
+      <a class="kb-link" href="image-compressor.html?target=10kb">Compress Image to 10KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=20kb">Compress Image to 20KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=30kb">Compress Image to 30KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=40kb">Compress Image to 40KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=50kb">Compress Image to 50KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=60kb">Compress Image to 60KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=70kb">Compress Image to 70KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=80kb">Compress Image to 80KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=90kb">Compress Image to 90KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=100kb">Compress Image to 100KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=130kb">Compress Image to 130KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=200kb">Compress Image to 200KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=220kb">Compress Image to 220KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=250kb">Compress Image to 250KB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=300kb">Compress Image to 300KB Online</a>
+    </div>
+    <div class="home-section-head" style="margin-top: 22px;">
+      <h2 id="ic-mb-links-title">Compress Image to Exact MB</h2>
+      <p>Need a bigger target? These links pre-select an MB target size.</p>
+    </div>
+    <div class="kb-link-grid">
+      <a class="kb-link" href="image-compressor.html?target=1mb">Compress Image to 1MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=2mb">Compress Image to 2MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=3mb">Compress Image to 3MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=4mb">Compress Image to 4MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=5mb">Compress Image to 5MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=6mb">Compress Image to 6MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=7mb">Compress Image to 7MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=8mb">Compress Image to 8MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=9mb">Compress Image to 9MB Online</a>
+      <a class="kb-link" href="image-compressor.html?target=10mb">Compress Image to 10MB Online</a>
+    </div>
   </section>
 
   <!-- SEO info -->
