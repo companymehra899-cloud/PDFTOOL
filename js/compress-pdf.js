@@ -334,14 +334,29 @@
       if (!(obj instanceof PDFLib.PDFRawStream)) continue;
       var dict = obj.dict;
       var subtype = dict && dict.lookup(PDFLib.PDFName.of('Subtype'));
-      if (subtype && String(subtype) === '/Image') images.push(obj);
+      if (subtype && String(subtype) === '/Image') {
+        images.push({ ref: entry[0], stream: obj });
+      }
+    }
+
+    // Images referenced as a soft mask (SMask) or colour-key mask (Mask) by
+    // other images must never be re-encoded. They are single-channel masks;
+    // turning them into an opaque RGB JPEG corrupts the compositing and makes
+    // whole pages render blank/white.
+    var protectedRefs = {};
+    for (var pi = 0; pi < images.length; pi++) {
+      var pdict = images[pi].stream.dict;
+      ['SMask', 'Mask'].forEach(function (key) {
+        var v = pdict.get(PDFLib.PDFName.of(key));
+        if (v instanceof PDFLib.PDFRef) protectedRefs[String(v)] = true;
+      });
     }
 
     // Recompress JPEG images with a bounded pool of concurrent tasks. A single
     // failing image keeps its original bytes and never aborts the whole PDF.
     var done = 0;
     await mapLimit(images, CONCURRENCY, function (img) {
-      return recompressImage(img, level).then(function () {
+      return recompressImage(img.stream, level, protectedRefs, String(img.ref)).then(function () {
         done++;
         if (onProgress) onProgress(done, images.length);
       });
@@ -361,10 +376,11 @@
 
   // Returns true when the image was re-encoded, false when it was kept as-is.
   // Never throws: any failure simply keeps the original image bytes.
-  async function recompressImage(stream, level) {
+  async function recompressImage(stream, level, protectedRefs, refStr) {
     try {
       var dict = stream.dict;
       if (!dict) return false;
+      if (protectedRefs && protectedRefs[refStr]) return false;
 
       // Never touch image masks or images that carry masking/transparency
       // (color-key Mask or SMask). Re-encoding those to an opaque JPEG breaks
@@ -381,10 +397,15 @@
       // Indexed, Cal* etc. decode differently in the browser than in a PDF
       // viewer, so re-encoding those corrupts the page.
       var cs = dict.lookup(PDFLib.PDFName.of('ColorSpace'));
-      if (cs instanceof PDFLib.PDFArray) return false;
-      if (cs instanceof PDFLib.PDFName) {
-        var s = String(cs);
-        if (s !== '/DeviceRGB' && s !== '/DeviceGray') return false;
+      if (cs) {
+        if (cs instanceof PDFLib.PDFName) {
+          var s = String(cs);
+          if (s !== '/DeviceRGB' && s !== '/DeviceGray') return false;
+        } else {
+          // PDFArray (Indexed / ICCBased-with-array) or PDFStream (ICCBased)
+          // or anything else: not a plain colour space we can safely replace.
+          return false;
+        }
       }
 
       var orig = stream.getContents();
