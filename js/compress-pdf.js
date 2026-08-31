@@ -365,16 +365,26 @@
     try {
       var dict = stream.dict;
       if (!dict) return false;
+
+      // Never touch image masks or images that carry masking/transparency
+      // (color-key Mask or SMask). Re-encoding those to an opaque JPEG breaks
+      // how the page composites them and blanks out the whole page.
       var mask = dict.lookup(PDFLib.PDFName.of('ImageMask'));
       if (mask instanceof PDFLib.PDFBool && mask.value === true) return false;
+      if (dict.get(PDFLib.PDFName.of('Mask'))) return false;
+      if (dict.get(PDFLib.PDFName.of('SMask'))) return false;
       if (dict.get(PDFLib.PDFName.of('DecodeParms'))) return false;
       if (!isDctDecode(dict)) return false;
 
+      // Only re-encode images whose color space is a plain, browser-decodable
+      // one (DeviceRGB / DeviceGray / unset). CMYK, ICCBased, Separation,
+      // Indexed, Cal* etc. decode differently in the browser than in a PDF
+      // viewer, so re-encoding those corrupts the page.
       var cs = dict.lookup(PDFLib.PDFName.of('ColorSpace'));
       if (cs instanceof PDFLib.PDFArray) return false;
       if (cs instanceof PDFLib.PDFName) {
         var s = String(cs);
-        if (s === '/DeviceCMYK' || s === '/CalRGB' || s === '/CalGray' || s === '/Indexed') return false;
+        if (s !== '/DeviceRGB' && s !== '/DeviceGray') return false;
       }
 
       var orig = stream.getContents();
@@ -408,6 +418,10 @@
       if (bmp.close) bmp.close();
       bmp = null;
 
+      // Safety net: if decoding silently produced a blank/transparent canvas,
+      // keep the original bytes instead of writing a white page.
+      if (canvasIsBlank(ctx, cw, ch)) return false;
+
       var blob = await canvasToBlob(canvas, 'image/jpeg', level.quality);
       if (!blob) return false;
       var bytes = new Uint8Array(await blob.arrayBuffer());
@@ -418,7 +432,35 @@
       dict.set(PDFLib.PDFName.of('ColorSpace'), PDFLib.PDFName.of('DeviceRGB'));
       dict.set(PDFLib.PDFName.of('BitsPerComponent'), PDFLib.PDFNumber.of(8));
       dict.delete(PDFLib.PDFName.of('DecodeParms'));
+      dict.delete(PDFLib.PDFName.of('Decode'));
+      dict.delete(PDFLib.PDFName.of('Mask'));
       return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // True when the canvas has no opaque pixels anywhere - a reliable sign the
+  // image failed to decode and would otherwise be saved as a blank white page.
+  function canvasIsBlank(ctx, w, h) {
+    try {
+      if (!ctx) return false;
+      var sw = Math.min(w, 64);
+      var sh = Math.min(h, 64);
+      var samples = [
+        [0, 0],
+        [Math.max(0, w - sw), 0],
+        [0, Math.max(0, h - sh)],
+        [Math.max(0, w - sw), Math.max(0, h - sh)],
+      ];
+      var opaque = 0;
+      for (var i = 0; i < samples.length; i++) {
+        var d = ctx.getImageData(samples[i][0], samples[i][1], sw, sh).data;
+        for (var j = 3; j < d.length; j += 4) {
+          if (d[j] > 0) { opaque++; break; }
+        }
+      }
+      return opaque === 0;
     } catch (e) {
       return false;
     }
@@ -427,7 +469,12 @@
   async function decodeJpeg(bytes) {
     var blob = new Blob([bytes], { type: 'image/jpeg' });
     try {
-      if ('createImageBitmap' in window) return await createImageBitmap(blob);
+      if ('createImageBitmap' in window) {
+        // imageOrientation 'none' keeps raw pixel order. The PDF viewer renders
+        // the image without EXIF rotation, so applying it here would rotate
+        // pages after compression.
+        return await createImageBitmap(blob, { imageOrientation: 'none' });
+      }
     } catch (e) {
       /* fall through to Image element */
     }
