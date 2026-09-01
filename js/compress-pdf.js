@@ -339,13 +339,19 @@
       }
     }
 
-    // Images referenced as a soft mask (SMask) or colour-key mask (Mask) by
-    // other images must never be re-encoded. They are single-channel masks;
-    // turning them into an opaque RGB JPEG corrupts the compositing and makes
-    // whole pages render blank/white.
+    // Soft masks (SMask) and colour-key masks (Mask) must never be re-encoded.
+    // They are single-channel masks; turning them into an opaque RGB JPEG
+    // corrupts the compositing and makes whole pages render blank/white.
+    //
+    // Masks are not only referenced from image dictionaries - complex files
+    // (large scans, InDesign/Illustrator exports) also attach them through
+    // ExtGState entries, transparency groups and form XObjects. Walk every
+    // indirect object's dictionary so all such references are protected.
     var protectedRefs = {};
-    for (var pi = 0; pi < images.length; pi++) {
-      var pdict = images[pi].stream.dict;
+    for (var pi = 0; pi < objs.length; pi++) {
+      var pobj = objs[pi][1];
+      var pdict = pobj && pobj.dict;
+      if (!pdict || typeof pdict.get !== 'function') continue;
       ['SMask', 'Mask'].forEach(function (key) {
         var v = pdict.get(PDFLib.PDFName.of(key));
         if (v instanceof PDFLib.PDFRef) protectedRefs[String(v)] = true;
@@ -391,6 +397,20 @@
       if (dict.get(PDFLib.PDFName.of('SMask'))) return false;
       if (dict.get(PDFLib.PDFName.of('DecodeParms'))) return false;
       if (!isDctDecode(dict)) return false;
+
+      // A non-identity /Decode array (e.g. inverted scans saved as [1 0])
+      // maps the samples to the opposite colour ramp. Since the re-encoded
+      // stream drops /Decode, keeping the original bytes preserves the page
+      // exactly; re-encoding would invert it and render white/black swapped.
+      var dec = dict.lookup(PDFLib.PDFName.of('Decode'));
+      if (dec instanceof PDFLib.PDFArray) {
+        var decArr = dec.asArray();
+        var identity = decArr.length === 2 ? [0, 1] : decArr.length === 4 ? [0, 1, 0, 1] : null;
+        var isIdentity = identity && decArr.every(function (n, idx) {
+          return n instanceof PDFLib.PDFNumber && n.asNumber() === identity[idx];
+        });
+        if (!isIdentity) return false;
+      }
 
       // Only re-encode images whose color space is a plain, browser-decodable
       // one (DeviceRGB / DeviceGray / unset). CMYK, ICCBased, Separation,
@@ -452,6 +472,14 @@
       dict.set(PDFLib.PDFName.of('Filter'), PDFLib.PDFName.of('DCTDecode'));
       dict.set(PDFLib.PDFName.of('ColorSpace'), PDFLib.PDFName.of('DeviceRGB'));
       dict.set(PDFLib.PDFName.of('BitsPerComponent'), PDFLib.PDFNumber.of(8));
+      // When downscaled for the "extreme" level the encoded bitmap is smaller
+      // than the declared size. Keep /Width and /Height in sync with the JPEG
+      // so strict viewers don't mis-read the stream and drop the image
+      // entirely (which renders the page area blank/white).
+      if (cw !== w || ch !== h) {
+        dict.set(PDFLib.PDFName.of('Width'), PDFLib.PDFNumber.of(cw));
+        dict.set(PDFLib.PDFName.of('Height'), PDFLib.PDFNumber.of(ch));
+      }
       dict.delete(PDFLib.PDFName.of('DecodeParms'));
       dict.delete(PDFLib.PDFName.of('Decode'));
       dict.delete(PDFLib.PDFName.of('Mask'));
