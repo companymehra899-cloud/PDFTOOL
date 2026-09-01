@@ -1,8 +1,10 @@
 /* ePDFConverter reference UI interactions */
 (function () {
-  var menu = document.querySelector('.menu');
-  var links = document.querySelector('.links');
+  var menu = document.querySelector('.menu') || document.getElementById('nav-menu');
+  var links = document.querySelector('.links') || document.getElementById('site-links');
   var dropToggles = Array.prototype.slice.call(document.querySelectorAll('.drop-toggle'));
+  var linksHome = links ? links.parentNode : null;
+  var linksAnchor = links && links.nextSibling;
 
   function closeAllDrops() {
     dropToggles.forEach(function (toggle) {
@@ -35,20 +37,37 @@
 
   function setMenu(open) {
     if (!menu || !links) return;
-    links.classList.toggle('open', open);
-    menu.classList.toggle('open', open);
-    menu.setAttribute('aria-expanded', open ? 'true' : 'false');
-    menu.textContent = open ? '\u2715' : '\u2630';
     if (open) {
+      if (links.parentNode !== document.body) {
+        document.body.appendChild(links);
+      }
+      links.classList.add('open');
+      menu.classList.add('open');
+      menu.setAttribute('aria-expanded', 'true');
+      menu.textContent = '\u2715';
       closeAllDrops();
       lockScroll(true);
     } else {
+      links.classList.remove('open');
+      menu.classList.remove('open');
+      menu.setAttribute('aria-expanded', 'false');
+      menu.textContent = '\u2630';
+      if (linksHome && links.parentNode !== linksHome) {
+        if (linksAnchor && linksAnchor.parentNode === linksHome) {
+          linksHome.insertBefore(links, linksAnchor);
+        } else {
+          linksHome.appendChild(links);
+        }
+      }
       lockScroll(false);
     }
   }
 
   if (menu && links) {
+    menu.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-controls', links.id || 'site-links');
     menu.addEventListener('click', function (e) {
+      e.preventDefault();
       e.stopPropagation();
       setMenu(!links.classList.contains('open'));
     });
