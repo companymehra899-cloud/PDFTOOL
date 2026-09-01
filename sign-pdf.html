@@ -398,6 +398,22 @@
     width:100%;margin-top:8px;border:1.5px solid #ddd6fe;border-radius:12px;padding:11px 14px;background:#fff;
     color:#6d28d9;font:inherit;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;
   }
+  .sgw-apply-all{
+    width:100%;margin-top:8px;border:0;border-radius:12px;padding:11px 14px;background:#16a34a;color:#fff;
+    font:inherit;font-size:14px;font-weight:700;cursor:pointer;
+  }
+  .sgw-remove-all{
+    width:100%;margin-top:8px;border:1.5px solid #fecaca;border-radius:12px;padding:11px 14px;background:#fff;color:#dc2626;
+    font:inherit;font-size:14px;font-weight:700;cursor:pointer;
+  }
+  .sgw-drag-preview{
+    display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0 4px;padding:10px;
+    border:2px dashed #c4b5fd;border-radius:12px;background:#faf8ff;cursor:grab;
+  }
+  .sgw-drag-preview[hidden]{display:none}
+  .sgw-drag-preview img{max-height:56px;max-width:100%;object-fit:contain;pointer-events:none}
+  .sgw-drag-preview span{font-size:12px;font-weight:700;color:#6d28d9}
+  .sgw-drag-preview:active{cursor:grabbing}
   .sgw-tips{
     background:#fff8e8;border:1px solid #fde68a;border-radius:16px;padding:14px 16px;color:#92400e;
   }
@@ -699,26 +715,29 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
                 <input type="range" id="sg-thick" min="1" max="10" value="3">
                 <em id="sg-thick-val">3px</em>
               </div>
+              <div class="sgw-drag-preview" id="sg-drag-chip" draggable="true" hidden>
+                <img id="sg-drag-preview-img" alt="">
+                <span>Drag onto PDF</span>
+              </div>
               <button type="button" class="sgw-add-sig" id="sg-place">Add Signature</button>
               <button type="button" class="sgw-save-sig" id="sg-save-sig">
                 <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="m12 3 2.6 6.6L22 10.2l-5.2 4.4L18.4 22 12 18.2 5.6 22l1.6-7.4L2 10.2l7.4-.6Z"/></svg>
                 Save Signature
               </button>
+              <button type="button" class="sgw-apply-all" id="sg-add-all">Apply to all pages</button>
+              <button type="button" class="sgw-remove-all" id="sg-remove-page">Remove from all pages</button>
             </div>
             <div class="sgw-tips">
               <b>Tips</b>
               <ul>
-                <li>Drag and drop the signature to place it</li>
+                <li>Drag the signature onto the PDF to place it</li>
                 <li>Resize using the handles</li>
-                <li>You can add multiple signatures</li>
+                <li>Apply to all pages copies the same position</li>
               </ul>
             </div>
             <input type="color" id="sg-color" value="#111827" hidden>
             <input type="range" id="sg-size" min="40" max="240" value="120" hidden>
             <span class="opt-value" id="sg-size-val" hidden>120 pt</span>
-            <div class="sw-drag-chip" id="sg-drag-chip" draggable="true" hidden><span>Drag me onto the page</span></div>
-            <button class="btn small primary" id="sg-add-all" type="button" hidden>Apply to all pages</button>
-            <button class="btn small danger" id="sg-remove-page" type="button" hidden>Remove</button>
           </aside>
         </div>
       </div>
@@ -892,7 +911,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
-<script src="js/sign-pdf.js?v=2"></script>
+<script src="js/sign-pdf.js?v=3"></script>
 <script src="js/home.js?v=6"></script>
 <script src="js/reference.js?v=5"></script>
 <div id="google_translate_element" style="display:none"></div>

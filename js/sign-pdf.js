@@ -434,18 +434,17 @@
 
   function updateDragChip() {
     const chip = $('#sg-drag-chip');
-    const inner = chip.querySelector('span');
+    if (!chip) return;
+    const img = $('#sg-drag-preview-img');
     if (sg.sig) {
-      chip.style.backgroundImage = 'url(' + sg.sig.canvas.toDataURL('image/png') + ')';
-      chip.style.backgroundSize = 'contain';
-      chip.style.backgroundRepeat = 'no-repeat';
-      chip.style.backgroundPosition = 'center';
+      const url = sg.sig.canvas.toDataURL('image/png');
+      if (img) img.src = url;
+      chip.hidden = false;
       chip.classList.add('has-sig');
-      inner.textContent = 'Drag me onto the page';
     } else {
-      chip.style.backgroundImage = '';
+      if (img) img.src = '';
+      chip.hidden = true;
       chip.classList.remove('has-sig');
-      inner.textContent = 'Drag me onto the page';
     }
   }
 
@@ -526,6 +525,14 @@
     sg.resize = null;
   });
 
+  $('#sg-stage').addEventListener('click', (e) => {
+    if (sg.drag || sg.resize) return;
+    if (e.target.closest('.sw-sig')) return;
+    if (!sg.sig) return;
+    if (sg.pages[sg.curPage]) return;
+    sgPlaceAt(e);
+  });
+
   /* --- drag & drop placement --- */
   const sgStageEl = $('#sg-stage');
   const sgCanvasEl = $('#sg-stage-canvas');
@@ -551,14 +558,27 @@
     toast('Signature placed on page ' + (sg.curPage + 1));
   }
 
-  sgStageEl.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'copy';
-    sgStageEl.classList.add('drag-over');
+  const sgStageWrapEl = $('#sg-stage-wrap');
+  [sgStageEl, sgStageWrapEl].forEach((el) => {
+    if (!el) return;
+    el.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+      sgStageEl.classList.add('drag-over');
+    });
   });
   sgStageEl.addEventListener('dragleave', () => {
     sgStageEl.classList.remove('drag-over');
   });
+  if (sgStageWrapEl) {
+    sgStageWrapEl.addEventListener('drop', (e) => {
+      if (e.target === sgStageEl || sgStageEl.contains(e.target)) return;
+      e.preventDefault();
+      sgStageEl.classList.remove('drag-over');
+      if (e.dataTransfer.files && e.dataTransfer.files.length) return;
+      sgPlaceAt(e);
+    });
+  }
   sgStageEl.addEventListener('drop', async (e) => {
     e.preventDefault();
     sgStageEl.classList.remove('drag-over');
@@ -593,15 +613,21 @@
     sgPlaceAt(e);
   });
 
-  $('#sg-drag-chip').addEventListener('dragstart', (e) => {
-    if (!sg.sig) {
-      e.preventDefault();
-      toast('Create a signature first', true);
-      return;
-    }
-    e.dataTransfer.setData('text/plain', 'signature');
-    e.dataTransfer.effectAllowed = 'copy';
-  });
+  function sgBindDragSource(el) {
+    if (!el) return;
+    el.addEventListener('dragstart', (e) => {
+      if (!sg.sig) {
+        e.preventDefault();
+        toast('Create a signature first', true);
+        return;
+      }
+      e.dataTransfer.setData('text/plain', 'signature');
+      e.dataTransfer.effectAllowed = 'copy';
+      try {
+        e.dataTransfer.setDragImage(sg.sig.canvas, sg.sig.canvas.width / 2, sg.sig.canvas.height / 2);
+      } catch (err) {}
+    });
+  }
 
   /* --- signature creation (draw / type / upload) --- */
 
@@ -620,6 +646,17 @@
   const sgDrawCanvas = $('#sg-draw');
   sgDrawCanvas.width = 640;
   sgDrawCanvas.height = 240;
+  sgBindDragSource($('#sg-drag-chip'));
+  const typePreview = $('#sg-type-preview');
+  if (typePreview) {
+    typePreview.setAttribute('draggable', 'true');
+    sgBindDragSource(typePreview);
+  }
+  const uploadPreview = $('#sg-upload-preview');
+  if (uploadPreview) {
+    uploadPreview.setAttribute('draggable', 'true');
+    sgBindDragSource(uploadPreview);
+  }
   const sgCtx = sgDrawCanvas.getContext('2d');
   sgCtx.lineWidth = 3;
   sgCtx.lineCap = 'round';
@@ -650,8 +687,8 @@
     if (!sgDrawing) return;
     sgDrawing = null;
     sg.sig = { canvas: sgDrawCanvas };
-    sgAutoPlace();
     drawSignOverlay();
+    updateDragChip();
   };
   sgDrawCanvas.addEventListener('pointerup', sgStopDraw);
   sgDrawCanvas.addEventListener('pointercancel', sgStopDraw);
@@ -731,8 +768,7 @@
   if (placeBtn) {
     placeBtn.addEventListener('click', () => {
       if (!sg.sig) return toast('Create a signature first', true);
-      if (!sg.pages[sg.curPage]) sgAutoPlace();
-      else toast('Signature already on this page — drag to move it');
+      sgAutoPlace(true);
     });
   }
   const saveSig = $('#sg-save-sig');
@@ -767,8 +803,8 @@
     tctx.textBaseline = 'middle';
     tctx.fillText(text, 10, sgTypeCanvas.height / 2);
     sg.sig = { canvas: sgTypeCanvas };
-    sgAutoPlace();
     drawSignOverlay();
+    updateDragChip();
   }
 
   $('#sg-type-text').addEventListener('input', sgDrawType);
@@ -813,9 +849,9 @@
       pv.src = c.toDataURL('image/png');
       pv.hidden = false;
       sg.sig = { canvas: c };
-      sgAutoPlace();
       drawSignOverlay();
-      toast('Signature loaded');
+      updateDragChip();
+      toast('Signature loaded — drag it onto the PDF');
     } catch (err) {
       console.error(err);
       toast('Could not read signature file', true);
@@ -885,8 +921,9 @@
     toast('Removed signatures from all pages');
   });
 
-  function sgAutoPlace() {
-    if (!sg.sig || sg.pages[sg.curPage]) return;
+  function sgAutoPlace(force) {
+    if (!sg.sig) return;
+    if (!force && sg.pages[sg.curPage]) return;
     const p = sgNormPos();
     if (p) {
       sg.pages[sg.curPage] = p;
