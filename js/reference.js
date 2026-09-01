@@ -13,10 +13,28 @@
     });
   }
 
+  function syncMobileMenuTop() {
+    var nav = document.querySelector('.nav');
+    if (!nav || !links) return;
+    var h = Math.round(nav.getBoundingClientRect().height);
+    if (h < 40) return;
+    document.documentElement.style.setProperty('--epdf-nav-h', h + 'px');
+    links.style.top = h + 'px';
+    links.style.height = 'calc(100dvh - ' + h + 'px)';
+    links.style.maxHeight = 'calc(100dvh - ' + h + 'px)';
+  }
+
   function openDrop(drop) {
     drop.classList.add('open');
     var t = drop.querySelector('.drop-toggle');
     if (t) t.setAttribute('aria-expanded', 'true');
+    if (window.innerWidth <= 900 && links && drop) {
+      requestAnimationFrame(function () {
+        var panelTop = links.getBoundingClientRect().top;
+        var itemTop = drop.getBoundingClientRect().top;
+        links.scrollTop += itemTop - panelTop - 8;
+      });
+    }
   }
 
   function lockScroll(on) {
@@ -47,6 +65,8 @@
       menu.textContent = '\u2715';
       closeAllDrops();
       lockScroll(true);
+      syncMobileMenuTop();
+      links.scrollTop = 0;
     } else {
       links.classList.remove('open');
       menu.classList.remove('open');
@@ -133,8 +153,11 @@
     if (window.innerWidth > 900) {
       closeAllDrops();
       setMenu(false);
+    } else if (links && links.classList.contains('open')) {
+      syncMobileMenuTop();
     }
   });
+  syncMobileMenuTop();
 
   document.querySelectorAll('.faq button').forEach(function (btn) {
     btn.addEventListener('click', function () {

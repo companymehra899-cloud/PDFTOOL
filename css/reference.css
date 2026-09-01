@@ -488,12 +488,50 @@ body.nav-open{padding-right:var(--nav-scrollbar,0px)}
   .brand-wordmark small{font-size:10px;margin-top:5px}
    .logo-mark,.logo-mark svg,.logo-mark img{width:40px;height:40px}
    .logo-mark{border-radius:10px}
-  .links{display:none;position:fixed;left:0;right:0;top:66px;width:100%;height:calc(100dvh - 66px);max-height:calc(100dvh - 66px);background:#fff;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;margin:0;padding:12px 20px 28px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;z-index:200;border-top:1px solid var(--border);box-sizing:border-box}
+  .links{
+    display:none;
+    position:fixed;
+    left:0;right:0;
+    top:var(--epdf-nav-h,66px);
+    width:100%;
+    height:calc(100dvh - var(--epdf-nav-h,66px));
+    max-height:calc(100dvh - var(--epdf-nav-h,66px));
+    background:#fff;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start !important;
+    gap:0;
+    margin:0;
+    padding:8px 20px 32px;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+    z-index:200;
+    border-top:1px solid var(--border);
+    box-sizing:border-box;
+  }
   .links.open{display:flex}
   .links>a,.links .drop-toggle{font-size:16px;padding:13px 4px;border-bottom:1px solid #f0f1f6;display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box}
-  .drop{display:flex;flex-direction:column;width:100%}
-  .drop-menu{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;box-shadow:none;border:0;border-left:2px solid #efeaff;border-radius:0;margin:4px 0 8px 10px;padding:2px 6px;min-width:0;display:none}
-  .drop.open .drop-menu{display:flex;flex-direction:column;transform:none;opacity:1;visibility:visible}
+  .drop{display:flex;flex-direction:column;width:100%;flex:0 0 auto}
+  .drop-menu{
+    position:static !important;
+    top:auto !important;
+    left:auto !important;
+    right:auto !important;
+    transform:none !important;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    box-shadow:none;
+    border:0;
+    border-left:2px solid #efeaff;
+    border-radius:0;
+    margin:4px 0 8px 10px;
+    padding:2px 6px;
+    min-width:0;
+    display:none;
+  }
+  .drop.open .drop-menu{display:flex;flex-direction:column;transform:none !important;opacity:1;visibility:visible}
   .drop-menu a{padding:10px 10px;font-size:14px;white-space:normal}
   .nav-actions .theme,.nav-actions .lang,.nav-actions .lang-drop,.nav-actions .btn{display:none}
   .menu{display:flex;align-items:center;justify-content:center;width:42px;height:42px;flex:0 0 42px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);font-size:22px;line-height:1;text-align:center;cursor:pointer;user-select:none;position:relative;z-index:210;pointer-events:auto;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -509,7 +547,11 @@ body.nav-open{padding-right:var(--nav-scrollbar,0px)}
    .logo-mark{border-radius:9px}
   .brand-wordmark{font-size:17px;letter-spacing:-.4px}
   .brand-wordmark small{font-size:8px;margin-top:4px}
-  .links{top:64px;height:calc(100dvh - 64px);max-height:calc(100dvh - 64px)}
+  .links{
+    top:var(--epdf-nav-h,64px);
+    height:calc(100dvh - var(--epdf-nav-h,64px));
+    max-height:calc(100dvh - var(--epdf-nav-h,64px));
+  }
 }
 
 /* ============================================================
