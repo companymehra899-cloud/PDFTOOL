@@ -26,7 +26,7 @@
 
 <link rel="canonical" href="https://epdfconverter.com/">
 <link rel="stylesheet" href="css/reference.css?v=16">
-<link rel="stylesheet" href="css/home-v2.css?v=2">
+<link rel="stylesheet" href="css/home-v2.css?v=3">
 <link rel="stylesheet" href="css/media/mobile.css?v=4">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -226,8 +226,8 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <div>
       <div class="hp-pills">
         <span class="hp-pill"><i class="g"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></i> 100% Free</span>
-        <span class="hp-pill"><i class="b"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/><path d="m9 12 2 2 4-4"/></svg></i> Secure</span>
-        <span class="hp-pill"><i class="o"><svg viewBox="0 0 24 24"><path d="M12 17v-6"/><path d="M8 8h8"/><circle cx="12" cy="12" r="9"/></svg></i> No Sign up</span>
+        <span class="hp-pill"><i class="b"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/></svg></i> Secure</span>
+        <span class="hp-pill"><i class="o"><svg viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m12 3 2.4 6.8L22 10.2l-5.4 4.4L18.5 22 12 18.2 5.5 22l1.9-7.4L2 10.2l7.6-.4Z"/></svg></i> No Sign up</span>
       </div>
       <h1>All-in-One Online<br><em>PDF &amp; Image Tools</em></h1>
       <p class="hp-lead">Merge, convert, compress, edit, sign PDFs and images with just a few clicks. Fast, easy &amp; secure!</p>
@@ -235,7 +235,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         <input type="search" id="tool-search" name="q" placeholder="Search tools (e.g. merge pdf, compress image)" autocomplete="off">
         <button type="submit" aria-label="Search tools"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
       </form>
-      <div class="hp-rating"><span class="hp-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.8/5 &nbsp;|&nbsp; Trusted by 1M+ users</div>
+      <div class="hp-rating"><span class="hp-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <b>4.8/5</b> <span class="hp-rating-sep">|</span> Trusted by 1M+ users</div>
     </div>
 
     <div class="hp-art" aria-hidden="true">
@@ -243,16 +243,18 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         <div class="hp-blob"></div>
         <svg class="hp-leaf hp-leaf-l" viewBox="0 0 80 120"><path d="M10 110 C10 40 70 20 70 10 C40 40 18 70 10 110Z" fill="#86efac"/><path d="M10 110 C28 70 48 40 70 10" fill="none" stroke="#16a34a" stroke-width="3"/></svg>
         <svg class="hp-leaf hp-leaf-r" viewBox="0 0 90 130"><path d="M80 120 C80 50 20 24 12 8 C48 36 70 74 80 120Z" fill="#c4b5fd"/><path d="M80 120 C58 76 36 40 12 8" fill="none" stroke="#7c3aed" stroke-width="3"/></svg>
+        <div class="hp-spark"></div>
         <div class="hp-x">&#10005;</div>
-        <div class="hp-pdf">PDF<small>Document</small></div>
         <div class="hp-screen">
           <div class="hp-screen-page"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
+        <div class="hp-pdf"><span class="hp-pdf-fold"></span>PDF</div>
+        <div class="hp-w">W</div>
         <div class="hp-jpg">JPG</div>
         <div class="hp-png">PNG</div>
         <div class="hp-books"><i class="hp-book a"></i><i class="hp-book b"></i><i class="hp-book c"></i></div>
         <button type="button" class="hp-cloud" id="hero-dropzone" aria-label="Drop a file here or browse">
-          <svg viewBox="0 0 24 24"><path d="M12 16V8"/><path d="m8.5 11.5 3.5-3.5 3.5 3.5"/><path d="M7 18h10a4 4 0 0 0 .4-8 6 6 0 0 0-11.4 1.6A3.5 3.5 0 0 0 7 18Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .4-8 6 6 0 0 0-11.4 1.6A3.5 3.5 0 0 0 7 18Z"/><path d="M12 16V9"/><path d="m8.5 11.5 3.5-3.5 3.5 3.5"/></svg>
         </button>
         <input type="file" id="hero-file-input" accept=".pdf,.jpg,.jpeg,.png,.webp" multiple hidden>
       </div>
@@ -261,10 +263,10 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 
   <div class="container">
     <div class="hp-stats">
-      <div class="hp-stat"><div class="hp-stat-ico s-purple"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M5 5l1.5 1.5M17.5 17.5 19 19M3 12h2M19 12h2M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></div><div><b>10+ Powerful Tools</b><span>PDF &amp; image utilities</span></div></div>
-      <div class="hp-stat"><div class="hp-stat-ico s-green"><svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 5-3.5 9.4-8 11C7.5 21.4 4 17 4 12V7Z"/><path d="m9 12 2 2 4-4"/></svg></div><div><b>Unlimited Usage</b><span>No daily limits</span></div></div>
-      <div class="hp-stat"><div class="hp-stat-ico s-blue"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><div><b>100% Secure &amp; Private</b><span>Files stay in your browser</span></div></div>
-      <div class="hp-stat"><div class="hp-stat-ico s-orange"><svg viewBox="0 0 24 24"><path d="M13 3 6 14h5l-1 7 8-12h-5l1-6Z"/></svg></div><div><b>Fast High Performance</b><span>Instant processing</span></div></div>
+      <div class="hp-stat"><div class="hp-stat-ico s-purple"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div><b>50+</b><span>Powerful Tools</span></div></div>
+      <div class="hp-stat"><div class="hp-stat-ico s-green"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></div><div><b>&infin;</b><span>Unlimited Usage</span></div></div>
+      <div class="hp-stat"><div class="hp-stat-ico s-blue"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/></svg></div><div><b>100%</b><span>Secure &amp; Private</span></div></div>
+      <div class="hp-stat"><div class="hp-stat-ico s-orange"><svg viewBox="0 0 24 24"><path d="M13 3 6 14h5l-1 7 8-12h-5l1-6Z"/></svg></div><div><b>Fast</b><span>High Performance</span></div></div>
     </div>
   </div>
 </section>
