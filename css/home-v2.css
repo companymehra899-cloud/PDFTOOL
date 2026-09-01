@@ -320,6 +320,14 @@ body.home-v2 .hp-empty.show{display:block}
 
 html[data-theme="dark"] body.home-v2{background:#0b1220}
 html[data-theme="dark"] body.home-v2 .nav{background:rgba(14,22,38,.92);border-bottom-color:#1f2940}
+html[data-theme="dark"] body.home-v2 .logo,
+html[data-theme="dark"] body.home-v2 .brand-wordmark,
+html[data-theme="dark"] body.home-v2 .links>a,
+html[data-theme="dark"] body.home-v2 .links .drop-toggle,
+html[data-theme="dark"] body.home-v2 .theme-btn,
+html[data-theme="dark"] body.home-v2 .lang-toggle,
+html[data-theme="dark"] body.home-v2 .lang-label,
+html[data-theme="dark"] body.home-v2 .menu{color:#ffffff}
 html[data-theme="dark"] body.home-v2 .hp-hero{background:radial-gradient(circle at 88% 12%,rgba(124,58,237,.22),transparent 34%),linear-gradient(180deg,#0b1220,#10182b)}
 html[data-theme="dark"] body.home-v2 .hp-hero h1{color:#f3f4f6}
 html[data-theme="dark"] body.home-v2 .hp-lead{color:#97a2b9}
