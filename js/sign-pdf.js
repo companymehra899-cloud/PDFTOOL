@@ -147,6 +147,7 @@
     const target = $('#view-' + name);
     if (!target) return;
     target.classList.add('active');
+    document.body.classList.toggle('sg-work-on', name === 'sign-work');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -191,6 +192,8 @@
     scale: 1,
     drag: null,
     resize: null,
+    zoom: 1,
+    rotation: 0,
   };
 
   function sgResetUpload() {
@@ -224,6 +227,7 @@
         numbers: false,
         onRemove: () => sgResetUpload(),
       });
+      sgFillFileCard();
       showView('sign-work');
       buildSignThumbs();
       await loadSignPage(0);
@@ -241,42 +245,79 @@
     if (!sg.files.length) return toast('Add a PDF first', true);
     sg.pages = Array.from({ length: sg.pageCount }, () => null);
     sg.curPage = 0;
+    sgFillFileCard();
     showView('sign-work');
     buildSignThumbs();
     loadSignPage(0);
   });
 
-  $('#sg-back').addEventListener('click', () => {
+  function sgLeaveWorkspace() {
     showView('sign');
     renderChips('#sg-files', sg.files, {
       numbers: false,
       onRemove: () => sgResetUpload(),
     });
-    $('#sg-upload-options').classList.add('show');
-  });
+    if (sg.files.length) $('#sg-upload-options').classList.add('show');
+  }
+
+  $('#sg-back').addEventListener('click', sgLeaveWorkspace);
+
+  function sgFillFileCard() {
+    const f = sg.files[0];
+    const nameEl = $('#sg-file-name');
+    const metaEl = $('#sg-file-meta');
+    if (!nameEl || !metaEl) return;
+    nameEl.textContent = f ? f.name : 'Document.pdf';
+    metaEl.textContent = f
+      ? fmtBytes(f.size) + ' | ' + sg.pageCount + ' Page' + (sg.pageCount === 1 ? '' : 's')
+      : '0 MB | 0 Pages';
+  }
+
+  function sgGoPage(i) {
+    if (i < 0 || i >= sg.pageCount) return;
+    sg.curPage = i;
+    $$('#sg-thumbs .sw-thumb').forEach((x) => x.classList.toggle('active', +x.dataset.idx === i));
+    loadSignPage(i);
+  }
 
   function buildSignThumbs() {
     const wrap = $('#sg-thumbs');
     wrap.innerHTML = '';
     for (let i = 0; i < sg.pageCount; i++) {
       const b = mkEl('button', 'sw-thumb' + (i === sg.curPage ? ' active' : ''));
-      b.textContent = 'Page ' + (i + 1);
+      b.type = 'button';
       b.dataset.idx = i;
-      b.addEventListener('click', () => {
-        sg.curPage = i;
-        $$('#sg-thumbs .sw-thumb').forEach((x) => x.classList.toggle('active', +x.dataset.idx === i));
-        loadSignPage(i);
-      });
+      const img = document.createElement('img');
+      img.alt = 'Page ' + (i + 1);
+      b.appendChild(img);
+      b.appendChild(document.createTextNode(String(i + 1)));
+      b.addEventListener('click', () => sgGoPage(i));
       wrap.appendChild(b);
+      sg.pdfJs.getPage(i + 1).then((page) => {
+        const vp = page.getViewport({ scale: 0.18 });
+        const c = document.createElement('canvas');
+        c.width = Math.floor(vp.width);
+        c.height = Math.floor(vp.height);
+        return page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise.then(() => {
+          img.src = c.toDataURL('image/jpeg', 0.7);
+        });
+      }).catch(() => {});
     }
+    sgUpdatePageLabel();
+  }
+
+  function sgUpdatePageLabel() {
+    const el = $('#sg-page-label');
+    if (el) el.textContent = (sg.curPage + 1) + ' / ' + Math.max(1, sg.pageCount);
   }
 
   async function loadSignPage(idx) {
     if (idx < 0 || idx >= sg.pageCount) return;
+    sgUpdatePageLabel();
     const page = await sg.pdfJs.getPage(idx + 1);
     const vp1 = page.getViewport({ scale: 1 });
     const wrap = $('#sg-stage-wrap');
-    const targetW = Math.min(680, Math.max(300, (wrap.clientWidth || 680) - 40));
+    const targetW = Math.min(680, Math.max(300, (wrap.clientWidth || 680) - 40)) * (sg.zoom || 1);
     const scale = targetW / vp1.width;
     const vp = page.getViewport({ scale });
     const canvas = $('#sg-stage-canvas');
@@ -307,22 +348,52 @@
     } else {
       if (!el) {
         el = mkEl('div', 'sw-sig');
-        el.style.backgroundSize = '100% 100%';
-        el.style.backgroundRepeat = 'no-repeat';
-        el.style.backgroundPosition = 'center';
+        const art = mkEl('div', 'sw-sig-art');
+        el.appendChild(art);
 
         const rm = mkEl('button', 'sw-sig-rm');
         rm.type = 'button';
         rm.title = 'Remove signature';
         rm.innerHTML = '&times;';
-        rm.addEventListener('pointerdown', (e) => e.stopPropagation());
-        rm.addEventListener('click', (e) => {
-          e.stopPropagation();
+        const removeSig = (e) => {
+          if (e) e.stopPropagation();
           sg.pages[sg.curPage] = null;
           drawSignOverlay();
           updateSignThumbs();
           toast('Removed signature from page ' + (sg.curPage + 1));
+        };
+        rm.addEventListener('pointerdown', (e) => e.stopPropagation());
+        rm.addEventListener('click', removeSig);
+
+        const rot = mkEl('button', 'sw-sig-rot');
+        rot.type = 'button';
+        rot.title = 'Rotate';
+        rot.innerHTML = '<svg viewBox="0 0 24 24" width="12" height="12"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M3 12a9 9 0 1 0 3-6.7"/><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M3 4v5h5"/></svg>';
+        rot.addEventListener('pointerdown', (e) => e.stopPropagation());
+        rot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sg.rotation = ((sg.rotation || 0) + 90) % 360;
+          drawSignOverlay();
         });
+        el.appendChild(rot);
+
+        const tools = mkEl('div', 'sw-sig-tools');
+        const mkTool = (cls, title, svg, fn) => {
+          const b = mkEl('button', cls);
+          b.type = 'button';
+          b.title = title;
+          b.innerHTML = svg;
+          b.addEventListener('pointerdown', (e) => e.stopPropagation());
+          b.addEventListener('click', fn);
+          tools.appendChild(b);
+        };
+        mkTool('sg-edit', 'Edit', '<svg viewBox="0 0 24 24" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="2" d="m3 21 4-1L18 9a2.1 2.1 0 0 0-3-3L4 17l-1 4Z"/></svg>', (e) => { e.stopPropagation(); toast('Edit the signature in the right panel'); });
+        mkTool('sg-del', 'Delete', '<svg viewBox="0 0 24 24" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M9 7V5h6v2m-7 0v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V7"/></svg>', removeSig);
+        mkTool('sg-move', 'Move', '<svg viewBox="0 0 24 24" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg>', (e) => e.stopPropagation());
+        el.appendChild(tools);
+
+        const label = mkEl('span', 'sw-sig-label', 'Signature');
+        el.appendChild(label);
 
         const corners = ['nw', 'ne', 'sw', 'se'];
         corners.forEach((c) => {
@@ -351,7 +422,11 @@
         el.appendChild(rm);
         stage.appendChild(el);
       }
-      el.style.backgroundImage = 'url(' + sg.sig.canvas.toDataURL('image/png') + ')';
+      const art = el.querySelector('.sw-sig-art');
+      if (art) {
+        art.style.backgroundImage = 'url(' + sg.sig.canvas.toDataURL('image/png') + ')';
+        art.style.transform = 'rotate(' + (sg.rotation || 0) + 'deg)';
+      }
       sgPosToStyle(el, pos);
     }
     updateDragChip();
@@ -587,11 +662,91 @@
     drawSignOverlay();
   });
 
-  $('#sg-color').addEventListener('input', () => {
-    sgCtx.strokeStyle = $('#sg-color').value;
+  function sgApplyColor(color) {
+    $('#sg-color').value = color;
+    sgCtx.strokeStyle = color;
     if (sg.method === 'draw') sgSetSigFromMethod();
+    if (sg.method === 'type') sgDrawType();
     drawSignOverlay();
+  }
+
+  $('#sg-color').addEventListener('input', () => sgApplyColor($('#sg-color').value));
+
+  $$('#sg-swatches button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      $$('#sg-swatches button').forEach((b) => b.classList.toggle('active', b === btn));
+      sgApplyColor(btn.dataset.color);
+    });
   });
+
+  const sgThick = $('#sg-thick');
+  if (sgThick) {
+    sgThick.addEventListener('input', () => {
+      const v = parseInt(sgThick.value, 10) || 3;
+      sgCtx.lineWidth = v;
+      const lab = $('#sg-thick-val');
+      if (lab) lab.textContent = v + 'px';
+    });
+  }
+
+  const sgZoomSel = $('#sg-zoom');
+  function sgSetZoom(z) {
+    sg.zoom = clamp(z, 0.5, 2);
+    if (sgZoomSel) sgZoomSel.value = String(sg.zoom);
+    if (sg.pdfJs) loadSignPage(sg.curPage);
+  }
+  if (sgZoomSel) sgZoomSel.addEventListener('change', () => sgSetZoom(parseFloat(sgZoomSel.value) || 1));
+  const zoomIn = $('#sg-zoom-in');
+  const zoomOut = $('#sg-zoom-out');
+  if (zoomIn) zoomIn.addEventListener('click', () => sgSetZoom((sg.zoom || 1) + 0.25));
+  if (zoomOut) zoomOut.addEventListener('click', () => sgSetZoom((sg.zoom || 1) - 0.25));
+  const prevBtn = $('#sg-page-prev');
+  const nextBtn = $('#sg-page-next');
+  if (prevBtn) prevBtn.addEventListener('click', () => sgGoPage(sg.curPage - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => sgGoPage(sg.curPage + 1));
+  const fsBtn = $('#sg-fs');
+  if (fsBtn) {
+    fsBtn.addEventListener('click', () => {
+      const wrap = $('#sg-stage-wrap');
+      if (!wrap) return;
+      if (!document.fullscreenElement) wrap.requestFullscreen && wrap.requestFullscreen();
+      else document.exitFullscreen && document.exitFullscreen();
+    });
+  }
+  const startOver = $('#sg-start-over');
+  if (startOver) startOver.addEventListener('click', () => {
+    sgResetUpload();
+    sgLeaveWorkspace();
+  });
+  const fileRemove = $('#sg-file-remove');
+  if (fileRemove) fileRemove.addEventListener('click', () => {
+    sgResetUpload();
+    sgLeaveWorkspace();
+  });
+  const addMore = $('#sg-add-more');
+  if (addMore) addMore.addEventListener('click', () => {
+    $('#sg-input').click();
+  });
+  const placeBtn = $('#sg-place');
+  if (placeBtn) {
+    placeBtn.addEventListener('click', () => {
+      if (!sg.sig) return toast('Create a signature first', true);
+      if (!sg.pages[sg.curPage]) sgAutoPlace();
+      else toast('Signature already on this page — drag to move it');
+    });
+  }
+  const saveSig = $('#sg-save-sig');
+  if (saveSig) {
+    saveSig.addEventListener('click', () => {
+      if (!sg.sig) return toast('Create a signature first', true);
+      try {
+        localStorage.setItem('epdf-saved-sig', sg.sig.canvas.toDataURL('image/png'));
+        toast('Signature saved');
+      } catch (err) {
+        toast('Could not save signature', true);
+      }
+    });
+  }
 
   const sgTypeCanvas = $('#sg-type-preview');
   sgTypeCanvas.width = 320;

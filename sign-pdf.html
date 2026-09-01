@@ -265,6 +265,194 @@
   }
   html[data-theme="dark"] #sg-dropzone .dz-title{color:#eef1ff}
   html[data-theme="dark"] #sg-dropzone .dz-sub{color:#97a2b9}
+
+  body.sg-work-on .home-hero,
+  body.sg-work-on .home-section,
+  body.sg-work-on .cta-banner,
+  body.sg-work-on .page-meta,
+  body.sg-work-on footer{display:none}
+  body.sg-work-on{background:#f6f7fb}
+  body.sg-work-on main.container{max-width:none;padding:0;width:100%}
+  body.sg-work-on .tool-area{margin:0}
+  body.sg-work-on .tool-area .view{padding:0}
+  body.sg-work-on #view-sign-work{display:block}
+
+  .sgw{background:#f6f7fb;min-height:calc(100vh - 76px);padding:10px 18px 24px}
+  .sgw-top{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;
+    padding:6px 6px 14px;
+  }
+  .sgw-back{
+    justify-self:start;display:inline-flex;align-items:center;gap:6px;
+    border:0;background:none;color:#6b7280;font:inherit;font-size:14px;font-weight:600;cursor:pointer;
+  }
+  .sgw-title{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin:0;font-size:20px;font-weight:800;color:#1e1b4b;letter-spacing:-.3px;
+  }
+  .sgw-title svg{color:#4c1d95}
+  .sgw-top-actions{justify-self:end;display:flex;gap:10px}
+  .sgw-btn-out,.sgw-btn-fill{
+    display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:10px 16px;
+    font:inherit;font-size:14px;font-weight:700;cursor:pointer;
+  }
+  .sgw-btn-out{background:#fff;border:1.5px solid #ddd6fe;color:#6d28d9}
+  .sgw-btn-fill{background:#6d28d9;border:0;color:#fff;box-shadow:0 8px 18px rgba(109,40,217,.28)}
+  .sgw-body{align-items:stretch;gap:16px}
+  .sgw-left{
+    width:220px;background:#fff;border:1px solid #eceef5;border-radius:18px;
+    padding:16px 14px;box-shadow:0 8px 24px rgba(23,33,59,.05);
+    display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 150px);
+  }
+  .sgw-file-head{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:800;color:#111827;margin-bottom:10px}
+  .sgw-check{width:18px;height:18px;border-radius:50%;background:#ecfdf5;display:grid;place-items:center}
+  .sgw-file-card{
+    display:flex;align-items:center;gap:10px;background:#f8fafc;border:1px solid #eef0f5;
+    border-radius:12px;padding:10px;
+  }
+  .sgw-pdf-badge{
+    width:34px;height:40px;border-radius:6px;background:linear-gradient(180deg,#ef4444,#dc2626);
+    color:#fff;font-size:9px;font-weight:800;display:grid;place-items:center;flex-shrink:0;
+  }
+  .sgw-file-meta{min-width:0;flex:1}
+  .sgw-file-meta strong{display:block;font-size:12.5px;color:#111827;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sgw-file-meta span{display:block;font-size:11px;color:#9ca3af;margin-top:2px}
+  .sgw-trash{border:1px solid #fee2e2;background:#fff;color:#ef4444;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;cursor:pointer}
+  .sgw-left .sw-side-title{text-transform:none;letter-spacing:0;font-size:14px;font-weight:800;color:#111827}
+  .sgw-left .sw-thumbs{gap:10px;flex:1}
+  .sgw-left .sw-thumb{
+    display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px;
+    background:#fff;border:1px solid #eceef5;border-radius:12px;color:#6b7280;text-align:center;
+  }
+  .sgw-left .sw-thumb img{width:100%;height:92px;object-fit:cover;object-position:top;border-radius:8px;background:#f8fafc;pointer-events:none}
+  .sgw-left .sw-thumb.active{border-color:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,.18);color:#6d28d9}
+  .sgw-add-more{
+    margin-top:auto;width:100%;border:1.5px solid #e9e4ff;background:#fff;color:#6d28d9;
+    border-radius:12px;padding:11px 10px;font:inherit;font-size:13.5px;font-weight:700;
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;
+  }
+  .sgw-center{
+    flex:1;min-width:0;background:#fff;border:1px solid #eceef5;border-radius:18px;
+    box-shadow:0 8px 24px rgba(23,33,59,.05);display:flex;flex-direction:column;overflow:hidden;
+  }
+  .sgw-toolbar{
+    display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid #f0f1f6;
+  }
+  .sgw-tb{
+    width:34px;height:34px;border:1px solid #eceef5;background:#fff;border-radius:10px;
+    display:grid;place-items:center;color:#4b5563;cursor:pointer;
+  }
+  .sgw-zoom{border:1px solid #eceef5;border-radius:10px;height:34px;padding:0 10px;background:#fff;font:inherit;font-size:13px;font-weight:700;color:#374151}
+  .sgw-tb-spacer{flex:1}
+  .sgw-page-label{font-size:13.5px;font-weight:700;color:#111827;min-width:52px;text-align:center}
+  .sgw-center .sw-stage-wrap{
+    border:0;box-shadow:none;background:#eef0f6;border-radius:0;flex:1;min-height:520px;padding:22px;
+  }
+  .sgw-center .sw-stage{overflow:visible}
+  .sgw-right{
+    width:300px;background:transparent;border:0;box-shadow:none;padding:0;gap:14px;max-height:calc(100vh - 150px);
+  }
+  .sgw-card{
+    background:#fff;border:1px solid #eceef5;border-radius:18px;padding:16px 16px 18px;
+    box-shadow:0 8px 24px rgba(23,33,59,.05);
+  }
+  .sgw-card-title{margin:0 0 10px;font-size:16px;font-weight:800;color:#111827}
+  .sgw-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:transparent;padding:0;gap:0;border-bottom:1px solid #eeeef5;margin-bottom:12px}
+  .sgw-tabs .seg-btn{
+    background:none;border:0;border-radius:0;box-shadow:none;color:#9ca3af;font-weight:700;padding:8px 0;
+    border-bottom:2px solid transparent;
+  }
+  .sgw-tabs .seg-btn.active{color:#6d28d9;border-bottom-color:#6d28d9;background:none}
+  .sgw-right .sw-draw-wrap{position:relative}
+  .sgw-right .sw-draw-wrap:after{
+    content:"";position:absolute;left:18px;right:18px;bottom:36px;height:1px;background:#d1d5db;pointer-events:none;
+  }
+  .sgw-right .sw-draw-wrap #sg-draw{
+    height:150px;border:1px solid #eceef5;border-radius:14px;background:#fafafa;box-shadow:none;
+  }
+  .sgw-clear{
+    position:absolute;right:10px;bottom:10px;border:0;background:none;color:#9ca3af;
+    font:inherit;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:4px;cursor:pointer;
+  }
+  .sgw-colors{margin-top:14px}
+  .sgw-colors span,.sgw-thick span{display:block;font-size:13px;font-weight:700;color:#111827;margin-bottom:8px}
+  .sgw-swatches{display:flex;gap:12px;align-items:center}
+  .sgw-swatches button{
+    width:22px;height:22px;border-radius:50%;border:2px solid transparent;padding:0;cursor:pointer;
+  }
+  .sgw-swatches button:nth-child(1){background:#111827}
+  .sgw-swatches button:nth-child(2){background:#ef4444}
+  .sgw-swatches button:nth-child(3){background:#3b82f6}
+  .sgw-swatches button:nth-child(4){background:#8b5cf6}
+  .sgw-swatches button:nth-child(5){background:#22c55e}
+  .sgw-swatches button.active{box-shadow:0 0 0 3px #fff,0 0 0 5px currentColor;border-color:#c4b5fd}
+  .sgw-thick{margin:16px 0 14px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px}
+  .sgw-thick span{grid-column:1/-1;margin-bottom:0}
+  .sgw-thick input{width:100%;accent-color:#7c3aed}
+  .sgw-thick em{font-style:normal;font-size:12.5px;font-weight:700;color:#6b7280}
+  .sgw-add-sig{
+    width:100%;border:0;border-radius:12px;padding:12px 14px;background:#6d28d9;color:#fff;
+    font:inherit;font-size:14.5px;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(109,40,217,.25);
+  }
+  .sgw-save-sig{
+    width:100%;margin-top:8px;border:1.5px solid #ddd6fe;border-radius:12px;padding:11px 14px;background:#fff;
+    color:#6d28d9;font:inherit;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  }
+  .sgw-tips{
+    background:#fff8e8;border:1px solid #fde68a;border-radius:16px;padding:14px 16px;color:#92400e;
+  }
+  .sgw-tips b{display:block;margin-bottom:8px;color:#b45309;font-size:14px}
+  .sgw-tips ul{margin:0;padding-left:16px;font-size:13px;line-height:1.7;color:#a16207}
+  .sw-sig{
+    border:1.5px dashed #7c3aed;box-shadow:none;background-color:transparent;
+  }
+  .sw-sig-art{
+    position:absolute;inset:0;
+    background-size:100% 100%;background-repeat:no-repeat;background-position:center;
+    pointer-events:none;
+  }
+  .sw-sig:hover{box-shadow:none}
+  .sw-sig-rm{display:none}
+  .sw-sig-tools{
+    position:absolute;right:-44px;top:8px;display:flex;flex-direction:column;gap:8px;
+  }
+  .sw-sig-tools button{
+    width:32px;height:32px;border-radius:8px;border:1px solid #eceef5;background:#fff;
+    display:grid;place-items:center;cursor:pointer;color:#4b5563;box-shadow:0 4px 10px rgba(15,23,42,.08);
+  }
+  .sw-sig-tools .sg-del{color:#ef4444}
+  .sw-sig-rot{
+    position:absolute;left:50%;top:-16px;transform:translateX(-50%);
+    width:26px;height:26px;border-radius:50%;border:0;background:#7c3aed;color:#fff;
+    display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(124,58,237,.3);
+  }
+  .sw-sig-label{
+    position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);
+    font-size:11px;color:#9ca3af;font-weight:600;white-space:nowrap;
+  }
+  .sw-sig-hd{width:10px;height:10px;background:#7c3aed;border:2px solid #fff}
+
+  @media(max-width:1100px){
+    .sgw-top{grid-template-columns:1fr;justify-items:center}
+    .sgw-top-actions,.sgw-back{justify-self:center}
+    .sgw-left,.sgw-right{width:100%}
+  }
+  html[data-theme="dark"] body.sg-work-on{background:#0b1220}
+  html[data-theme="dark"] .sgw{background:#0b1220}
+  html[data-theme="dark"] .sgw-title,html[data-theme="dark"] .sgw-card-title,html[data-theme="dark"] .sgw-file-head,
+  html[data-theme="dark"] .sgw-file-meta strong,html[data-theme="dark"] .sgw-left .sw-side-title{color:#f3f4f6}
+  html[data-theme="dark"] .sgw-left,
+  html[data-theme="dark"] .sgw-center,
+  html[data-theme="dark"] .sgw-card,
+  html[data-theme="dark"] .sgw-btn-out,
+  html[data-theme="dark"] .sgw-tb,
+  html[data-theme="dark"] .sgw-zoom,
+  html[data-theme="dark"] .sgw-save-sig{
+    background:#131b2f;border-color:#27314a;color:#e7ebf4;
+  }
+  html[data-theme="dark"] .sgw-center .sw-stage-wrap{background:#10182b}
+  html[data-theme="dark"] .sgw-file-card{background:#10182b;border-color:#27314a}
+  html[data-theme="dark"] .sgw-back{color:#97a2b9}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}
@@ -389,68 +577,150 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 
     <!-- Signing workspace view -->
     <div id="view-sign-work" class="view">
-      <div class="editor-bar">
-        <button class="btn ghost small" id="sg-back">&larr; Back</button>
-        <h2 class="editor-title">Sign PDF</h2>
-        <button class="btn primary" id="sg-download">Download PDF</button>
-      </div>
-      <div class="sign-work">
-        <aside class="sw-pages-panel" id="sg-pages-panel">
-          <span class="sw-side-title"><i class="fa-solid fa-layer-group"></i> Pages</span>
-          <div class="sw-thumbs" id="sg-thumbs"></div>
-        </aside>
-        <div class="sw-stage-wrap" id="sg-stage-wrap">
-          <div class="sw-stage" id="sg-stage">
-            <canvas id="sg-stage-canvas"></canvas>
+      <div class="sgw">
+        <div class="sgw-top">
+          <button class="sgw-back" id="sg-back" type="button">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+            Back to Tools
+          </button>
+          <h2 class="sgw-title">Sign PDF <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m3 21 4-1L18 9a2.1 2.1 0 0 0-3-3L4 17l-1 4Z"/><path fill="none" stroke="currentColor" stroke-width="2" d="m13 6 3 3"/></svg></h2>
+          <div class="sgw-top-actions">
+            <button class="sgw-btn-out" id="sg-start-over" type="button">
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+              Start Over
+            </button>
+            <button class="sgw-btn-fill" id="sg-download" type="button">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>
+              Download Signed PDF
+            </button>
           </div>
         </div>
-        <aside class="sw-side" id="sg-side">
-          <div class="sw-section">
-            <span class="sw-side-title"><i class="fa-solid fa-pen-nib"></i> Signature</span>
-            <div class="seg" id="sg-method">
-              <button class="seg-btn active" data-method="draw">Draw</button>
-              <button class="seg-btn" data-method="type">Type</button>
-              <button class="seg-btn" data-method="upload">Upload</button>
-            </div>
-            <div class="sw-draw-wrap" id="sg-draw-wrap">
-              <canvas id="sg-draw"></canvas>
-              <div class="sig-pad-bar">
-                <button class="btn small ghost" id="sg-clear">Clear</button>
-                <span class="opt-hint">Draw with mouse or touch</span>
+
+        <div class="sign-work sgw-body">
+          <aside class="sw-pages-panel sgw-left" id="sg-pages-panel">
+            <div class="sgw-file-block">
+              <div class="sgw-file-head">Your File <span class="sgw-check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14"><path fill="none" stroke="#22c55e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12 5 5L20 7"/></svg>
+              </span></div>
+              <div class="sgw-file-card">
+                <span class="sgw-pdf-badge">PDF</span>
+                <div class="sgw-file-meta">
+                  <strong id="sg-file-name">Document.pdf</strong>
+                  <span id="sg-file-meta">0 MB | 0 Pages</span>
+                </div>
+                <button type="button" class="sgw-trash" id="sg-file-remove" aria-label="Remove file">
+                  <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M9 7V5h6v2m-7 0v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V7"/></svg>
+                </button>
               </div>
             </div>
-            <div class="sw-type-wrap" id="sg-type-wrap" style="display:none">
-              <input type="text" id="sg-type-text" class="input sig-type-input" placeholder="Type your name">
-              <canvas id="sg-type-preview" width="320" height="90" hidden></canvas>
+            <span class="sw-side-title">Pages</span>
+            <div class="sw-thumbs" id="sg-thumbs"></div>
+            <button type="button" class="sgw-add-more" id="sg-add-more">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 8v8M8 12h8"/></svg>
+              Add More Files
+            </button>
+          </aside>
+
+          <div class="sgw-center">
+            <div class="sgw-toolbar">
+              <button type="button" class="sgw-tb" id="sg-zoom-out" aria-label="Zoom out">
+                <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8 11h6M21 21l-3.5-3.5"/></svg>
+              </button>
+              <button type="button" class="sgw-tb" id="sg-zoom-in" aria-label="Zoom in">
+                <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 8v6M8 11h6M21 21l-3.5-3.5"/></svg>
+              </button>
+              <select class="sgw-zoom" id="sg-zoom" aria-label="Zoom">
+                <option value="0.5">50%</option>
+                <option value="0.75">75%</option>
+                <option value="1" selected>100%</option>
+                <option value="1.25">125%</option>
+                <option value="1.5">150%</option>
+              </select>
+              <div class="sgw-tb-spacer"></div>
+              <button type="button" class="sgw-tb" id="sg-page-prev" aria-label="Previous page">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+              </button>
+              <span class="sgw-page-label" id="sg-page-label">1 / 1</span>
+              <button type="button" class="sgw-tb" id="sg-page-next" aria-label="Next page">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+              </button>
+              <div class="sgw-tb-spacer"></div>
+              <button type="button" class="sgw-tb" id="sg-pan" aria-label="Pan">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg>
+              </button>
+              <button type="button" class="sgw-tb" id="sg-fs" aria-label="Fullscreen">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 3H4v5M15 3h5v5M9 21H4v-5M15 21h5v-5"/></svg>
+              </button>
             </div>
-            <div class="sw-upload-wrap" id="sg-upload-wrap" style="display:none">
-              <input type="file" id="sg-upload" accept="image/*,application/pdf" hidden>
-              <button class="btn small ghost" id="sg-upload-btn">Choose signature JPG / PNG / PDF</button>
-              <span class="opt-hint">PNG with transparency works best</span>
-              <img id="sg-upload-preview" class="sig-upload-preview" alt="Signature preview" hidden>
-            </div>
-            <div class="sw-row">
-              <label class="ve-inp">Color <input type="color" id="sg-color" value="#1f2437"></label>
+            <div class="sw-stage-wrap" id="sg-stage-wrap">
+              <div class="sw-stage" id="sg-stage">
+                <canvas id="sg-stage-canvas"></canvas>
+              </div>
             </div>
           </div>
-          <div class="sw-section">
-            <span class="sw-side-title"><i class="fa-solid fa-location-dot"></i> Place</span>
-            <div class="sw-drag-chip" id="sg-drag-chip" draggable="true" title="Drag me onto the page">
-              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6-4 4-4-4m-2-4h-4m6 0h10"/></svg>
-              <span>Drag me onto the page</span>
+
+          <aside class="sw-side sgw-right" id="sg-side">
+            <div class="sgw-card">
+              <h3 class="sgw-card-title">Add Signature</h3>
+              <div class="seg sgw-tabs" id="sg-method">
+                <button class="seg-btn active" data-method="draw">Draw</button>
+                <button class="seg-btn" data-method="type">Type</button>
+                <button class="seg-btn" data-method="upload">Upload</button>
+              </div>
+              <div class="sw-draw-wrap" id="sg-draw-wrap">
+                <canvas id="sg-draw"></canvas>
+                <button class="sgw-clear" id="sg-clear" type="button">
+                  <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M3 12a9 9 0 1 0 3-6.7"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 4v5h5"/></svg>
+                  Clear
+                </button>
+              </div>
+              <div class="sw-type-wrap" id="sg-type-wrap" style="display:none">
+                <input type="text" id="sg-type-text" class="input sig-type-input" placeholder="Type your name">
+                <canvas id="sg-type-preview" width="320" height="90" hidden></canvas>
+              </div>
+              <div class="sw-upload-wrap" id="sg-upload-wrap" style="display:none">
+                <input type="file" id="sg-upload" accept="image/*,application/pdf" hidden>
+                <button class="btn small ghost" id="sg-upload-btn" type="button">Choose signature JPG / PNG / PDF</button>
+                <span class="opt-hint">PNG with transparency works best</span>
+                <img id="sg-upload-preview" class="sig-upload-preview" alt="Signature preview" hidden>
+              </div>
+              <div class="sgw-colors">
+                <span>Choose Color</span>
+                <div class="sgw-swatches" id="sg-swatches">
+                  <button type="button" class="active" data-color="#111827" aria-label="Black"></button>
+                  <button type="button" data-color="#ef4444" aria-label="Red"></button>
+                  <button type="button" data-color="#3b82f6" aria-label="Blue"></button>
+                  <button type="button" data-color="#8b5cf6" aria-label="Purple"></button>
+                  <button type="button" data-color="#22c55e" aria-label="Green"></button>
+                </div>
+              </div>
+              <div class="sgw-thick">
+                <span>Thickness</span>
+                <input type="range" id="sg-thick" min="1" max="10" value="3">
+                <em id="sg-thick-val">3px</em>
+              </div>
+              <button type="button" class="sgw-add-sig" id="sg-place">Add Signature</button>
+              <button type="button" class="sgw-save-sig" id="sg-save-sig">
+                <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="m12 3 2.6 6.6L22 10.2l-5.2 4.4L18.4 22 12 18.2 5.6 22l1.6-7.4L2 10.2l7.4-.6Z"/></svg>
+                Save Signature
+              </button>
             </div>
-            <div class="sw-row">
-              <span class="opt-label">Size</span>
-              <input type="range" id="sg-size" min="40" max="240" value="120">
-              <span class="opt-value" id="sg-size-val">120 pt</span>
+            <div class="sgw-tips">
+              <b>Tips</b>
+              <ul>
+                <li>Drag and drop the signature to place it</li>
+                <li>Resize using the handles</li>
+                <li>You can add multiple signatures</li>
+              </ul>
             </div>
-            <div class="sw-row">
-              <button class="btn small primary" id="sg-add-all">Apply to all pages</button>
-              <button class="btn small danger" id="sg-remove-page">Remove</button>
-            </div>
-          </div>
-          <span class="sw-hint">Your signature appears on the current page — drag it to position it, or drop a JPG / PNG / PDF anywhere on the page. Use "Apply to all pages" to repeat it at the same spot on every page.</span>
-        </aside>
+            <input type="color" id="sg-color" value="#111827" hidden>
+            <input type="range" id="sg-size" min="40" max="240" value="120" hidden>
+            <span class="opt-value" id="sg-size-val" hidden>120 pt</span>
+            <div class="sw-drag-chip" id="sg-drag-chip" draggable="true" hidden><span>Drag me onto the page</span></div>
+            <button class="btn small primary" id="sg-add-all" type="button" hidden>Apply to all pages</button>
+            <button class="btn small danger" id="sg-remove-page" type="button" hidden>Remove</button>
+          </aside>
+        </div>
       </div>
     </div>
   </section>
@@ -622,7 +892,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
-<script src="js/sign-pdf.js?v=1"></script>
+<script src="js/sign-pdf.js?v=2"></script>
 <script src="js/home.js?v=6"></script>
 <script src="js/reference.js?v=5"></script>
 <div id="google_translate_element" style="display:none"></div>
