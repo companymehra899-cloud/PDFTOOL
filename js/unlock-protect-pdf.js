@@ -183,6 +183,26 @@
     mode: 'unlock',
   };
 
+  let qpdfPromise = null;
+  function getQpdf() {
+    if (!qpdfPromise) {
+      if (typeof window.Module !== 'function') {
+        qpdfPromise = Promise.reject(new Error('PDF engine failed to load'));
+      } else {
+        qpdfPromise = window.Module({ locateFile: (f) => 'js/vendor/qpdf/' + f });
+      }
+    }
+    return qpdfPromise;
+  }
+
+  function callMainSafe(q, args) {
+    try {
+      return q.callMain(args);
+    } catch (e) {
+      return e && typeof e.status === 'number' ? e.status : -1;
+    }
+  }
+
   function scResetUpload() {
     sc.files = [];
     renderChips('#sc-files', [], {});
@@ -253,77 +273,71 @@
     busy('Processing ' + sc.files.length + ' PDF(s)...');
     const results = [];
     try {
-      if (sc.mode === 'unlock') {
-        const pass = $('#sc-unlock-pass').value || '';
-        for (let i = 0; i < sc.files.length; i++) {
-          const item = sc.files[i];
-          setBusyText('Unlocking "' + item.name + '" (' + (i + 1) + '/' + sc.files.length + ')...');
-          let doc;
-          try {
-            doc = await PDFLib.PDFDocument.load(
-              item.buf,
-              pass ? { password: pass } : { ignoreEncryption: true }
-            );
-          } catch (err) {
-            toast('Wrong password for "' + item.name + '"', true);
-            continue;
+      const q = await getQpdf();
+      const FS = q.FS;
+      for (let i = 0; i < sc.files.length; i++) {
+        const item = sc.files[i];
+        setBusyText('Processing "' + item.name + '" (' + (i + 1) + '/' + sc.files.length + ')...');
+        FS.writeFile('/in.pdf', new Uint8Array(item.buf));
+        let args;
+        if (sc.mode === 'unlock') {
+          const pass = $('#sc-unlock-pass').value || '';
+          args = ['/in.pdf', '/out.pdf', '--decrypt'];
+          if (pass) args.splice(2, 0, '--password=' + pass);
+        } else {
+          const p1 = $('#sc-pass1').value;
+          const p2 = $('#sc-pass2').value;
+          if (!p1) {
+            unbusy();
+            return toast('Enter a password', true);
           }
-          if (pass === '' && doc.isEncrypted) {
-            toast('"' + item.name + '" is password-protected. Enter its password.', true);
-            continue;
+          if (p1 !== p2) {
+            unbusy();
+            return toast('Passwords do not match', true);
           }
-          const out = await PDFLib.PDFDocument.create();
-          const pages = await out.copyPages(doc, doc.getPageIndices());
-          pages.forEach((p) => out.addPage(p));
-          const bytes = await out.save();
-          results.push({
-            name: item.name.replace(/\.pdf$/i, '') + '-unlocked.pdf',
-            before: item.size,
-            after: bytes.length,
-            bytes,
-          });
+          const perms = {
+            allowPrint: $('#sc-perm-print').checked,
+            allowCopy: $('#sc-perm-copy').checked,
+            allowModify: $('#sc-perm-modify').checked,
+          };
+          args = [
+            '--encrypt', p1, p1, '256',
+            '--print=' + (perms.allowPrint ? 'full' : 'none'),
+            '--extract=' + (perms.allowCopy ? 'y' : 'n'),
+            '--modify=' + (perms.allowModify ? 'all' : 'none'),
+            '--', '/in.pdf', '/out.pdf',
+          ];
         }
-        $('#sc-result').innerHTML = '';
-        renderResults(results);
-        if (results.length) toast('Unlocked ' + results.length + ' PDF(s)');
-      } else {
-        const p1 = $('#sc-pass1').value;
-        const p2 = $('#sc-pass2').value;
-        if (!p1) return toast('Enter a password', true);
-        if (p1 !== p2) return toast('Passwords do not match', true);
-        const perms = {
-          allowPrint: $('#sc-perm-print').checked,
-          allowCopy: $('#sc-perm-copy').checked,
-          allowModify: $('#sc-perm-modify').checked,
-        };
-        for (let i = 0; i < sc.files.length; i++) {
-          const item = sc.files[i];
-          setBusyText('Protecting "' + item.name + '" (' + (i + 1) + '/' + sc.files.length + ')...');
-          const src = await PDFLib.PDFDocument.load(item.buf, { ignoreEncryption: true });
-          const out = await PDFLib.PDFDocument.create();
-          const pages = await out.copyPages(src, src.getPageIndices());
-          pages.forEach((p) => out.addPage(p));
-          out.encrypt({
-            userPassword: p1,
-            ownerPassword: p1,
-            permissions: {
-              printing: perms.allowPrint ? 'highResolution' : false,
-              copying: perms.allowCopy,
-              modifying: perms.allowModify,
-            },
-            algorithm: 'AES-256',
-          });
-          const bytes = await out.save();
-          results.push({
-            name: item.name.replace(/\.pdf$/i, '') + '-protected.pdf',
-            before: item.size,
-            after: bytes.length,
-            bytes,
-          });
+        try { FS.unlink('/out.pdf'); } catch (e) { /* no previous output */ }
+        const code = callMainSafe(q, args);
+        if (code !== 0) {
+          if (sc.mode === 'unlock') {
+            const pass = $('#sc-unlock-pass').value || '';
+            if (!pass) toast('"' + item.name + '" is password-protected. Enter its password.', true);
+            else toast('Wrong password for "' + item.name + '"', true);
+          } else {
+            toast('Could not protect "' + item.name + '"', true);
+          }
+          continue;
         }
-        $('#sc-result').innerHTML = '';
-        renderResults(results);
-        if (results.length) toast('Protected ' + results.length + ' PDF(s)');
+        let bytes;
+        try {
+          bytes = FS.readFile('/out.pdf');
+        } catch (e) {
+          toast('Could not read output for "' + item.name + '"', true);
+          continue;
+        }
+        results.push({
+          name: item.name.replace(/\.pdf$/i, '') + (sc.mode === 'unlock' ? '-unlocked.pdf' : '-protected.pdf'),
+          before: item.size,
+          after: bytes.length,
+          bytes,
+        });
+      }
+      $('#sc-result').innerHTML = '';
+      renderResults(results);
+      if (results.length) {
+        toast((sc.mode === 'unlock' ? 'Unlocked ' : 'Protected ') + results.length + ' PDF(s)');
       }
     } catch (err) {
       console.error(err);
