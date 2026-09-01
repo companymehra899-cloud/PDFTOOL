@@ -29,8 +29,9 @@ a{text-decoration:none;color:inherit}
 .nav{height:88px;border-bottom:1px solid #e8eaf2;background:#fff;display:flex;align-items:center;position:sticky;top:0;z-index:20}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:28px;min-height:88px}
 .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;white-space:nowrap;flex:0 0 auto;color:#13203b}
-.logo-mark{width:48px;height:48px;display:grid;place-items:center;color:#5234f4}
-.logo-mark svg{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.logo-mark{width:48px;height:48px;display:grid;place-items:center;flex:none;border-radius:12px;overflow:hidden;box-shadow:0 8px 18px rgba(81,52,244,.22);color:#5234f4}
+.logo-mark img{width:48px;height:48px;display:block;object-fit:cover}
+.logo-mark svg{width:48px;height:48px;display:block}
 .brand-wordmark{font-size:25px;line-height:1;font-weight:800;letter-spacing:-.8px;white-space:nowrap}
 .brand-wordmark small{display:block;margin-top:7px;font-size:12px;line-height:1;font-weight:500;color:#56627a;letter-spacing:-.1px}
 .links{display:flex;align-items:center;justify-content:center;gap:38px;flex:1 1 auto;margin-left:20px;font-size:15px}
@@ -346,7 +347,8 @@ footer li a:hover{color:var(--primary);transform:translateX(3px)}
   .nav-actions .btn{min-width:0;padding:0 14px}
   .brand-wordmark{font-size:20px}
   .brand-wordmark small{font-size:10px}
-  .logo-mark,.logo-mark svg{width:42px;height:42px}
+   .logo-mark,.logo-mark svg,.logo-mark img{width:42px;height:42px}
+   .logo-mark{border-radius:11px}
   .hero-grid{gap:35px}
   .popular{grid-template-columns:repeat(3,minmax(0,1fr))}
   .categories{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -484,7 +486,8 @@ body.nav-open{padding-right:var(--nav-scrollbar,0px)}
   .nav-inner{min-height:66px}
   .brand-wordmark{font-size:20px}
   .brand-wordmark small{font-size:10px;margin-top:5px}
-  .logo-mark,.logo-mark svg{width:40px;height:40px}
+   .logo-mark,.logo-mark svg,.logo-mark img{width:40px;height:40px}
+   .logo-mark{border-radius:10px}
   .links{display:none;position:fixed;left:0;right:0;top:66px;bottom:0;background:#fff;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;margin:0;padding:12px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;z-index:60;border-top:1px solid var(--border)}
   .links.open{display:flex}
   .links>a,.links .drop-toggle{font-size:16px;padding:13px 4px;border-bottom:1px solid #f0f1f6;display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box}
@@ -502,7 +505,8 @@ body.nav-open{padding-right:var(--nav-scrollbar,0px)}
   .nav{height:64px}
   .nav-inner{min-height:64px}
   .logo{gap:8px}
-  .logo-mark,.logo-mark svg{width:36px;height:36px}
+   .logo-mark,.logo-mark svg,.logo-mark img{width:36px;height:36px}
+   .logo-mark{border-radius:9px}
   .brand-wordmark{font-size:17px;letter-spacing:-.4px}
   .brand-wordmark small{font-size:8px;margin-top:4px}
   .links{top:64px}
