@@ -337,6 +337,9 @@
       $('#sc-result').innerHTML = '';
       renderResults(results);
       if (results.length) {
+        results.forEach((r) => {
+          saveAs(new Blob([r.bytes], { type: 'application/pdf' }), r.name);
+        });
         toast((sc.mode === 'unlock' ? 'Unlocked ' : 'Protected ') + results.length + ' PDF(s)');
       }
     } catch (err) {
