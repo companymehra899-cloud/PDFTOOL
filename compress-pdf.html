@@ -191,10 +191,10 @@
     border-radius:18px;
     background:linear-gradient(180deg,#f7fef9 0%,#f0fdf4 100%);
     color:#4b5563;
-    padding:32px 24px 28px;
+    padding:48px 24px 40px;
     box-shadow:none;
     transform:none;
-    min-height:220px;
+    min-height:280px;
   }
   #cp-dropzone:hover,#cp-dropzone.dragover{
     transform:none;
@@ -271,7 +271,7 @@
     display:grid;
     grid-template-columns:repeat(5,minmax(0,1fr));
     gap:10px;
-    margin-top:14px;
+    margin:18px 0 8px;
   }
   .cp-feat{
     display:flex;
@@ -301,7 +301,7 @@
   @media(max-width:980px){
     .cp-screen{padding:10px 0 8px}
     .cp-features{grid-template-columns:1fr 1fr}
-    #cp-dropzone{padding:24px 16px 20px;min-height:180px}
+    #cp-dropzone{padding:36px 16px 28px;min-height:220px}
     #cp-dropzone .dz-title{font-size:18px}
   }
   @media(max-width:640px){
@@ -311,7 +311,7 @@
     .cp-title-ico svg{width:44px;height:44px}
     .cp-page .home-hero.tool-hero h1{font-size:24px;white-space:normal}
     .cp-upload-card{padding:14px 12px 12px;border-radius:18px}
-    #cp-dropzone{padding:22px 12px 18px;min-height:160px;border-radius:14px}
+    #cp-dropzone{padding:28px 12px 22px;min-height:200px;border-radius:14px}
     #cp-dropzone .dz-title{font-size:16px}
     .cp-features{grid-template-columns:1fr}
   }
@@ -439,28 +439,6 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         <button type="button" class="dz-btn" aria-label="Upload files">Choose PDF File <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
         <p class="dz-sub">Max file size: 100MB &nbsp;|&nbsp; Supports: PDF</p>
         <input type="file" id="cp-input" accept="application/pdf" multiple hidden>
-      </div>
-      <div class="cp-features" aria-hidden="true">
-        <div class="cp-feat">
-          <span class="cp-feat-ico g"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <div><b>100% Secure</b><span>Your files are safe</span></div>
-        </div>
-        <div class="cp-feat">
-          <span class="cp-feat-ico p"><svg viewBox="0 0 24 24"><path d="M5 19c1.5-6 4-10 7-16 3 6 5.5 10 7 16"/><path d="M8 13h8"/></svg></span>
-          <div><b>Easy to Use</b><span>Simple &amp; intuitive</span></div>
-        </div>
-        <div class="cp-feat">
-          <span class="cp-feat-ico t"><svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 5-3.5 9-8 11-4.5-2-8-6-8-11V7Z"/><path d="M12 8v4l2.5 1.5"/></svg></span>
-          <div><b>High Quality</b><span>Best output quality</span></div>
-        </div>
-        <div class="cp-feat">
-          <span class="cp-feat-ico o"><svg viewBox="0 0 24 24"><path d="M13 3 6 14h5l-1 7 8-12h-5l1-6Z"/></svg></span>
-          <div><b>Fast Processing</b><span>Get results instantly</span></div>
-        </div>
-        <div class="cp-feat">
-          <span class="cp-feat-ico l"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
-          <div><b>No Sign Up</b><span>100% Free</span></div>
-        </div>
       </div>
     </div>
     </div>
@@ -605,6 +583,28 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <h2>Ready to shrink a PDF?</h2>
     <p>Free, fast and private. No sign-up, no uploads, no limits.</p>
     <a class="btn primary hero-btn" href="#compress-h1">Compress a PDF now</a>
+  </div>
+  <div class="cp-features" aria-hidden="true">
+    <div class="cp-feat">
+      <span class="cp-feat-ico g"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <div><b>100% Secure</b><span>Your files are safe</span></div>
+    </div>
+    <div class="cp-feat">
+      <span class="cp-feat-ico p"><svg viewBox="0 0 24 24"><path d="M5 19c1.5-6 4-10 7-16 3 6 5.5 10 7 16"/><path d="M8 13h8"/></svg></span>
+      <div><b>Easy to Use</b><span>Simple &amp; intuitive</span></div>
+    </div>
+    <div class="cp-feat">
+      <span class="cp-feat-ico t"><svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 5-3.5 9-8 11-4.5-2-8-6-8-11V7Z"/><path d="M12 8v4l2.5 1.5"/></svg></span>
+      <div><b>High Quality</b><span>Best output quality</span></div>
+    </div>
+    <div class="cp-feat">
+      <span class="cp-feat-ico o"><svg viewBox="0 0 24 24"><path d="M13 3 6 14h5l-1 7 8-12h-5l1-6Z"/></svg></span>
+      <div><b>Fast Processing</b><span>Get results instantly</span></div>
+    </div>
+    <div class="cp-feat">
+      <span class="cp-feat-ico l"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+      <div><b>No Sign Up</b><span>100% Free</span></div>
+    </div>
   </div>
 
 
