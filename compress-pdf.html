@@ -584,4 +584,83 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         <div class="faq-a"><p>Yes. It is completely free with no sign-up, no paywall and no limits.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" type="button">Are m
+        <button class="faq-q" type="button">Are my PDF files uploaded?<span class="faq-chev">&#9662;</span></button>
+        <div class="faq-a"><p>No. Compression happens in your browser, so your files are never sent to a server.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">Will compression reduce PDF quality?<span class="faq-chev">&#9662;</span></button>
+        <div class="faq-a"><p>The images inside the PDF are re-encoded to save space while keeping pages readable. Use a lighter level to keep higher quality.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">What if my PDF is already optimized?<span class="faq-chev">&#9662;</span></button>
+        <div class="faq-a"><p>If the file cannot be made meaningfully smaller, the original is returned as-is so you always get a working PDF.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <div class="cta-banner reveal">
+    <h2>Ready to shrink a PDF?</h2>
+    <p>Free, fast and private. No sign-up, no uploads, no limits.</p>
+    <a class="btn primary hero-btn" href="#compress-h1">Compress a PDF now</a>
+  </div>
+
+
+  <div class="page-meta" style="margin: 34px 0 8px; padding: 18px 22px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; font-size: 13.5px; color: var(--muted);">
+    <p style="margin: 0;">Last updated: September 5, 2026 &middot; Reviewed by the ePDFConverter Team</p>
+    <p style="margin: 6px 0 0;"><strong style="color: var(--text);">Related guide:</strong> <a href="blog-compress-pdf-for-email.html" style="color: var(--primary); font-weight: 600;">How to Compress a PDF for Email</a></p>
+  </div>
+
+</main>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+  <div class="footer-brand">
+    <div class="logo">
+      <div class="logo-mark" aria-hidden="true">
+        <img src="icons/logo-mark-2x.png" width="48" height="48" alt="">
+      </div>
+      <div class="brand-wordmark">ePDFConverter<small>All-in-One PDF &amp; Image Tools</small></div>
+    </div>
+    <p>All-in-one free online PDF and image tools. Fast, private and secure.</p>
+  </div>
+  <div><h4>PDF Tools</h4><ul>
+    <li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="compress-pdf.html">Compress PDF</a></li>
+    <li><a href="edit-pdf.html">Edit PDF</a></li><li><a href="organise-pdf.html">Organise Pages</a></li>
+    <li><a href="sign-pdf.html">Sign PDF</a></li>
+  </ul></div>
+  <div><h4>Image Tools</h4><ul>
+    <li><a href="resize-image.html">Resize Image</a></li><li><a href="image-compressor.html">Compress Image</a></li>
+    <li><a href="image-resizer.html">Image Resizer</a></li><li><a href="pdf-to-jpg.html">PDF to JPG</a></li>
+    <li><a href="jpg-to-pdf.html">JPG to PDF</a></li>
+  </ul></div>
+  <div><h4>Company</h4><ul>
+    <li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="blog.html">Blog</a></li>
+    <li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li>
+  </ul></div>
+</div>
+<div class="copyright">&copy; 2026 ePDFConverter.com &mdash; All rights reserved.</div>
+</div>
+</footer>
+
+<div id="toast-wrap"></div>
+<div class="busy-overlay" id="busy-overlay" hidden>
+  <div class="spinner"></div>
+  <p id="busy-text">Working...</p>
+  <div class="busy-progress" id="busy-progress" hidden>
+    <div class="busy-bar" id="busy-bar"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script src="js/compress-pdf.js?v=4"></script>
+<script src="js/hero-upload.js?v=1"></script>
+<script src="js/home.js?v=6"></script>
+<script src="js/reference.js?v=6"></script>
+<div id="google_translate_element" style="display:none"></div>
+<script src="js/translate.js?v=5"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
