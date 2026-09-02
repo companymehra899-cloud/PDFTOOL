@@ -234,6 +234,7 @@
     margin:0 auto 10px;
     color:#16122c;
     font-weight:800;
+    text-align:center;
   }
   .rz-accent{color:#ec4899;-webkit-text-fill-color:#ec4899}
   .rz-page .home-hero.tool-hero .hero-sub{
@@ -295,6 +296,7 @@
     transform:none;
     place-items:unset;
     align-content:unset;
+    text-align:center;
   }
   .rz-page .upload-card:hover,.rz-page .upload-card.dragover{
     transform:none;
@@ -310,10 +312,16 @@
     margin:0 0 12px;
     height:82px;
   }
-  .rz-illu svg{
-    width:147px;
-    height:82px;
-    margin:0;
+  .rz-illu svg,
+  .rz-page .upload-card:hover .rz-illu svg,
+  .rz-page .upload-card.dragover .rz-illu svg{
+    width:147px !important;
+    height:82px !important;
+    margin:0 !important;
+    color:inherit;
+    fill:initial;
+    stroke:initial;
+    transform:none !important;
   }
   .rz-page .upload-card h2{
     font-size:22px;
@@ -323,11 +331,23 @@
     margin:0;
     text-align:center;
   }
+  .rz-page .upload-card .rz-or{
+    margin:8px 0 14px;
+    font-size:15px;
+    font-weight:500;
+    color:#9aa3b5;
+  }
   .rz-page .upload-card p{
     margin:8px 0 14px;
     font-size:13.5px;
     color:#8b849e;
     max-width:none;
+  }
+  .rz-page .upload-card .rz-sub{
+    margin-top:14px;
+    margin-bottom:0;
+    font-size:13.5px;
+    color:#8b849e;
   }
   .rz-page .btn-select{
     margin-top:0;
@@ -346,6 +366,17 @@
     transform:none;
     background:linear-gradient(180deg,#5b3df5,#4f2fee);
     box-shadow:0 12px 28px rgba(91,61,245,.36);
+  }
+  .rz-page .btn-select svg,
+  .rz-page .upload-card:hover .btn-select svg,
+  .rz-page .upload-card.dragover .btn-select svg{
+    width:18px;
+    height:18px;
+    margin:0;
+    color:#fff;
+    transform:none;
+    fill:none;
+    stroke:currentColor;
   }
 
   .rz-features{
@@ -417,7 +448,9 @@
     border-color:#6d5bbd;
   }
   html[data-theme="dark"] .rz-page .upload-card h2{color:#eef1ff}
-  html[data-theme="dark"] .rz-page .upload-card p{color:#97a2b9}
+  html[data-theme="dark"] .rz-page .upload-card p,
+  html[data-theme="dark"] .rz-page .upload-card .rz-or,
+  html[data-theme="dark"] .rz-page .upload-card .rz-sub{color:#97a2b9}
   html[data-theme="dark"] .rz-features{background:#131b2f;border-color:#27314a}
   html[data-theme="dark"] .rz-feat{border-color:#27314a}
   html[data-theme="dark"] .rz-feat b{color:#e7ebf4}
@@ -571,9 +604,10 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
             </defs>
           </svg>
         </span>
-        <h2>Upload Image to Resize</h2>
-        <p>Supports JPG, PNG, WEBP files. Drag &amp; drop or click to browse.</p>
+        <h2>Drag &amp; drop your images here</h2>
+        <p class="rz-or">or</p>
         <button class="btn-select" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg> Choose Image File</button>
+        <p class="rz-sub">Supports JPG, PNG, WEBP files. Drag &amp; drop or click to browse.</p>
         <input type="file" id="fileInput" accept="image/*" hidden />
       </div>
       </div>
