@@ -118,182 +118,202 @@
   .tool-hero .hero-sub { max-width: 720px; }
   .tool-area { margin-top: 6px; }
 
-  .cp-upload-card{
-    max-width: 920px;
-    margin: 0 auto 8px;
-    background: #fff;
-    border: 1px solid #e8f5e9;
-    border-radius: 28px;
-    padding: 28px 28px 22px;
-    box-shadow: 0 18px 48px rgba(34,197,94,.08);
+  .cp-page .tool-area{margin-top:10px;padding-bottom:28px}
+
+  .cp-upload-stage{
+    position:relative;
+    margin:0 auto 8px;
+    padding:8px 0 6px;
   }
+  .cp-deco{
+    position:absolute;
+    pointer-events:none;
+    z-index:0;
+    opacity:.9;
+  }
+  .cp-deco-pdf-l{left:18px;top:18px;width:86px;opacity:.45}
+  .cp-deco-pdf-r{right:22px;top:8px;width:90px;opacity:.45}
+  .cp-deco-curve-l{left:8px;top:70px;width:120px;height:180px;opacity:.55}
+  .cp-deco-curve-r{right:10px;top:64px;width:120px;height:180px;opacity:.55}
+  .cp-leaf-l{left:-8px;bottom:-36px;width:210px;opacity:.55}
+  .cp-leaf-r{right:-18px;bottom:-48px;width:230px;opacity:.55}
+
   .cp-upload-head{
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 0 0 18px;
+    position:relative;
+    z-index:1;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:0 0 16px;
   }
   .cp-head-ico{
-    width: 52px;
-    height: 52px;
-    flex: none;
-    display: grid;
-    place-items: center;
+    width:52px;
+    height:52px;
+    flex:none;
+    display:grid;
+    place-items:center;
   }
   .cp-head-ico svg{width:52px;height:52px;display:block}
   .cp-head-title{
-    margin: 0;
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -.6px;
-    color: #16a34a;
-    line-height: 1.15;
+    margin:0;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:-.6px;
+    color:#16a34a;
+    line-height:1.15;
   }
   .cp-head-sub{
-    margin: 4px 0 0;
-    font-size: 14.5px;
-    font-weight: 500;
-    color: #6b7280;
+    margin:4px 0 0;
+    font-size:14.5px;
+    font-weight:500;
+    color:#6b7280;
   }
 
   #cp-dropzone{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed #86efac;
-    border-radius: 22px;
-    background: linear-gradient(180deg,#f7fef9 0%,#f0fdf4 100%);
-    color: #4b5563;
-    padding: 36px 24px 28px;
-    box-shadow: none;
-    transform: none;
-    min-height: 280px;
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    border:2px dashed #86efac;
+    border-radius:36px;
+    background:linear-gradient(180deg,#f7fef9 0%,#f0fdf4 48%,#fff 100%);
+    color:#4b5563;
+    padding:52px 28px 42px;
+    box-shadow:none;
+    transform:none;
+    min-height:380px;
   }
   #cp-dropzone:hover,#cp-dropzone.dragover{
-    transform: none;
-    border-color: #4ade80;
-    background: linear-gradient(180deg,#f0fdf4 0%,#ecfdf3 100%);
-    box-shadow: 0 12px 32px rgba(34,197,94,.1);
+    transform:none;
+    border-color:#4ade80;
+    background:linear-gradient(180deg,#f0fdf4 0%,#ecfdf3 48%,#fff 100%);
+    box-shadow:0 18px 44px rgba(34,197,94,.1);
   }
   #cp-dropzone .cp-illu{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 0 18px;
+    height:118px;
   }
   #cp-dropzone .cp-illu svg,
   #cp-dropzone:hover .cp-illu svg,
   #cp-dropzone.dragover .cp-illu svg{
-    width: 72px !important;
-    height: 72px !important;
-    margin: 0 !important;
-    color: inherit;
-    fill: initial;
-    stroke: initial;
-    transform: none !important;
+    width:96px !important;
+    height:96px !important;
+    margin:0 !important;
+    color:inherit;
+    fill:initial;
+    stroke:initial;
+    transform:none !important;
   }
   #cp-dropzone .dz-title{
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -.4px;
-    color: #14532d;
-    margin: 0;
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:-.5px;
+    color:#14532d;
+    margin:0;
   }
   #cp-dropzone .cp-or{
-    margin: 8px 0 14px;
-    font-size: 14.5px;
-    font-weight: 500;
-    color: #9ca3af;
+    margin:8px 0 14px;
+    font-size:15px;
+    font-weight:500;
+    color:#9ca3af;
   }
   #cp-dropzone .dz-browse{display:none}
   #cp-dropzone .dz-sub{
-    margin-top: 14px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #9ca3af;
+    margin-top:14px;
+    font-size:13.5px;
+    color:#8b849e;
   }
   #cp-dropzone .dz-btn{
-    margin-top: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 13px 28px;
-    border-radius: 999px;
-    font-size: 15.5px;
-    font-weight: 800;
-    background: linear-gradient(180deg,#22c55e,#16a34a);
-    color: #fff;
-    box-shadow: 0 10px 22px rgba(22,163,74,.28);
+    margin-top:0;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 28px;
+    border-radius:999px;
+    font-size:15.5px;
+    font-weight:800;
+    background:linear-gradient(180deg,#22c55e,#16a34a);
+    color:#fff;
+    box-shadow:0 10px 24px rgba(22,163,74,.28);
   }
   #cp-dropzone .dz-btn:hover{
-    background: linear-gradient(180deg,#16a34a,#15803d);
-    box-shadow: 0 12px 26px rgba(22,163,74,.36);
+    background:linear-gradient(180deg,#16a34a,#15803d);
+    box-shadow:0 12px 28px rgba(22,163,74,.36);
   }
   #cp-dropzone .dz-btn svg,
   #cp-dropzone:hover .dz-btn svg,
   #cp-dropzone.dragover .dz-btn svg{
-    width: 14px;
-    height: 14px;
-    margin: 0;
-    color: #fff;
-    transform: none;
-    fill: none;
-    stroke: currentColor;
+    width:14px;
+    height:14px;
+    margin:0;
+    color:#fff;
+    transform:none;
+    fill:none;
+    stroke:currentColor;
   }
 
   .cp-features{
-    display: grid;
-    grid-template-columns: repeat(4,minmax(0,1fr));
-    gap: 12px;
-    margin-top: 16px;
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    background:#fff;
+    border:1px solid #e8f5e9;
+    border-radius:22px;
+    margin-top:18px;
+    box-shadow:0 12px 36px rgba(34,197,94,.06);
+    overflow:hidden;
   }
   .cp-feat{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #fff;
-    border: 1px solid #eef2f0;
-    border-radius: 16px;
-    padding: 12px 12px 12px 10px;
-    box-shadow: 0 6px 16px rgba(15,23,42,.04);
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:22px 18px 22px 20px;
+    border-right:1px solid #eef6ef;
   }
+  .cp-feat:last-child{border-right:0}
   .cp-feat-ico{
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    flex: none;
-    display: grid;
-    place-items: center;
+    width:42px;height:42px;border-radius:50%;flex:none;
+    display:grid;place-items:center;
   }
-  .cp-feat-ico svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .cp-feat-ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .cp-feat-ico.g{background:#ecfdf3;color:#16a34a}
   .cp-feat-ico.t{background:#ecfeff;color:#0d9488}
   .cp-feat-ico.o{background:#fff7ed;color:#ea580c}
   .cp-feat-ico.p{background:#f5f3ff;color:#7c3aed}
-  .cp-feat b{display:block;font-size:13.5px;color:#14532d;margin:0 0 2px;letter-spacing:-.2px}
-  .cp-feat span{display:block;font-size:11.5px;line-height:1.35;color:#6b7280;font-weight:500}
+  .cp-feat b{display:block;font-size:14.5px;color:#14532d;margin-bottom:4px;letter-spacing:-.2px}
+  .cp-feat span{display:block;font-size:12.5px;line-height:1.45;color:#6b7280;font-weight:500}
 
   .cp-page #cp-files{justify-content:center}
   .cp-page #cp-options{max-width:920px;margin-left:auto;margin-right:auto}
 
-  @media(max-width:860px){
+  @media(max-width:980px){
+    .cp-deco-pdf-l,.cp-deco-pdf-r,.cp-deco-curve-l,.cp-deco-curve-r{opacity:.28}
+    .cp-leaf-l,.cp-leaf-r{width:150px;opacity:.4}
+    #cp-dropzone{padding:44px 18px 36px;border-radius:28px;min-height:320px}
+    #cp-dropzone .dz-title{font-size:22px}
     .cp-features{grid-template-columns:1fr 1fr}
+    .cp-feat:nth-child(2){border-right:0}
+    .cp-feat{border-bottom:1px solid #eef6ef}
+    .cp-feat:nth-last-child(-n+2){border-bottom:0}
   }
   @media(max-width:640px){
-    .cp-upload-card{padding:18px 14px 14px;border-radius:22px}
+    .cp-deco{display:none}
     .cp-head-title{font-size:22px}
     .cp-head-sub{font-size:13px}
-    #cp-dropzone{padding:28px 14px 22px;min-height:0;border-radius:18px}
+    #cp-dropzone{padding:32px 14px 26px;min-height:0;border-radius:22px}
     #cp-dropzone .dz-title{font-size:18px}
+    #cp-dropzone .cp-illu svg{width:72px;height:72px}
     .cp-features{grid-template-columns:1fr}
+    .cp-feat{border-right:0;border-bottom:1px solid #eef6ef}
+    .cp-feat:last-child{border-bottom:0}
   }
 
-  html[data-theme="dark"] .cp-upload-card{
-    background:#131b2f;
-    border-color:#27314a;
-    box-shadow:0 18px 48px rgba(0,0,0,.28);
-  }
   html[data-theme="dark"] .cp-head-title{color:#4ade80}
   html[data-theme="dark"] .cp-head-sub{color:#97a2b9}
   html[data-theme="dark"] #cp-dropzone{
@@ -307,7 +327,8 @@
   }
   html[data-theme="dark"] #cp-dropzone .dz-title{color:#eef1ff}
   html[data-theme="dark"] #cp-dropzone .dz-sub,html[data-theme="dark"] #cp-dropzone .cp-or{color:#97a2b9}
-  html[data-theme="dark"] .cp-feat{background:#10182b;border-color:#27314a}
+  html[data-theme="dark"] .cp-features{background:#131b2f;border-color:#27314a}
+  html[data-theme="dark"] .cp-feat{border-color:#27314a}
   html[data-theme="dark"] .cp-feat b{color:#e7ebf4}
   html[data-theme="dark"] .cp-feat span{color:#97a2b9}
 </style>
@@ -377,7 +398,41 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   <!-- Compress PDF tool -->
   <section class="tool-area" aria-labelledby="compress-tool-title">
     <h2 id="compress-tool-title" class="sr-only">Compress PDF tool</h2>
-    <div class="cp-upload-card">
+    <div class="cp-upload-stage">
+      <svg class="cp-deco cp-deco-pdf-l" viewBox="0 0 80 90" aria-hidden="true" focusable="false">
+        <rect x="10" y="8" width="52" height="68" rx="6" fill="#fff" stroke="#bbf7d0" stroke-width="1.6"/>
+        <path d="M46 8v16h16" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.6"/>
+        <text x="22" y="28" font-size="9" font-family="Inter,Arial,sans-serif" font-weight="800" fill="#16a34a">PDF</text>
+        <rect x="18" y="36" width="30" height="3" rx="1.5" fill="#e5e7eb"/>
+        <rect x="18" y="44" width="24" height="3" rx="1.5" fill="#e5e7eb"/>
+        <rect x="18" y="52" width="28" height="3" rx="1.5" fill="#e5e7eb"/>
+      </svg>
+      <svg class="cp-deco cp-deco-pdf-r" viewBox="0 0 80 90" aria-hidden="true" focusable="false">
+        <rect x="16" y="12" width="52" height="68" rx="6" fill="#fff" stroke="#bbf7d0" stroke-width="1.6"/>
+        <path d="M52 12v16h16" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.6"/>
+        <text x="28" y="32" font-size="9" font-family="Inter,Arial,sans-serif" font-weight="800" fill="#16a34a">PDF</text>
+        <rect x="24" y="40" width="30" height="3" rx="1.5" fill="#e5e7eb"/>
+        <rect x="24" y="48" width="24" height="3" rx="1.5" fill="#e5e7eb"/>
+        <rect x="24" y="56" width="28" height="3" rx="1.5" fill="#e5e7eb"/>
+      </svg>
+      <svg class="cp-deco cp-deco-curve-l" viewBox="0 0 120 180" aria-hidden="true" focusable="false">
+        <path d="M18 20c28 38 18 78 8 150" fill="none" stroke="#86efac" stroke-width="1.6" stroke-dasharray="5 7" stroke-linecap="round"/>
+        <path d="M18 20l8 10M18 20l-10 6" fill="none" stroke="#86efac" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <svg class="cp-deco cp-deco-curve-r" viewBox="0 0 120 180" aria-hidden="true" focusable="false">
+        <path d="M102 16c-28 38-18 78-8 150" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-dasharray="5 7" stroke-linecap="round"/>
+        <path d="M102 16l-8 10M102 16l10 6" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <svg class="cp-deco cp-leaf-l" viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+        <path d="M20 210c30-90 90-150 190-190C150 70 70 140 20 210Z" fill="#dcfce7"/>
+        <path d="M46 196c28-70 78-118 150-154" fill="none" stroke="#bbf7d0" stroke-width="2"/>
+      </svg>
+      <svg class="cp-deco cp-leaf-r" viewBox="0 0 240 260" aria-hidden="true" focusable="false">
+        <path d="M220 250c-20-90-70-160-200-230 70 50 130 130 200 230Z" fill="#ecfdf3"/>
+        <path d="M206 236c-18-70-62-128-170-188" fill="none" stroke="#bbf7d0" stroke-width="2"/>
+        <ellipse cx="168" cy="92" rx="18" ry="34" transform="rotate(28 168 92)" fill="#dcfce7"/>
+        <ellipse cx="196" cy="128" rx="14" ry="28" transform="rotate(18 196 128)" fill="#f0fdf4"/>
+      </svg>
       <div class="cp-upload-head">
         <span class="cp-head-ico" aria-hidden="true">
           <svg viewBox="0 0 52 52">
@@ -397,14 +452,14 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       </div>
       <div class="dropzone" id="cp-dropzone" role="button" tabindex="0" aria-label="Drop a PDF here or browse">
         <span class="cp-illu" aria-hidden="true">
-          <svg viewBox="0 0 72 72" width="72" height="72">
-            <rect x="16" y="8" width="32" height="42" rx="5" fill="#22c55e"/>
-            <path d="M37 8v12h11" fill="#86efac"/>
-            <rect x="22" y="26" width="20" height="3" rx="1.5" fill="#dcfce7"/>
-            <rect x="22" y="32" width="15" height="3" rx="1.5" fill="#dcfce7"/>
-            <rect x="22" y="38" width="18" height="3" rx="1.5" fill="#dcfce7"/>
-            <circle cx="46" cy="50" r="14" fill="#16a34a" stroke="#fff" stroke-width="3"/>
-            <path d="M46 43v10M41.5 49.5 46 54l4.5-4.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg viewBox="0 0 96 96" width="96" height="96">
+            <rect x="22" y="10" width="40" height="52" rx="6" fill="#22c55e"/>
+            <path d="M48 10v15h14" fill="#86efac"/>
+            <rect x="30" y="34" width="24" height="3.5" rx="1.7" fill="#dcfce7"/>
+            <rect x="30" y="42" width="18" height="3.5" rx="1.7" fill="#dcfce7"/>
+            <rect x="30" y="50" width="21" height="3.5" rx="1.7" fill="#dcfce7"/>
+            <circle cx="62" cy="68" r="18" fill="#16a34a" stroke="#fff" stroke-width="4"/>
+            <path d="M62 59v14M56 69l6 6 6-6" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
         <p class="dz-title">Drag &amp; drop your PDF here</p>
@@ -414,23 +469,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         <p class="dz-sub">Max file size: 100MB &nbsp;|&nbsp; Supports: PDF</p>
         <input type="file" id="cp-input" accept="application/pdf" multiple hidden>
       </div>
-      <div class="cp-features" aria-hidden="true">
-        <div class="cp-feat">
-          <span class="cp-feat-ico g"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <div><b>100% Secure</b><span>Your files are safe</span></div>
-        </div>
-        <div class="cp-feat">
-          <span class="cp-feat-ico t"><svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 5-3.5 9-8 11-4.5-2-8-6-8-11V7Z"/><path d="M12 8v4l2.5 1.5"/></svg></span>
-          <div><b>High Quality</b><span>Best output quality</span></div>
-        </div>
-        <div class="cp-feat">
-          <span class="cp-feat-ico o"><svg viewBox="0 0 24 24"><path d="M13 3 6 14h5l-1 7 8-12h-5l1-6Z"/></svg></span>
-          <div><b>Fast Processing</b><span>Get results instantly</span></div>
-        </div>
-        <div class="cp-feat">
-          <span class="cp-feat-ico p"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg></span>
-          <div><b>No Sign Up</b><span>100% Free</span></div>
-        </div>
+    </div>
+
+    <div class="cp-features" aria-hidden="true">
+      <div class="cp-feat">
+        <span class="cp-feat-ico g"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><b>100% Secure</b><span>Your files are safe</span></div>
+      </div>
+      <div class="cp-feat">
+        <span class="cp-feat-ico t"><svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 5-3.5 9-8 11-4.5-2-8-6-8-11V7Z"/><path d="M12 8v4l2.5 1.5"/></svg></span>
+        <div><b>High Quality</b><span>Best output quality</span></div>
+      </div>
+      <div class="cp-feat">
+        <span class="cp-feat-ico o"><svg viewBox="0 0 24 24"><path d="M13 3 6 14h5l-1 7 8-12h-5l1-6Z"/></svg></span>
+        <div><b>Fast Processing</b><span>Get results instantly</span></div>
+      </div>
+      <div class="cp-feat">
+        <span class="cp-feat-ico p"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg></span>
+        <div><b>No Sign Up</b><span>100% Free</span></div>
       </div>
     </div>
 
