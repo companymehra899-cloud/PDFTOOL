@@ -127,6 +127,34 @@
     padding:22px 22px 18px;
     box-shadow:0 10px 36px rgba(15,23,42,.05);
   }
+  .cp-upload-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:0 0 16px;
+  }
+  .cp-head-ico{
+    width:48px;
+    height:48px;
+    flex:none;
+    display:grid;
+    place-items:center;
+  }
+  .cp-head-ico svg{width:48px;height:48px;display:block}
+  .cp-head-title{
+    margin:0;
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:-.4px;
+    color:#111827;
+    line-height:1.15;
+  }
+  .cp-head-sub{
+    margin:3px 0 0;
+    font-size:13.5px;
+    font-weight:500;
+    color:#6b7280;
+  }
 
   #cp-dropzone{
     display:flex;
@@ -251,6 +279,8 @@
   }
   @media(max-width:640px){
     .cp-upload-card{padding:16px 12px 12px;border-radius:18px}
+    .cp-head-title{font-size:18px}
+    .cp-head-sub{font-size:12.5px}
     #cp-dropzone{padding:26px 12px 22px;min-height:0;border-radius:14px}
     #cp-dropzone .dz-title{font-size:16px}
     .cp-features{grid-template-columns:1fr}
@@ -261,6 +291,8 @@
     border-color:#27314a;
     box-shadow:none;
   }
+  html[data-theme="dark"] .cp-head-title{color:#eef1ff}
+  html[data-theme="dark"] .cp-head-sub{color:#97a2b9}
   html[data-theme="dark"] #cp-dropzone{
     border-color:#2f6b4a;
     background:linear-gradient(180deg,#14241c,#10182b);
@@ -343,6 +375,23 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   <section class="tool-area" aria-labelledby="compress-tool-title">
     <h2 id="compress-tool-title" class="sr-only">Compress PDF tool</h2>
     <div class="cp-upload-card">
+      <div class="cp-upload-head">
+        <span class="cp-head-ico" aria-hidden="true">
+          <svg viewBox="0 0 48 48">
+            <rect x="4" y="2" width="28" height="38" rx="5" fill="#22c55e"/>
+            <path d="M23 2v11h9" fill="#4ade80"/>
+            <rect x="10" y="20" width="16" height="2.6" rx="1.3" fill="#dcfce7"/>
+            <rect x="10" y="26" width="13" height="2.6" rx="1.3" fill="#dcfce7"/>
+            <rect x="10" y="32" width="15" height="2.6" rx="1.3" fill="#dcfce7"/>
+            <circle cx="36" cy="36" r="10" fill="#16a34a"/>
+            <path d="M36 31v7M32.8 35.2 36 38.4l3.2-3.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <div>
+          <p class="cp-head-title">Compress PDF</p>
+          <p class="cp-head-sub">Reduce PDF file size while maintaining quality</p>
+        </div>
+      </div>
       <div class="dropzone" id="cp-dropzone" role="button" tabindex="0" aria-label="Drop a PDF here or browse">
         <span class="cp-illu" aria-hidden="true">
           <svg viewBox="0 0 56 56" width="56" height="56">
