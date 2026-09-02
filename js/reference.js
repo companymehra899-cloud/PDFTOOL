@@ -159,16 +159,34 @@
   });
   syncMobileMenuTop();
 
-  document.querySelectorAll('.faq button').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var item = btn.parentElement;
+  var faqList = document.querySelector('.faq');
+  if (faqList) {
+    faqList.addEventListener('click', function (e) {
+      var btn = e.target.closest('button');
+      if (!btn || !faqList.contains(btn)) return;
+      e.preventDefault();
+      var item = btn.closest('.faq-item');
+      if (!item) return;
       var answer = item.querySelector('.faq-answer');
-      var isOpen = btn.classList.toggle('open');
-      if (answer) {
-        answer.style.maxHeight = isOpen ? answer.scrollHeight + 'px' : '0px';
+      var willOpen = !item.classList.contains('open');
+      Array.prototype.forEach.call(faqList.querySelectorAll('.faq-item'), function (other) {
+        other.classList.remove('open');
+        var otherBtn = other.querySelector('button');
+        var otherAnswer = other.querySelector('.faq-answer');
+        if (otherBtn) {
+          otherBtn.classList.remove('open');
+          otherBtn.setAttribute('aria-expanded', 'false');
+        }
+        if (otherAnswer) otherAnswer.style.maxHeight = '0px';
+      });
+      if (willOpen) {
+        item.classList.add('open');
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
       }
     });
-  });
+  }
 
   /* Theme toggle */
   var root = document.documentElement;
