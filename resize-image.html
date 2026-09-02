@@ -331,36 +331,32 @@
     margin:0;
     text-align:center;
   }
-  .rz-page .upload-card .rz-or{
-    margin:8px 0 14px;
-    font-size:15px;
-    font-weight:500;
-    color:#9aa3b5;
-  }
   .rz-page .upload-card p{
     margin:8px 0 14px;
     font-size:13.5px;
     color:#8b849e;
     max-width:none;
   }
-  .rz-page .upload-card .rz-sub{
-    margin-top:14px;
-    margin-bottom:0;
-    font-size:13.5px;
-    color:#8b849e;
-  }
   .rz-page .btn-select{
     margin-top:0;
     display:inline-flex;
     align-items:center;
+    justify-content:center;
     gap:8px;
+    width:auto;
+    max-width:max-content;
+    align-self:center;
+    flex:0 0 auto;
     padding:14px 28px;
+    border:0;
     border-radius:14px;
+    font-family:inherit;
     font-size:15.5px;
     font-weight:800;
     background:linear-gradient(180deg,#6d4aff,#5b3df5);
     color:#fff;
     box-shadow:0 10px 24px rgba(91,61,245,.28);
+    cursor:pointer;
   }
   .rz-page .btn-select:hover{
     transform:none;
@@ -448,9 +444,7 @@
     border-color:#6d5bbd;
   }
   html[data-theme="dark"] .rz-page .upload-card h2{color:#eef1ff}
-  html[data-theme="dark"] .rz-page .upload-card p,
-  html[data-theme="dark"] .rz-page .upload-card .rz-or,
-  html[data-theme="dark"] .rz-page .upload-card .rz-sub{color:#97a2b9}
+  html[data-theme="dark"] .rz-page .upload-card p{color:#97a2b9}
   html[data-theme="dark"] .rz-features{background:#131b2f;border-color:#27314a}
   html[data-theme="dark"] .rz-feat{border-color:#27314a}
   html[data-theme="dark"] .rz-feat b{color:#e7ebf4}
@@ -515,7 +509,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   <!-- Hero -->
   <section class="home-hero tool-hero" aria-labelledby="rz-h1">
     <div class="hero-badge"><span class="dot"></span> 100% Free &middot; No Sign-up &middot; 100% Private</div>
-    <h1 id="rz-h1">Resize Image <span class="rz-accent">Online</span> Free &ndash; Resize JPG, PNG &amp; Images</h1>
+    <h1 id="rz-h1">Resize <span class="rz-accent">Image</span> Online</h1>
     <p class="hero-sub">Resize JPG, PNG and WebP pictures by a percentage, or to an exact width, height or size. It is a quick way to shrink photos for emailing, uploading or fitting a specific space. Everything is processed right in your browser &mdash; your images are never uploaded to a server.</p>
     <div class="rz-pills" aria-hidden="true">
       <span class="rz-pill g"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/><path d="m9 12 2 2 4-4"/></svg> 100% Secure</span>
@@ -604,10 +598,9 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
             </defs>
           </svg>
         </span>
-        <h2>Drag &amp; drop your images here</h2>
-        <p class="rz-or">or</p>
-        <button class="btn-select" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg> Choose Image File</button>
-        <p class="rz-sub">Supports JPG, PNG, WEBP files. Drag &amp; drop or click to browse.</p>
+        <h2>Upload Image to Resize</h2>
+        <p>Supports JPG, PNG, WEBP files. Drag &amp; drop or click to browse.</p>
+        <span class="btn-select"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg> Choose Image File</span>
         <input type="file" id="fileInput" accept="image/*" hidden />
       </div>
       </div>
