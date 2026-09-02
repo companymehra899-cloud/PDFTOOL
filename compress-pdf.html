@@ -118,15 +118,26 @@
   .tool-hero .hero-sub { max-width: 720px; }
   .tool-area { margin-top: 6px; }
 
+  .cp-page .tool-area{
+    margin-top:0;
+    padding-bottom:0;
+  }
+  .cp-screen{
+    min-height:calc(100dvh - 88px);
+    display:flex;
+    flex-direction:column;
+    padding:16px 0 18px;
+    box-sizing:border-box;
+  }
   .cp-page .home-hero.tool-hero{
     text-align:left;
-    padding:10px 0 4px;
+    padding:22px 0 12px;
     background:transparent;
     border-bottom:none;
     overflow:visible;
   }
   .cp-page .home-hero.tool-hero::before{display:none}
-  .cp-page .home-hero.tool-hero .hero-badge{margin-bottom:8px}
+  .cp-page .home-hero.tool-hero .hero-badge{margin-bottom:10px}
   .cp-page .home-hero.tool-hero h1{
     font-size:28px;
     font-weight:700;
@@ -136,23 +147,26 @@
     white-space:normal;
     overflow:visible;
     max-width:none;
-    margin:0 0 6px;
+    margin:0 0 8px;
   }
   .cp-page .home-hero.tool-hero .hero-sub{
     max-width:none;
-    margin:0 0 4px;
+    margin:0;
     font-size:15px;
     font-weight:400;
     color:#4b5563;
   }
-  .cp-page .tool-area{margin-top:0;padding-bottom:28px}
 
   .cp-upload-card{
+    flex:1;
+    display:flex;
+    flex-direction:column;
     background:#fff;
     border:1px solid #e8eee9;
     border-radius:24px;
-    padding:16px 18px 14px;
+    padding:18px 20px 16px;
     box-shadow:0 10px 36px rgba(15,23,42,.05);
+    min-height:0;
   }
   .cp-upload-head{
     display:flex;
@@ -191,14 +205,15 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
+    flex:1;
     border:1.8px dashed #86efac;
     border-radius:18px;
     background:linear-gradient(180deg,#f7fef9 0%,#f0fdf4 100%);
     color:#4b5563;
-    padding:28px 24px 24px;
+    padding:48px 24px 40px;
     box-shadow:none;
     transform:none;
-    min-height:0;
+    min-height:320px;
   }
   #cp-dropzone:hover,#cp-dropzone.dragover{
     transform:none;
@@ -215,8 +230,8 @@
   #cp-dropzone .cp-illu svg,
   #cp-dropzone:hover .cp-illu svg,
   #cp-dropzone.dragover .cp-illu svg{
-    width:56px !important;
-    height:56px !important;
+    width:72px !important;
+    height:72px !important;
     margin:0 !important;
     color:inherit;
     fill:initial;
@@ -224,7 +239,7 @@
     transform:none !important;
   }
   #cp-dropzone .dz-title{
-    font-size:20px;
+    font-size:22px;
     font-weight:800;
     letter-spacing:-.3px;
     color:#111827;
@@ -303,17 +318,19 @@
   .cp-page #cp-options{max-width:none;margin-left:0;margin-right:0}
 
   @media(max-width:980px){
+    .cp-screen{min-height:calc(100dvh - 66px);padding:12px 0 14px}
     .cp-features{grid-template-columns:1fr 1fr}
-    #cp-dropzone{padding:24px 16px 20px;min-height:0}
+    #cp-dropzone{padding:36px 16px 32px;min-height:260px}
     #cp-dropzone .dz-title{font-size:18px}
   }
   @media(max-width:640px){
-    .cp-page .home-hero.tool-hero{padding:6px 0 2px}
+    .cp-screen{min-height:calc(100dvh - 64px);padding:10px 0 12px}
+    .cp-page .home-hero.tool-hero{padding:16px 0 10px}
     .cp-page .home-hero.tool-hero h1{font-size:22px;white-space:normal}
     .cp-upload-card{padding:14px 12px 12px;border-radius:18px}
     .cp-head-title{font-size:16px;white-space:normal}
     .cp-head-sub{font-size:12.5px}
-    #cp-dropzone{padding:26px 12px 22px;min-height:0;border-radius:14px}
+    #cp-dropzone{padding:32px 12px 28px;min-height:220px;border-radius:14px}
     #cp-dropzone .dz-title{font-size:16px}
     .cp-features{grid-template-columns:1fr}
   }
@@ -398,16 +415,10 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 
 <main class="container">
 
-  <!-- Hero -->
-  <section class="home-hero tool-hero" aria-labelledby="compress-h1">
-    <div class="hero-badge"><span class="dot"></span> 100% Free &middot; No Sign-up &middot; 100% Private</div>
-    <h1 id="compress-h1">Compress PDF Online</h1>
-    <p class="hero-sub">PDF compression shrinks your file by re-encoding the images inside it, so the document takes up less space while staying readable. A smaller PDF is easier to email, upload and store. Everything happens right in your browser, and your files are never uploaded to a server.</p>
-  </section>
-
   <!-- Compress PDF tool -->
   <section class="tool-area" aria-labelledby="compress-tool-title">
     <h2 id="compress-tool-title" class="sr-only">Compress PDF tool</h2>
+    <div class="cp-screen">
     <div class="cp-upload-card">
       <div class="cp-upload-head">
         <span class="cp-head-ico" aria-hidden="true">
@@ -428,7 +439,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       </div>
       <div class="dropzone" id="cp-dropzone" role="button" tabindex="0" aria-label="Drop a PDF here or browse">
         <span class="cp-illu" aria-hidden="true">
-          <svg viewBox="0 0 56 56" width="56" height="56">
+          <svg viewBox="0 0 56 56" width="72" height="72">
             <rect x="12" y="6" width="24" height="32" rx="4" fill="#22c55e"/>
             <path d="M28 6v9h8" fill="#86efac"/>
             <rect x="17" y="20" width="14" height="2.2" rx="1.1" fill="#dcfce7"/>
@@ -468,6 +479,13 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         </div>
       </div>
     </div>
+    </div>
+
+    <section class="home-hero tool-hero" aria-labelledby="compress-h1">
+      <div class="hero-badge"><span class="dot"></span> 100% Free &middot; No Sign-up &middot; 100% Private</div>
+      <h1 id="compress-h1">Compress PDF Online</h1>
+      <p class="hero-sub">PDF compression shrinks your file by re-encoding the images inside it, so the document takes up less space while staying readable. A smaller PDF is easier to email, upload and store. Everything happens right in your browser, and your files are never uploaded to a server.</p>
+    </section>
 
     <div id="cp-files" class="file-list" aria-live="polite"></div>
     <div class="options-card" id="cp-options">
