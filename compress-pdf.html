@@ -134,14 +134,19 @@
     background:transparent;
     border-bottom:none;
     overflow:visible;
+    width:70%;
+    max-width:70%;
+    margin:0 auto;
   }
   .cp-page .home-hero.tool-hero::before{display:none}
   .cp-page .home-hero.tool-hero .hero-badge{display:none}
   .cp-title-wrap{
     display:flex;
     align-items:center;
+    justify-content:flex-start;
     gap:14px;
-    margin:0 0 10px;
+    margin:0 0 12px;
+    text-align:left;
   }
   .cp-title-ico{
     width:56px;
@@ -150,26 +155,38 @@
     display:block;
   }
   .cp-title-ico svg{width:56px;height:56px;display:block}
-  .cp-h1-wrap{min-width:0;flex:1}
+  .cp-h1-wrap{
+    min-width:0;
+    flex:0 1 auto;
+    text-align:left;
+  }
   .cp-page .home-hero.tool-hero h1{
+    display:block;
     font-size:34px;
     font-weight:800;
-    line-height:1.2;
+    line-height:1.15;
     letter-spacing:-.6px;
     color:#111827;
-    white-space:normal;
+    white-space:nowrap;
+    text-wrap:nowrap;
     overflow:visible;
+    overflow-wrap:normal;
+    word-break:normal;
     max-width:none;
+    width:auto;
     margin:0;
+    text-align:left;
   }
   .cp-accent{color:#16a34a;-webkit-text-fill-color:#16a34a}
-  .cp-sub-wrap{margin:0}
+  .cp-sub-wrap{margin:0;text-align:left}
   .cp-page .home-hero.tool-hero .hero-sub{
     max-width:none;
     margin:0;
     font-size:15px;
     font-weight:400;
+    line-height:1.6;
     color:#4b5563;
+    text-align:left;
   }
 
   .cp-upload-card{
@@ -304,16 +321,16 @@
   @media(max-width:980px){
     .cp-screen{padding:10px 0 8px}
     .cp-features{grid-template-columns:1fr 1fr}
-    .cp-upload-card{width:85%;max-width:85%}
+    .cp-page .home-hero.tool-hero,.cp-upload-card{width:85%;max-width:85%}
     #cp-dropzone{padding:25px 11px 20px;min-height:154px}
     #cp-dropzone .dz-title{font-size:18px}
   }
   @media(max-width:640px){
     .cp-screen{padding:8px 0 8px}
-    .cp-page .home-hero.tool-hero{padding:10px 0 8px}
+    .cp-page .home-hero.tool-hero{width:100%;max-width:100%;padding:10px 0 8px}
     .cp-title-ico{width:44px;height:44px}
     .cp-title-ico svg{width:44px;height:44px}
-    .cp-page .home-hero.tool-hero h1{font-size:24px;white-space:normal}
+    .cp-page .home-hero.tool-hero h1{font-size:24px;white-space:normal;text-wrap:wrap}
     .cp-upload-card{width:100%;max-width:100%;padding:10px 8px 8px;border-radius:18px}
     #cp-dropzone{padding:20px 8px 15px;min-height:140px;border-radius:14px}
     #cp-dropzone .dz-title{font-size:16px}
