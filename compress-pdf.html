@@ -130,13 +130,13 @@
   }
   .cp-page .home-hero.tool-hero{
     text-align:left;
-    padding:22px 0 12px;
+    padding:14px 0 10px;
     background:transparent;
     border-bottom:none;
     overflow:visible;
   }
   .cp-page .home-hero.tool-hero::before{display:none}
-  .cp-page .home-hero.tool-hero .hero-badge{margin-bottom:10px}
+  .cp-page .home-hero.tool-hero .hero-badge{display:none}
   .cp-page .home-hero.tool-hero h1{
     font-size:28px;
     font-weight:700;
@@ -321,7 +321,7 @@
   }
   @media(max-width:640px){
     .cp-screen{padding:8px 0 8px}
-    .cp-page .home-hero.tool-hero{padding:16px 0 10px}
+    .cp-page .home-hero.tool-hero{padding:10px 0 8px}
     .cp-page .home-hero.tool-hero h1{font-size:22px;white-space:normal}
     .cp-upload-card{padding:14px 12px 12px;border-radius:18px}
     .cp-head-title{font-size:16px;white-space:normal}
@@ -414,6 +414,10 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   <!-- Compress PDF tool -->
   <section class="tool-area" aria-labelledby="compress-tool-title">
     <h2 id="compress-tool-title" class="sr-only">Compress PDF tool</h2>
+    <section class="home-hero tool-hero" aria-labelledby="compress-h1">
+      <h1 id="compress-h1">Compress PDF Online</h1>
+      <p class="hero-sub">PDF compression shrinks your file by re-encoding the images inside it, so the document takes up less space while staying readable. A smaller PDF is easier to email, upload and store. Everything happens right in your browser, and your files are never uploaded to a server.</p>
+    </section>
     <div class="cp-screen">
     <div class="cp-upload-card">
       <div class="cp-upload-head">
@@ -476,12 +480,6 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       </div>
     </div>
     </div>
-
-    <section class="home-hero tool-hero" aria-labelledby="compress-h1">
-      <div class="hero-badge"><span class="dot"></span> 100% Free &middot; No Sign-up &middot; 100% Private</div>
-      <h1 id="compress-h1">Compress PDF Online</h1>
-      <p class="hero-sub">PDF compression shrinks your file by re-encoding the images inside it, so the document takes up less space while staying readable. A smaller PDF is easier to email, upload and store. Everything happens right in your browser, and your files are never uploaded to a server.</p>
-    </section>
 
     <div id="cp-files" class="file-list" aria-live="polite"></div>
     <div class="options-card" id="cp-options">
