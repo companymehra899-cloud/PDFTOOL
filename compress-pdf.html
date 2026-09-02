@@ -120,41 +120,45 @@
 
   .cp-page .home-hero.tool-hero{
     text-align:left;
-    padding:28px 0 12px;
+    padding:10px 0 4px;
     background:transparent;
     border-bottom:none;
     overflow:visible;
   }
   .cp-page .home-hero.tool-hero::before{display:none}
+  .cp-page .home-hero.tool-hero .hero-badge{margin-bottom:8px}
   .cp-page .home-hero.tool-hero h1{
-    font-size:34px;
-    line-height:1.15;
-    letter-spacing:-.6px;
-    color:#16a34a;
-    white-space:nowrap;
+    font-size:28px;
+    font-weight:700;
+    line-height:1.25;
+    letter-spacing:0;
+    color:#111827;
+    white-space:normal;
     overflow:visible;
-    text-wrap:nowrap;
     max-width:none;
-    margin:0 0 10px;
+    margin:0 0 6px;
   }
   .cp-page .home-hero.tool-hero .hero-sub{
     max-width:none;
-    margin:0;
+    margin:0 0 4px;
+    font-size:15px;
+    font-weight:400;
+    color:#4b5563;
   }
-  .cp-page .tool-area{margin-top:6px;padding-bottom:28px}
+  .cp-page .tool-area{margin-top:0;padding-bottom:28px}
 
   .cp-upload-card{
     background:#fff;
     border:1px solid #e8eee9;
     border-radius:24px;
-    padding:22px 22px 18px;
+    padding:16px 18px 14px;
     box-shadow:0 10px 36px rgba(15,23,42,.05);
   }
   .cp-upload-head{
     display:flex;
     align-items:center;
     gap:14px;
-    margin:0 0 16px;
+    margin:0 0 12px;
     min-width:0;
   }
   .cp-head-ico{
@@ -168,12 +172,12 @@
   .cp-head-copy{min-width:0;flex:1}
   .cp-head-title{
     margin:0;
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:-.4px;
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:0;
     color:#111827;
-    line-height:1.2;
-    white-space:nowrap;
+    line-height:1.3;
+    white-space:normal;
   }
   .cp-head-sub{
     margin:4px 0 0;
@@ -191,10 +195,10 @@
     border-radius:18px;
     background:linear-gradient(180deg,#f7fef9 0%,#f0fdf4 100%);
     color:#4b5563;
-    padding:42px 24px 34px;
+    padding:28px 24px 24px;
     box-shadow:none;
     transform:none;
-    min-height:240px;
+    min-height:0;
   }
   #cp-dropzone:hover,#cp-dropzone.dragover{
     transform:none;
@@ -300,13 +304,14 @@
 
   @media(max-width:980px){
     .cp-features{grid-template-columns:1fr 1fr}
-    #cp-dropzone{padding:32px 16px 28px;min-height:200px}
+    #cp-dropzone{padding:24px 16px 20px;min-height:0}
     #cp-dropzone .dz-title{font-size:18px}
   }
   @media(max-width:640px){
-    .cp-page .home-hero.tool-hero h1{font-size:24px;white-space:normal}
-    .cp-upload-card{padding:16px 12px 12px;border-radius:18px}
-    .cp-head-title{font-size:18px;white-space:normal}
+    .cp-page .home-hero.tool-hero{padding:6px 0 2px}
+    .cp-page .home-hero.tool-hero h1{font-size:22px;white-space:normal}
+    .cp-upload-card{padding:14px 12px 12px;border-radius:18px}
+    .cp-head-title{font-size:16px;white-space:normal}
     .cp-head-sub{font-size:12.5px}
     #cp-dropzone{padding:26px 12px 22px;min-height:0;border-radius:14px}
     #cp-dropzone .dz-title{font-size:16px}
@@ -318,7 +323,8 @@
     border-color:#27314a;
     box-shadow:none;
   }
-  html[data-theme="dark"] .cp-page .home-hero.tool-hero h1{color:#4ade80}
+  html[data-theme="dark"] .cp-page .home-hero.tool-hero h1{color:#eef1ff}
+  html[data-theme="dark"] .cp-page .home-hero.tool-hero .hero-sub{color:#97a2b9}
   html[data-theme="dark"] .cp-head-title{color:#eef1ff}
   html[data-theme="dark"] .cp-head-sub{color:#97a2b9}
   html[data-theme="dark"] #cp-dropzone{
