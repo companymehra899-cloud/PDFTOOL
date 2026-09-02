@@ -138,16 +138,36 @@
   .cp-page .home-hero.tool-hero::before{display:none}
   .cp-page .home-hero.tool-hero .hero-badge{display:none}
   .cp-page .home-hero.tool-hero h1{
-    font-size:28px;
-    font-weight:700;
-    line-height:1.25;
-    letter-spacing:0;
+    font-size:34px;
+    font-weight:800;
+    line-height:1.2;
+    letter-spacing:-.6px;
     color:#111827;
     white-space:normal;
     overflow:visible;
     max-width:none;
-    margin:0 0 8px;
+    margin:0 0 12px;
   }
+  .cp-accent{color:#16a34a;-webkit-text-fill-color:#16a34a}
+  .cp-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:0 0 12px;
+  }
+  .cp-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    border-radius:999px;
+    padding:6px 12px;
+    font-size:13px;
+    font-weight:700;
+  }
+  .cp-pill svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .cp-pill.g{background:#ecfdf3;color:#16a34a}
+  .cp-pill.b{background:#eef4ff;color:#3b82f6}
+  .cp-pill.p{background:#f3e8ff;color:#7c3aed}
   .cp-page .home-hero.tool-hero .hero-sub{
     max-width:none;
     margin:0;
@@ -291,7 +311,7 @@
   @media(max-width:640px){
     .cp-screen{padding:8px 0 8px}
     .cp-page .home-hero.tool-hero{padding:10px 0 8px}
-    .cp-page .home-hero.tool-hero h1{font-size:22px;white-space:normal}
+    .cp-page .home-hero.tool-hero h1{font-size:24px;white-space:normal}
     .cp-upload-card{padding:14px 12px 12px;border-radius:18px}
     #cp-dropzone{padding:22px 12px 18px;min-height:160px;border-radius:14px}
     #cp-dropzone .dz-title{font-size:16px}
@@ -304,6 +324,10 @@
     box-shadow:none;
   }
   html[data-theme="dark"] .cp-page .home-hero.tool-hero h1{color:#eef1ff}
+  html[data-theme="dark"] .cp-accent{color:#4ade80;-webkit-text-fill-color:#4ade80}
+  html[data-theme="dark"] .cp-pill.g{background:#14241c;color:#4ade80}
+  html[data-theme="dark"] .cp-pill.b{background:#152238;color:#93c5fd}
+  html[data-theme="dark"] .cp-pill.p{background:#1c1630;color:#c4b5fd}
   html[data-theme="dark"] .cp-page .home-hero.tool-hero .hero-sub{color:#97a2b9}
   html[data-theme="dark"] #cp-dropzone{
     border-color:#2f6b4a;
@@ -380,7 +404,12 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   <section class="tool-area" aria-labelledby="compress-tool-title">
     <h2 id="compress-tool-title" class="sr-only">Compress PDF tool</h2>
     <section class="home-hero tool-hero" aria-labelledby="compress-h1">
-      <h1 id="compress-h1">Compress PDF Online</h1>
+      <h1 id="compress-h1">Compress <span class="cp-accent">PDF</span> Online</h1>
+      <div class="cp-pills" aria-hidden="true">
+        <span class="cp-pill g"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/><path d="m9 12 2 2 4-4"/></svg> 100% Secure</span>
+        <span class="cp-pill b"><svg viewBox="0 0 24 24"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg> Easy to Use</span>
+        <span class="cp-pill p"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg> No Sign Up</span>
+      </div>
       <p class="hero-sub">PDF compression shrinks your file by re-encoding the images inside it, so the document takes up less space while staying readable. A smaller PDF is easier to email, upload and store. Everything happens right in your browser, and your files are never uploaded to a server.</p>
     </section>
     <div class="cp-screen">
