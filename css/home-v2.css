@@ -75,6 +75,11 @@ body.home-v2 .hp-hero h1 em{
   color:#7c3aed;
   -webkit-text-fill-color:#7c3aed;
 }
+body.home-v2 .hp-subhead{
+  font-size:clamp(16px,2vw,20px);
+  line-height:1.35;font-weight:700;letter-spacing:-.3px;
+  color:#374151;margin:0 0 14px;max-width:520px;
+}
 body.home-v2 .hp-lead{font-size:16.5px;line-height:1.7;color:#4b5563;max-width:520px;margin:0 0 22px;cursor:pointer}
 body.home-v2 .hp-search{
   display:flex;align-items:center;gap:10px;
@@ -372,6 +377,7 @@ html[data-theme="dark"] body.home-v2 .menu{color:#ffffff}
 html[data-theme="dark"] body.home-v2 .brand-wordmark small{color:#97a2b9}
 html[data-theme="dark"] body.home-v2 .hp-hero{background:radial-gradient(circle at 88% 12%,rgba(124,58,237,.22),transparent 34%),linear-gradient(180deg,#0b1220,#10182b)}
 html[data-theme="dark"] body.home-v2 .hp-hero h1{color:#f3f4f6}
+html[data-theme="dark"] body.home-v2 .hp-subhead{color:#e7ebf4}
 html[data-theme="dark"] body.home-v2 .hp-lead{color:#97a2b9}
 html[data-theme="dark"] body.home-v2 .hp-pill,
 html[data-theme="dark"] body.home-v2 .hp-search,
