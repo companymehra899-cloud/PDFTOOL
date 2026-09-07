@@ -253,10 +253,15 @@
   }
   .og-feat{
     display:flex;
-    align-items:flex-start;
+    align-items:center;
     gap:12px;
-    padding:22px 18px 22px 20px;
+    padding:22px 16px 22px 18px;
     border-right:1px solid #f1edfa;
+    min-width:0;
+  }
+  .og-feat > div{
+    min-width:0;
+    flex:1 1 auto;
   }
   .og-feat:last-child{border-right:0}
   .og-feat-ico{
@@ -268,8 +273,8 @@
   .og-feat-ico.p{background:#f3e8ff;color:#7c3aed}
   .og-feat-ico.b{background:#eef4ff;color:#3b82f6}
   .og-feat-ico.o{background:#fff7ed;color:#ea580c}
-  .og-feat b{display:block;font-size:14.5px;color:#16122c;margin-bottom:4px;letter-spacing:-.2px}
-  .og-feat span{display:block;font-size:12.5px;line-height:1.45;color:#6b7280;font-weight:500}
+  .og-feat b{display:block;font-size:14.5px;color:#16122c;margin-bottom:4px;letter-spacing:-.2px;white-space:nowrap}
+  .og-feat > div span{display:block;font-size:12.5px;line-height:1.45;color:#6b7280;font-weight:500}
   .file-list-section { display: none; flex-direction: column; gap: 16px; }
   .file-list-section.show { display: flex; }
   .section-title {
