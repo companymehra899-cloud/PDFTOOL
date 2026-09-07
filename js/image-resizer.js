@@ -139,7 +139,9 @@
     });
     dz.addEventListener('drop', function (e) {
       var files = Array.prototype.slice.call(e.dataTransfer.files);
-      files = files.filter(function (f) { return ACCEPT_TYPES.indexOf(f.type) !== -1; });
+      files = files.filter(function (f) {
+        return ACCEPT_TYPES.indexOf(f.type) !== -1 || /\.(jpe?g|png)$/i.test(f.name || '');
+      });
       if (files.length) onFiles(files);
       else toast('Please drop a JPG or PNG image', true);
     });
@@ -406,6 +408,10 @@
   });
 
   setupDropzone('#ir-dropzone', '#ir-input', function (files) {
+    files = files.filter(function (f) {
+      return ACCEPT_TYPES.indexOf(f.type) !== -1 || /\.(jpe?g|png)$/i.test(f.name || '');
+    });
+    if (!files.length) return toast('Please add a JPG or PNG image', true);
     state.files.push.apply(state.files, files);
     renderChips();
     syncOptions();

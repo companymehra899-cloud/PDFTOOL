@@ -154,7 +154,7 @@
   }
 
   setupDropzone('#p2j-dropzone', '#p2j-input', async function (files) {
-    var pdf = files.find(function (f) { return f.type === 'application/pdf'; });
+    var pdf = files.find(function (f) { return f.type === 'application/pdf' || /\.pdf$/i.test(f.name || ''); });
     if (!pdf) return toast('Please add a PDF file', true);
     busy('Reading PDF...');
     try {
@@ -212,8 +212,8 @@
         var link = mkEl('a', null, 'Download');
         link.href = img.src;
         link.download = blobs[i].name;
-        link.addEventListener('click', function () {
-          p2jResetUpload();
+        link.addEventListener('click', function (ev) {
+          ev.stopPropagation();
         });
         item.appendChild(link);
         grid.appendChild(item);

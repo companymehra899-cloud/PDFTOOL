@@ -212,7 +212,7 @@
   }
 
   setupDropzone('#sc-dropzone', '#sc-input', async (files) => {
-    const pdfs = files.filter((f) => f.type === 'application/pdf');
+    const pdfs = files.filter((f) => f.type === 'application/pdf' || /\.pdf$/i.test(f.name || ''));
     if (!pdfs.length) return toast('Please add PDF files', true);
     if (checkSize(pdfs)) return;
     busy('Reading PDFs...');

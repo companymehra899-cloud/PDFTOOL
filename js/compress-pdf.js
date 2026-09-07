@@ -220,7 +220,7 @@
   };
 
   setupDropzone('#cp-dropzone', '#cp-input', async function (files) {
-    var pdfs = files.filter(function (f) { return f.type === 'application/pdf'; });
+    var pdfs = files.filter(function (f) { return f.type === 'application/pdf' || /\.pdf$/i.test(f.name || ''); });
     if (!pdfs.length) return toast('Please add PDF files', true);
     if (checkSize(pdfs)) return;
     busy('Reading PDFs...');

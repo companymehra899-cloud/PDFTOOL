@@ -100,7 +100,9 @@
     });
     dz.addEventListener('drop', function (e) {
       var files = Array.prototype.slice.call(e.dataTransfer.files);
-      if (acceptList) files = files.filter(function (f) { return acceptList.indexOf(f.type) !== -1; });
+      if (acceptList) files = files.filter(function (f) {
+        return acceptList.indexOf(f.type) !== -1 || /\.(jpe?g|png|webp|gif|bmp|svg)$/i.test(f.name || '');
+      });
       if (files.length) onFiles(files);
       else toast('Unsupported file type', true);
     });
@@ -150,7 +152,9 @@
   };
 
   setupDropzone('#j2p-dropzone', '#j2p-input', function (files) {
-    var imgs = files.filter(function (f) { return f.type.indexOf('image/') === 0; });
+    var imgs = files.filter(function (f) {
+      return (f.type || '').indexOf('image/') === 0 || /\.(jpe?g|png|webp|gif|bmp|svg)$/i.test(f.name || '');
+    });
     if (!imgs.length) return toast('Please add image files', true);
     j2p.files = j2p.files.concat(imgs);
     renderJ2pChips();

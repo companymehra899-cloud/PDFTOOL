@@ -8,8 +8,14 @@
       var wasOpen = item.classList.contains('open');
       Array.prototype.forEach.call(document.querySelectorAll('.faq-item.open'), function (i) {
         i.classList.remove('open');
+        var otherA = i.querySelector('.faq-a');
+        if (otherA) otherA.style.maxHeight = '0px';
       });
-      if (!wasOpen) item.classList.add('open');
+      if (!wasOpen) {
+        item.classList.add('open');
+        var a = item.querySelector('.faq-a');
+        if (a) a.style.maxHeight = Math.max(a.scrollHeight, 80) + 'px';
+      }
     });
   });
 

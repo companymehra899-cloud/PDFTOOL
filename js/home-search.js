@@ -1,7 +1,7 @@
 (function () {
   var input = document.getElementById('tool-search');
   var form = document.getElementById('tool-search-form');
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.hp-card[data-tools]'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.hp-card'));
   var empty = document.getElementById('tool-empty');
   if (!input || !cards.length) return;
 

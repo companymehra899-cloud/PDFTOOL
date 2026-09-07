@@ -226,7 +226,7 @@
 .faq-chev { color: var(--muted); font-size: 12px; transition: transform .2s; flex-shrink: 0; }
 .faq-item.open .faq-chev { transform: rotate(180deg); color: var(--primary); }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height .25s ease; }
-.faq-item.open .faq-a { max-height: 200px; }
+.faq-item.open .faq-a { max-height: 640px; }
 .faq-a p { padding: 0 20px 16px; color: var(--muted); font-size: 14.5px; }
 
 /* ---------- Quick Tool Shortcuts ---------- */

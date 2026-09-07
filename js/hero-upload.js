@@ -149,7 +149,11 @@
 
   function heroToast(msg, isErr) {
     var wrap = document.getElementById('toast-wrap');
-    if (!wrap) return;
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.id = 'toast-wrap';
+      document.body.appendChild(wrap);
+    }
     var el = document.createElement('div');
     el.className = 'toast' + (isErr ? ' err' : '');
     el.textContent = msg;
@@ -288,7 +292,7 @@
 
   /* ---------------- tool pages: import pending file ---------------- */
 
-  var IMPORT_INPUTS = ['#cp-input', '#p2j-input', '#ed-input', '#j2p-input', '#fileInput', '#rz-input'];
+  var IMPORT_INPUTS = ['#cp-input', '#p2j-input', '#ed-input', '#j2p-input', '#fileInput', '#rz-input', '#mg-input', '#sg-input', '#sc-input', '#ic-input', '#ir-input'];
 
   function initImport() {
     if (!/[?&]import=1/.test(window.location.search)) return;

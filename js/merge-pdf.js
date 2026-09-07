@@ -118,7 +118,7 @@
   }
 
   setupDropzone('#mg-dropzone', '#mg-input', function (files) {
-    var pdfs = files.filter(function (f) { return f.type === 'application/pdf'; });
+    var pdfs = files.filter(function (f) { return f.type === 'application/pdf' || /\.pdf$/i.test(f.name || ''); });
     if (!pdfs.length) return toast('Please add PDF files', true);
     if (checkSize(pdfs)) return;
     mg.files.push.apply(mg.files, pdfs.map(function (f) {

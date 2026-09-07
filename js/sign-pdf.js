@@ -210,7 +210,7 @@
   }
 
   setupDropzone('#sg-dropzone', '#sg-input', async (files) => {
-    const pdf = files.find((f) => f.type === 'application/pdf');
+    const pdf = files.find((f) => f.type === 'application/pdf' || /\.pdf$/i.test(f.name || ''));
     if (!pdf) return toast('Please add a PDF file', true);
     if (checkSize([pdf])) return;
     busy('Reading PDF...');
@@ -585,7 +585,7 @@
     const files = e.dataTransfer.files;
     if (files.length) {
       const f = files[0];
-      const isPdf = f.type === 'application/pdf';
+      const isPdf = f.type === 'application/pdf' || /\.pdf$/i.test(f.name || '');
       const isImg = (f.type || '').startsWith('image/');
       if (!isPdf && !isImg) return toast('Drop a JPG / PNG / PDF signature', true);
       busy('Reading signature...');
