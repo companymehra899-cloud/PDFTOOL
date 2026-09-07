@@ -290,12 +290,17 @@ h1 strong{color:var(--primary)}
 #how .how-title{font-size:24px;line-height:1.2;margin:0 0 17px;color:#17213b}
 
 /* FAQ */
-.faq{border:1px solid var(--border);border-radius:9px;overflow:hidden;position:relative;z-index:1}
-.faq button,.faq .faq-q{width:100%;padding:15px 17px;background:#fff;border:0;border-bottom:1px solid #edf0f5;text-align:left;font-size:15px;font-weight:600;cursor:pointer;color:#17213b;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;line-height:1.45;overflow-wrap:anywhere;user-select:none;-webkit-user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:rgba(81,52,244,.12);position:relative;z-index:1;appearance:none;-webkit-appearance:none}
+.faq{border:1px solid var(--border);border-radius:9px;overflow:hidden;position:relative;z-index:2}
+.faq .faq-item{cursor:pointer;position:relative;z-index:2}
+.faq button,.faq .faq-q, .faq summary.faq-q{width:100%;padding:15px 17px;background:#fff;border:0;border-bottom:1px solid #edf0f5;text-align:left;font-size:15px;font-weight:600;cursor:pointer;color:#17213b;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;line-height:1.45;overflow-wrap:anywhere;user-select:none;-webkit-user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:rgba(81,52,244,.12);position:relative;z-index:2;appearance:none;-webkit-appearance:none;pointer-events:auto;list-style:none}
+.faq summary.faq-q::-webkit-details-marker{display:none}
+.faq summary.faq-q::marker{content:""}
 .faq .faq-item:last-child > button,.faq .faq-item:last-child > .faq-q{border-bottom:0}
 .faq button span,.faq .faq-chev{float:none;color:#687188;transition:transform .2s;flex:0 0 auto;pointer-events:none}
-.faq button.open span,.faq .faq-item.open .faq-chev,.faq button.open .faq-chev{transform:rotate(180deg);color:var(--primary)}
+.faq button.open span,.faq .faq-item.open .faq-chev,.faq button.open .faq-chev,.faq .faq-item[open] .faq-chev{transform:rotate(180deg);color:var(--primary)}
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .25s ease;background:#fcfbff;border-bottom:1px solid #f0f1f6}
+.faq-item.open > .faq-answer,
+.faq-item[open] > .faq-answer{max-height:640px}
 .faq-answer p{padding:12px 17px;font-size:14px;color:#55627a;line-height:1.6;overflow-wrap:break-word}
 .faq-answer:last-child{border-bottom:0}
 .faq .faq-item:last-child .faq-answer{border-bottom:0}
