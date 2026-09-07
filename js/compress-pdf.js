@@ -255,12 +255,6 @@
     $('#cp-options').classList.toggle('show', cp.files.length > 0);
   }
 
-  function cpResetUpload() {
-    cp.files = [];
-    renderCompressChips();
-    $('#cp-result').innerHTML = '';
-  }
-
   $('#cp-level').addEventListener('click', function (e) {
     var btn = e.target.closest('.seg-btn');
     if (!btn) return;

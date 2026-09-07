@@ -32,17 +32,6 @@
     $('#busy-text').textContent = text || 'Working...';
     ov.hidden = false;
   }
-  function setBusyText(text) {
-    const el = $('#busy-text');
-    if (el) el.textContent = text || 'Working...';
-  }
-  function setBusyPct(pct) {
-    const bar = $('#busy-bar');
-    const wrap = $('#busy-progress');
-    if (!bar || !wrap) return;
-    wrap.hidden = false;
-    bar.style.width = Math.max(2, Math.min(100, Math.round(pct || 0))) + '%';
-  }
   function unbusy() {
     busyCount = Math.max(0, busyCount - 1);
     if (busyCount === 0) {
