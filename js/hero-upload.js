@@ -119,25 +119,25 @@
   var TOOLS = {
     pdf: [
       {
-        title: 'Compress PDF', desc: 'Reduce PDF file size', page: 'compress-pdf.html',
+        title: 'Compress PDF', desc: 'Reduce PDF file size', page: 'compress-pdf',
         cls: 'c-red', icon: SVG.compress,
       },
       {
-        title: 'PDF to JPG', desc: 'Convert PDF pages to images', page: 'pdf-to-jpg.html',
+        title: 'PDF to JPG', desc: 'Convert PDF pages to images', page: 'pdf-to-jpg',
         cls: 'c-blue', icon: SVG.p2j,
       },
       {
-        title: 'Edit PDF', desc: 'Edit text and images in PDF', page: 'edit-pdf.html',
+        title: 'Edit PDF', desc: 'Edit text and images in PDF', page: 'edit-pdf',
         cls: 'c-green', icon: SVG.edit,
       },
     ],
     image: [
       {
-        title: 'JPG to PDF', desc: 'Convert images into a PDF', page: 'jpg-to-pdf.html',
+        title: 'JPG to PDF', desc: 'Convert images into a PDF', page: 'jpg-to-pdf',
         cls: 'c-purple', icon: SVG.j2p,
       },
       {
-        title: 'Resize Image', desc: 'Change image dimensions', page: 'resize-image.html',
+        title: 'Resize Image', desc: 'Change image dimensions', page: 'resize-image',
         cls: 'c-cyan', icon: SVG.resize,
       },
     ],
