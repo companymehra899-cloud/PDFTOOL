@@ -160,19 +160,19 @@ h1 strong{color:var(--primary);-webkit-text-fill-color:var(--primary)}
 .faq .faq-item:last-child .faq-answer{border-bottom:0}
 
 /* FOOTER */
-footer{border-top:1px solid #e9ebf1;padding:52px 0 0;margin-top:25px;background:linear-gradient(180deg,#fcfdff,#f7f9ff)}
-.footer-grid{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:44px}
+footer{border-top:1px solid #eceef5;padding:64px 0 0;margin-top:40px;background:#f7f8fc}
+.footer-grid{display:grid;grid-template-columns:minmax(240px,1.4fr) repeat(3,minmax(0,.9fr));gap:48px 40px;align-items:start}
 .footer-brand{display:flex;flex-direction:column;align-items:flex-start;gap:0;color:#13203b;min-width:0}
-.footer-brand .brand-wordmark{font-size:22px}
-.footer-brand .logo{flex:0 0 auto}
-.footer-brand p{font-size:12.5px;line-height:1.6;color:var(--muted);max-width:260px;margin:14px 0 0;overflow-wrap:break-word}
-footer h4{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 16px;color:#17213b;overflow-wrap:break-word}
+.footer-brand .brand-wordmark{font-size:22px;letter-spacing:-.6px}
+.footer-brand .logo{flex:0 0 auto;margin:0}
+.footer-brand p{font-size:14.5px;line-height:1.65;color:#6b7385;max-width:280px;margin:16px 0 0;overflow-wrap:break-word}
+footer h4{font-size:12.5px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;margin:8px 0 18px;color:#17213b;overflow-wrap:break-word}
 footer ul{list-style:none;margin:0;padding:0}
-footer li{list-style:none;font-size:12px;color:var(--muted);margin:10px 0}
-footer li:first-child{margin-top:0}
-footer li a{color:var(--muted);display:inline-block;transition:color .2s,transform .2s;overflow-wrap:break-word}
-footer li a:hover{color:var(--primary);transform:translateX(3px)}
-.copyright{text-align:center;border-top:1px solid #edf0f4;margin-top:44px;padding:18px 0;font-size:11px;color:#7b8394;letter-spacing:.2px}
+footer li{list-style:none;font-size:14.5px;line-height:1.2;color:#5f6b80;margin:0}
+footer li + li{margin-top:12px}
+footer li a{color:#5f6b80;display:inline-block;font-weight:500;transition:color .15s ease;overflow-wrap:break-word}
+footer li a:hover{color:var(--primary)}
+.copyright{text-align:center;border-top:1px solid #e6e9f2;margin-top:48px;padding:20px 0;font-size:13px;color:#8a93a6;letter-spacing:.2px}
 
 /* ===== TOOL PAGES: re-theme shared components ===== */
 .home-hero.tool-hero{
@@ -211,8 +211,9 @@ footer li a:hover{color:var(--primary);transform:translateX(3px)}
   .brand-wordmark small{font-size:10px}
    .logo-mark,.logo-mark svg,.logo-mark img{width:42px;height:42px}
    .logo-mark{border-radius:11px}
-  .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
-  .footer-brand{grid-column:1/-1;margin-bottom:4px}
+   .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 28px}
+   .footer-brand{grid-column:1/-1;margin-bottom:8px}
+   .footer-brand p{max-width:420px}
 }
 
 @media(max-width:960px){
@@ -228,8 +229,8 @@ footer li a:hover{color:var(--primary);transform:translateX(3px)}
   .container{width:100%;max-width:1440px;padding:0 14px}
   h1{font-size:42px}
   .section{padding:30px 0}
-  .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
-  .footer-brand{grid-column:1/-1}
+   .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px}
+   .footer-brand{grid-column:1/-1}
 }
 
 @media(max-width:768px){
@@ -244,13 +245,14 @@ footer li a:hover{color:var(--primary);transform:translateX(3px)}
   .section{padding:25px 0}
   .section-title{font-size:20px;margin-bottom:14px}
   .faq button,.faq .faq-q{padding:14px 14px;font-size:15px;min-height:48px}
-  footer{padding:32px 0 14px}
-  .footer-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 16px}
-  footer h4{font-size:11px}
-  footer li{font-size:9px;margin:7px 0}
-  .footer-brand{grid-column:1/-1}
-  .footer-brand p{font-size:10px;max-width:290px}
-  .copyright{font-size:8px;margin-top:20px}
+   footer{padding:40px 0 0}
+   .footer-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 20px}
+   footer h4{font-size:12px;margin-bottom:14px}
+   footer li{font-size:14px}
+   footer li + li{margin-top:10px}
+   .footer-brand{grid-column:1/-1}
+   .footer-brand p{font-size:14px;max-width:none}
+   .copyright{font-size:12.5px;margin-top:28px;padding:16px 0}
   .home-hero.tool-hero{padding:32px 0 22px}
   .home-hero.tool-hero h1{font-size:clamp(26px,8vw,40px);letter-spacing:-.6px;overflow-wrap:break-word}
   .home-hero.tool-hero .hero-sub{font-size:13.5px}
