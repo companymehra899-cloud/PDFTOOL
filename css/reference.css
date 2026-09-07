@@ -99,6 +99,9 @@ h1,h2,h3,.section-title{
 h1 .title-link,
 .hero-sub .title-link{
   cursor:pointer;
+  position:relative;
+  z-index:10;
+  pointer-events:auto;
 }
 h1{font-size:clamp(26px,3.3vw,40px);line-height:1.08;letter-spacing:-1.4px;margin-bottom:14px;overflow-wrap:break-word}
 .hero-line-1{display:inline}
@@ -332,10 +335,14 @@ footer li a:hover{color:var(--primary);transform:translateX(3px)}
   text-align:left;padding:46px 0 30px;
   background:radial-gradient(circle at 85% 20%,rgba(117,88,255,.10),transparent 40%),linear-gradient(180deg,#fff,#fbfbff);
   border-bottom:1px solid #f0f1f6;
+  isolation:isolate;
+  z-index:1;
 }
-.home-hero.tool-hero .hero-badge{margin-bottom:16px}
-.home-hero.tool-hero h1{font-size:38px;line-height:1.1;letter-spacing:-1.2px;margin:0 0 12px;max-width:none}
-.home-hero.tool-hero .hero-sub{max-width:740px;font-size:16px;color:var(--muted);margin:0 0 6px}
+.home-hero.tool-hero::before,
+.home-hero.tool-hero::after{pointer-events:none}
+.home-hero.tool-hero .hero-badge{margin-bottom:16px;position:relative;z-index:2}
+.home-hero.tool-hero h1{font-size:38px;line-height:1.1;letter-spacing:-1.2px;margin:0 0 12px;max-width:none;position:relative;z-index:10}
+.home-hero.tool-hero .hero-sub{max-width:740px;font-size:16px;color:var(--muted);margin:0 0 6px;position:relative;z-index:10}
 
 .dropzone{border:2px dashed #b9aaff;border-radius:14px;background:linear-gradient(180deg,#fff,#fbfaff);color:#59627b}
 .dropzone svg{color:#785eff}
@@ -939,10 +946,24 @@ html.translated-rtl .card p{min-height:auto}
   text-decoration:none;
   cursor:pointer;
   display:inline;
+  position:relative;
+  z-index:10;
+  pointer-events:auto;
 }
 .title-link:hover{color:inherit}
 h1 .title-link,
 .hero-sub .title-link,
 .hp-lead .title-link{
   cursor:pointer;
+  position:relative;
+  z-index:10;
+  pointer-events:auto;
+}
+
+/* Decorative SVGs must never intercept title/subtitle clicks */
+.ir-deco,.ic-deco,.og-deco,.rz-deco,.p2j-deco,.sc-deco,.mg-deco,.j2p-deco,.ed-deco,
+.dz-illu,.hero-bg-shapes,.hp-art,.hp-leaf,.hp-blob,.hp-spark,
+[class*="-deco"],[class*="-leaf"],
+.ir-illu,.ic-illu,.og-illu,.rz-illu,.p2j-illu,.sc-illu,.mg-illu,.j2p-illu,.ed-illu,.cp-illu,.cp-title-ico{
+  pointer-events:none;
 }

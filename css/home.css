@@ -11,6 +11,12 @@
   text-align: center;
   padding: 20px 0 40px;
   overflow: hidden;
+  isolation: isolate;
+  z-index: 1;
+}
+.home-hero::before,
+.home-hero::after {
+  pointer-events: none;
 }
 .home-hero::before {
   content: "";
