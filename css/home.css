@@ -32,7 +32,7 @@
 .home-section h2 {
   user-select: text;
   -webkit-user-select: text;
-  cursor: text;
+  cursor: pointer;
 }
 .hero-badge {
   display: inline-flex;
