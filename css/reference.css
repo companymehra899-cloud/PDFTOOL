@@ -341,7 +341,7 @@ footer li a:hover{color:var(--primary);transform:translateX(3px)}
 .home-hero.tool-hero::before,
 .home-hero.tool-hero::after{pointer-events:none}
 .home-hero.tool-hero .hero-badge{margin-bottom:16px;position:relative;z-index:2}
-.home-hero.tool-hero h1{font-size:38px;line-height:1.1;letter-spacing:-1.2px;margin:0 0 12px;max-width:none;position:relative;z-index:10}
+.home-hero.tool-hero h1{font-size:40px;line-height:1.15;letter-spacing:-1px;margin:0 0 12px;max-width:none;position:relative;z-index:10;overflow-wrap:break-word}
 .home-hero.tool-hero .hero-sub{max-width:740px;font-size:16px;color:var(--muted);margin:0 0 6px;position:relative;z-index:10}
 
 .dropzone{border:2px dashed #b9aaff;border-radius:14px;background:linear-gradient(180deg,#fff,#fbfaff);color:#59627b}
@@ -477,7 +477,7 @@ footer li a:hover{color:var(--primary);transform:translateX(3px)}
   .footer-brand p{font-size:10px;max-width:290px}
   .copyright{font-size:8px;margin-top:20px}
   .home-hero.tool-hero{padding:32px 0 22px}
-  .home-hero.tool-hero h1{font-size:28px;letter-spacing:-.6px}
+  .home-hero.tool-hero h1{font-size:clamp(26px,8vw,40px);letter-spacing:-.6px;overflow-wrap:break-word}
   .home-hero.tool-hero .hero-sub{font-size:13.5px}
 }
 
