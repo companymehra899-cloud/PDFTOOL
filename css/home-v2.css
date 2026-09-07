@@ -62,11 +62,12 @@ body.home-v2 .hp-pill .o{background:#d97706}
 body.home-v2 .hp-hero h1{
   font-size:clamp(34px,4.6vw,56px);
   line-height:1.06;letter-spacing:-1.9px;font-weight:800;color:#111827;margin:0 0 14px;
+  user-select:text;-webkit-user-select:text;cursor:text;
 }
 body.home-v2 .hp-hero h1 em{
   font-style:normal;
-  background:linear-gradient(90deg,#db2777 0%,#6d28d9 78%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  color:#7c3aed;
+  -webkit-text-fill-color:#7c3aed;
 }
 body.home-v2 .hp-lead{font-size:16.5px;line-height:1.7;color:#4b5563;max-width:520px;margin:0 0 22px}
 body.home-v2 .hp-search{

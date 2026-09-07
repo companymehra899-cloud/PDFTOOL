@@ -161,15 +161,11 @@
 
   function setFaqOpen(item, open) {
     var btn = item.querySelector('.faq-q, button, summary');
-    var answer = item.querySelector('.faq-answer');
     item.classList.toggle('open', open);
     if (item.tagName === 'DETAILS') item.open = open;
     if (btn) {
       btn.classList.toggle('open', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
-    if (answer) {
-      answer.style.maxHeight = open ? (Math.max(answer.scrollHeight, 80) + 'px') : '0px';
     }
   }
 
@@ -179,22 +175,20 @@
     });
   }
 
-  document.addEventListener('click', function (e) {
-    var el = e.target;
-    if (!el) return;
-    if (el.nodeType === 3) el = el.parentElement;
-    if (!el || !el.closest) return;
-    var list = el.closest('.faq');
-    if (!list) return;
-    if (el.closest('.faq-answer')) return;
-    var item = el.closest('.faq-item');
-    if (!item || !list.contains(item)) return;
-    var isDetails = item.tagName === 'DETAILS';
-    var willOpen = isDetails ? !item.open : !item.classList.contains('open');
-    if (isDetails) e.preventDefault();
-    closeFaqSiblings(list, item);
-    setFaqOpen(item, willOpen);
-  }, true);
+  Array.prototype.forEach.call(document.querySelectorAll('details.faq-item'), function (item) {
+    var btn = item.querySelector('.faq-q, summary');
+    if (btn) btn.setAttribute('aria-expanded', item.open ? 'true' : 'false');
+    item.addEventListener('toggle', function () {
+      item.classList.toggle('open', item.open);
+      if (btn) {
+        btn.classList.toggle('open', item.open);
+        btn.setAttribute('aria-expanded', item.open ? 'true' : 'false');
+      }
+      if (!item.open) return;
+      var list = item.closest('.faq, .faq-list');
+      if (list) closeFaqSiblings(list, item);
+    });
+  });
 
   /* Theme toggle */
   var root = document.documentElement;
