@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /*?*
 
 Sitemap: https://epdfconverter.com/sitemap.xml

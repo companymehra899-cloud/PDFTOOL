@@ -2,13 +2,87 @@
 import os
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import unquote, urlparse
+from urllib.parse import parse_qsl, unquote, urlencode, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 os.chdir(ROOT)
 
+TRACKING_PARAMS = {
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "utm_id",
+    "gclid",
+    "gbraid",
+    "wbraid",
+    "fbclid",
+    "msclkid",
+    "ttclid",
+    "ref",
+    "mc_cid",
+    "mc_eid",
+    "_ga",
+    "yclid",
+}
+
 
 class RewriteHandler(SimpleHTTPRequestHandler):
+    def canonical_location(self):
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path) or "/"
+        query = parse_qsl(parsed.query, keep_blank_values=True)
+        redirect = False
+
+        lower = path.lower()
+        if lower.endswith("/index.html"):
+            path = path[: -len("index.html")]
+            if path != "/" and path.endswith("/"):
+                path = path.rstrip("/") or "/"
+            redirect = True
+        elif lower.endswith(".html"):
+            path = path[:-5]
+            if not path:
+                path = "/"
+            redirect = True
+
+        if path != "/" and path.endswith("/"):
+            path = path.rstrip("/")
+            redirect = True
+
+        kept = [(k, v) for k, v in query if k.lower() not in TRACKING_PARAMS]
+        if len(kept) != len(query):
+            redirect = True
+
+        if not redirect:
+            return None
+
+        dest = path
+        if kept:
+            dest += "?" + urlencode(kept)
+        return dest
+
+    def send_canonical_redirect(self):
+        dest = self.canonical_location()
+        if not dest:
+            return False
+        self.send_response(301)
+        self.send_header("Location", dest)
+        self.send_header("Cache-Control", "no-cache")
+        super().end_headers()
+        return True
+
+    def do_GET(self):
+        if self.send_canonical_redirect():
+            return
+        super().do_GET()
+
+    def do_HEAD(self):
+        if self.send_canonical_redirect():
+            return
+        super().do_HEAD()
+
     def translate_path(self, path):
         parsed = urlparse(unquote(path))
         request_path = parsed.path or "/"
@@ -35,9 +109,6 @@ class RewriteHandler(SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Cache-Control", "no-cache")
         super().end_headers()
-
-    def log_message(self, format, *args):
-        super().log_message(format, *args)
 
 
 if __name__ == "__main__":
