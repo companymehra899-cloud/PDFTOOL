@@ -252,16 +252,6 @@
     });
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll('h1, .hero-sub, .hp-lead'), function (el) {
-    var a = el.querySelector('a.title-link');
-    if (!a) return;
-    el.style.cursor = 'pointer';
-    el.addEventListener('click', function (e) {
-      if (e.target.closest('a')) return;
-      a.click();
-    });
-  });
-
   /* Sticky nav: subtle shadow once the page is scrolled */
   var navEl = document.querySelector('.nav');
   function syncNavShadow() {

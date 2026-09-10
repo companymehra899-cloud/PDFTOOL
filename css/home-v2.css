@@ -64,7 +64,7 @@ body.home-v2 .hp-pill .o{background:#d97706}
 body.home-v2 .hp-hero h1{
   font-size:clamp(34px,4.6vw,56px);
   line-height:1.06;letter-spacing:-1.9px;font-weight:800;color:#111827;margin:0 0 14px;
-  user-select:text;-webkit-user-select:text;cursor:pointer;
+  user-select:text;-webkit-user-select:text;
 }
 body.home-v2 .hp-hero h1 .title-link,
 body.home-v2 .hp-lead .title-link{
