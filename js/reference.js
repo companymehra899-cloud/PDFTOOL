@@ -175,18 +175,33 @@
     });
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll('details.faq-item'), function (item) {
-    var btn = item.querySelector('.faq-q, summary');
-    if (btn) btn.setAttribute('aria-expanded', item.open ? 'true' : 'false');
-    item.addEventListener('toggle', function () {
-      item.classList.toggle('open', item.open);
-      if (btn) {
-        btn.classList.toggle('open', item.open);
-        btn.setAttribute('aria-expanded', item.open ? 'true' : 'false');
-      }
-      if (!item.open) return;
+  Array.prototype.forEach.call(document.querySelectorAll('.faq-item'), function (item) {
+    if (item.tagName === 'DETAILS') {
+      var summary = item.querySelector('.faq-q, summary');
+      if (summary) summary.setAttribute('aria-expanded', item.open ? 'true' : 'false');
+      item.addEventListener('toggle', function () {
+        item.classList.toggle('open', item.open);
+        if (summary) {
+          summary.classList.toggle('open', item.open);
+          summary.setAttribute('aria-expanded', item.open ? 'true' : 'false');
+        }
+        if (!item.open) return;
+        var list = item.closest('.faq, .faq-list');
+        if (list) closeFaqSiblings(list, item);
+      });
+      return;
+    }
+    var btn = item.querySelector('.faq-q, button');
+    if (!btn || btn.getAttribute('data-faq-bound') === '1') return;
+    btn.setAttribute('data-faq-bound', '1');
+    btn.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var wasOpen = item.classList.contains('open');
       var list = item.closest('.faq, .faq-list');
       if (list) closeFaqSiblings(list, item);
+      setFaqOpen(item, !wasOpen);
     });
   });
 
