@@ -85,11 +85,13 @@ h1,h2,h3,.section-title{
   user-select:text;-webkit-user-select:text;-moz-user-select:text;
   cursor:text;
 }
-h1 .title-link,.hero-sub .title-link{
+h1 .title-link,.hero-sub .title-link,.hp-lead .title-link{
   cursor:pointer;
   position:relative;
-  z-index:10;
+  z-index:21;
   pointer-events:auto;
+  color:inherit;
+  text-decoration:none;
 }
 h1{font-size:clamp(26px,3.3vw,40px);line-height:1.08;letter-spacing:-1.4px;margin-bottom:14px;overflow-wrap:break-word}
 
@@ -192,8 +194,8 @@ footer li a:hover{color:var(--primary)}
 }
 .home-hero.tool-hero::before,.home-hero.tool-hero::after{pointer-events:none}
 .home-hero.tool-hero .hero-badge{margin-bottom:16px;position:relative;z-index:2}
-.home-hero.tool-hero h1{font-size:40px;line-height:1.15;letter-spacing:-1px;margin:0 0 12px;max-width:none;position:relative;z-index:10;overflow-wrap:break-word}
-.home-hero.tool-hero .hero-sub{max-width:740px;font-size:16px;color:var(--muted);margin:0 0 6px;position:relative;z-index:10}
+.home-hero.tool-hero h1{font-size:40px;line-height:1.15;letter-spacing:-1px;margin:0 0 12px;max-width:none;position:relative;z-index:20;overflow-wrap:break-word;pointer-events:auto;cursor:pointer}
+.home-hero.tool-hero .hero-sub{max-width:740px;font-size:16px;color:var(--muted);margin:0 0 6px;position:relative;z-index:20;pointer-events:auto;cursor:pointer}
 
 .dropzone{border:2px dashed #b9aaff;border-radius:14px;background:linear-gradient(180deg,#fff,#fbfaff);color:#59627b}
 .dropzone svg{color:#785eff}
