@@ -13,7 +13,7 @@ body.home-v2 .container{max-width:1180px;padding:0 28px}
 body.home-v2 .nav-inner.container{max-width:1440px;padding:0 32px}
 body.home-v2 .brand-wordmark{font-size:22px;letter-spacing:-.6px}
 body.home-v2 .brand-wordmark small{display:block;margin-top:5px;font-size:11px;font-weight:500;color:#56627a}
-body.home-v2 .links{gap:32px;margin-left:12px;justify-content:center;flex:1}
+body.home-v2 .links{gap:32px;margin-left:12px;justify-content:center;flex:1;height:auto;max-height:none}
 body.home-v2 .links>a,
 body.home-v2 .links .drop-toggle{font-size:15px;font-weight:600;color:#1c2740}
 body.home-v2 .nav-actions{gap:12px}
@@ -315,7 +315,7 @@ body.home-v2 .bi-b{background:#2563eb}
 body.home-v2 .bi-y{background:#d97706}
 body.home-v2 .bi-p{background:#db2777}
 
-body.home-v2 .hp-faq{background:#fff;padding:12px 0 8px}
+body.home-v2 .hp-faq{background:#fff;padding:12px 0 8px;position:relative;z-index:5}
 body.home-v2 .hp-faq .section-title{font-size:26px;letter-spacing:-.6px;margin-bottom:16px}
 body.home-v2 .hp-faq .section-title:before{content:none}
 body.home-v2 .hp-empty{
