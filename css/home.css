@@ -185,7 +185,8 @@
   overflow: hidden;
   transition: border-color .15s, box-shadow .15s;
 }
-.faq-item.open{ border-color: #bfdbfe; }
+.faq-item.open,
+.faq-item[open]{ border-color: #bfdbfe; }
 .faq-item.reveal{ opacity: 1; transform: none; }
 .faq-q{
   width: 100%;
@@ -204,10 +205,33 @@
   user-select: text;
   -webkit-user-select: text;
 }
+summary.faq-q{
+  display: block;
+  padding: 0;
+  list-style: none;
+}
+summary.faq-q::-webkit-details-marker{ display: none; }
+summary.faq-q::marker{ content: ""; }
+.faq-q-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  pointer-events: none;
+}
 .faq-chev{ color: var(--muted); font-size: 12px; transition: transform .2s; flex-shrink: 0; user-select: none; pointer-events: none; }
-.faq-item.open .faq-chev{ transform: rotate(180deg); color: var(--primary); }
+.faq-item.open .faq-chev,
+.faq-item[open] .faq-chev{ transform: rotate(180deg); color: var(--primary); }
 .faq-a{ max-height: 0; overflow: hidden; transition: max-height .25s ease; }
 .faq-item.open .faq-a{ max-height: 640px; }
+details.faq-item > .faq-a{
+  max-height: none;
+  overflow: visible;
+}
+details.faq-item:not([open]) > .faq-a{
+  display: none;
+}
 .faq-a p{ padding: 0 20px 16px; color: var(--muted); font-size: 14.5px; user-select: text; -webkit-user-select: text; }
 
 /* ---------- Final CTA banner ---------- */
