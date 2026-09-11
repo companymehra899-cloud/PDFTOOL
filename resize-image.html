@@ -149,7 +149,7 @@
   .btn-select svg{width:17px;height:17px}
 
   .editor-container{
-    display:none;grid-template-columns:minmax(0,1fr) 340px;gap:22px;
+    display:none;grid-template-columns:minmax(0,1.7fr) 300px;gap:28px;
     padding:26px 0 14px;align-items:start;
   }
   .preview-box{
@@ -239,9 +239,12 @@
   .rz-accent{color:#ec4899;-webkit-text-fill-color:#ec4899}
   .rz-page .home-hero.tool-hero .hero-sub{
     margin:0 auto 18px;
-    max-width:640px;
+    max-width:70%;
+    width:70%;
     font-size:16.5px;
+    line-height:1.55;
     color:#6b7280;
+    text-wrap:balance;
   }
   .rz-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:0 0 8px}
   .rz-pill{
@@ -255,7 +258,14 @@
   .rz-pill.p{background:#f3e8ff;color:#7c3aed}
   .rz-page .tool-area{max-width:none;margin-top:10px;padding-bottom:28px}
   .rz-page .upload-container{display:block;padding:0}
-  .rz-page .editor-container{max-width:880px;margin-left:auto;margin-right:auto}
+  .rz-page .editor-container{
+    width:70%;
+    max-width:70%;
+    margin-left:auto;
+    margin-right:auto;
+    grid-template-columns:minmax(0,1.7fr) 300px;
+    gap:28px;
+  }
 
   .rz-upload-stage{
     position:relative;
