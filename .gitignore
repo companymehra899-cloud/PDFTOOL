@@ -47,9 +47,6 @@
 **/.pnpm-store/
 **/*.tsbuild*
 
-# Cloudflare Wrangler
-**/.wrangler/
-
 # Python
 **/__pycache__/
 *.py[cod]
