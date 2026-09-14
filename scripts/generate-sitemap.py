@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import subprocess
 from datetime import date
 from pathlib import Path
 
@@ -85,15 +86,34 @@ def priority_for(path):
     return 0.8
 
 
+def lastmod_for(html):
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cs", "--", html.name],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        stamp = result.stdout.strip()
+        if stamp:
+            return stamp
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        pass
+    return TODAY
+
+
 def main():
     discovered = []
     seen = set()
+    path_to_html = {}
     for html in ROOT.glob("*.html"):
         path = html_to_path(html)
         if not path or path in seen or has_query_or_hash(path):
             continue
         seen.add(path)
         discovered.append(path)
+        path_to_html[path] = html
 
     order_index = {item: i for i, item in enumerate(PREFERRED_ORDER)}
     paths = sorted(discovered, key=lambda p: (order_index.get(p, 1000), p))
@@ -106,7 +126,7 @@ def main():
         blocks.append(
             "  <url>\n"
             f"    <loc>{loc}</loc>\n"
-            f"    <lastmod>{TODAY}</lastmod>\n"
+            f"    <lastmod>{lastmod_for(path_to_html[path])}</lastmod>\n"
             f"    <changefreq>{changefreq_for(path)}</changefreq>\n"
             f"    <priority>{priority_for(path):.1f}</priority>\n"
             "  </url>"
