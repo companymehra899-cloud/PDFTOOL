@@ -100,11 +100,6 @@ h1 strong{color:var(--primary);-webkit-text-fill-color:var(--primary)}
 
 @keyframes cloudFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-@keyframes badgeFloat{
-  0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}
-  50%{transform:translateY(-7px) rotate(var(--rot,0deg))}
-}
-
 /* SECTIONS */
 .section{padding:38px 0}
 .section-title{font-size:24px;line-height:1.2;margin-bottom:20px}
@@ -625,25 +620,6 @@ html.translated-ltr .nav-actions,html.translated-rtl .nav-actions{gap:10px}
 html.translated-ltr .lang-toggle,html.translated-rtl .lang-toggle{font-size:12px;gap:4px}
 html.translated-ltr .nav-actions .btn,html.translated-rtl .nav-actions .btn{min-width:0;padding:0 12px;font-size:12px;height:40px;gap:6px}
 html.translated-ltr .nav-actions .btn svg,html.translated-rtl .nav-actions .btn svg{display:none}
-
-/* Equal-height tool cards: keep the CTA pinned to the bottom when translated text wraps */
-
-.title-link{
-  color:inherit;
-  text-decoration:none;
-  cursor:pointer;
-  display:inline;
-  position:relative;
-  z-index:10;
-  pointer-events:auto;
-}
-.title-link:hover{color:inherit}
-h1 .title-link,.hero-sub .title-link,.hp-lead .title-link{
-  cursor:pointer;
-  position:relative;
-  z-index:10;
-  pointer-events:auto;
-}
 
 /* Decorative SVGs must never intercept title/subtitle clicks */
 .ir-deco,.ic-deco,.og-deco,.rz-deco,.p2j-deco,.sc-deco,.mg-deco,.j2p-deco,.ed-deco,.hp-art,.hp-leaf,.hp-blob,.hp-spark,[class*="-deco"],[class*="-leaf"],.ir-illu,.ic-illu,.og-illu,.rz-illu,.p2j-illu,.sc-illu,.mg-illu,.j2p-illu,.ed-illu,.cp-illu,.cp-title-ico{

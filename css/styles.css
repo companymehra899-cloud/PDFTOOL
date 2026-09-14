@@ -696,7 +696,6 @@ body.ve-open{ overflow: hidden; }
 }
 .sw-type-wrap{ display: flex; flex-direction: column; gap: 8px; width: 100%; }
 .sw-upload-wrap{ display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.sw-row{ display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .sw-hint{ font-size: 12px; color: var(--muted); line-height: 1.5; }
 
 .sig-type-input{ max-width: 260px; font-family: "Segoe Script", "Brush Script MT", "Apple Chancery", cursive; font-size: 22px; }
