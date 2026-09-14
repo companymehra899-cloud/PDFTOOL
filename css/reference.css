@@ -110,7 +110,7 @@ h1 strong{color:var(--primary);-webkit-text-fill-color:var(--primary)}
 .section-title{font-size:24px;line-height:1.2;margin-bottom:20px}
 .section-title:before{content:"↗";color:var(--primary);margin-right:8px;font-size:24px}
 
-.red{background:#ef3f45}.orange{background:#ff9f25}.blue{background:#2876ed}.green{background:#20b965}.purple{background:#7250e9}
+.blue{background:#2876ed}.green{background:#20b965}
 
 .red-mini{background:#ee3b42}.orange-mini{background:#ff9d1d}.purple-mini{background:#7250e9}
 .green-mini{background:#1fb667}.blue-mini{background:#2e73ef}
