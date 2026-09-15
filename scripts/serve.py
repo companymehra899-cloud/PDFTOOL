@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import os
+import re
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qsl, unquote, urlencode, urlparse
+from urllib.parse import parse_qsl, unquote, urlencode
 
 ROOT = Path(__file__).resolve().parents[1]
 os.chdir(ROOT)
@@ -30,10 +31,15 @@ TRACKING_PARAMS = {
 
 class RewriteHandler(SimpleHTTPRequestHandler):
     def canonical_location(self):
-        parsed = urlparse(self.path)
-        path = unquote(parsed.path) or "/"
-        query = parse_qsl(parsed.query, keep_blank_values=True)
+        raw_path, _, raw_query = self.path.partition("?")
+        path = unquote(raw_path) or "/"
+        query = parse_qsl(raw_query, keep_blank_values=True)
         redirect = False
+
+        collapsed = re.sub(r"/{2,}", "/", path)
+        if collapsed != path:
+            path = collapsed
+            redirect = True
 
         lower = path.lower()
         if lower.endswith("/index.html"):
@@ -84,8 +90,10 @@ class RewriteHandler(SimpleHTTPRequestHandler):
         super().do_HEAD()
 
     def translate_path(self, path):
-        parsed = urlparse(unquote(path))
-        request_path = parsed.path or "/"
+        request_path = unquote(path.partition("?")[0]) or "/"
+
+        if request_path in ("/404", "/404.html"):
+            return super().translate_path("/__not-found__")
 
         if request_path != "/" and request_path.endswith("/"):
             request_path = request_path.rstrip("/")
@@ -105,6 +113,21 @@ class RewriteHandler(SimpleHTTPRequestHandler):
             return html_path
 
         return candidate
+
+    def send_error(self, code, message=None, explain=None):
+        if code == 404:
+            page = ROOT / "404.html"
+            if page.is_file():
+                body = page.read_bytes()
+                self.send_response(404)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.send_header("Cache-Control", "no-cache")
+                self.end_headers()
+                if self.command != "HEAD":
+                    self.wfile.write(body)
+                return
+        super().send_error(code, message, explain)
 
     def end_headers(self):
         self.send_header("Cache-Control", "no-cache")

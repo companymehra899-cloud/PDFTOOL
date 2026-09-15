@@ -20,6 +20,8 @@ const TRACKING_PARAMS = new Set([
 
 const ASSET_EXT = /\.(css|js|mjs|png|jpe?g|gif|svg|ico|webp|xml|txt|json|woff2?|map|webmanifest)$/i;
 
+const RESERVED_PATHS = new Set(["/404", "/404.html"]);
+
 export async function onRequest(context) {
   const url = new URL(context.request.url);
 
@@ -27,20 +29,32 @@ export async function onRequest(context) {
     return context.next();
   }
 
-  let path = url.pathname;
+  let path = url.pathname.replace(/\/{2,}/g, "/");
   let redirect = false;
+
+  if (path !== url.pathname) {
+    redirect = true;
+  }
+
+  if (RESERVED_PATHS.has(path)) {
+    return context.next();
+  }
 
   if (/\/index\.html$/i.test(path)) {
     path = path.replace(/\/index\.html$/i, "/") || "/";
     redirect = true;
   } else if (/\.html$/i.test(path)) {
-    path = path.replace(/\.html$/i, "");
+    path = path.replace(/\.html$/i, "") || "/";
     redirect = true;
   }
 
   if (path.length > 1 && path.endsWith("/")) {
     path = path.replace(/\/+$/, "");
     redirect = true;
+  }
+
+  if (!path.startsWith("/")) {
+    path = "/" + path;
   }
 
   const kept = new URLSearchParams();
