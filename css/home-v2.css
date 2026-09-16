@@ -360,24 +360,36 @@ body.home-v2 .hp-empty.show{display:block}
   }
 }
 
-/* Hero illustration: the artwork is built at a fixed 540x460 design size, so on
-   narrow screens it is uniformly scaled down to stay inside the container. */
+/* Hero illustration: the artwork is built at a fixed 540x460 design size. As a
+   grid item it would otherwise refuse to shrink (min-width:auto) and push the
+   whole hero outside the container, so on narrow screens it is clamped with
+   min-width:0 and the stage is uniformly scaled down and centred. */
 @media(max-width:470px){
-  body.home-v2 .hp-art{min-height:0;height:286px}
+  body.home-v2 .hp-hero-grid > div{min-width:0}
+  body.home-v2 .hp-rating{flex-wrap:wrap;row-gap:6px}
+  body.home-v2 .hp-art{min-width:0;overflow:hidden;min-height:0;height:286px}
   body.home-v2 .hp-art-stage{
     width:540px;height:460px;max-width:none;
-    left:50%;margin:0;
+    margin:0;left:50%;
     transform:translateX(-50%) scale(.62);
     transform-origin:top center;
   }
 }
-@media(max-width:390px){
+@media(max-width:392px){
   body.home-v2 .hp-art{height:253px}
   body.home-v2 .hp-art-stage{transform:translateX(-50%) scale(.55)}
 }
-@media(max-width:350px){
+@media(max-width:352px){
   body.home-v2 .hp-art{height:221px}
   body.home-v2 .hp-art-stage{transform:translateX(-50%) scale(.48)}
+}
+@media(max-width:320px){
+  body.home-v2 .hp-art{height:184px}
+  body.home-v2 .hp-art-stage{transform:translateX(-50%) scale(.40)}
+}
+@media(max-width:290px){
+  body.home-v2 .hp-art{height:161px}
+  body.home-v2 .hp-art-stage{transform:translateX(-50%) scale(.35)}
 }
 
 html[data-theme="dark"] body.home-v2{background:#0b1220}
