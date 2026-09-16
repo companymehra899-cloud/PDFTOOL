@@ -35,10 +35,7 @@ body.home-v2 .hp-hero{
   isolation:isolate;
   z-index:1;
   padding:28px 0 22px;
-  background:
-    radial-gradient(circle at 92% 8%,rgba(139,92,246,.28),transparent 32%),
-    radial-gradient(circle at 6% 88%,rgba(16,185,129,.14),transparent 26%),
-    linear-gradient(180deg,#ece8f6 0%,#eef0f6 48%,#f3f4f8 100%);
+  background:#ffffff;
 }
 body.home-v2 .hp-hero-grid{
   display:grid;
