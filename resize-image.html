@@ -278,6 +278,16 @@
     .rz-page .editor-container{grid-template-columns:minmax(0,1fr)}
   }
 
+  /* Focus mode: after a file is loaded show only the workspace */
+  body.rz-page.rz-editing .home-hero,
+  body.rz-page.rz-editing .home-section,
+  body.rz-page.rz-editing .privacy-banner,
+  body.rz-page.rz-editing .cta-banner,
+  body.rz-page.rz-editing .rz-features,
+  body.rz-page.rz-editing .page-meta,
+  body.rz-page.rz-editing footer{display:none}
+  body.rz-page.rz-editing .tool-area{margin-top:22px;padding-bottom:40px}
+
   .rz-upload-stage{
     position:relative;
     width:70%;
@@ -980,11 +990,14 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   function showUpload() {
     editorStep.style.display = 'none';
     uploadStep.style.display = '';
+    document.body.classList.remove('rz-editing');
   }
 
   function showEditor() {
     uploadStep.style.display = 'none';
     editorStep.style.display = 'grid';
+    document.body.classList.add('rz-editing');
+    window.scrollTo(0, 0);
   }
 
   function handleFile(file) {
