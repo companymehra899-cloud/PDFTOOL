@@ -360,6 +360,26 @@ body.home-v2 .hp-empty.show{display:block}
   }
 }
 
+/* Hero illustration: the artwork is built at a fixed 540x460 design size, so on
+   narrow screens it is uniformly scaled down to stay inside the container. */
+@media(max-width:470px){
+  body.home-v2 .hp-art{min-height:0;height:286px}
+  body.home-v2 .hp-art-stage{
+    width:540px;height:460px;max-width:none;
+    left:50%;margin:0;
+    transform:translateX(-50%) scale(.62);
+    transform-origin:top center;
+  }
+}
+@media(max-width:390px){
+  body.home-v2 .hp-art{height:253px}
+  body.home-v2 .hp-art-stage{transform:translateX(-50%) scale(.55)}
+}
+@media(max-width:350px){
+  body.home-v2 .hp-art{height:221px}
+  body.home-v2 .hp-art-stage{transform:translateX(-50%) scale(.48)}
+}
+
 html[data-theme="dark"] body.home-v2{background:#0b1220}
 html[data-theme="dark"] body.home-v2 .nav{background:rgba(14,22,38,.92);border-bottom-color:#1f2940}
 html[data-theme="dark"] body.home-v2 .logo,
