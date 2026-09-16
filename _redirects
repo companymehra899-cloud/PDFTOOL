@@ -1,2 +1,40 @@
+# Static safety net for clean-URL canonicals.
+# Functions/_middleware.js also performs these redirects (and handles
+# duplicate-slash + tracking-param normalization), but these exact-match
+# rules keep .html URLs out of the index even if Functions are unavailable.
+# No wildcard here on purpose: a /*.html splat turns //path.html into a
+# protocol-relative off-site redirect.
+
+# Legacy / typo aliases
 /image-compresser  /image-compressor  301
-/index.html        /                  301
+
+# .html -> clean URL
+/index.html                   /                             301
+/about.html                   /about                        301
+/blog.html                    /blog                         301
+/blog-best-free-pdf-tools.html    /blog-best-free-pdf-tools     301
+/blog-compress-images.html    /blog-compress-images         301
+/blog-compress-pdf-for-email.html /blog-compress-pdf-for-email  301
+/blog-edit-pdf.html           /blog-edit-pdf                301
+/blog-jpg-to-pdf.html         /blog-jpg-to-pdf              301
+/blog-merge-pdf-online.html   /blog-merge-pdf-online        301
+/blog-organise-pdf-pages.html /blog-organise-pdf-pages      301
+/blog-pdf-to-jpg.html         /blog-pdf-to-jpg              301
+/blog-photo-resize-ssc-upsc.html  /blog-photo-resize-ssc-upsc   301
+/blog-resize-images.html      /blog-resize-images           301
+/blog-sign-pdf.html           /blog-sign-pdf                301
+/blog-unlock-protect-pdf.html /blog-unlock-protect-pdf      301
+/compress-pdf.html            /compress-pdf                 301
+/contact.html                 /contact                      301
+/edit-pdf.html                /edit-pdf                     301
+/image-compressor.html        /image-compressor             301
+/image-resizer.html           /image-resizer                301
+/jpg-to-pdf.html              /jpg-to-pdf                   301
+/merge-pdf.html               /merge-pdf                    301
+/organise-pdf.html            /organise-pdf                 301
+/pdf-to-jpg.html              /pdf-to-jpg                   301
+/privacy-policy.html          /privacy-policy               301
+/resize-image.html            /resize-image                 301
+/sign-pdf.html                /sign-pdf                     301
+/terms.html                   /terms                        301
+/unlock-protect-pdf.html      /unlock-protect-pdf           301
