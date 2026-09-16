@@ -180,6 +180,10 @@
     $('#ir-options').classList.toggle('show', state.files.length > 0);
     $('#ir-run').disabled = state.files.length === 0;
     if (state.files.length === 0) $('#ir-result').hidden = true;
+    var hasFiles = state.files.length > 0;
+    var was = document.body.classList.contains('ir-work-on');
+    document.body.classList.toggle('ir-work-on', hasFiles);
+    if (hasFiles && !was) window.scrollTo(0, 0);
   }
 
   function selectKb(kb) {

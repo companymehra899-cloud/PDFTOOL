@@ -175,6 +175,10 @@
     });
     $('#j2p-options').classList.toggle('show', j2p.files.length > 0);
     $('#j2p-run').disabled = j2p.files.length === 0;
+    var hasFiles = j2p.files.length > 0;
+    var was = document.body.classList.contains('j2p-work-on');
+    document.body.classList.toggle('j2p-work-on', hasFiles);
+    if (hasFiles && !was) window.scrollTo(0, 0);
   }
 
   $('#j2p-orient').addEventListener('click', function (e) {

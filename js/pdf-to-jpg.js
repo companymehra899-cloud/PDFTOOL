@@ -143,6 +143,12 @@
     pageCount: 0,
   };
 
+  function p2jSetWorking(on) {
+    var was = document.body.classList.contains('p2j-work-on');
+    document.body.classList.toggle('p2j-work-on', on);
+    if (on && !was) window.scrollTo(0, 0);
+  }
+
   function p2jResetUpload() {
     p2j.file = null;
     p2j.pdfJs = null;
@@ -151,6 +157,7 @@
     $('#p2j-run').disabled = true;
     $('#p2j-options').classList.remove('show');
     $('#p2j-result').innerHTML = '';
+    p2jSetWorking(false);
   }
 
   setupDropzone('#p2j-dropzone', '#p2j-input', async function (files) {
@@ -170,6 +177,7 @@
       $('#p2j-run').disabled = false;
       $('#p2j-options').classList.add('show');
       $('#p2j-result').innerHTML = '';
+      p2jSetWorking(true);
     } catch (err) {
       console.error(err);
       toast('Could not read PDF', true);

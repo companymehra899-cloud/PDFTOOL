@@ -342,6 +342,16 @@
   html[data-theme="dark"] .j2p-feat{border-color:#27314a}
   html[data-theme="dark"] .j2p-feat b{color:#e7ebf4}
   html[data-theme="dark"] .j2p-feat span{color:#97a2b9}
+
+  /* Focus mode: show only the workspace after files are loaded */
+  body.j2p-work-on .home-hero,
+  body.j2p-work-on .home-section,
+  body.j2p-work-on .privacy-banner,
+  body.j2p-work-on .cta-banner,
+  body.j2p-work-on .j2p-features,
+  body.j2p-work-on .page-meta,
+  body.j2p-work-on footer{display:none}
+  body.j2p-work-on .tool-area{margin-top:22px;padding-bottom:40px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}
@@ -786,7 +796,7 @@ function saveAs(blob, name) {
   setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
 }
 </script>
-<script src="js/jpg-to-pdf.js?v=2"></script>
+<script src="js/jpg-to-pdf.js?v=3"></script>
 <script src="js/hero-upload.js?v=3"></script>
 <script src="js/home.js?v=9"></script>
 <script src="js/reference.js?v=14"></script>
