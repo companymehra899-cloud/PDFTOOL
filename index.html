@@ -27,7 +27,7 @@
 <link rel="canonical" href="https://epdfconverter.com/">
 <script src="js/canonical.js?v=1"></script>
 <link rel="stylesheet" href="css/reference.css?v=35">
-<link rel="stylesheet" href="css/home-v2.css?v=22">
+<link rel="stylesheet" href="css/home-v2.css?v=23">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -229,44 +229,32 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 </section>
 
 <section class="hp-hero">
-  <div class="container hp-hero-grid">
-    <div>
-      <div class="hp-pills">
-        <span class="hp-pill"><i class="g"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></i> 100% Free</span>
-        <span class="hp-pill"><i class="b"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/></svg></i> Secure</span>
-        <span class="hp-pill"><i class="o"><svg viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m12 3 2.4 6.8L22 10.2l-5.4 4.4L18.5 22 12 18.2 5.5 22l1.9-7.4L2 10.2l7.6-.4Z"/></svg></i> No Sign up</span>
-      </div>
-      <h1>ePDFConverter<br><em>PDF &amp; Image Tools</em></h1>
-      <h2 class="hp-subhead">Fast, Free &amp; 100% Secure Browser-Based Tools</h2>
-      <p class="hp-lead">Merge, convert, compress, edit, sign PDFs and images with just a few clicks. Fast, easy &amp; secure!</p>
-      <form class="hp-search" id="tool-search-form" action="#tools" role="search">
-        <input type="search" id="tool-search" name="q" placeholder="Search tools (e.g. merge pdf, compress image)" autocomplete="off">
-        <button type="submit" aria-label="Search tools"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
-      </form>
-      <div class="hp-rating"><span class="hp-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <b>Free forever</b> <span class="hp-rating-sep">|</span> No sign-up, no uploads</div>
+  <div class="hp-hero-bg" aria-hidden="true"></div>
+  <div class="container hp-hero-inner">
+    <div class="hp-pills">
+      <span class="hp-pill"><i class="g"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></i> 100% Free</span>
+      <span class="hp-pill"><i class="b"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/></svg></i> Secure</span>
+      <span class="hp-pill"><i class="o"><svg viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m12 3 2.4 6.8L22 10.2l-5.4 4.4L18.5 22 12 18.2 5.5 22l1.9-7.4L2 10.2l7.6-.4Z"/></svg></i> No Sign up</span>
     </div>
+    <h1>ePDFConverter<br><em>PDF &amp; Image Tools</em></h1>
+    <h2 class="hp-subhead">Fast, Free &amp; 100% Secure Browser-Based Tools</h2>
+    <p class="hp-lead">Merge, convert, compress, edit, sign PDFs and images with just a few clicks. Fast, easy &amp; secure!</p>
 
-    <div class="hp-art" aria-hidden="true">
-      <div class="hp-art-stage">
-        <div class="hp-blob"></div>
-        <svg class="hp-leaf hp-leaf-l" viewBox="0 0 80 120"><path d="M10 110 C10 40 70 20 70 10 C40 40 18 70 10 110Z" fill="#86efac"/><path d="M10 110 C28 70 48 40 70 10" fill="none" stroke="#16a34a" stroke-width="3"/></svg>
-        <svg class="hp-leaf hp-leaf-r" viewBox="0 0 90 130"><path d="M80 120 C80 50 20 24 12 8 C48 36 70 74 80 120Z" fill="#c4b5fd"/><path d="M80 120 C58 76 36 40 12 8" fill="none" stroke="#7c3aed" stroke-width="3"/></svg>
-        <div class="hp-spark"></div>
-        <div class="hp-x">&#10005;</div>
-        <div class="hp-screen">
-          <div class="hp-screen-page"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        </div>
-        <div class="hp-pdf"><span class="hp-pdf-fold"></span>PDF</div>
-        <div class="hp-w">W</div>
-        <div class="hp-jpg">JPG</div>
-        <div class="hp-png">PNG</div>
-        <div class="hp-books"><i class="hp-book a"></i><i class="hp-book b"></i><i class="hp-book c"></i></div>
-        <button type="button" class="hp-cloud" id="hero-dropzone" aria-label="Drop a file here or browse">
-          <svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .4-8 6 6 0 0 0-11.4 1.6A3.5 3.5 0 0 0 7 18Z"/><path d="M12 16V9"/><path d="m8.5 11.5 3.5-3.5 3.5 3.5"/></svg>
-        </button>
-        <input type="file" id="hero-file-input" accept=".pdf,.jpg,.jpeg,.png,.webp" multiple hidden>
-      </div>
-    </div>
+    <button type="button" class="hp-drop" id="hero-dropzone" aria-label="Drop a file here or click to browse your device">
+      <span class="hp-drop-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .4-8 6 6 0 0 0-11.4 1.6A3.5 3.5 0 0 0 7 18Z"/><path d="M12 16V9"/><path d="m8.5 11.5 3.5-3.5 3.5 3.5"/></svg></span>
+      <span class="hp-drop-title">Drop a file here</span>
+      <span class="hp-drop-sub">or <b>browse your device</b> &mdash; we&rsquo;ll suggest the right tool. Everything runs in your browser, nothing is uploaded.</span>
+      <span class="hp-drop-formats" aria-hidden="true"><i>PDF</i><i>JPG</i><i>PNG</i><i>WEBP</i></span>
+    </button>
+    <input type="file" id="hero-file-input" accept=".pdf,.jpg,.jpeg,.png,.webp" multiple hidden>
+
+    <form class="hp-search" id="tool-search-form" action="#tools" role="search">
+      <span class="hp-search-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+      <input type="search" id="tool-search" name="q" placeholder="Search tools (e.g. merge pdf, compress image)" autocomplete="off">
+      <button type="submit" aria-label="Search tools">Search</button>
+    </form>
+
+    <div class="hp-rating"><span class="hp-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <b>Free forever</b> <span class="hp-rating-sep">|</span> No sign-up, no uploads</div>
   </div>
 
   <div class="container">

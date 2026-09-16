@@ -622,6 +622,6 @@ html.translated-ltr .nav-actions .btn,html.translated-rtl .nav-actions .btn{min-
 html.translated-ltr .nav-actions .btn svg,html.translated-rtl .nav-actions .btn svg{display:none}
 
 /* Decorative SVGs must never intercept title/subtitle clicks */
-.ir-deco,.ic-deco,.og-deco,.rz-deco,.p2j-deco,.sc-deco,.mg-deco,.j2p-deco,.ed-deco,.hp-art,.hp-leaf,.hp-blob,.hp-spark,[class*="-deco"],[class*="-leaf"],.ir-illu,.ic-illu,.og-illu,.rz-illu,.p2j-illu,.sc-illu,.mg-illu,.j2p-illu,.ed-illu,.cp-illu,.cp-title-ico{
+.ir-deco,.ic-deco,.og-deco,.rz-deco,.p2j-deco,.sc-deco,.mg-deco,.j2p-deco,.ed-deco,[class*="-deco"],[class*="-leaf"],.ir-illu,.ic-illu,.og-illu,.rz-illu,.p2j-illu,.sc-illu,.mg-illu,.j2p-illu,.ed-illu,.cp-illu,.cp-title-ico{
   pointer-events:none;
 }
