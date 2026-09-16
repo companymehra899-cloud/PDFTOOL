@@ -252,7 +252,11 @@
       },
     });
     $('#cp-run').disabled = cp.files.length === 0;
-    $('#cp-options').classList.toggle('show', cp.files.length > 0);
+    var hasFiles = cp.files.length > 0;
+    var was = document.body.classList.contains('cp-work-on');
+    document.body.classList.toggle('cp-work-on', hasFiles);
+    if (hasFiles && !was) window.scrollTo(0, 0);
+    $('#cp-options').classList.toggle('show', hasFiles);
   }
 
   $('#cp-level').addEventListener('click', function (e) {

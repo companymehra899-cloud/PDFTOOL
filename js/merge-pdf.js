@@ -155,7 +155,11 @@
       },
     });
     $('#mg-run').disabled = mg.files.length < 2;
-    $('#mg-options').classList.toggle('show', mg.files.length > 0);
+    var hasFiles = mg.files.length > 0;
+    var was = document.body.classList.contains('mg-work-on');
+    document.body.classList.toggle('mg-work-on', hasFiles);
+    if (hasFiles && !was) window.scrollTo(0, 0);
+    $('#mg-options').classList.toggle('show', hasFiles);
   }
 
   $('#mg-run').addEventListener('click', async function () {

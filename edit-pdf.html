@@ -334,6 +334,16 @@
   html[data-theme="dark"] .ed-feat{border-color:#27314a}
   html[data-theme="dark"] .ed-feat b{color:#e7ebf4}
   html[data-theme="dark"] .ed-feat span{color:#97a2b9}
+
+  /* Focus mode: show only the workspace while editing */
+  body.ed-work-on .home-hero,
+  body.ed-work-on .home-section,
+  body.ed-work-on .privacy-banner,
+  body.ed-work-on .cta-banner,
+  body.ed-work-on .ed-features,
+  body.ed-work-on .page-meta,
+  body.ed-work-on footer{display:none}
+  body.ed-work-on .tool-area{margin-top:22px;padding-bottom:40px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}
@@ -829,6 +839,24 @@ function saveAs(blob, name) {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
 <script src="js/edit-pdf.min.js?v=2"></script>
+<script>
+(function () {
+  'use strict';
+  var editorView = document.getElementById('view-editor');
+  var editView = document.getElementById('view-edit');
+  if (!editorView) return;
+  function sync() {
+    var editing = editorView.classList.contains('active');
+    var was = document.body.classList.contains('ed-work-on');
+    document.body.classList.toggle('ed-work-on', editing);
+    if (editing && !was) window.scrollTo(0, 0);
+  }
+  var obs = new MutationObserver(sync);
+  obs.observe(editorView, { attributes: true, attributeFilter: ['class'] });
+  if (editView) obs.observe(editView, { attributes: true, attributeFilter: ['class'] });
+  sync();
+})();
+</script>
 <script src="js/hero-upload.js?v=3"></script>
 <script src="js/home.js?v=9"></script>
 <script src="js/reference.js?v=14"></script>

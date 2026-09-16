@@ -157,6 +157,10 @@
     if (rotateBtn) rotateBtn.disabled = !hasPages;
     if (reverseBtn) reverseBtn.disabled = !hasPages;
 
+    var was = document.body.classList.contains('og-work-on');
+    document.body.classList.toggle('og-work-on', hasPages);
+    if (hasPages && !was) window.scrollTo(0, 0);
+
     globalThumbnailsContainer.innerHTML = '';
     renderGen++;
     var gen = renderGen;

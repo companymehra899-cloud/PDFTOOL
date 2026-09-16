@@ -121,6 +121,7 @@
     const target = $('#view-' + name);
     if (!target) return;
     target.classList.add('active');
+    document.body.classList.toggle('sc-work-on', name === 'secure-work');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

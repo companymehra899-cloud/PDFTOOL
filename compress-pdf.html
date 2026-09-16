@@ -358,6 +358,16 @@
   html[data-theme="dark"] .cp-feat{background:#10182b;border-color:#27314a}
   html[data-theme="dark"] .cp-feat b{color:#e7ebf4}
   html[data-theme="dark"] .cp-feat span{color:#97a2b9}
+
+  /* Focus mode: show only the workspace after files are loaded */
+  body.cp-work-on .home-hero,
+  body.cp-work-on .home-section,
+  body.cp-work-on .privacy-banner,
+  body.cp-work-on .cta-banner,
+  body.cp-work-on .cp-features,
+  body.cp-work-on .page-meta,
+  body.cp-work-on footer{display:none}
+  body.cp-work-on .tool-area{margin-top:22px;padding-bottom:40px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}
@@ -745,7 +755,7 @@ function saveAs(blob, name) {
   setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
 }
 </script>
-<script src="js/compress-pdf.js?v=6"></script>
+<script src="js/compress-pdf.js?v=7"></script>
 <script src="js/hero-upload.js?v=3"></script>
 <script src="js/home.js?v=9"></script>
 <script src="js/reference.js?v=14"></script>

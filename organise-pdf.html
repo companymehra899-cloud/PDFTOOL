@@ -379,6 +379,16 @@
     .bottom-actions { justify-content: center; }
     .section-title { flex-direction: column; align-items: flex-start; }
   }
+
+  /* Focus mode: show only the workspace after pages are loaded */
+  body.og-work-on .home-hero,
+  body.og-work-on .home-section,
+  body.og-work-on .privacy-banner,
+  body.og-work-on .cta-banner,
+  body.og-work-on .og-features,
+  body.og-work-on .page-meta,
+  body.og-work-on footer{display:none}
+  body.og-work-on .tool-area{margin-top:22px;padding-bottom:40px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}
@@ -810,7 +820,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
-<script src="js/organise-pdf.js?v=2"></script>
+<script src="js/organise-pdf.js?v=3"></script>
 <script src="js/home.js?v=9"></script>
 <script src="js/reference.js?v=14"></script>
 <div id="google_translate_element" style="display:none"></div>
