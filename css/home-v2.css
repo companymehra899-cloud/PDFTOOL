@@ -196,27 +196,6 @@ body.home-v2 .c-pink{background:linear-gradient(180deg,#f472b6,#db2777)}
 body.home-v2 .c-violet{background:linear-gradient(180deg,#a78bfa,#7c3aed)}
 body.home-v2 .c-teal{background:linear-gradient(180deg,#2dd4bf,#0d9488)}
 
-/* Safety */
-body.home-v2 .hp-safe-wrap{padding:18px 0 8px;background:#fff}
-body.home-v2 .hp-safe{
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-  background:linear-gradient(90deg,#f3e8ff,#fce7f3 55%,#ede9fe);
-  border:1px solid #ead9ff;border-radius:22px;padding:22px 28px;
-}
-body.home-v2 .hp-safe-left{display:flex;align-items:center;gap:18px}
-body.home-v2 .hp-shield{
-  width:72px;height:72px;min-width:72px;border-radius:20px;
-  background:linear-gradient(180deg,#a78bfa,#7c3aed);color:#fff;display:grid;place-items:center;
-  box-shadow:0 12px 24px rgba(124,58,237,.25);
-}
-body.home-v2 .hp-shield svg{width:36px;height:36px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-body.home-v2 .hp-safe h3{font-size:22px;margin:0 0 6px;color:#1f1638}
-body.home-v2 .hp-safe p{margin:0;font-size:14px;color:#5b4e78;max-width:560px;line-height:1.5}
-body.home-v2 .hp-safe .btn{
-  background:linear-gradient(180deg,#8b5cf6,#6d28d9);color:#fff;border-radius:12px;
-  padding:12px 22px;white-space:nowrap;box-shadow:0 10px 22px rgba(109,40,217,.25);
-}
-
 /* How it works */
 body.home-v2 .hp-how{padding:36px 0 20px;background:#fff;text-align:center}
 body.home-v2 .hp-how h2{font-size:28px;margin:0 0 28px;letter-spacing:-.6px;color:#111827}
@@ -271,7 +250,6 @@ body.home-v2 .hp-empty.show{display:block}
 @media(max-width:900px){
   body.home-v2 .hp-drop{max-width:620px}
   body.home-v2 .hp-bar{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:20px}
-  body.home-v2 .hp-safe{flex-direction:column;align-items:flex-start}
   body.home-v2 .hp-steps{flex-wrap:wrap;justify-content:center}
   body.home-v2 .hp-dots{display:none}
   body.home-v2 .hp-step{max-width:220px}
@@ -357,7 +335,6 @@ html[data-theme="dark"] body.home-v2 .hp-drop-title{color:#f3f4f6}
 html[data-theme="dark"] body.home-v2 .hp-drop-sub{color:#97a2b9}
 html[data-theme="dark"] body.home-v2 .hp-drop-formats i{color:#c4b5fd;background:#1d2542;border-color:#332a5c}
 html[data-theme="dark"] body.home-v2 .hp-tools,
-html[data-theme="dark"] body.home-v2 .hp-safe-wrap,
 html[data-theme="dark"] body.home-v2 .hp-how,
 html[data-theme="dark"] body.home-v2 .hp-bar-wrap,
 html[data-theme="dark"] body.home-v2 .hp-faq{background:#0b1220}
@@ -366,7 +343,4 @@ html[data-theme="dark"] body.home-v2 .hp-how h2,
 html[data-theme="dark"] body.home-v2 .hp-card h3,
 html[data-theme="dark"] body.home-v2 .hp-step h3,
 html[data-theme="dark"] body.home-v2 .hp-stat b{color:#e7ebf4}
-html[data-theme="dark"] body.home-v2 .hp-safe{background:linear-gradient(90deg,#1a1433,#22182f);border-color:#3b2a66}
-html[data-theme="dark"] body.home-v2 .hp-safe h3{color:#f3e8ff}
-html[data-theme="dark"] body.home-v2 .hp-safe p{color:#c4b5fd}
 html[data-theme="dark"] body.home-v2 .hp-bar{background:#060b16}
