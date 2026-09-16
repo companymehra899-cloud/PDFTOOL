@@ -82,6 +82,55 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why won't my email accept the PDF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your file is almost certainly over the provider's attachment limit. Compress it to under 10 MB, or use a file-sharing link for very large documents."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does compressing a PDF reduce its quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It reduces the quality of embedded images slightly. The text remains crisp. Using a Balanced or Fast level keeps the difference invisible for most documents."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I compress a PDF without losing quality for text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Text is re-rendered rather than re-encoded as an image, so a text-heavy PDF stays sharp even with strong compression."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the largest file the compressor can handle?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The PDF Compressor handles files up to 100 MB. If your PDF is bigger, try splitting it first with the Organise Pages tool."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my PDF uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The entire process runs locally in your browser. Your document never leaves your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -227,17 +276,28 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <p>If you are combining several documents, compress them first and then <a href="merge-pdf">merge the PDFs</a> into one attachment.</p>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Why won't my email accept the PDF?</h3>
-    <p>Your file is almost certainly over the provider's attachment limit. Compress it to under 10 MB, or use a file-sharing link for very large documents.</p>
-    <h3>Does compressing a PDF reduce its quality?</h3>
-    <p>It reduces the quality of embedded images slightly. The text remains crisp. Using a <em>Balanced</em> or <em>Fast</em> level keeps the difference invisible for most documents.</p>
-    <h3>Can I compress a PDF without losing quality for text?</h3>
-    <p>Yes. Text is re-rendered rather than re-encoded as an image, so a text-heavy PDF stays sharp even with strong compression.</p>
-    <h3>What is the largest file the compressor can handle?</h3>
-    <p>The <a href="compress-pdf">PDF Compressor</a> handles files up to 100 MB. If your PDF is bigger, try splitting it first with the <a href="organise-pdf">Organise Pages</a> tool.</p>
-    <h3>Is my PDF uploaded to a server?</h3>
-    <p>No. The entire process runs locally in your browser. Your document never leaves your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Why won't my email accept the PDF?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Your file is almost certainly over the provider's attachment limit. Compress it to under 10 MB, or use a file-sharing link for very large documents.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Does compressing a PDF reduce its quality?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>It reduces the quality of embedded images slightly. The text remains crisp. Using a <em>Balanced</em> or <em>Fast</em> level keeps the difference invisible for most documents.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I compress a PDF without losing quality for text?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Text is re-rendered rather than re-encoded as an image, so a text-heavy PDF stays sharp even with strong compression.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">What is the largest file the compressor can handle?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>The <a href="compress-pdf">PDF Compressor</a> handles files up to 100 MB. If your PDF is bigger, try splitting it first with the <a href="organise-pdf">Organise Pages</a> tool.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Is my PDF uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. The entire process runs locally in your browser. Your document never leaves your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

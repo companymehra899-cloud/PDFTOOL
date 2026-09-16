@@ -80,6 +80,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to resize signature to 140x60 pixels under 20kb?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Select the Signature 140 x 60 px preset on the resizer, keep the 20 KB target selected, then click Compress & Download. The output will be 140 x 60 pixels and under 20kb."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my photo is already under the KB limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Then you only need to check the dimensions. Set the width and height required by the portal, leave a target KB that is higher than your current file size, and download — the tool only compresses enough to fit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my photos uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Both the resizer and the compressor run entirely in your browser. Your photos and signatures never leave your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which format should I use for exam uploads?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most Indian portals accept JPG or JPEG. Upload a JPG or PNG, and the tools output a JPG under the target size, which works for the vast majority of applications."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -218,14 +259,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <p>Yes. For an exam that asks for a passport-size photo, crop your image to <strong>3.5cm x 4.5cm</strong> using the <em>Passport 3.5 x 4.5 cm</em> preset, then compress to the required KB. To <strong>make passport size photo background white online free</strong>, choose a photo taken against a plain light wall, increase contrast slightly, and the JPEG compression will keep the background looking clean and white.</p>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>How to resize signature to 140x60 pixels under 20kb?</h3>
-    <p>Select the <em>Signature 140 x 60 px</em> preset on the <a href="image-resizer">resizer</a>, keep the 20 KB target selected, then click Compress &amp; Download. The output will be 140 x 60 pixels and under 20kb.</p>
-    <h3>What if my photo is already under the KB limit?</h3>
-    <p>Then you only need to check the dimensions. Set the width and height required by the portal, leave a target KB that is higher than your current file size, and download &mdash; the tool only compresses enough to fit.</p>
-    <h3>Are my photos uploaded to a server?</h3>
-    <p>No. Both the <a href="image-resizer">resizer</a> and the <a href="image-compressor">compressor</a> run entirely in your browser. Your photos and signatures never leave your device.</p>
-    <h3>Which format should I use for exam uploads?</h3>
-    <p>Most Indian portals accept JPG or JPEG. Upload a JPG or PNG, and the tools output a JPG under the target size, which works for the vast majority of applications.</p>
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">How to resize signature to 140x60 pixels under 20kb?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Select the <em>Signature 140 x 60 px</em> preset on the <a href="image-resizer">resizer</a>, keep the 20 KB target selected, then click Compress &amp; Download. The output will be 140 x 60 pixels and under 20kb.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">What if my photo is already under the KB limit?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Then you only need to check the dimensions. Set the width and height required by the portal, leave a target KB that is higher than your current file size, and download &mdash; the tool only compresses enough to fit.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Are my photos uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. Both the <a href="image-resizer">resizer</a> and the <a href="image-compressor">compressor</a> run entirely in your browser. Your photos and signatures never leave your device.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Which format should I use for exam uploads?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Most Indian portals accept JPG or JPEG. Upload a JPG or PNG, and the tools output a JPG under the target size, which works for the vast majority of applications.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

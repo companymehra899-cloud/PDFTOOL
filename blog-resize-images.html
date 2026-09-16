@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I resize to an exact size in pixels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Enter the exact width and height you need and download. The output matches those dimensions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will resizing distort my image?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if you force an aspect ratio that differs from the original. The resizer keeps proportions unless you set both dimensions explicitly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I resize multiple images at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Upload several files and resize them together with the same settings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything runs locally in your browser, so your images never leave your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -211,15 +252,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </div>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Can I resize to an exact size in pixels?</h3>
-    <p>Yes. Enter the exact width and height you need and download. The output matches those dimensions.</p>
-    <h3>Will resizing distort my image?</h3>
-    <p>Only if you force an aspect ratio that differs from the original. The resizer keeps proportions unless you set both dimensions explicitly.</p>
-    <h3>Can I resize multiple images at once?</h3>
-    <p>Yes. Upload several files and resize them together with the same settings.</p>
-    <h3>Are my images uploaded to a server?</h3>
-    <p>No. Everything runs locally in your browser, so your images never leave your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I resize to an exact size in pixels?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Enter the exact width and height you need and download. The output matches those dimensions.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Will resizing distort my image?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Only if you force an aspect ratio that differs from the original. The resizer keeps proportions unless you set both dimensions explicitly.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I resize multiple images at once?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Upload several files and resize them together with the same settings.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Are my images uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. Everything runs locally in your browser, so your images never leave your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

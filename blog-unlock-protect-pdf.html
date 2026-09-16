@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I unlock a PDF if I forgot the password?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you set the password yourself and remember it, you can remove it. The tool cannot decrypt a file without the correct password, and it never cracks passwords."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What encryption is used when protecting a PDF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The protect feature applies strong 256-bit AES encryption, the same standard used by modern security tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will password protection work on all devices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. PDF readers on every platform prompt for the password and open the file once it is entered correctly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my PDF uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Unlocking and protecting run entirely in your browser, so your document never leaves your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -214,15 +255,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <p>Password removal only works when you know the password, which means you are the owner or have permission. The tools never break, crack or bypass encryption &mdash; they simply use the password you provide to decrypt the file. Always respect the rights of the document owner.</p>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Can I unlock a PDF if I forgot the password?</h3>
-    <p>If you set the password yourself and remember it, you can remove it. The tool cannot decrypt a file without the correct password, and it never cracks passwords.</p>
-    <h3>What encryption is used when protecting a PDF?</h3>
-    <p>The protect feature applies strong 256-bit AES encryption, the same standard used by modern security tools.</p>
-    <h3>Will password protection work on all devices?</h3>
-    <p>Yes. PDF readers on every platform prompt for the password and open the file once it is entered correctly.</p>
-    <h3>Is my PDF uploaded to a server?</h3>
-    <p>No. Unlocking and protecting run entirely in your browser, so your document never leaves your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I unlock a PDF if I forgot the password?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>If you set the password yourself and remember it, you can remove it. The tool cannot decrypt a file without the correct password, and it never cracks passwords.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">What encryption is used when protecting a PDF?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>The protect feature applies strong 256-bit AES encryption, the same standard used by modern security tools.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Will password protection work on all devices?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. PDF readers on every platform prompt for the password and open the file once it is entered correctly.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Is my PDF uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. Unlocking and protecting run entirely in your browser, so your document never leaves your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

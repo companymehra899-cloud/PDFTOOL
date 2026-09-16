@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is a typed signature legally binding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most everyday documents, yes — a typed name with your consent is treated as an electronic signature. Check the specific requirements for legal or government documents."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I draw my signature with a mouse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The draw mode captures your mouse, trackpad or touch input and turns it into a clean signature image."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I sign more than one page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Place your signature on every page that needs it before downloading the signed document."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my document and signature private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Everything is processed locally in your browser. Your document and signature never leave your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -212,15 +253,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </div>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Is a typed signature legally binding?</h3>
-    <p>For most everyday documents, yes &mdash; a typed name with your consent is treated as an electronic signature. Check the specific requirements for legal or government documents.</p>
-    <h3>Can I draw my signature with a mouse?</h3>
-    <p>Yes. The draw mode captures your mouse, trackpad or touch input and turns it into a clean signature image.</p>
-    <h3>Can I sign more than one page?</h3>
-    <p>Yes. Place your signature on every page that needs it before downloading the signed document.</p>
-    <h3>Are my document and signature private?</h3>
-    <p>Yes. Everything is processed locally in your browser. Your document and signature never leave your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Is a typed signature legally binding?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>For most everyday documents, yes &mdash; a typed name with your consent is treated as an electronic signature. Check the specific requirements for legal or government documents.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I draw my signature with a mouse?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. The draw mode captures your mouse, trackpad or touch input and turns it into a clean signature image.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I sign more than one page?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Place your signature on every page that needs it before downloading the signed document.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Are my document and signature private?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Everything is processed locally in your browser. Your document and signature never leave your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

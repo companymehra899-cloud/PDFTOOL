@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I edit the existing text of a PDF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can add new text and annotations anywhere on a page. Editing the original words of a PDF is only possible if the document is an editable form; for most PDFs you overlay text rather than rewrite it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to install software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The editor works in your browser with no installation and no account."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will my edits look the same on other devices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The edited PDF keeps its layout, so your changes display consistently everywhere."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my PDF uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Editing happens entirely in your browser, so your document never leaves your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -208,15 +249,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </div>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Can I edit the existing text of a PDF?</h3>
-    <p>You can add new text and annotations anywhere on a page. Editing the original words of a PDF is only possible if the document is an editable form; for most PDFs you overlay text rather than rewrite it.</p>
-    <h3>Do I need to install software?</h3>
-    <p>No. The editor works in your browser with no installation and no account.</p>
-    <h3>Will my edits look the same on other devices?</h3>
-    <p>Yes. The edited PDF keeps its layout, so your changes display consistently everywhere.</p>
-    <h3>Is my PDF uploaded to a server?</h3>
-    <p>No. Editing happens entirely in your browser, so your document never leaves your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I edit the existing text of a PDF?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>You can add new text and annotations anywhere on a page. Editing the original words of a PDF is only possible if the document is an editable form; for most PDFs you overlay text rather than rewrite it.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Do I need to install software?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. The editor works in your browser with no installation and no account.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Will my edits look the same on other devices?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. The edited PDF keeps its layout, so your changes display consistently everywhere.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Is my PDF uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. Editing happens entirely in your browser, so your document never leaves your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

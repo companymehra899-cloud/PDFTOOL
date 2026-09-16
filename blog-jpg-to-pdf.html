@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which image formats can I convert?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JPG, JPEG, PNG and most common image formats work. Each image becomes one PDF page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the PDF preserve my image quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The images are embedded at their full resolution, so the pages look as sharp as the originals."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I change the page size after adding images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Pick a paper size and orientation at any point before you download, then generate the PDF again."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The conversion happens entirely in your browser, so your images never leave your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -212,15 +253,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </div>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Which image formats can I convert?</h3>
-    <p>JPG, JPEG, PNG and most common image formats work. Each image becomes one PDF page.</p>
-    <h3>Will the PDF preserve my image quality?</h3>
-    <p>Yes. The images are embedded at their full resolution, so the pages look as sharp as the originals.</p>
-    <h3>Can I change the page size after adding images?</h3>
-    <p>Yes. Pick a paper size and orientation at any point before you download, then generate the PDF again.</p>
-    <h3>Are my images uploaded to a server?</h3>
-    <p>No. The conversion happens entirely in your browser, so your images never leave your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Which image formats can I convert?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>JPG, JPEG, PNG and most common image formats work. Each image becomes one PDF page.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Will the PDF preserve my image quality?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. The images are embedded at their full resolution, so the pages look as sharp as the originals.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I change the page size after adding images?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Pick a paper size and orientation at any point before you download, then generate the PDF again.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Are my images uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. The conversion happens entirely in your browser, so your images never leave your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

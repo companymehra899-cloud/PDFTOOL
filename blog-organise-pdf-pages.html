@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I move a single page to a new position?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Select the page's card and move it up or down until it sits where you want it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does rotating a page change the rest of the PDF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Each page is rotated independently; the other pages are untouched."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I recover a page after deleting it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The output file is generated from the pages you keep, so double-check your selection before downloading. Your original upload is never modified."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the tool free and private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It is completely free, and because processing happens in your browser, your document never leaves your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -208,15 +249,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </div>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Can I move a single page to a new position?</h3>
-    <p>Yes. Select the page's card and move it up or down until it sits where you want it.</p>
-    <h3>Does rotating a page change the rest of the PDF?</h3>
-    <p>No. Each page is rotated independently; the other pages are untouched.</p>
-    <h3>Can I recover a page after deleting it?</h3>
-    <p>No. The output file is generated from the pages you keep, so double-check your selection before downloading. Your original upload is never modified.</p>
-    <h3>Is the tool free and private?</h3>
-    <p>Yes. It is completely free, and because processing happens in your browser, your document never leaves your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I move a single page to a new position?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Select the page's card and move it up or down until it sits where you want it.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Does rotating a page change the rest of the PDF?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. Each page is rotated independently; the other pages are untouched.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I recover a page after deleting it?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. The output file is generated from the pages you keep, so double-check your selection before downloading. Your original upload is never modified.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Is the tool free and private?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. It is completely free, and because processing happens in your browser, your document never leaves your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

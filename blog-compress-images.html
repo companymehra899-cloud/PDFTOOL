@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will compression make my images look bad?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At moderate settings the difference is invisible on screen. Lower settings start to soften fine detail, so check the output before using it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I compress multiple images at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Upload several JPG or PNG files and compress them together in one batch."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What file size should I aim for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For websites, under 100–200kb per image is a good target. For forms, follow the limit stated on the portal (commonly 20kb to 300kb)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Compression runs locally in your browser, so your images never leave your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -212,15 +253,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </div>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Will compression make my images look bad?</h3>
-    <p>At moderate settings the difference is invisible on screen. Lower settings start to soften fine detail, so check the output before using it.</p>
-    <h3>Can I compress multiple images at once?</h3>
-    <p>Yes. Upload several JPG or PNG files and compress them together in one batch.</p>
-    <h3>What file size should I aim for?</h3>
-    <p>For websites, under 100&ndash;200kb per image is a good target. For forms, follow the limit stated on the portal (commonly 20kb to 300kb).</p>
-    <h3>Are my images uploaded to a server?</h3>
-    <p>No. Compression runs locally in your browser, so your images never leave your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Will compression make my images look bad?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>At moderate settings the difference is invisible on screen. Lower settings start to soften fine detail, so check the output before using it.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I compress multiple images at once?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Upload several JPG or PNG files and compress them together in one batch.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">What file size should I aim for?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>For websites, under 100&ndash;200kb per image is a good target. For forms, follow the limit stated on the portal (commonly 20kb to 300kb).</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Are my images uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. Compression runs locally in your browser, so your images never leave your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

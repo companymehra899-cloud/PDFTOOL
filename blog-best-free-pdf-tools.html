@@ -80,6 +80,55 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are free PDF tools safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most are, but it depends on how they handle your files. Browser-based tools that process everything locally are the safest because your documents never leave your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the best completely free PDF editor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For a truly free experience with no watermark, no daily limits and no sign-up, a browser-based editor like ePDFConverter is the strongest option. Desktop alternatives exist, but they require installation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I combine multiple PDFs into one?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use a PDF merger. Add at least two files, arrange them in the order you want, and download the combined document. Most mergers, including ePDFConverter's, finish in seconds."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my PDF too large to email?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PDFs that contain many images or scans can grow quickly. Run the file through a compressor to re-encode the images at a lower quality, which usually cuts the size dramatically while keeping pages readable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I edit text in a PDF for free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Browser-based editors let you click existing text to replace it and add new text anywhere on a page — all without uploading the document."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -292,16 +341,28 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </ol>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Are free PDF tools safe?</h3>
-    <p>Most are, but it depends on how they handle your files. Browser-based tools that process everything locally are the safest because your documents never leave your device.</p>
-    <h3>What is the best completely free PDF editor?</h3>
-    <p>For a truly free experience with no watermark, no daily limits and no sign-up, a browser-based editor like ePDFConverter is the strongest option. Desktop alternatives exist, but they require installation.</p>
-    <h3>How do I combine multiple PDFs into one?</h3>
-    <p>Use a PDF merger. Add at least two files, arrange them in the order you want, and download the combined document. Most mergers, including <a href="merge-pdf">ePDFConverter's</a>, finish in seconds.</p>
-    <h3>Why is my PDF too large to email?</h3>
-    <p>PDFs that contain many images or scans can grow quickly. Run the file through a compressor to re-encode the images at a lower quality, which usually cuts the size dramatically while keeping pages readable.</p>
-    <h3>Can I edit text in a PDF for free?</h3>
-    <p>Yes. Browser-based editors let you click existing text to replace it and add new text anywhere on a page — all without uploading the document.</p>
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Are free PDF tools safe?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Most are, but it depends on how they handle your files. Browser-based tools that process everything locally are the safest because your documents never leave your device.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">What is the best completely free PDF editor?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>For a truly free experience with no watermark, no daily limits and no sign-up, a browser-based editor like ePDFConverter is the strongest option. Desktop alternatives exist, but they require installation.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">How do I combine multiple PDFs into one?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Use a PDF merger. Add at least two files, arrange them in the order you want, and download the combined document. Most mergers, including <a href="merge-pdf">ePDFConverter's</a>, finish in seconds.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Why is my PDF too large to email?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>PDFs that contain many images or scans can grow quickly. Run the file through a compressor to re-encode the images at a lower quality, which usually cuts the size dramatically while keeping pages readable.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I edit text in a PDF for free?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Browser-based editors let you click existing text to replace it and add new text anywhere on a page — all without uploading the document.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

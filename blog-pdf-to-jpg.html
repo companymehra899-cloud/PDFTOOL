@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is converting PDF to JPG the same as taking a screenshot?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The converter renders each full page at the resolution you choose, so nothing is cropped or cut off — the entire page becomes one image."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the JPGs look exactly like my PDF pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Each page is rendered from the original file, so colours, layout and text appear as they do in the PDF."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert one specific page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The converter processes all pages and saves each one as its own JPG. Simply keep the page you need and delete the rest."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my files uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The conversion runs locally in your browser, so your document never leaves your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -213,15 +254,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </div>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>Is converting PDF to JPG the same as taking a screenshot?</h3>
-    <p>No. The converter renders each full page at the resolution you choose, so nothing is cropped or cut off &mdash; the entire page becomes one image.</p>
-    <h3>Will the JPGs look exactly like my PDF pages?</h3>
-    <p>Yes. Each page is rendered from the original file, so colours, layout and text appear as they do in the PDF.</p>
-    <h3>Can I convert one specific page?</h3>
-    <p>The converter processes all pages and saves each one as its own JPG. Simply keep the page you need and delete the rest.</p>
-    <h3>Are my files uploaded to a server?</h3>
-    <p>No. The conversion runs locally in your browser, so your document never leaves your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Is converting PDF to JPG the same as taking a screenshot?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. The converter renders each full page at the resolution you choose, so nothing is cropped or cut off &mdash; the entire page becomes one image.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Will the JPGs look exactly like my PDF pages?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Each page is rendered from the original file, so colours, layout and text appear as they do in the PDF.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I convert one specific page?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>The converter processes all pages and saves each one as its own JPG. Simply keep the page you need and delete the rest.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Are my files uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. The conversion runs locally in your browser, so your document never leaves your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">

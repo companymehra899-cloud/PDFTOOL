@@ -82,6 +82,47 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many PDFs can I merge at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As many as you need. The merger accepts multiple files in one session and combines all of them into a single PDF."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will merging change the quality of my pages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Merging combines the original pages without re-encoding them, so quality stays exactly the same."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I reorder files before merging?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Use the arrows on each file card to move it up or down in the list before you click Merge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my documents uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything runs locally in your browser. Your files never leave your device."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   .blog-hero { padding: 64px 0 24px; }
   .blog-meta { display: flex; justify-content: center; gap: 14px; color: var(--muted); font-size: 13.5px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -210,15 +251,24 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <p>If you only need part of a file &mdash; say a few pages from the middle of a long report &mdash; extract those pages with <a href="organise-pdf">Organise Pages</a> first, then merge them with the rest.</p>
 
     <h2 id="faq">Frequently asked questions</h2>
-    <h3>How many PDFs can I merge at once?</h3>
-    <p>As many as you need. The merger accepts multiple files in one session and combines all of them into a single PDF.</p>
-    <h3>Will merging change the quality of my pages?</h3>
-    <p>No. Merging combines the original pages without re-encoding them, so quality stays exactly the same.</p>
-    <h3>Can I reorder files before merging?</h3>
-    <p>Yes. Use the arrows on each file card to move it up or down in the list before you click Merge.</p>
-    <h3>Are my documents uploaded to a server?</h3>
-    <p>No. Everything runs locally in your browser. Your files never leave your device.</p>
-
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">How many PDFs can I merge at once?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>As many as you need. The merger accepts multiple files in one session and combines all of them into a single PDF.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Will merging change the quality of my pages?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. Merging combines the original pages without re-encoding them, so quality stays exactly the same.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Can I reorder files before merging?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>Yes. Use the arrows on each file card to move it up or down in the list before you click Merge.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="faq-q-inner">Are my documents uploaded to a server?<span class="faq-chev">&#8964;</span></span></summary>
+        <div class="faq-a"><p>No. Everything runs locally in your browser. Your files never leave your device.</p></div>
+      </details>
+    </div>
 
     <div class="blog-cta">
       <div class="cta-banner reveal">
