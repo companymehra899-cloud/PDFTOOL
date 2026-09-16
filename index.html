@@ -27,7 +27,7 @@
 <link rel="canonical" href="https://epdfconverter.com/">
 <script src="js/canonical.js?v=1"></script>
 <link rel="stylesheet" href="css/reference.css?v=35">
-<link rel="stylesheet" href="css/home-v2.css?v=25">
+<link rel="stylesheet" href="css/home-v2.css?v=26">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -206,13 +206,12 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   </div>
 </header>
 
-<section class="hp-tools" id="tools">
+<section class="hp-tools" id="all-tools">
 <div class="container">
   <div class="hp-tools-head">
-    <h2>Popular PDF Tools</h2>
-    <a href="#all-tools">View all tools &rarr;</a>
+    <h2>All Tools</h2>
   </div>
-  <div class="hp-grid" id="popular-tools">
+  <div class="hp-grid">
     <a class="hp-card" href="merge-pdf" data-tools="merge pdf combine files"><div class="ico c-red"><svg viewBox="0 0 24 24"><path d="M8 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2"/><path d="M12 7v10"/></svg></div><h3>Merge PDF</h3><p>Combine multiple PDFs</p></a>
     <a class="hp-card" href="compress-pdf" data-tools="compress pdf reduce size"><div class="ico c-orange"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M12 18v-6"/><path d="m9.5 15 2.5 2.5 2.5-2.5"/></svg></div><h3>Compress PDF</h3><p>Reduce PDF file size</p></a>
     <a class="hp-card" href="jpg-to-pdf" data-tools="jpg to pdf image convert"><div class="ico c-green"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="15" height="16" rx="2"/><circle cx="8" cy="8.5" r="1.4"/><path d="m4.5 16 3.5-3.5 2.5 2.5 2-2 3 3"/><path d="M20 4v14"/></svg></div><h3>JPG to PDF</h3><p>Convert images to PDF</p></a>
@@ -223,40 +222,13 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <a class="hp-card" href="unlock-protect-pdf" data-tools="unlock protect password pdf"><div class="ico c-teal"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Unlock / Protect</h3><p>Lock or unlock PDFs</p></a>
     <a class="hp-card" href="resize-image" data-tools="resize image photo dimensions"><div class="ico c-green"><svg viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div><h3>Resize Image</h3><p>Change image dimensions</p></a>
     <a class="hp-card" href="image-compressor" data-tools="compress image jpg png size"><div class="ico c-orange"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M12 8v8"/><path d="m9.5 10.5 2.5-2.5 2.5 2.5"/><path d="m9.5 13.5 2.5 2.5 2.5-2.5"/></svg></div><h3>Compress Image</h3><p>Reduce image file size</p></a>
+    <a class="hp-card" href="image-resizer" data-tools="image signature resizer kb cm"><div class="ico c-sky"><svg viewBox="0 0 24 24"><path d="m3 21 4-1L18 9a2.1 2.1 0 0 0-3-3L4 17l-1 4Z"/><path d="m13 6 3 3"/><path d="M21 19H12"/></svg></div><h3>Image &amp; Signature Resizer</h3><p>Resize photos to KB / CM</p></a>
   </div>
   <div class="hp-empty" id="tool-empty">No matching tools. Try merge, compress, jpg or sign.</div>
 </div>
 </section>
 
-<section class="hp-hero">
-  <div class="hp-hero-bg" aria-hidden="true"></div>
-  <div class="container hp-hero-inner">
-    <div class="hp-pills">
-      <span class="hp-pill"><i class="g"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></i> 100% Free</span>
-      <span class="hp-pill"><i class="b"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V6Z"/></svg></i> Secure</span>
-      <span class="hp-pill"><i class="o"><svg viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m12 3 2.4 6.8L22 10.2l-5.4 4.4L18.5 22 12 18.2 5.5 22l1.9-7.4L2 10.2l7.6-.4Z"/></svg></i> No Sign up</span>
-    </div>
-    <h1>ePDFConverter<br><em>PDF &amp; Image Tools</em></h1>
-    <h2 class="hp-subhead">Fast, Free &amp; 100% Secure Browser-Based Tools</h2>
-    <p class="hp-lead">Merge, convert, compress, edit, sign PDFs and images with just a few clicks. Fast, easy &amp; secure!</p>
-
-    <button type="button" class="hp-drop" id="hero-dropzone" aria-label="Drop a file here or click to browse your device">
-      <span class="hp-drop-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .4-8 6 6 0 0 0-11.4 1.6A3.5 3.5 0 0 0 7 18Z"/><path d="M12 16V9"/><path d="m8.5 11.5 3.5-3.5 3.5 3.5"/></svg></span>
-      <span class="hp-drop-title">Drop a file here</span>
-      <span class="hp-drop-sub">or <b>browse your device</b> &mdash; we&rsquo;ll suggest the right tool. Everything runs in your browser, nothing is uploaded.</span>
-      <span class="hp-drop-formats" aria-hidden="true"><i>PDF</i><i>JPG</i><i>PNG</i><i>WEBP</i></span>
-    </button>
-    <input type="file" id="hero-file-input" accept=".pdf,.jpg,.jpeg,.png,.webp" multiple hidden>
-
-    <form class="hp-search" id="tool-search-form" action="#tools" role="search">
-      <span class="hp-search-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-      <input type="search" id="tool-search" name="q" placeholder="Search tools (e.g. merge pdf, compress image)" autocomplete="off">
-      <button type="submit" aria-label="Search tools">Search</button>
-    </form>
-
-    <div class="hp-rating"><span class="hp-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <b>Free forever</b> <span class="hp-rating-sep">|</span> No sign-up, no uploads</div>
-  </div>
-
+<section class="hp-stats-wrap">
   <div class="container">
     <div class="hp-stats">
       <div class="hp-stat"><div class="hp-stat-ico s-purple"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0 1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div><b>11</b><span>Free PDF &amp; Image Tools</span></div></div>
@@ -267,10 +239,11 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   </div>
 </section>
 
-<section class="hp-tools" id="all-tools">
+<section class="hp-tools" id="tools">
 <div class="container">
   <div class="hp-tools-head">
-    <h2>All Tools</h2>
+    <h2>Popular PDF Tools</h2>
+    <a href="#all-tools">View all tools &rarr;</a>
   </div>
   <div class="hp-grid">
     <a class="hp-card" href="merge-pdf" data-tools="merge pdf combine files"><div class="ico c-red"><svg viewBox="0 0 24 24"><path d="M8 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h2"/><path d="M16 3h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2"/><path d="M12 7v10"/></svg></div><h3>Merge PDF</h3><p>Combine multiple PDFs</p></a>
@@ -281,7 +254,6 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <a class="hp-card" href="unlock-protect-pdf" data-tools="unlock protect password pdf"><div class="ico c-teal"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Unlock / Protect</h3><p>Lock or unlock PDFs</p></a>
     <a class="hp-card" href="resize-image" data-tools="resize image photo dimensions"><div class="ico c-green"><svg viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div><h3>Resize Image</h3><p>Change image dimensions</p></a>
     <a class="hp-card" href="image-compressor" data-tools="compress image jpg png size"><div class="ico c-orange"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M12 8v8"/><path d="m9.5 10.5 2.5-2.5 2.5 2.5"/><path d="m9.5 13.5 2.5 2.5 2.5-2.5"/></svg></div><h3>Compress Image</h3><p>Reduce image file size</p></a>
-    <a class="hp-card" href="image-resizer" data-tools="image signature resizer kb cm"><div class="ico c-sky"><svg viewBox="0 0 24 24"><path d="m3 21 4-1L18 9a2.1 2.1 0 0 0-3-3L4 17l-1 4Z"/><path d="m13 6 3 3"/><path d="M21 19H12"/></svg></div><h3>Image &amp; Signature Resizer</h3><p>Resize photos to KB / CM</p></a>
     <a class="hp-card" href="jpg-to-pdf" data-tools="jpg to pdf image convert"><div class="ico c-green"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="15" height="16" rx="2"/><circle cx="8" cy="8.5" r="1.4"/><path d="m4.5 16 3.5-3.5 2.5 2.5 2-2 3 3"/><path d="M20 4v14"/></svg></div><h3>JPG to PDF</h3><p>Convert images to PDF</p></a>
     <a class="hp-card" href="pdf-to-jpg" data-tools="pdf to jpg convert images"><div class="ico c-blue"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="15" height="16" rx="2"/><circle cx="11" cy="8.5" r="1.4"/><path d="m7.5 16 3.5-3.5 2.5 2.5 2-2 3 3"/><path d="M4 4v14"/></svg></div><h3>PDF to JPG</h3><p>Convert PDF to images</p></a>
   </div>
@@ -395,18 +367,6 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 <div class="copyright">&copy; 2026 ePDFConverter.com &mdash; All rights reserved.</div>
 </div>
 </footer>
-
-<div class="hero-modal" id="hero-modal" aria-hidden="true">
-  <div class="hero-modal-backdrop" data-close></div>
-  <div class="hero-modal-card" role="dialog" aria-modal="true" aria-labelledby="hero-modal-title">
-    <button type="button" class="hero-modal-close" data-close aria-label="Close">&times;</button>
-    <div class="hero-modal-file" id="hero-modal-file"></div>
-    <h3 id="hero-modal-title">What would you like to do with this file?</h3>
-    <p class="hero-modal-sub" id="hero-modal-sub">Pick a tool and your file will be loaded straight into it.</p>
-    <div class="hero-modal-options" id="hero-modal-options"></div>
-    <button type="button" class="hero-modal-cancel" data-close>Cancel</button>
-  </div>
-</div>
 
 <div id="toast-wrap"></div>
 <script src="js/hero-upload.js?v=3"></script>
