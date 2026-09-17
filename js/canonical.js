@@ -16,10 +16,26 @@
     return CANONICAL_ORIGIN + cleanPath(window.location.pathname);
   }
 
+  function upsertMeta(attr, key, value) {
+    var head = document.head || document.getElementsByTagName("head")[0];
+    if (!head) return;
+    var selector = 'meta[' + attr + '="' + key + '"]';
+    var el = head.querySelector(selector);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attr, key);
+      head.appendChild(el);
+    }
+    if (el.getAttribute("content") !== value) {
+      el.setAttribute("content", value);
+    }
+  }
+
   function applyCanonical() {
     var href = canonicalHref();
     var head = document.head || document.getElementsByTagName("head")[0];
     if (!head) return;
+
     var link = head.querySelector('link[rel="canonical"]');
     if (!link) {
       link = document.createElement("link");
@@ -29,6 +45,8 @@
     if (link.getAttribute("href") !== href) {
       link.setAttribute("href", href);
     }
+
+    upsertMeta("property", "og:url", href);
   }
 
   applyCanonical();
