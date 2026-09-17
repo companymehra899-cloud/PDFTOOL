@@ -3,9 +3,10 @@
 
   function cleanPath(pathname) {
     if (!pathname) return "/";
-    pathname = pathname.split("?")[0].split("#")[0];
+    pathname = String(pathname).split("?")[0].split("#")[0];
     pathname = pathname.replace(/\/index\.html$/i, "/");
     pathname = pathname.replace(/\.html$/i, "");
+    pathname = pathname.replace(/\/{2,}/g, "/");
     if (pathname.length > 1 && pathname.charAt(pathname.length - 1) === "/") {
       pathname = pathname.slice(0, -1);
     }
