@@ -245,7 +245,12 @@
     background:linear-gradient(180deg,#5b3df5,#4f2fee);
     box-shadow:0 12px 28px rgba(91,61,245,.36);
   }
-  .sc-page #sc-files{justify-content:center}
+  .sc-page #sc-files{
+    justify-content:center;
+    position:relative;
+    z-index:2;
+    margin-top:28px;
+  }
   .sc-page #sc-upload-options{max-width:920px;margin-left:auto;margin-right:auto}
 
   .sc-features{
@@ -338,6 +343,28 @@
   body.sc-work-on .page-meta,
   body.sc-work-on footer{display:none}
   body.sc-work-on .tool-area{margin-top:22px;padding-bottom:40px}
+  body.sc-work-on .sc-deco{display:none}
+  body.sc-work-on .sc-upload-stage{
+    width:100%;
+    max-width:920px;
+    margin:0 auto 8px;
+    padding:0;
+    overflow:hidden;
+  }
+  body.sc-work-on #sc-dropzone{
+    min-height:0;
+    padding:20px 16px 18px;
+    border-radius:20px;
+  }
+  body.sc-work-on #sc-dropzone .sc-illu{display:none}
+  body.sc-work-on #sc-dropzone .dz-title{font-size:16px}
+  body.sc-work-on #sc-dropzone .dz-sub{margin-top:10px}
+  body.sc-work-on #sc-dropzone .dz-btn{padding:11px 22px;font-size:14px}
+  body.sc-work-on #sc-files{
+    max-width:920px;
+    margin:20px auto 0;
+  }
+  body.sc-work-on #sc-upload-options{margin-top:16px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}

@@ -334,7 +334,12 @@
     fill:none;
     stroke:currentColor;
   }
-  .ir-page #ir-files{justify-content:center}
+  .ir-page #ir-files{
+    justify-content:center;
+    position:relative;
+    z-index:2;
+    margin-top:28px;
+  }
   .ir-page #ir-options{max-width:none;margin-left:0;margin-right:0}
 
   .ir-features{
@@ -426,6 +431,28 @@
   body.ir-work-on .page-meta,
   body.ir-work-on footer{display:none}
   body.ir-work-on .tool-area{margin-top:22px;padding-bottom:40px}
+  body.ir-work-on .ir-deco{display:none}
+  body.ir-work-on .ir-upload-stage{
+    width:100%;
+    max-width:920px;
+    margin:0 auto 8px;
+    padding:0;
+    overflow:hidden;
+  }
+  body.ir-work-on #ir-dropzone{
+    min-height:0;
+    padding:20px 16px 18px;
+    border-radius:20px;
+  }
+  body.ir-work-on #ir-dropzone .ir-illu{display:none}
+  body.ir-work-on #ir-dropzone .dz-title{font-size:16px}
+  body.ir-work-on #ir-dropzone .dz-sub{margin-top:10px}
+  body.ir-work-on #ir-dropzone .dz-btn{padding:11px 22px;font-size:14px}
+  body.ir-work-on #ir-files{
+    max-width:920px;
+    margin:20px auto 0;
+  }
+  body.ir-work-on #ir-options{margin-top:16px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}

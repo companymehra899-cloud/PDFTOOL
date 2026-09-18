@@ -259,7 +259,12 @@
     background:linear-gradient(180deg,#5b3df5,#4f2fee);
     box-shadow:0 12px 28px rgba(91,61,245,.36);
   }
-  .p2j-page #p2j-files{justify-content:center}
+  .p2j-page #p2j-files{
+    justify-content:center;
+    position:relative;
+    z-index:2;
+    margin-top:28px;
+  }
   .p2j-page #p2j-options{max-width:920px;margin-left:auto;margin-right:auto}
 
   .p2j-features{
@@ -352,6 +357,28 @@
   body.p2j-work-on .page-meta,
   body.p2j-work-on footer{display:none}
   body.p2j-work-on .tool-area{margin-top:22px;padding-bottom:40px}
+  body.p2j-work-on .p2j-deco{display:none}
+  body.p2j-work-on .p2j-upload-stage{
+    width:100%;
+    max-width:920px;
+    margin:0 auto 8px;
+    padding:0;
+    overflow:hidden;
+  }
+  body.p2j-work-on #p2j-dropzone{
+    min-height:0;
+    padding:20px 16px 18px;
+    border-radius:20px;
+  }
+  body.p2j-work-on #p2j-dropzone .p2j-illu{display:none}
+  body.p2j-work-on #p2j-dropzone .dz-title{font-size:16px}
+  body.p2j-work-on #p2j-dropzone .dz-sub{margin-top:10px}
+  body.p2j-work-on #p2j-dropzone .dz-btn{padding:11px 22px;font-size:14px}
+  body.p2j-work-on #p2j-files{
+    max-width:920px;
+    margin:20px auto 0;
+  }
+  body.p2j-work-on #p2j-options{margin-top:16px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}

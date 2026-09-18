@@ -233,7 +233,12 @@
     box-shadow:0 12px 28px rgba(225,29,116,.36);
   }
   #sg-dropzone .dz-btn svg,#sg-dropzone:hover .dz-btn svg,#sg-dropzone.dragover .dz-btn svg{margin:0;color:#fff;transform:none}
-  .sg-page #sg-files{justify-content:center}
+  .sg-page #sg-files{
+    justify-content:center;
+    position:relative;
+    z-index:2;
+    margin-top:28px;
+  }
   .sg-page #sg-upload-options{max-width:820px;margin-left:auto;margin-right:auto}
 
   @media(max-width:900px){

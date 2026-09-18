@@ -315,7 +315,12 @@
   .cp-feat b{display:block;font-size:13px;color:#111827;margin:0 0 2px;letter-spacing:-.2px}
   .cp-feat > div span{display:block;font-size:11.5px;line-height:1.35;color:#6b7280;font-weight:500}
 
-  .cp-page #cp-files{justify-content:flex-start}
+  .cp-page #cp-files{
+    justify-content:flex-start;
+    position:relative;
+    z-index:2;
+    margin-top:28px;
+  }
   .cp-page #cp-options{max-width:none;margin-left:0;margin-right:0}
 
   @media(max-width:980px){
@@ -370,6 +375,27 @@
   body.cp-work-on .page-meta,
   body.cp-work-on footer{display:none}
   body.cp-work-on .tool-area{margin-top:22px;padding-bottom:40px}
+  body.cp-work-on .cp-upload-card{
+    width:100%;
+    max-width:920px;
+    margin:0 auto 8px;
+    padding:8px;
+  }
+  body.cp-work-on #cp-dropzone{
+    min-height:0;
+    padding:20px 16px 18px;
+    border-radius:16px;
+  }
+  body.cp-work-on #cp-dropzone .cp-illu{display:none}
+  body.cp-work-on #cp-dropzone .dz-title{font-size:16px}
+  body.cp-work-on #cp-dropzone .cp-or{margin:6px 0 10px}
+  body.cp-work-on #cp-dropzone .dz-sub{margin-top:10px}
+  body.cp-work-on #cp-dropzone .dz-btn{padding:11px 22px;font-size:14px}
+  body.cp-work-on #cp-files{
+    max-width:920px;
+    margin:20px auto 0;
+  }
+  body.cp-work-on #cp-options{margin-top:16px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}

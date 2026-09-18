@@ -262,7 +262,12 @@
     fill:none;
     stroke:currentColor;
   }
-  .j2p-page #j2p-files{justify-content:center}
+  .j2p-page #j2p-files{
+    justify-content:center;
+    position:relative;
+    z-index:2;
+    margin-top:28px;
+  }
   .j2p-page #j2p-options{max-width:920px;margin-left:auto;margin-right:auto}
 
   .j2p-features{
@@ -354,6 +359,29 @@
   body.j2p-work-on .page-meta,
   body.j2p-work-on footer{display:none}
   body.j2p-work-on .tool-area{margin-top:22px;padding-bottom:40px}
+  body.j2p-work-on .j2p-deco{display:none}
+  body.j2p-work-on .j2p-upload-stage{
+    width:100%;
+    max-width:920px;
+    margin:0 auto 8px;
+    padding:0;
+    overflow:hidden;
+  }
+  body.j2p-work-on #j2p-dropzone{
+    min-height:0;
+    padding:20px 16px 18px;
+    border-radius:20px;
+  }
+  body.j2p-work-on #j2p-dropzone .j2p-illu{display:none}
+  body.j2p-work-on #j2p-dropzone .dz-title{font-size:16px}
+  body.j2p-work-on #j2p-dropzone .j2p-or{margin:6px 0 10px}
+  body.j2p-work-on #j2p-dropzone .dz-sub{margin-top:10px}
+  body.j2p-work-on #j2p-dropzone .dz-btn{padding:11px 22px;font-size:14px}
+  body.j2p-work-on #j2p-files{
+    max-width:920px;
+    margin:20px auto 0;
+  }
+  body.j2p-work-on #j2p-options{margin-top:16px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}

@@ -253,7 +253,12 @@
     background:linear-gradient(180deg,#5b3df5,#4f2fee);
     box-shadow:0 12px 28px rgba(91,61,245,.36);
   }
-  .ed-page #ed-files{justify-content:center}
+  .ed-page #ed-files{
+    justify-content:center;
+    position:relative;
+    z-index:2;
+    margin-top:28px;
+  }
   .ed-page #ed-upload-options{max-width:920px;margin-left:auto;margin-right:auto}
 
   .ed-features{
@@ -346,6 +351,28 @@
   body.ed-work-on .page-meta,
   body.ed-work-on footer{display:none}
   body.ed-work-on .tool-area{margin-top:22px;padding-bottom:40px}
+  body.ed-work-on .ed-deco{display:none}
+  body.ed-work-on .ed-upload-stage{
+    width:100%;
+    max-width:920px;
+    margin:0 auto 8px;
+    padding:0;
+    overflow:hidden;
+  }
+  body.ed-work-on #ed-dropzone{
+    min-height:0;
+    padding:20px 16px 18px;
+    border-radius:20px;
+  }
+  body.ed-work-on #ed-dropzone .ed-illu{display:none}
+  body.ed-work-on #ed-dropzone .dz-title{font-size:16px}
+  body.ed-work-on #ed-dropzone .dz-sub{margin-top:10px}
+  body.ed-work-on #ed-dropzone .dz-btn{padding:11px 22px;font-size:14px}
+  body.ed-work-on #ed-files{
+    max-width:920px;
+    margin:20px auto 0;
+  }
+  body.ed-work-on #ed-upload-options{margin-top:16px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}

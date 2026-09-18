@@ -277,7 +277,7 @@
   .og-feat-ico.o{background:#fff7ed;color:#ea580c}
   .og-feat b{display:block;font-size:14.5px;color:#16122c;margin-bottom:4px;letter-spacing:-.2px;white-space:nowrap}
   .og-feat > div span{display:block;font-size:12.5px;line-height:1.45;color:#6b7280;font-weight:500}
-  .file-list-section { display: none; flex-direction: column; gap: 16px; }
+  .file-list-section { display: none; flex-direction: column; gap: 16px; position:relative; z-index:2; margin-top:28px; }
   .file-list-section.show { display: flex; }
   .section-title {
     display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
@@ -391,6 +391,27 @@
   body.og-work-on .page-meta,
   body.og-work-on footer{display:none}
   body.og-work-on .tool-area{margin-top:22px;padding-bottom:40px}
+  body.og-work-on .og-deco{display:none}
+  body.og-work-on .og-upload-stage{
+    width:100%;
+    max-width:920px;
+    margin:0 auto 8px;
+    padding:0;
+    overflow:hidden;
+  }
+  body.og-work-on .upload-card{
+    min-height:0;
+    padding:20px 16px 18px;
+    border-radius:20px;
+  }
+  body.og-work-on .og-illu{display:none}
+  body.og-work-on .upload-card h2{font-size:16px}
+  body.og-work-on .upload-card p{margin:6px 0 10px}
+  body.og-work-on .btn-select{padding:11px 22px;font-size:14px}
+  body.og-work-on .file-list-section{
+    max-width:920px;
+    margin:20px auto 0;
+  }
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}
