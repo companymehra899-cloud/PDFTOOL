@@ -22,6 +22,10 @@ const ASSET_EXT = /\.(css|js|mjs|png|jpe?g|gif|svg|ico|webp|xml|txt|json|woff2?|
 
 const RESERVED_PATHS = new Set(["/404", "/404.html"]);
 
+const ALIASES = {
+  "/image-compresser": "/image-compressor"
+};
+
 export async function onRequest(context) {
   const url = new URL(context.request.url);
 
@@ -50,6 +54,12 @@ export async function onRequest(context) {
 
   if (path.length > 1 && path.endsWith("/")) {
     path = path.replace(/\/+$/, "");
+    redirect = true;
+  }
+
+  const alias = ALIASES[path] || ALIASES[path.toLowerCase()];
+  if (alias) {
+    path = alias;
     redirect = true;
   }
 

@@ -8,6 +8,10 @@ from urllib.parse import parse_qsl, unquote, urlencode
 ROOT = Path(__file__).resolve().parents[1]
 os.chdir(ROOT)
 
+ALIASES = {
+    "/image-compresser": "/image-compressor",
+}
+
 TRACKING_PARAMS = {
     "utm_source",
     "utm_medium",
@@ -55,6 +59,11 @@ class RewriteHandler(SimpleHTTPRequestHandler):
 
         if path != "/" and path.endswith("/"):
             path = path.rstrip("/")
+            redirect = True
+
+        alias = ALIASES.get(path) or ALIASES.get(path.lower())
+        if alias:
+            path = alias
             redirect = True
 
         kept = [(k, v) for k, v in query if k.lower() not in TRACKING_PARAMS]

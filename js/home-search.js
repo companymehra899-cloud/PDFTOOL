@@ -22,7 +22,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       filter();
-      var tools = document.getElementById('tools');
+      var tools = document.getElementById('all-tools');
       if (tools) tools.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
