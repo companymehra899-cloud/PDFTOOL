@@ -633,3 +633,852 @@ html.translated-ltr .nav-actions .btn svg,html.translated-rtl .nav-actions .btn 
 .ir-deco,.ic-deco,.og-deco,.rz-deco,.p2j-deco,.sc-deco,.mg-deco,.j2p-deco,.ed-deco,[class*="-deco"],[class*="-leaf"],.ir-illu,.ic-illu,.og-illu,.rz-illu,.p2j-illu,.sc-illu,.mg-illu,.j2p-illu,.ed-illu,.cp-illu,.cp-title-ico{
   pointer-events:none;
 }
+
+/* ============================================================
+   iLovePDF-style upload box + workspace (shared across tool pages)
+   Layout only — no behaviour changes.
+   ============================================================ */
+
+/* Center the tool hero and give it a calm rhythm */
+body[class*="-page"] .home-hero.tool-hero{
+  text-align:center !important;
+  padding:34px 0 14px !important;
+  background:transparent !important;
+  border-bottom:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 auto !important;
+}
+body[class*="-page"] .home-hero.tool-hero h1{
+  font-size:clamp(28px,4vw,40px) !important;
+  line-height:1.16 !important;
+  letter-spacing:-1.2px !important;
+  margin:0 auto 10px !important;
+  white-space:normal !important;
+  text-wrap:balance !important;
+  text-align:center !important;
+  color:#16122c !important;
+}
+body[class*="-page"] .home-hero.tool-hero .hero-sub{
+  margin:0 auto 8px !important;
+  max-width:640px !important;
+  text-align:center !important;
+  font-size:16px !important;
+  color:#6b7280 !important;
+}
+body[class*="-page"] .home-hero.tool-hero .hero-badge{
+  display:inline-flex !important;
+  margin:0 0 14px !important;
+}
+body[class*="-page"] .tool-ico-row,
+body[class*="-page"] .pills,
+body[class*="-page"] [class*="-pills"]{
+  justify-content:center !important;
+}
+
+/* One consistent upload stage: centered, full width, capped */
+body[class*="-page"] [class$="-upload-stage"],
+body[class*="-page"] .cp-upload-card,
+body[class*="-page"] .cp-screen{
+  width:100% !important;
+  max-width:920px !important;
+  margin:0 auto 10px !important;
+  padding:0 !important;
+}
+body[class*="-page"] .cp-upload-card{
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+
+/* The card itself — clean white panel with soft border */
+body[class*="-page"] .dropzone,
+body[class*="-page"] .upload-card{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  max-width:none !important;
+  min-height:280px !important;
+  padding:44px 28px 40px !important;
+  border:1.5px dashed #d4d4dc !important;
+  border-radius:18px !important;
+  background:#fafafb !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+  color:#4b5563 !important;
+  transform:none !important;
+  text-align:center !important;
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease !important;
+}
+body[class*="-page"] .dropzone:hover,
+body[class*="-page"] .upload-card:hover,
+body[class*="-page"] .dropzone.dragover,
+body[class*="-page"] .upload-card.dragover{
+  border-color:var(--primary,#5134f4) !important;
+  background:#f5f4ff !important;
+  box-shadow:0 6px 22px rgba(81,52,244,.10) !important;
+  transform:none !important;
+}
+body[class*="-page"] .dropzone svg,
+body[class*="-page"] .upload-card svg{
+  transform:none !important;
+}
+body[class*="-page"] .dropzone:hover svg,
+body[class*="-page"] .upload-card:hover svg,
+body[class*="-page"] .dropzone.dragover svg,
+body[class*="-page"] .upload-card.dragover svg{
+  transform:none !important;
+}
+body[class*="-page"] .dz-title,
+body[class*="-page"] .upload-card h2{
+  font-size:21px !important;
+  font-weight:800 !important;
+  letter-spacing:-.4px !important;
+  color:#16122c !important;
+  margin:14px 0 6px !important;
+  text-align:center !important;
+}
+body[class*="-page"] .dz-sub,
+body[class*="-page"] .upload-card p,
+body[class*="-page"] .mg-or,
+body[class*="-page"] [class*="-or"]{
+  font-size:13.5px !important;
+  color:#8b91a1 !important;
+  margin:6px 0 0 !important;
+  text-align:center !important;
+}
+body[class*="-page"] .dz-title .dz-browse,
+body[class*="-page"] .dz-browse{
+  color:var(--primary,#5134f4) !important;
+  text-decoration:underline !important;
+}
+
+/* Upload button — iLovePDF style solid pill */
+body[class*="-page"] .dz-btn,
+body[class*="-page"] .btn-select{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:9px !important;
+  margin:18px 0 0 !important;
+  padding:14px 30px !important;
+  border:0 !important;
+  border-radius:12px !important;
+  background:var(--primary,#5134f4) !important;
+  color:#fff !important;
+  font-size:15px !important;
+  font-weight:800 !important;
+  line-height:1 !important;
+  cursor:pointer !important;
+  box-shadow:0 8px 20px rgba(81,52,244,.22) !important;
+  transition:background .15s ease,box-shadow .15s ease,transform .1s ease !important;
+}
+body[class*="-page"] .dz-btn:hover,
+body[class*="-page"] .btn-select:hover,
+body[class*="-page"] .dz-btn.dragover,
+body[class*="-page"] .btn-select.dragover{
+  background:var(--primary-dark,#4230e8) !important;
+  box-shadow:0 12px 26px rgba(81,52,244,.30) !important;
+  transform:translateY(-1px) !important;
+}
+body[class*="-page"] .dz-btn:active,
+body[class*="-page"] .btn-select:active{transform:translateY(0) !important}
+body[class*="-page"] .dz-btn svg,
+body[class*="-page"] .btn-select svg{
+  width:18px !important;
+  height:18px !important;
+  margin:0 !important;
+  color:#fff !important;
+  transform:none !important;
+}
+
+/* Workspace: file chips become tidy iLovePDF-like cards */
+body[class*="-page"] .file-list{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr)) !important;
+  gap:12px !important;
+  margin:22px auto 0 !important;
+  max-width:920px !important;
+  justify-content:flex-start !important;
+}
+body[class*="-page"] .file-list .chip{
+  width:100% !important;
+  max-width:none !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  padding:12px 14px !important;
+  border:1px solid #e7e9f0 !important;
+  border-radius:12px !important;
+  background:#fff !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+}
+body[class*="-page"] .chip .chip-name{
+  flex:1 1 auto !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  color:#17213b !important;
+}
+body[class*="-page"] .chip .chip-size{
+  font-size:12px !important;
+  color:#8b91a1 !important;
+}
+body[class*="-page"] .chip .chip-num{
+  background:var(--primary,#5134f4) !important;
+}
+
+/* Action bar */
+body[class*="-page"] .options-card{
+  max-width:920px !important;
+  margin:16px auto 0 !important;
+  padding:16px 18px !important;
+  border:1px solid #e7e9f0 !important;
+  border-radius:14px !important;
+  background:#fff !important;
+  box-shadow:0 6px 22px rgba(23,33,59,.06) !important;
+}
+body[class*="-page"] .options-card .opt-row{
+  display:flex !important;
+  align-items:center !important;
+  gap:14px !important;
+  flex-wrap:wrap !important;
+}
+body[class*="-page"] .options-card .btn.primary{
+  padding:13px 28px !important;
+  border-radius:12px !important;
+  font-size:15px !important;
+  font-weight:800 !important;
+}
+
+/* Dark mode */
+html[data-theme="dark"] body[class*="-page"] .dropzone,
+html[data-theme="dark"] body[class*="-page"] .upload-card{
+  background:#0f1729 !important;
+  border-color:#2b3550 !important;
+  color:#97a2b9 !important;
+}
+html[data-theme="dark"] body[class*="-page"] .dropzone:hover,
+html[data-theme="dark"] body[class*="-page"] .upload-card:hover,
+html[data-theme="dark"] body[class*="-page"] .dropzone.dragover,
+html[data-theme="dark"] body[class*="-page"] .upload-card.dragover{
+  background:#121b33 !important;
+  border-color:var(--primary,#8f7bff) !important;
+}
+html[data-theme="dark"] body[class*="-page"] .dz-title,
+html[data-theme="dark"] body[class*="-page"] .upload-card h2,
+html[data-theme="dark"] body[class*="-page"] .chip .chip-name{
+  color:#eef1ff !important;
+}
+html[data-theme="dark"] body[class*="-page"] .file-list .chip,
+html[data-theme="dark"] body[class*="-page"] .options-card{
+  background:#131b2f !important;
+  border-color:#27314a !important;
+}
+
+@media(max-width:640px){
+  body[class*="-page"] .dropzone,
+  body[class*="-page"] .upload-card{
+    min-height:0 !important;
+    padding:30px 16px 26px !important;
+    border-radius:16px !important;
+  }
+  body[class*="-page"] .dz-title,
+  body[class*="-page"] .upload-card h2{font-size:18px !important}
+  body[class*="-page"] .file-list{grid-template-columns:1fr !important}
+}
+
+/* ============================================================
+   iLovePDF-style layout for content pages
+   (about, contact, blog list, blog posts, legal)
+   ============================================================ */
+
+body:not([class]){
+  background:#f5f5f7;
+  color:#1a1a1a;
+}
+
+/* Heroes: centered, clean */
+.home-hero:not(.tool-hero){
+  text-align:center !important;
+  padding:56px 0 22px !important;
+  background:transparent !important;
+  border-bottom:0 !important;
+}
+.home-hero:not(.tool-hero) h1{
+  font-size:clamp(28px,4vw,42px) !important;
+  line-height:1.16 !important;
+  letter-spacing:-1.2px !important;
+  margin:0 auto 12px !important;
+  max-width:820px !important;
+  text-wrap:balance !important;
+  color:#16122c !important;
+}
+.home-hero:not(.tool-hero) .hero-sub{
+  margin:0 auto !important;
+  max-width:680px !important;
+  font-size:16.5px !important;
+  color:#5c5c5c !important;
+}
+.home-hero:not(.tool-hero) .hero-badge{margin:0 0 16px !important}
+
+/* Section headings: no arrow prefix, tighter */
+.section-title:before{content:none !important}
+.section-title{
+  font-size:26px !important;
+  letter-spacing:-.5px !important;
+  color:#1a1a1a !important;
+}
+
+/* Blog cards */
+.blog-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:18px !important;
+}
+.blog-card{
+  background:#fff !important;
+  border:1px solid #ececec !important;
+  border-radius:14px !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+  padding:26px 24px 22px !important;
+}
+.blog-card:hover{
+  transform:translateY(-3px) !important;
+  box-shadow:0 12px 30px rgba(16,24,40,.10) !important;
+  border-color:#ddd !important;
+}
+.blog-card h2{font-size:18px !important;color:#1a1a1a !important}
+.blog-card p{color:#6b6b6b !important}
+.blog-card-meta{border-top-color:#eee !important;color:#8b8b8b !important}
+
+/* About / contact cards */
+.about-card,.about-value,.contact-form-card{
+  background:#fff !important;
+  border:1px solid #ececec !important;
+  border-radius:14px !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+}
+.about-value:hover{
+  transform:translateY(-3px) !important;
+  box-shadow:0 12px 30px rgba(16,24,40,.10) !important;
+}
+
+/* Legal / blog prose */
+.legal-prose,.blog-article{color:#3d3d3d !important}
+.legal-prose h2,.blog-article h2{
+  color:#1a1a1a !important;
+  letter-spacing:-.4px !important;
+}
+.legal-prose p,.blog-article p{color:#4b4b4b !important}
+
+/* TOC + inline CTA */
+.blog-toc{
+  background:#f5f5f7 !important;
+  border:1px solid #ececec !important;
+  border-radius:14px !important;
+}
+.blog-cta .btn,.blog-cta a{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 26px;border-radius:12px;
+  background:var(--primary,#5134f4) !important;color:#fff !important;
+  font-weight:700 !important;box-shadow:0 8px 20px rgba(81,52,244,.22);
+}
+
+/* CTA banner */
+.cta-banner{
+  background:#fff !important;
+  border:1px solid #ececec !important;
+  border-radius:16px !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+}
+
+/* Footer: dark, iLovePDF-like, on every page */
+footer{
+  background:#1a1a2e !important;
+  border-top:0 !important;
+  color:#c5c5d0 !important;
+}
+footer .brand-wordmark,
+footer .logo,
+footer h4{color:#fff !important}
+footer .brand-wordmark small,
+footer .footer-brand p{color:#9ca3af !important}
+footer li,
+footer li a{color:#b4b4c0 !important}
+footer li a:hover{color:#fff !important}
+footer .copyright{border-top:1px solid #2e2e44 !important;color:#8a8a9a !important}
+
+/* Dark mode */
+html[data-theme="dark"] body:not([class]){background:#0b1220;color:#e7ebf4}
+html[data-theme="dark"] .home-hero:not(.tool-hero) h1,
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] .blog-card h2,
+html[data-theme="dark"] .legal-prose h2,
+html[data-theme="dark"] .blog-article h2{color:#eef1ff !important}
+html[data-theme="dark"] .home-hero:not(.tool-hero) .hero-sub,
+html[data-theme="dark"] .blog-card p,
+html[data-theme="dark"] .legal-prose p,
+html[data-theme="dark"] .blog-article p{color:#97a2b9 !important}
+html[data-theme="dark"] .blog-card,
+html[data-theme="dark"] .about-card,
+html[data-theme="dark"] .about-value,
+html[data-theme="dark"] .contact-form-card,
+html[data-theme="dark"] .cta-banner{background:#131b2f !important;border-color:#27314a !important}
+html[data-theme="dark"] .blog-toc{background:#10182b !important;border-color:#27314a !important}
+html[data-theme="dark"] footer{background:#080d18 !important}
+
+@media(max-width:980px){
+  .blog-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media(max-width:640px){
+  .blog-grid{grid-template-columns:1fr !important}
+  .home-hero:not(.tool-hero){padding:34px 0 16px !important}
+}
+
+/* ============================================================
+   TOOL PAGES — full iLovePDF-style redesign (v2)
+   Layout only. Loaded last so it wins. No JS/behaviour changes.
+   ============================================================ */
+
+/* Per-tool accent colours (used by hero + buttons) */
+body.mg-page{--tool:#e5322d;--tool-dark:#c4271f;--tool-soft:#fff1f0}
+body.cp-page{--tool:#16a34a;--tool-dark:#128a3e;--tool-soft:#f0fdf4}
+body.ed-page{--tool:#7c3aed;--tool-dark:#6527d0;--tool-soft:#f5f3ff}
+body.og-page{--tool:#db2777;--tool-dark:#be185d;--tool-soft:#fdf2f8}
+body.sg-page{--tool:#db2777;--tool-dark:#be185d;--tool-soft:#fdf2f8}
+body.sc-page{--tool:#0d9488;--tool-dark:#0f766e;--tool-soft:#f0fdfa}
+body.p2j-page{--tool:#0284c7;--tool-dark:#0369a1;--tool-soft:#f0f9ff}
+body.j2p-page{--tool:#16a34a;--tool-dark:#128a3e;--tool-soft:#f0fdf4}
+body.rz-page{--tool:#16a34a;--tool-dark:#128a3e;--tool-soft:#f0fdf4}
+body.ir-page{--tool:#2563eb;--tool-dark:#1d4ed8;--tool-soft:#eff6ff}
+body.ic-page{--tool:#ea580c;--tool-dark:#c2410c;--tool-soft:#fff7ed}
+
+body[class*="-page"]{background:#fff !important}
+
+/* ---------- Hero band ---------- */
+body[class*="-page"] .home-hero.tool-hero{
+  text-align:center !important;
+  padding:54px 24px 30px !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 !important;
+  background:linear-gradient(180deg,var(--tool-soft,#f6f6f8) 0%,#ffffff 100%) !important;
+  border-bottom:1px solid #f0f0f4 !important;
+  overflow:visible !important;
+  isolation:auto !important;
+}
+body[class*="-page"] .home-hero.tool-hero::before,
+body[class*="-page"] .home-hero.tool-hero::after{display:none !important}
+body[class*="-page"] .home-hero.tool-hero .hero-badge{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  margin:0 0 16px !important;
+  padding:7px 14px !important;
+  border-radius:999px !important;
+  background:#fff !important;
+  border:1px solid rgba(0,0,0,.06) !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.05) !important;
+  font-size:12.5px !important;
+  font-weight:700 !important;
+  color:#5c5c6b !important;
+}
+body[class*="-page"] .home-hero.tool-hero h1{
+  font-size:clamp(30px,4.2vw,44px) !important;
+  line-height:1.14 !important;
+  letter-spacing:-1.4px !important;
+  font-weight:800 !important;
+  color:#15151f !important;
+  margin:0 auto 12px !important;
+  max-width:820px !important;
+  white-space:normal !important;
+  text-wrap:balance !important;
+  text-align:center !important;
+}
+body[class*="-page"] .home-hero.tool-hero .hero-sub{
+  margin:0 auto !important;
+  max-width:620px !important;
+  font-size:16.5px !important;
+  line-height:1.6 !important;
+  color:#64647a !important;
+  text-align:center !important;
+}
+body[class*="-page"] [class*="-pills"]{
+  justify-content:center !important;
+  margin:18px 0 0 !important;
+}
+body[class*="-page"] [class*="-pill"]{
+  background:#fff !important;
+  border:1px solid rgba(0,0,0,.06) !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.05) !important;
+  color:var(--tool,#5134f4) !important;
+}
+
+/* ---------- Upload stage ---------- */
+body[class*="-page"] [class$="-upload-stage"],
+body[class*="-page"] .cp-upload-card,
+body[class*="-page"] .cp-screen{
+  width:100% !important;
+  max-width:880px !important;
+  margin:0 auto !important;
+  padding:26px 24px 0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+/* hide busy floating decorations for a cleaner layout */
+body[class*="-page"] [class*="-deco"],
+body[class*="-page"] [class*="-leaf"]{display:none !important}
+
+/* ---------- The upload card ---------- */
+body[class*="-page"] .dropzone,
+body[class*="-page"] .upload-card{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  max-width:none !important;
+  min-height:320px !important;
+  padding:52px 28px 46px !important;
+  border:2px dashed #dcdce4 !important;
+  border-radius:22px !important;
+  background:#fff !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+  color:#4b4b5a !important;
+  transform:none !important;
+  text-align:center !important;
+  cursor:pointer !important;
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease,transform .18s ease !important;
+}
+body[class*="-page"] .dropzone:hover,
+body[class*="-page"] .upload-card:hover,
+body[class*="-page"] .dropzone.dragover,
+body[class*="-page"] .upload-card.dragover{
+  border-color:var(--tool,#5134f4) !important;
+  border-style:solid !important;
+  background:#fff !important;
+  box-shadow:0 18px 44px rgba(16,24,40,.10) !important;
+  transform:translateY(-2px) !important;
+}
+body[class*="-page"] .dropzone svg,
+body[class*="-page"] .upload-card svg{transform:none !important}
+body[class*="-page"] .dropzone:hover svg,
+body[class*="-page"] .upload-card:hover svg,
+body[class*="-page"] .dropzone.dragover svg,
+body[class*="-page"] .upload-card.dragover svg{transform:none !important}
+body[class*="-page"] [class*="-illu"]{opacity:.95 !important;margin-bottom:6px !important}
+body[class*="-page"] .dz-title,
+body[class*="-page"] .upload-card h2{
+  font-size:22px !important;
+  font-weight:800 !important;
+  letter-spacing:-.4px !important;
+  color:#15151f !important;
+  margin:12px 0 0 !important;
+  text-align:center !important;
+}
+body[class*="-page"] .dz-sub,
+body[class*="-page"] .upload-card p,
+body[class*="-page"] .mg-or,
+body[class*="-page"] [class*="-or"]{
+  font-size:14px !important;
+  color:#8b8b9c !important;
+  margin:8px 0 0 !important;
+  text-align:center !important;
+}
+body[class*="-page"] .dz-browse{
+  color:var(--tool,#5134f4) !important;
+  text-decoration:underline !important;
+  font-weight:700 !important;
+}
+body[class*="-page"] .dz-btn,
+body[class*="-page"] .btn-select{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:9px !important;
+  margin:22px 0 0 !important;
+  padding:16px 36px !important;
+  border:0 !important;
+  border-radius:12px !important;
+  background:var(--tool,#5134f4) !important;
+  color:#fff !important;
+  font-size:16px !important;
+  font-weight:800 !important;
+  line-height:1 !important;
+  letter-spacing:-.1px !important;
+  cursor:pointer !important;
+  box-shadow:0 10px 24px rgba(16,24,40,.16) !important;
+  transition:background .15s ease,box-shadow .15s ease,transform .1s ease !important;
+}
+body[class*="-page"] .dz-btn:hover,
+body[class*="-page"] .btn-select:hover{
+  background:var(--tool-dark,#4230e8) !important;
+  box-shadow:0 14px 30px rgba(16,24,40,.22) !important;
+  transform:translateY(-1px) !important;
+}
+body[class*="-page"] .dz-btn:active,
+body[class*="-page"] .btn-select:active{transform:translateY(0) !important}
+body[class*="-page"] .dz-btn svg,
+body[class*="-page"] .btn-select svg{
+  width:18px !important;height:18px !important;margin:0 !important;color:#fff !important;transform:none !important;
+}
+
+/* ---------- Workspace: file cards ---------- */
+body[class*="-page"] .file-list{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr)) !important;
+  gap:12px !important;
+  justify-content:stretch !important;
+  width:100% !important;
+  max-width:880px !important;
+  margin:22px auto 0 !important;
+}
+body[class*="-page"] .file-list .chip{
+  width:100% !important;
+  max-width:none !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  padding:13px 14px !important;
+  border:1px solid #ececf2 !important;
+  border-radius:12px !important;
+  background:#fff !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.05) !important;
+}
+body[class*="-page"] .chip .chip-name{flex:1 1 auto !important;font-size:13px !important;font-weight:600 !important;color:#1c1c28 !important}
+body[class*="-page"] .chip .chip-size{font-size:12px !important;color:#8b8b9c !important}
+body[class*="-page"] .chip .chip-num{background:var(--tool,#5134f4) !important}
+body[class*="-page"] .chip .chip-thumb{border-radius:8px !important}
+
+/* ---------- Sticky action bar ---------- */
+body[class*="-page"] .options-card{
+  position:sticky !important;
+  bottom:14px !important;
+  z-index:30 !important;
+  width:100% !important;
+  max-width:880px !important;
+  margin:20px auto 0 !important;
+  padding:14px 18px !important;
+  border:1px solid #ececf2 !important;
+  border-radius:16px !important;
+  background:rgba(255,255,255,.94) !important;
+  -webkit-backdrop-filter:blur(10px) !important;
+  backdrop-filter:blur(10px) !important;
+  box-shadow:0 14px 38px rgba(16,24,40,.14) !important;
+}
+body[class*="-page"] .options-card .opt-row{
+  display:flex !important;align-items:center !important;gap:14px !important;flex-wrap:wrap !important;
+}
+body[class*="-page"] .options-card .btn.primary{
+  background:var(--tool,#5134f4) !important;
+  padding:14px 32px !important;
+  border-radius:12px !important;
+  font-size:15.5px !important;
+  font-weight:800 !important;
+  box-shadow:0 10px 24px rgba(16,24,40,.18) !important;
+}
+body[class*="-page"] .options-card .btn.primary:hover{background:var(--tool-dark,#4230e8) !important}
+body[class*="-page"] .options-card .opt-hint{font-size:12.5px !important;color:#8b8b9c !important}
+
+/* ---------- Feature strip + sections ---------- */
+body[class*="-page"] [class$="-features"]{
+  max-width:880px !important;
+  margin:20px auto 0 !important;
+  gap:10px !important;
+  border:1px solid #f0f0f4 !important;
+  border-radius:16px !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+}
+body[class*="-page"] [class$="-feat"]{
+  border-color:#f2f2f6 !important;
+  background:#fff !important;
+}
+body[class*="-page"] [class$="-feat"] b{color:#1c1c28 !important}
+body[class*="-page"] [class$="-feat"] span{color:#8b8b9c !important}
+body[class*="-page"] .home-section{padding:44px 0 !important}
+body[class*="-page"] .home-section-head{text-align:center !important;margin:0 auto 26px !important;max-width:720px !important}
+body[class*="-page"] .home-section-head h2{
+  font-size:clamp(22px,3vw,28px) !important;letter-spacing:-.6px !important;color:#15151f !important;
+}
+body[class*="-page"] .home-section-head p{color:#7a7a8c !important}
+body[class*="-page"] .step,
+body[class*="-page"] .feature{
+  border-radius:16px !important;
+  border:1px solid #f0f0f4 !important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04) !important;
+}
+body[class*="-page"] .seo-keyword-box{
+  max-width:880px !important;border-radius:16px !important;
+  border-color:#f0f0f4 !important;background:#fafafb !important;
+}
+
+/* ---------- Dark mode ---------- */
+html[data-theme="dark"] body[class*="-page"]{background:#0b1220 !important}
+html[data-theme="dark"] body[class*="-page"] .home-hero.tool-hero{
+  background:linear-gradient(180deg,#10182b 0%,#0b1220 100%) !important;
+  border-bottom-color:#1f2940 !important;
+}
+html[data-theme="dark"] body[class*="-page"] .home-hero.tool-hero h1{color:#f2f4ff !important}
+html[data-theme="dark"] body[class*="-page"] .home-hero.tool-hero .hero-sub{color:#97a2b9 !important}
+html[data-theme="dark"] body[class*="-page"] .home-hero.tool-hero .hero-badge,
+html[data-theme="dark"] body[class*="-page"] [class*="-pill"]{
+  background:#131b2f !important;border-color:#27314a !important;color:#c9c9d8 !important;
+}
+html[data-theme="dark"] body[class*="-page"] .dropzone,
+html[data-theme="dark"] body[class*="-page"] .upload-card{
+  background:#0f1729 !important;border-color:#2b3550 !important;color:#97a2b9 !important;
+}
+html[data-theme="dark"] body[class*="-page"] .dropzone:hover,
+html[data-theme="dark"] body[class*="-page"] .upload-card:hover,
+html[data-theme="dark"] body[class*="-page"] .dropzone.dragover,
+html[data-theme="dark"] body[class*="-page"] .upload-card.dragover{
+  background:#121b33 !important;border-color:var(--tool,#8f7bff) !important;
+}
+html[data-theme="dark"] body[class*="-page"] .dz-title,
+html[data-theme="dark"] body[class*="-page"] .upload-card h2,
+html[data-theme="dark"] body[class*="-page"] .chip .chip-name,
+html[data-theme="dark"] body[class*="-page"] .home-section-head h2{color:#eef1ff !important}
+html[data-theme="dark"] body[class*="-page"] .file-list .chip,
+html[data-theme="dark"] body[class*="-page"] .options-card,
+html[data-theme="dark"] body[class*="-page"] .step,
+html[data-theme="dark"] body[class*="-page"] .feature,
+html[data-theme="dark"] body[class*="-page"] [class$="-feat"]{
+  background:#131b2f !important;border-color:#27314a !important;
+}
+html[data-theme="dark"] body[class*="-page"] .options-card{background:rgba(19,27,47,.94) !important}
+html[data-theme="dark"] body[class*="-page"] .seo-keyword-box{background:#10182b !important;border-color:#27314a !important}
+
+/* ---------- Mobile ---------- */
+@media(max-width:768px){
+  body[class*="-page"] .home-hero.tool-hero{padding:34px 18px 20px !important}
+  body[class*="-page"] [class$="-upload-stage"],
+  body[class*="-page"] .cp-upload-card,
+  body[class*="-page"] .cp-screen{padding:18px 14px 0 !important}
+  body[class*="-page"] .dropzone,
+  body[class*="-page"] .upload-card{
+    min-height:0 !important;padding:34px 18px 30px !important;border-radius:18px !important;
+  }
+  body[class*="-page"] .dz-title,
+  body[class*="-page"] .upload-card h2{font-size:19px !important}
+  body[class*="-page"] .dz-btn,
+  body[class*="-page"] .btn-select{padding:14px 26px !important;font-size:15px !important}
+  body[class*="-page"] .file-list{grid-template-columns:1fr !important}
+  body[class*="-page"] .options-card{position:static !important;bottom:auto !important}
+}
+
+/* ============================================================
+   TOOL PAGES — keep the upload box above the fold (v3)
+   ============================================================ */
+body[class*="-page"] .home-hero.tool-hero{
+  padding:22px 24px 12px !important;
+}
+body[class*="-page"] .home-hero.tool-hero .hero-badge{display:none !important}
+body[class*="-page"] .home-hero.tool-hero h1{
+  font-size:clamp(26px,3.2vw,36px) !important;
+  margin:0 auto 8px !important;
+  letter-spacing:-1px !important;
+}
+body[class*="-page"] .home-hero.tool-hero .hero-sub{
+  font-size:15.5px !important;
+}
+body[class*="-page"] [class*="-pills"]{margin:10px 0 0 !important}
+body[class*="-page"] [class*="-pill"]{padding:5px 12px !important;font-size:12px !important}
+body[class*="-page"] [class$="-upload-stage"],
+body[class*="-page"] .cp-upload-card,
+body[class*="-page"] .cp-screen{
+  padding:10px 24px 0 !important;
+}
+body[class*="-page"] .dropzone,
+body[class*="-page"] .upload-card{
+  min-height:230px !important;
+  padding:32px 28px 28px !important;
+}
+body[class*="-page"] .dz-btn,
+body[class*="-page"] .btn-select{margin:16px 0 0 !important}
+
+/* Compress-style pages have a tall title row: keep it tight too */
+body.cp-page .cp-page-title,
+body.cp-page .cp-title-wrap{margin:0 0 8px !important}
+body.cp-page .home-hero.tool-hero h1{font-size:clamp(24px,2.8vw,32px) !important}
+
+@media(max-width:768px){
+  body[class*="-page"] .home-hero.tool-hero{padding:16px 16px 8px !important}
+  body[class*="-page"] [class*="-pills"]{display:none !important}
+  body[class*="-page"] [class$="-upload-stage"],
+  body[class*="-page"] .cp-upload-card,
+  body[class*="-page"] .cp-screen{padding:8px 14px 0 !important}
+  body[class*="-page"] .dropzone,
+  body[class*="-page"] .upload-card{min-height:0 !important;padding:26px 16px 24px !important}
+}
+
+/* ============================================================
+   COMPRESS PDF — make the upload screen match the Merge PDF UI
+   (UI only; markup/text/behaviour unchanged)
+   ============================================================ */
+body.cp-page .tool-area{max-width:100% !important}
+
+/* Hero: centered like Merge (hide the side title icon) */
+body.cp-page .cp-title-wrap{
+  display:block !important;
+  text-align:center !important;
+  margin:0 auto 10px !important;
+  max-width:820px !important;
+}
+body.cp-page .cp-title-ico{display:none !important}
+body.cp-page .cp-h1-wrap{text-align:center !important;flex:none !important}
+body.cp-page .home-hero.tool-hero h1{
+  text-align:center !important;
+  white-space:normal !important;
+  overflow-wrap:break-word !important;
+}
+body.cp-page .cp-sub-wrap{
+  text-align:center !important;
+  margin:0 auto !important;
+  max-width:640px !important;
+}
+body.cp-page .home-hero.tool-hero .hero-sub{
+  text-align:center !important;
+  margin:0 auto !important;
+}
+
+/* Upload card: drop the outer white wrapper, keep just the dropzone */
+body.cp-page .cp-upload-card,
+body.cp-page .cp-screen{
+  width:100% !important;
+  max-width:880px !important;
+  margin:0 auto !important;
+  padding:10px 24px 0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+body.cp-page #cp-dropzone{
+  min-height:230px !important;
+  padding:32px 28px 28px !important;
+  border:2px dashed #dcdce4 !important;
+  border-radius:22px !important;
+  background:#fff !important;
+}
+body.cp-page #cp-dropzone:hover,
+body.cp-page #cp-dropzone.dragover{
+  border-color:var(--tool,#16a34a) !important;
+  border-style:solid !important;
+  background:#fff !important;
+  box-shadow:0 18px 44px rgba(16,24,40,.10) !important;
+}
+
+@media(max-width:768px){
+  body.cp-page .cp-upload-card,
+  body.cp-page .cp-screen{
+    width:100% !important;max-width:100% !important;padding:8px 14px 0 !important;
+  }
+  body.cp-page #cp-dropzone{min-height:0 !important;padding:26px 16px 24px !important}
+}
+html[data-theme="dark"] body.cp-page .cp-upload-card{background:transparent !important;border:0 !important}
+html[data-theme="dark"] body.cp-page #cp-dropzone{background:#0f1729 !important;border-color:#2b3550 !important}
