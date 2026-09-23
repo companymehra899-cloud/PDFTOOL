@@ -484,23 +484,11 @@
     max-width:280px !important;
   }
   html body.ir-page #ir-options.options-card{
-    position:static !important;
-    bottom:auto !important;
-    z-index:auto !important;
-    display:none;
-    flex-direction:column !important;
-    align-items:stretch !important;
-    width:100% !important;
-    max-width:none !important;
-    margin:16px 0 0 !important;
-    padding:18px 20px !important;
-    border-radius:12px !important;
-    background:var(--card,#fff) !important;
-    box-shadow:0 4px 12px rgba(15,23,42,.08) !important;
-    -webkit-backdrop-filter:none !important;
-    backdrop-filter:none !important;
+    display:none !important;
   }
-  html body.ir-page #ir-options.options-card.show{display:flex !important}
+  html body.ir-page:not(.ir-work-on) #ir-options{
+    display:none !important;
+  }
   html body.ir-page #ir-options .opt-row{
     display:flex !important;
     align-items:flex-start !important;
@@ -558,6 +546,9 @@
     max-height:420px !important;
   }
   html body.ir-page.ir-work-on #ir-options.options-card{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
     grid-column:2 !important;
     grid-row:1 / span 8 !important;
     position:sticky !important;
@@ -907,124 +898,6 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
           <option value="px300">300 x 400 px</option>
           <option value="px600">600 x 800 px</option>
         </select>
-      </div>
-      <div class="opt-row">
-        <button class="btn primary" id="ir-run" type="button">Compress &amp; Download</button>
-        <span class="opt-hint">Output is saved as JPG sized under your target KB.</span>
-      </div>
-    </div>
-      </div>
-      <div class="opt-row">
-        <label class="opt-label" for="ir-mb-slider">Target size (MB)</label>
-        <div class="ir-slider-row">
-          <div class="ir-slider-head"><span>1 MB</span><b id="ir-mb-val">1 MB</b><span>10 MB</span></div>
-          <input type="range" id="ir-mb-slider" class="ir-slider" min="1" max="10" step="1" value="1">
-        </div>
-      </div>
-      <input type="hidden" id="ir-kb-custom" value="">
-      <div class="opt-row">
-        <label class="opt-label">Dimensions (optional)</label>
-        <div class="dim-row">
-          <input type="number" id="ir-width" class="input" min="1" placeholder="Width">
-          <span class="dim-x">&times;</span>
-          <input type="number" id="ir-height" class="input" min="1" placeholder="Height">
-          <select id="ir-unit-select" class="input ir-select" aria-label="Dimension unit">
-            <option value="px" selected>px</option>
-            <option value="cm">cm</option>
-            <option value="mm">mm</option>
-          </select>
-        </div>
-      </div>
-      <div class="opt-row">
-        <label class="opt-label" for="ir-preset-cm">CM presets</label>
-        <select id="ir-preset-cm" class="input ir-select">
-          <option value="">Choose CM size</option>
-          <option value="passport">3.5 x 4.5 cm — Passport Photo</option>
-          <option value="cm45">4 x 5 cm</option>
-          <option value="cm4535">4.5 x 3.5 cm</option>
-          <option value="sig">6 x 2 cm — Signature</option>
-          <option value="sig5x2">5 x 2 cm — 50mm x 20mm</option>
-        </select>
-      </div>
-      <div class="opt-row">
-        <label class="opt-label" for="ir-preset-mm">MM presets</label>
-        <select id="ir-preset-mm" class="input ir-select">
-          <option value="">Choose MM size</option>
-          <option value="mm5020">50 x 20 mm</option>
-          <option value="mm3545">35 x 45 mm — Passport Photo</option>
-          <option value="mm4050">40 x 50 mm</option>
-          <option value="mm4535">45 x 35 mm</option>
-        </select>
-      </div>
-      <div class="opt-row">
-        <label class="opt-label" for="ir-preset-px">Pixel presets</label>
-        <select id="ir-preset-px" class="input ir-select">
-          <option value="">Choose PX size</option>
-          <option value="sig140">140 x 60 px — Signature</option>
-          <option value="photo">200 x 230 px</option>
-          <option value="px300">300 x 400 px</option>
-          <option value="px600">600 x 800 px</option>
-        </select>
-      </div>
-      <div class="opt-row">
-        <button class="btn primary" id="ir-run" type="button">Compress &amp; Download</button>
-        <span class="opt-hint">Output is saved as JPG sized under your target KB.</span>
-      </div>
-    </div>
-        <div class="kb-pills" id="ir-mb-pills">
-          <button class="kb-pill" data-mb="1" type="button">1 MB</button>
-          <button class="kb-pill" data-mb="2" type="button">2 MB</button>
-          <button class="kb-pill" data-mb="3" type="button">3 MB</button>
-          <button class="kb-pill" data-mb="4" type="button">4 MB</button>
-          <button class="kb-pill" data-mb="5" type="button">5 MB</button>
-          <button class="kb-pill" data-mb="6" type="button">6 MB</button>
-          <button class="kb-pill" data-mb="7" type="button">7 MB</button>
-          <button class="kb-pill" data-mb="8" type="button">8 MB</button>
-          <button class="kb-pill" data-mb="9" type="button">9 MB</button>
-          <button class="kb-pill" data-mb="10" type="button">10 MB</button>
-        </div>
-        <span class="opt-hint">Custom KB: <input type="number" id="ir-kb-custom" class="input" min="1" placeholder="e.g. 45" style="width:90px"> max</span>
-      </div>
-      <div class="opt-row">
-        <label class="opt-label">Dimensions (optional)</label>
-        <div class="dim-row">
-          <input type="number" id="ir-width" class="input" min="1" placeholder="Width">
-          <span class="dim-x">&times;</span>
-          <input type="number" id="ir-height" class="input" min="1" placeholder="Height">
-          <div class="seg" id="ir-unit">
-            <button class="seg-btn" data-unit="cm" type="button">cm</button>
-            <button class="seg-btn" data-unit="mm" type="button">mm</button>
-            <button class="seg-btn active" data-unit="px" type="button">px</button>
-          </div>
-        </div>
-      </div>
-      <div class="opt-row">
-        <label class="opt-label">Dimension Presets &mdash; CM</label>
-        <div class="kb-pills">
-          <button class="kb-pill" data-preset="passport" type="button">3.5 &times; 4.5 cm &mdash; Passport Photo &#11088;</button>
-          <button class="kb-pill" data-preset="cm45" type="button">4 &times; 5 cm</button>
-          <button class="kb-pill" data-preset="cm4535" type="button">4.5 &times; 3.5 cm</button>
-          <button class="kb-pill" data-preset="sig" type="button">6 &times; 2 cm &mdash; Signature &#11088;</button>
-          <button class="kb-pill" data-preset="sig5x2" type="button">5 &times; 2 cm &mdash; 50mm &times; 20mm &#11088;</button>
-        </div>
-      </div>
-      <div class="opt-row">
-        <label class="opt-label">MM Presets</label>
-        <div class="kb-pills">
-          <button class="kb-pill" data-preset="mm5020" type="button">50 &times; 20 mm &#11088;</button>
-          <button class="kb-pill" data-preset="mm3545" type="button">35 &times; 45 mm &mdash; Passport Photo</button>
-          <button class="kb-pill" data-preset="mm4050" type="button">40 &times; 50 mm</button>
-          <button class="kb-pill" data-preset="mm4535" type="button">45 &times; 35 mm</button>
-        </div>
-      </div>
-      <div class="opt-row">
-        <label class="opt-label">Pixel Presets</label>
-        <div class="kb-pills">
-          <button class="kb-pill" data-preset="sig140" type="button">140 &times; 60 px &mdash; Signature &#11088;</button>
-          <button class="kb-pill" data-preset="photo" type="button">200 &times; 230 px</button>
-          <button class="kb-pill" data-preset="px300" type="button">300 &times; 400 px</button>
-          <button class="kb-pill" data-preset="px600" type="button">600 &times; 800 px</button>
-        </div>
       </div>
       <div class="opt-row">
         <button class="btn primary" id="ir-run" type="button">Compress &amp; Download</button>
