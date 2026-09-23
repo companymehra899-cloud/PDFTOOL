@@ -186,122 +186,93 @@
     if (hasFiles && !was) window.scrollTo(0, 0);
   }
 
-  function selectKb(kb) {
+  function clamp(n, min, max) {
+    return Math.min(max, Math.max(min, n));
+  }
+
+  function syncSliderLabels() {
+    var kbEl = $('#ir-kb-val');
+    var mbEl = $('#ir-mb-val');
+    if (kbEl) kbEl.textContent = clamp(Math.round(state.targetKB), 10, 1000) + ' KB';
+    if (mbEl) mbEl.textContent = Math.max(1, Math.round(state.targetKB / 1024) || 1) + ' MB';
+  }
+
+  function selectKb(kb, fromMb) {
+    kb = Math.max(1, parseInt(kb, 10) || 20);
     state.targetKB = kb;
-    $('#ir-kb-custom').value = '';
-    var pills = document.querySelectorAll('#ir-kb-pills .kb-pill');
-    Array.prototype.forEach.call(pills, function (p) {
-      p.classList.toggle('active', parseInt(p.dataset.kb, 10) === kb);
-    });
-    var mpills = document.querySelectorAll('#ir-mb-pills .kb-pill');
-    Array.prototype.forEach.call(mpills, function (p) {
-      p.classList.toggle('active', parseInt(p.dataset.mb, 10) * 1024 === kb);
+    var kbSlider = $('#ir-kb-slider');
+    var mbSlider = $('#ir-mb-slider');
+    if (kbSlider && !fromMb) kbSlider.value = String(clamp(kb, 10, 1000));
+    if (mbSlider && fromMb) mbSlider.value = String(clamp(Math.round(kb / 1024), 1, 10));
+    if (kbSlider && fromMb && kb < 1024) kbSlider.value = String(clamp(kb, 10, 1000));
+    if (mbSlider && !fromMb && kb >= 1024) mbSlider.value = String(clamp(Math.round(kb / 1024), 1, 10));
+    syncSliderLabels();
+  }
+
+  var kbSliderEl = $('#ir-kb-slider');
+  if (kbSliderEl) {
+    kbSliderEl.addEventListener('input', function () {
+      selectKb(this.value, false);
     });
   }
 
-  $('#ir-kb-pills').addEventListener('click', function (e) {
-    var pill = e.target.closest('.kb-pill');
-    if (!pill || !pill.dataset.kb) return;
-    selectKb(parseInt(pill.dataset.kb, 10));
-  });
-
-  $('#ir-mb-pills').addEventListener('click', function (e) {
-    var pill = e.target.closest('.kb-pill');
-    if (!pill || !pill.dataset.mb) return;
-    selectKb(parseInt(pill.dataset.mb, 10) * 1024);
-  });
-
-  $('#ir-kb-custom').addEventListener('input', function () {
-    var v = parseInt(this.value, 10);
-    if (!isNaN(v) && v > 0) {
-      state.targetKB = v;
-      var pills = document.querySelectorAll('#ir-kb-pills .kb-pill');
-      Array.prototype.forEach.call(pills, function (p) {
-        p.classList.remove('active');
-      });
-      var mpills = document.querySelectorAll('#ir-mb-pills .kb-pill');
-      Array.prototype.forEach.call(mpills, function (p) {
-        p.classList.remove('active');
-      });
-    }
-  });
-
-  $('#ir-unit').addEventListener('click', function (e) {
-    var btn = e.target.closest('.seg-btn');
-    if (!btn) return;
-    var buttons = Array.prototype.slice.call(document.querySelectorAll('#ir-unit .seg-btn'));
-    buttons.forEach(function (b) { b.classList.toggle('active', b === btn); });
-  });
+  var mbSliderEl = $('#ir-mb-slider');
+  if (mbSliderEl) {
+    mbSliderEl.addEventListener('input', function () {
+      selectKb(parseInt(this.value, 10) * 1024, true);
+    });
+  }
 
   function currentUnit() {
-    return document.querySelector('#ir-unit .seg-btn.active').dataset.unit;
+    var sel = $('#ir-unit-select');
+    return sel && sel.value ? sel.value : 'px';
   }
 
-  $('#ir-options').addEventListener('click', function (e) {
-    var pill = e.target.closest('.kb-pill[data-preset]');
-    if (!pill) return;
-    var p = pill.dataset.preset;
-    if (p === 'sig') {
-      $('#ir-width').value = '6';
-      $('#ir-height').value = '2';
-      setUnit('cm');
-    } else if (p === 'sig140') {
-      $('#ir-width').value = '140';
-      $('#ir-height').value = '60';
-      setUnit('px');
-    } else if (p === 'photo') {
-      $('#ir-width').value = '200';
-      $('#ir-height').value = '230';
-      setUnit('px');
-    } else if (p === 'passport') {
-      $('#ir-width').value = '3.5';
-      $('#ir-height').value = '4.5';
-      setUnit('cm');
-    } else if (p === 'cm45') {
-      $('#ir-width').value = '4';
-      $('#ir-height').value = '5';
-      setUnit('cm');
-    } else if (p === 'cm4535') {
-      $('#ir-width').value = '4.5';
-      $('#ir-height').value = '3.5';
-      setUnit('cm');
-    } else if (p === 'sig5x2') {
-      $('#ir-width').value = '5';
-      $('#ir-height').value = '2';
-      setUnit('cm');
-    } else if (p === 'mm5020') {
-      $('#ir-width').value = '50';
-      $('#ir-height').value = '20';
-      setUnit('mm');
-    } else if (p === 'mm3545') {
-      $('#ir-width').value = '35';
-      $('#ir-height').value = '45';
-      setUnit('mm');
-    } else if (p === 'mm4050') {
-      $('#ir-width').value = '40';
-      $('#ir-height').value = '50';
-      setUnit('mm');
-    } else if (p === 'mm4535') {
-      $('#ir-width').value = '45';
-      $('#ir-height').value = '35';
-      setUnit('mm');
-    } else if (p === 'px300') {
-      $('#ir-width').value = '300';
-      $('#ir-height').value = '400';
-      setUnit('px');
-    } else if (p === 'px600') {
-      $('#ir-width').value = '600';
-      $('#ir-height').value = '800';
-      setUnit('px');
-    }
-  });
+  var PRESETS = {
+    sig: { w: '6', h: '2', unit: 'cm' },
+    sig140: { w: '140', h: '60', unit: 'px' },
+    photo: { w: '200', h: '230', unit: 'px' },
+    passport: { w: '3.5', h: '4.5', unit: 'cm' },
+    cm45: { w: '4', h: '5', unit: 'cm' },
+    cm4535: { w: '4.5', h: '3.5', unit: 'cm' },
+    sig5x2: { w: '5', h: '2', unit: 'cm' },
+    mm5020: { w: '50', h: '20', unit: 'mm' },
+    mm3545: { w: '35', h: '45', unit: 'mm' },
+    mm4050: { w: '40', h: '50', unit: 'mm' },
+    mm4535: { w: '45', h: '35', unit: 'mm' },
+    px300: { w: '300', h: '400', unit: 'px' },
+    px600: { w: '600', h: '800', unit: 'px' }
+  };
+
+  function applyPreset(key) {
+    var p = PRESETS[key];
+    if (!p) return;
+    $('#ir-width').value = p.w;
+    $('#ir-height').value = p.h;
+    setUnit(p.unit);
+  }
 
   function setUnit(unit) {
-    var buttons = Array.prototype.slice.call(document.querySelectorAll('#ir-unit .seg-btn'));
-    buttons.forEach(function (b) {
-      b.classList.toggle('active', b.dataset.unit === unit);
+    var sel = $('#ir-unit-select');
+    if (sel) sel.value = unit;
+  }
+
+  function bindPresetSelect(id) {
+    var el = $(id);
+    if (!el) return;
+    el.addEventListener('change', function () {
+      if (!this.value) return;
+      applyPreset(this.value);
+      var others = ['#ir-preset-cm', '#ir-preset-mm', '#ir-preset-px'];
+      others.forEach(function (sel) {
+        if (sel !== id && $(sel)) $(sel).value = '';
+      });
     });
   }
+  bindPresetSelect('#ir-preset-cm');
+  bindPresetSelect('#ir-preset-mm');
+  bindPresetSelect('#ir-preset-px');
+  syncSliderLabels();
 
   function targetDimPx(img) {
     var wInput = $('#ir-width').value;

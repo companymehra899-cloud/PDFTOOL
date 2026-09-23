@@ -580,21 +580,46 @@
   html body.ir-page.ir-work-on #ir-options .opt-hint,
   html body.ir-page.ir-work-on #ir-options .dim-x,
   html body.ir-page.ir-work-on #ir-options .input,
-  html body.ir-page.ir-work-on #ir-options{
+  html body.ir-page.ir-work-on #ir-options,
+  html body.ir-page.ir-work-on #ir-options .ir-slider-head,
+  html body.ir-page.ir-work-on #ir-options .ir-slider-head b{
     color:#000 !important;
   }
-  html body.ir-page.ir-work-on #ir-options .kb-pill{
+  html body.ir-page #ir-options .ir-slider-row{width:100%}
+  html body.ir-page #ir-options .ir-slider-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:6px;
+    color:#000;
+  }
+  html body.ir-page #ir-options .ir-slider-head b{font-size:13px}
+  html body.ir-page #ir-options .ir-slider{
+    width:100%;
+    accent-color:#5134f4;
+    height:6px;
+    cursor:pointer;
+  }
+  html body.ir-page #ir-options .ir-select{
+    width:100% !important;
+    max-width:none !important;
     color:#000 !important;
-    background:#fff !important;
-    border-color:#d4d4d8 !important;
   }
-  html body.ir-page.ir-work-on #ir-options .kb-pill.active{
-    background:var(--primary,#5134f4) !important;
-    color:#fff !important;
-    border-color:var(--primary,#5134f4) !important;
+  html body.ir-page.ir-work-on #ir-options .dim-row{
+    width:100%;
+    flex-wrap:wrap;
   }
-  html body.ir-page.ir-work-on #ir-options .seg-btn{color:#000 !important}
-  html body.ir-page.ir-work-on #ir-options .seg-btn.active{color:#000 !important}
+  html body.ir-page.ir-work-on #ir-options .dim-row .input{
+    width:90px !important;
+    max-width:none !important;
+    color:#000 !important;
+  }
+  html body.ir-page.ir-work-on #ir-options .dim-row .ir-select{
+    width:72px !important;
+  }
+  html body.ir-page.ir-work-on #ir-options .btn.primary{width:100%}
 
   @media(max-width:980px){
     html body.ir-page .ir-upload-stage{width:85% !important;max-width:85% !important}
@@ -825,24 +850,127 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <div id="ir-files" class="file-list" aria-live="polite"></div>
     <div class="options-card" id="ir-options">
       <div class="opt-row">
-        <label class="opt-label">Target size</label>
-        <div class="kb-pills" id="ir-kb-pills">
-          <button class="kb-pill" data-kb="10" type="button">10 KB</button>
-          <button class="kb-pill active" data-kb="20" type="button">20 KB</button>
-          <button class="kb-pill" data-kb="30" type="button">30 KB</button>
-          <button class="kb-pill" data-kb="40" type="button">40 KB</button>
-          <button class="kb-pill" data-kb="50" type="button">50 KB</button>
-          <button class="kb-pill" data-kb="60" type="button">60 KB</button>
-          <button class="kb-pill" data-kb="70" type="button">70 KB</button>
-          <button class="kb-pill" data-kb="80" type="button">80 KB</button>
-          <button class="kb-pill" data-kb="90" type="button">90 KB</button>
-          <button class="kb-pill" data-kb="100" type="button">100 KB</button>
-          <button class="kb-pill" data-kb="130" type="button">130 KB</button>
-          <button class="kb-pill" data-kb="200" type="button">200 KB</button>
-          <button class="kb-pill" data-kb="220" type="button">220 KB</button>
-          <button class="kb-pill" data-kb="250" type="button">250 KB</button>
-          <button class="kb-pill" data-kb="300" type="button">300 KB</button>
+        <label class="opt-label" for="ir-kb-slider">Target size (KB)</label>
+        <div class="ir-slider-row">
+          <div class="ir-slider-head"><span>10 KB</span><b id="ir-kb-val">20 KB</b><span>1000 KB</span></div>
+          <input type="range" id="ir-kb-slider" class="ir-slider" min="10" max="1000" step="10" value="20">
         </div>
+      </div>
+      <div class="opt-row">
+        <label class="opt-label" for="ir-mb-slider">Target size (MB)</label>
+        <div class="ir-slider-row">
+          <div class="ir-slider-head"><span>1 MB</span><b id="ir-mb-val">1 MB</b><span>10 MB</span></div>
+          <input type="range" id="ir-mb-slider" class="ir-slider" min="1" max="10" step="1" value="1">
+        </div>
+      </div>
+      <input type="hidden" id="ir-kb-custom" value="">
+      <div class="opt-row">
+        <label class="opt-label">Dimensions (optional)</label>
+        <div class="dim-row">
+          <input type="number" id="ir-width" class="input" min="1" placeholder="Width">
+          <span class="dim-x">&times;</span>
+          <input type="number" id="ir-height" class="input" min="1" placeholder="Height">
+          <select id="ir-unit-select" class="input ir-select" aria-label="Dimension unit">
+            <option value="px" selected>px</option>
+            <option value="cm">cm</option>
+            <option value="mm">mm</option>
+          </select>
+        </div>
+      </div>
+      <div class="opt-row">
+        <label class="opt-label" for="ir-preset-cm">CM presets</label>
+        <select id="ir-preset-cm" class="input ir-select">
+          <option value="">Choose CM size</option>
+          <option value="passport">3.5 x 4.5 cm — Passport Photo</option>
+          <option value="cm45">4 x 5 cm</option>
+          <option value="cm4535">4.5 x 3.5 cm</option>
+          <option value="sig">6 x 2 cm — Signature</option>
+          <option value="sig5x2">5 x 2 cm — 50mm x 20mm</option>
+        </select>
+      </div>
+      <div class="opt-row">
+        <label class="opt-label" for="ir-preset-mm">MM presets</label>
+        <select id="ir-preset-mm" class="input ir-select">
+          <option value="">Choose MM size</option>
+          <option value="mm5020">50 x 20 mm</option>
+          <option value="mm3545">35 x 45 mm — Passport Photo</option>
+          <option value="mm4050">40 x 50 mm</option>
+          <option value="mm4535">45 x 35 mm</option>
+        </select>
+      </div>
+      <div class="opt-row">
+        <label class="opt-label" for="ir-preset-px">Pixel presets</label>
+        <select id="ir-preset-px" class="input ir-select">
+          <option value="">Choose PX size</option>
+          <option value="sig140">140 x 60 px — Signature</option>
+          <option value="photo">200 x 230 px</option>
+          <option value="px300">300 x 400 px</option>
+          <option value="px600">600 x 800 px</option>
+        </select>
+      </div>
+      <div class="opt-row">
+        <button class="btn primary" id="ir-run" type="button">Compress &amp; Download</button>
+        <span class="opt-hint">Output is saved as JPG sized under your target KB.</span>
+      </div>
+    </div>
+      </div>
+      <div class="opt-row">
+        <label class="opt-label" for="ir-mb-slider">Target size (MB)</label>
+        <div class="ir-slider-row">
+          <div class="ir-slider-head"><span>1 MB</span><b id="ir-mb-val">1 MB</b><span>10 MB</span></div>
+          <input type="range" id="ir-mb-slider" class="ir-slider" min="1" max="10" step="1" value="1">
+        </div>
+      </div>
+      <input type="hidden" id="ir-kb-custom" value="">
+      <div class="opt-row">
+        <label class="opt-label">Dimensions (optional)</label>
+        <div class="dim-row">
+          <input type="number" id="ir-width" class="input" min="1" placeholder="Width">
+          <span class="dim-x">&times;</span>
+          <input type="number" id="ir-height" class="input" min="1" placeholder="Height">
+          <select id="ir-unit-select" class="input ir-select" aria-label="Dimension unit">
+            <option value="px" selected>px</option>
+            <option value="cm">cm</option>
+            <option value="mm">mm</option>
+          </select>
+        </div>
+      </div>
+      <div class="opt-row">
+        <label class="opt-label" for="ir-preset-cm">CM presets</label>
+        <select id="ir-preset-cm" class="input ir-select">
+          <option value="">Choose CM size</option>
+          <option value="passport">3.5 x 4.5 cm — Passport Photo</option>
+          <option value="cm45">4 x 5 cm</option>
+          <option value="cm4535">4.5 x 3.5 cm</option>
+          <option value="sig">6 x 2 cm — Signature</option>
+          <option value="sig5x2">5 x 2 cm — 50mm x 20mm</option>
+        </select>
+      </div>
+      <div class="opt-row">
+        <label class="opt-label" for="ir-preset-mm">MM presets</label>
+        <select id="ir-preset-mm" class="input ir-select">
+          <option value="">Choose MM size</option>
+          <option value="mm5020">50 x 20 mm</option>
+          <option value="mm3545">35 x 45 mm — Passport Photo</option>
+          <option value="mm4050">40 x 50 mm</option>
+          <option value="mm4535">45 x 35 mm</option>
+        </select>
+      </div>
+      <div class="opt-row">
+        <label class="opt-label" for="ir-preset-px">Pixel presets</label>
+        <select id="ir-preset-px" class="input ir-select">
+          <option value="">Choose PX size</option>
+          <option value="sig140">140 x 60 px — Signature</option>
+          <option value="photo">200 x 230 px</option>
+          <option value="px300">300 x 400 px</option>
+          <option value="px600">600 x 800 px</option>
+        </select>
+      </div>
+      <div class="opt-row">
+        <button class="btn primary" id="ir-run" type="button">Compress &amp; Download</button>
+        <span class="opt-hint">Output is saved as JPG sized under your target KB.</span>
+      </div>
+    </div>
         <div class="kb-pills" id="ir-mb-pills">
           <button class="kb-pill" data-mb="1" type="button">1 MB</button>
           <button class="kb-pill" data-mb="2" type="button">2 MB</button>
@@ -1106,7 +1234,7 @@ function saveAs(blob, name) {
   setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
 }
 </script>
-<script src="js/image-resizer.js?v=3"></script>
+<script src="js/image-resizer.js?v=4"></script>
 <script src="js/home.js?v=9"></script>
 <script src="js/reference.js?v=14"></script>
 <div id="google_translate_element" style="display:none"></div>
