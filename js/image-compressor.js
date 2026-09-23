@@ -234,28 +234,36 @@
 
   function selectKb(bytes) {
     state.targetBytes = bytes;
-    $('#ic-kb-custom').value = '';
+    var custom = $('#ic-kb-custom');
+    if (custom) custom.value = '';
     var pills = document.querySelectorAll('#ic-kb-pills .kb-pill');
     Array.prototype.forEach.call(pills, function (p) {
-      p.classList.toggle('active', parseInt(p.dataset.kb, 10) * 1024 === bytes);
+      p.classList.toggle('active', parseInt(p.getAttribute('data-kb'), 10) * 1024 === bytes);
     });
     var mpills = document.querySelectorAll('#ic-mb-pills .kb-pill');
     Array.prototype.forEach.call(mpills, function (p) {
-      p.classList.toggle('active', parseInt(p.dataset.mb, 10) * 1024 * 1024 === bytes);
+      p.classList.toggle('active', parseInt(p.getAttribute('data-mb'), 10) * 1024 * 1024 === bytes);
     });
   }
 
-  $('#ic-kb-pills').addEventListener('click', function (e) {
-    var pill = e.target.closest('.kb-pill');
-    if (!pill || !pill.dataset.kb) return;
-    selectKb(parseInt(pill.dataset.kb, 10) * 1024);
-  });
+  function onPillClick(e) {
+    var pill = e.target.closest ? e.target.closest('.kb-pill') : e.target;
+    if (!pill || !pill.classList || !pill.classList.contains('kb-pill')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (pill.getAttribute('data-kb')) {
+      selectKb(parseInt(pill.getAttribute('data-kb'), 10) * 1024);
+    } else if (pill.getAttribute('data-mb')) {
+      selectKb(parseInt(pill.getAttribute('data-mb'), 10) * 1024 * 1024);
+    }
+  }
 
-  $('#ic-mb-pills').addEventListener('click', function (e) {
-    var pill = e.target.closest('.kb-pill');
-    if (!pill || !pill.dataset.mb) return;
-    selectKb(parseInt(pill.dataset.mb, 10) * 1024 * 1024);
-  });
+  var kbPills = $('#ic-kb-pills');
+  var mbPills = $('#ic-mb-pills');
+  if (kbPills) kbPills.addEventListener('click', onPillClick);
+  if (mbPills) mbPills.addEventListener('click', onPillClick);
+  var optionsCard = $('#ic-options');
+  if (optionsCard) optionsCard.addEventListener('click', onPillClick);
 
   $('#ic-kb-custom').addEventListener('input', function () {
     var v = parseInt(this.value, 10);
@@ -352,9 +360,7 @@
         if (i === state.files.length - 1) renderResult(item);
       }
       toast('Downloaded ' + state.files.length + ' compressed image(s)');
-      state.files = [];
-      renderChips();
-      syncOptions();
+      window.setTimeout(function () { window.location.reload(); }, 400);
     } catch (err) {
       console.error(err);
       toast(err.message || 'Compression failed', true);

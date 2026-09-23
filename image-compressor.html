@@ -613,6 +613,21 @@
     flex-wrap:wrap !important;
     gap:6px !important;
     width:100% !important;
+    pointer-events:auto !important;
+  }
+  html body.ic-page #ic-options .kb-pill{
+    pointer-events:auto !important;
+    cursor:pointer !important;
+    position:relative !important;
+    z-index:2 !important;
+    background:#fff !important;
+    color:#ea580c !important;
+    border:1px solid #ececf2 !important;
+  }
+  html body.ic-page #ic-options .kb-pill.active{
+    background:#ea580c !important;
+    color:#fff !important;
+    border-color:#ea580c !important;
   }
   html body.ic-page.ic-work-on #ic-options .select{
     width:100% !important;
@@ -1083,7 +1098,7 @@ function saveAs(blob, name) {
   setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
 }
 </script>
-<script src="js/image-compressor.js?v=4"></script>
+<script src="js/image-compressor.js?v=5"></script>
 <script src="js/home.js?v=9"></script>
 <script src="js/reference.js?v=14"></script>
 <div id="google_translate_element" style="display:none"></div>
