@@ -154,6 +154,29 @@
     return el;
   }
 
+  var previewUrls = [];
+
+  function revokePreviewUrls() {
+    previewUrls.forEach(function (u) { URL.revokeObjectURL(u); });
+    previewUrls = [];
+  }
+
+  function renderWorkspacePreview() {
+    var box = $('#ir-ws-preview');
+    if (!box) return;
+    revokePreviewUrls();
+    box.innerHTML = '';
+    state.files.forEach(function (file) {
+      var url = URL.createObjectURL(file);
+      previewUrls.push(url);
+      var img = document.createElement('img');
+      img.className = 'ir-ws-img';
+      img.src = url;
+      img.alt = file.name;
+      box.appendChild(img);
+    });
+  }
+
   function renderChips() {
     var wrap = $('#ir-files');
     wrap.innerHTML = '';
@@ -174,6 +197,7 @@
       chip.appendChild(x);
       wrap.appendChild(chip);
     });
+    renderWorkspacePreview();
   }
 
   function syncOptions() {
