@@ -516,7 +516,16 @@
     max-height:130px !important;
   }
 
+  html body.ir-page.ir-work-on .tool-area{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 340px !important;
+    gap:22px !important;
+    align-items:start !important;
+    margin-top:22px !important;
+    padding-bottom:40px !important;
+  }
   html body.ir-page.ir-work-on .ir-upload-stage{
+    grid-column:1 !important;
     width:100% !important;
     max-width:none !important;
     margin:0 0 8px !important;
@@ -529,26 +538,73 @@
     border-radius:20px !important;
   }
   html body.ir-page.ir-work-on #ir-dropzone .ir-illu{display:none !important}
-  html body.ir-page.ir-work-on #ir-dropzone .dz-title{font-size:16px !important;margin:0 !important}
-  html body.ir-page.ir-work-on #ir-dropzone .dz-sub{margin-top:10px !important}
+  html body.ir-page.ir-work-on #ir-dropzone .dz-title{font-size:16px !important;margin:0 !important;color:#000 !important}
+  html body.ir-page.ir-work-on #ir-dropzone .dz-sub{margin-top:10px !important;color:#000 !important}
   html body.ir-page.ir-work-on #ir-dropzone .dz-btn{padding:11px 22px !important;font-size:14px !important;margin-top:0 !important}
   html body.ir-page.ir-work-on #ir-files.file-list{
+    grid-column:1 !important;
     display:flex !important;
     flex-wrap:wrap !important;
-    justify-content:center !important;
+    justify-content:flex-start !important;
     max-width:none !important;
-    margin:20px 0 0 !important;
-  }
-  html body.ir-page.ir-work-on #ir-options.options-card{
-    position:static !important;
-    max-width:none !important;
-    width:100% !important;
     margin:16px 0 0 !important;
   }
-  html body.ir-page.ir-work-on .tool-area{margin-top:22px !important;padding-bottom:40px !important}
+  html body.ir-page.ir-work-on #ir-result{
+    grid-column:1 !important;
+    margin-top:16px !important;
+  }
+  html body.ir-page.ir-work-on #ir-result .preview-img{
+    max-width:100% !important;
+    max-height:420px !important;
+  }
+  html body.ir-page.ir-work-on #ir-options.options-card{
+    grid-column:2 !important;
+    grid-row:1 / span 8 !important;
+    position:sticky !important;
+    top:88px !important;
+    bottom:auto !important;
+    z-index:20 !important;
+    max-width:none !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:20px 18px !important;
+    color:#000 !important;
+    background:#fff !important;
+  }
+  html body.ir-page.ir-work-on #ir-options .opt-row{
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:8px !important;
+  }
+  html body.ir-page.ir-work-on #ir-options .opt-label,
+  html body.ir-page.ir-work-on #ir-options .opt-hint,
+  html body.ir-page.ir-work-on #ir-options .dim-x,
+  html body.ir-page.ir-work-on #ir-options .input,
+  html body.ir-page.ir-work-on #ir-options{
+    color:#000 !important;
+  }
+  html body.ir-page.ir-work-on #ir-options .kb-pill{
+    color:#000 !important;
+    background:#fff !important;
+    border-color:#d4d4d8 !important;
+  }
+  html body.ir-page.ir-work-on #ir-options .kb-pill.active{
+    background:var(--primary,#5134f4) !important;
+    color:#fff !important;
+    border-color:var(--primary,#5134f4) !important;
+  }
+  html body.ir-page.ir-work-on #ir-options .seg-btn{color:#000 !important}
+  html body.ir-page.ir-work-on #ir-options .seg-btn.active{color:#000 !important}
 
   @media(max-width:980px){
     html body.ir-page .ir-upload-stage{width:85% !important;max-width:85% !important}
+    html body.ir-page.ir-work-on .tool-area{grid-template-columns:1fr !important}
+    html body.ir-page.ir-work-on #ir-options.options-card{
+      grid-column:1 !important;
+      grid-row:auto !important;
+      position:static !important;
+      top:auto !important;
+    }
   }
   @media(max-width:640px){
     html body.ir-page .ir-upload-stage{width:100% !important;max-width:100% !important}
