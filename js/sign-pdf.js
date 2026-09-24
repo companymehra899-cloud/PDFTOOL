@@ -971,7 +971,6 @@
       const stage = $('#sg-stage');
       stage.querySelectorAll('.sw-sig, .sw-hint').forEach((n) => n.remove());
       showView('sign');
-      $('#sg-upload-options').classList.add('show');
     } catch (err) {
       console.error(err);
       toast('Signing failed', true);
