@@ -1482,3 +1482,170 @@ body.cp-page #cp-dropzone.dragover{
 }
 html[data-theme="dark"] body.cp-page .cp-upload-card{background:transparent !important;border:0 !important}
 html[data-theme="dark"] body.cp-page #cp-dropzone{background:#0f1729 !important;border-color:#2b3550 !important}
+
+/* ============================================================
+   MERGE PDF — workspace split layout (DESKTOP ONLY)
+   Left: file list   |   Right: full-height action panel
+   Mobile / tablet keep the original layout.
+   Layout only, no behaviour changes.
+   ============================================================ */
+@media (min-width:1024px){
+
+  body.mg-page.mg-work-on .tool-area{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 380px !important;
+    grid-template-rows:auto 1fr !important;
+    align-items:stretch !important;
+    gap:0 !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    min-height:calc(100vh - 88px) !important;
+  }
+
+  /* remove the upload-zone box inside the workspace */
+  body.mg-page.mg-work-on .tool-area > .mg-upload-stage{display:none !important}
+
+  /* left column: the file cards */
+  body.mg-page.mg-work-on .tool-area > .file-list{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    width:auto !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:8px 24px 40px !important;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr)) !important;
+    align-content:start !important;
+    gap:14px !important;
+  }
+  body.mg-page.mg-work-on .file-list .chip{
+    display:flex !important;
+    align-items:center !important;
+    gap:14px !important;
+    padding:16px !important;
+    min-height:86px !important;
+    border:1px solid #ececf2 !important;
+    border-radius:14px !important;
+    background:#fff !important;
+    box-shadow:0 1px 2px rgba(16,24,40,.05) !important;
+  }
+  body.mg-page.mg-work-on .file-list .chip::before{
+    content:"" !important;
+    flex:0 0 auto !important;
+    width:42px !important;
+    height:52px !important;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 60'%3E%3Cpath d='M6 4h22l14 14v38a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z' fill='%23ffffff' stroke='%23e2e2ea' stroke-width='2'/%3E%3Cpath d='M28 4l14 14H30a2 2 0 0 1-2-2V4z' fill='%23f3f4f8' stroke='%23e2e2ea' stroke-width='2'/%3E%3Crect x='8' y='34' width='32' height='16' rx='4' fill='%23ef4444'/%3E%3Ctext x='24' y='46' font-family='Arial' font-size='11' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EPDF%3C/text%3E%3C/svg%3E") center/contain no-repeat !important;
+  }
+  body.mg-page.mg-work-on .file-list .chip-name{
+    flex:1 1 auto !important;
+    min-width:0 !important;
+    font-size:13.5px !important;
+    font-weight:600 !important;
+    color:#1c1c28 !important;
+    word-break:break-word !important;
+  }
+  body.mg-page.mg-work-on .file-list .chip-size{font-size:12px !important;white-space:nowrap !important}
+  body.mg-page.mg-work-on .file-list .chip-x{
+    flex:0 0 auto !important;
+    width:30px !important;
+    height:30px !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    border-radius:8px !important;
+  }
+
+  /* right column: full-height action panel */
+  body.mg-page.mg-work-on .tool-area > .options-card{
+    grid-column:2 !important;
+    grid-row:1 / span 2 !important;
+    position:sticky !important;
+    top:88px !important;
+    bottom:auto !important;
+    align-self:start !important;
+    height:calc(100vh - 88px) !important;
+    max-height:calc(100vh - 88px) !important;
+    overflow:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    width:auto !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:32px 26px 30px !important;
+    border:0 !important;
+    border-left:1px solid #e8eaf0 !important;
+    border-radius:0 !important;
+    background:#fff !important;
+    box-shadow:none !important;
+    -webkit-backdrop-filter:none !important;
+    backdrop-filter:none !important;
+  }
+  /* panel heading */
+  body.mg-page.mg-work-on .tool-area > .options-card::before{
+    content:"Merge PDF";
+    display:block;
+    text-align:center;
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:-.6px;
+    color:#16122c;
+    margin:8px 0 26px;
+    line-height:1.2;
+  }
+  /* hint becomes the info box, sits above the button */
+  body.mg-page.mg-work-on .options-card .opt-row{
+    display:flex !important;
+    flex-direction:column !important;
+    flex:1 1 auto !important;
+    align-items:stretch !important;
+    gap:10px !important;
+  }
+  body.mg-page.mg-work-on .options-card .opt-hint{
+    order:1 !important;
+    display:block !important;
+    background:#e8f1fe !important;
+    color:#2f6fed !important;
+    font-size:13.5px !important;
+    line-height:1.5 !important;
+    padding:13px 15px 13px 38px !important;
+    border-radius:10px !important;
+    position:relative !important;
+    text-align:left !important;
+  }
+  body.mg-page.mg-work-on .options-card .opt-hint::before{
+    content:"i";
+    position:absolute;
+    left:13px;
+    top:12px;
+    width:17px;
+    height:17px;
+    border:1.6px solid #2f6fed;
+    border-radius:50%;
+    font-size:11px;
+    font-weight:700;
+    line-height:15px;
+    text-align:center;
+    font-style:normal;
+  }
+  /* action button pinned to the bottom of the panel */
+  body.mg-page.mg-work-on .options-card .btn.primary{
+    order:2 !important;
+    width:100% !important;
+    margin-top:auto !important;
+    padding:20px 24px !important;
+    font-size:18px !important;
+    border-radius:12px !important;
+  }
+
+  html[data-theme="dark"] body.mg-page.mg-work-on .tool-area > .options-card{
+    background:#0f1729 !important;
+    border-left-color:#222c44 !important;
+  }
+  html[data-theme="dark"] body.mg-page.mg-work-on .tool-area > .options-card::before{color:#f2f4ff}
+  html[data-theme="dark"] body.mg-page.mg-work-on .options-card .opt-hint{
+    background:#13203a !important;
+    color:#8fb4ff !important;
+  }
+  html[data-theme="dark"] body.mg-page.mg-work-on .options-card .opt-hint::before{border-color:#8fb4ff}
+}
