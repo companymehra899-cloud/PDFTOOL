@@ -1649,3 +1649,126 @@ html[data-theme="dark"] body.cp-page #cp-dropzone{background:#0f1729 !important;
   }
   html[data-theme="dark"] body.mg-page.mg-work-on .options-card .opt-hint::before{border-color:#8fb4ff}
 }
+
+/* ============================================================
+   ORGANISE PDF — workspace split layout (DESKTOP ONLY)
+   Left: page cards   |   Right: full-height action panel
+   Mobile / tablet keep the original layout.
+   Layout only, no behaviour changes.
+   ============================================================ */
+@media (min-width:1024px){
+
+  /* remove the upload-zone box inside the workspace */
+  body.og-page.og-work-on .og-upload-stage{display:none !important}
+
+  /* two-column workspace shell */
+  body.og-page.og-work-on .file-list-section.show{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 380px !important;
+    grid-template-rows:auto 1fr !important;
+    align-items:stretch !important;
+    gap:0 !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    min-height:calc(100vh - 88px) !important;
+    background:linear-gradient(to right,
+      transparent calc(100% - 380px),
+      #e8eaf0 calc(100% - 380px), #e8eaf0 calc(100% - 379px),
+      #ffffff calc(100% - 379px)) !important;
+  }
+
+  /* left column: page thumbnails */
+  body.og-page.og-work-on .thumbnails-container{
+    grid-column:1 !important;
+    grid-row:1 / span 2 !important;
+    align-self:stretch !important;
+    align-content:start !important;
+    padding:22px 24px 40px !important;
+    gap:14px !important;
+  }
+
+  /* right column header: title + tools + hint */
+  body.og-page.og-work-on .section-title{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:14px !important;
+    margin:0 !important;
+    padding:30px 26px 16px !important;
+    font-size:inherit !important;
+    color:inherit !important;
+  }
+  body.og-page.og-work-on .section-title > span{display:none !important}
+  body.og-page.og-work-on .section-title::before{
+    content:"Organise PDF";
+    display:block;
+    text-align:center;
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:-.6px;
+    color:#16122c;
+    line-height:1.2;
+    margin:6px 0 2px;
+  }
+  body.og-page.og-work-on .section-title::after{
+    content:"Drag pages to reorder. Click a page to select it, then rotate or delete it.";
+    display:block;
+    background:#e8f1fe;
+    color:#2f6fed;
+    font-size:13.5px;
+    font-weight:500;
+    line-height:1.5;
+    padding:13px 15px;
+    border-radius:10px;
+  }
+
+  /* rotate / reverse buttons */
+  body.og-page.og-work-on .og-workspace-actions{
+    display:flex !important;
+    gap:10px !important;
+    flex-wrap:nowrap !important;
+  }
+  body.og-page.og-work-on .og-workspace-actions .action-btn{
+    flex:1 1 0 !important;
+    justify-content:center !important;
+    padding:12px 8px !important;
+  }
+
+  /* right column bottom: clear + save */
+  body.og-page.og-work-on .bottom-actions{
+    grid-column:2 !important;
+    grid-row:2 !important;
+    align-self:end !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    justify-content:flex-end !important;
+    gap:12px !important;
+    margin:0 !important;
+    padding:18px 26px 30px !important;
+  }
+  body.og-page.og-work-on .bottom-actions .action-btn,
+  body.og-page.og-work-on .bottom-actions .btn-merge{
+    width:100% !important;
+    justify-content:center !important;
+  }
+  body.og-page.og-work-on .btn-merge{
+    padding:18px 24px !important;
+    font-size:17px !important;
+    border-radius:12px !important;
+  }
+
+  /* dark mode */
+  html[data-theme="dark"] body.og-page.og-work-on .file-list-section.show{
+    background:linear-gradient(to right,
+      transparent calc(100% - 380px),
+      #222c44 calc(100% - 380px), #222c44 calc(100% - 379px),
+      #0f1729 calc(100% - 379px)) !important;
+  }
+  html[data-theme="dark"] body.og-page.og-work-on .section-title::before{color:#f2f4ff}
+  html[data-theme="dark"] body.og-page.og-work-on .section-title::after{background:#13203a;color:#8fb4ff}
+}
