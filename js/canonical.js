@@ -1,9 +1,20 @@
 (function () {
   var CANONICAL_ORIGIN = "https://epdfconverter.com";
+  var PAGES_BASE = "/PDFTOOL";
+
+  function siteBase() {
+    var host = window.location.hostname || "";
+    if (/\.github\.io$/i.test(host)) return PAGES_BASE;
+    return "";
+  }
 
   function cleanPath(pathname) {
     if (!pathname) return "/";
     pathname = String(pathname).split("?")[0].split("#")[0];
+    var base = siteBase();
+    if (base && pathname.indexOf(base) === 0) {
+      pathname = pathname.slice(base.length) || "/";
+    }
     pathname = pathname.replace(/\/index\.html$/i, "/");
     pathname = pathname.replace(/\.html$/i, "");
     pathname = pathname.replace(/\/{2,}/g, "/");
@@ -50,7 +61,48 @@
     upsertMeta("property", "og:url", href);
   }
 
+  function withBase(href, base) {
+    if (!base || !href || href.charAt(0) !== "/") return href;
+    if (href.charAt(1) === "/") return href;
+    if (href.indexOf(base + "/") === 0 || href === base || href.indexOf(base + "?") === 0 || href.indexOf(base + "#") === 0) {
+      return href;
+    }
+    return base + href;
+  }
+
+  function rewriteRootLinks() {
+    var base = siteBase();
+    if (!base) return;
+    var nodes = document.querySelectorAll('a[href^="/"]');
+    for (var i = 0; i < nodes.length; i++) {
+      var href = nodes[i].getAttribute("href");
+      var next = withBase(href, base);
+      if (next !== href) nodes[i].setAttribute("href", next);
+    }
+  }
+
   applyCanonical();
+  rewriteRootLinks();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", rewriteRootLinks);
+  } else {
+    rewriteRootLinks();
+  }
+
+  document.addEventListener(
+    "click",
+    function (e) {
+      var base = siteBase();
+      if (!base) return;
+      var a = e.target && e.target.closest ? e.target.closest("a") : null;
+      if (!a) return;
+      var href = a.getAttribute("href");
+      var next = withBase(href, base);
+      if (next && next !== href) a.setAttribute("href", next);
+    },
+    true
+  );
 
   window.addEventListener("popstate", applyCanonical);
   window.addEventListener("hashchange", applyCanonical);
