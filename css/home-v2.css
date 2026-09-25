@@ -248,12 +248,25 @@ body.home-v2 .copyright{border-top-color:#2e2e44;color:#8a8a9a}
 @media(max-width:900px){
   body.home-v2 .hp-hero{padding:36px 0 8px}
   body.home-v2 .hp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  body.home-v2 .hp-cats{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  body.home-v2 .hp-cats{
+    justify-content:flex-start;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    overscroll-behavior-x:contain;
+    margin-left:-8px;
+    margin-right:-8px;
+    padding-left:8px;
+    padding-right:8px;
+  }
+  body.home-v2 .hp-cats::-webkit-scrollbar{display:none}
+  body.home-v2 .hp-cat{padding:10px 12px 12px;font-size:13.5px}
   body.home-v2 .hp-steps{flex-wrap:wrap;justify-content:center}
   body.home-v2 .hp-dots{display:none}
   body.home-v2 .hp-step{max-width:220px}
   body.home-v2 .nav-actions .btn{display:none}
-  body.home-v2 .nav{height:66px;overflow:hidden}
+  body.home-v2 .nav{height:66px;overflow:visible}
   body.home-v2 .nav-inner{min-height:66px;gap:12px}
   body.home-v2 .links{
     top:var(--epdf-nav-h,66px) !important;
@@ -270,21 +283,42 @@ body.home-v2 .copyright{border-top-color:#2e2e44;color:#8a8a9a}
   }
 }
 @media(max-width:640px){
-  body.home-v2 .hp-grid{grid-template-columns:1fr}
-  body.home-v2 .hp-card{min-height:0}
+  body.home-v2 .container{padding:0 16px}
+  body.home-v2 .nav-inner.container{padding:0 16px}
+  body.home-v2 .hp-grid{grid-template-columns:1fr;gap:12px}
+  body.home-v2 .hp-card{min-height:0;padding:16px 14px}
   body.home-v2 .hp-blog-grid{grid-template-columns:1fr}
   body.home-v2 .hp-why-grid{grid-template-columns:1fr}
   body.home-v2 .hp-backlink-grid{grid-template-columns:1fr}
   body.home-v2 .hp-hero{padding:28px 0 4px}
+  body.home-v2 .hp-hero h1{font-size:clamp(24px,7.2vw,34px);letter-spacing:-.8px}
+  body.home-v2 .hp-hero p{font-size:15px;line-height:1.55}
+  body.home-v2 .hp-how,
+  body.home-v2 .hp-why,
+  body.home-v2 .hp-blog{padding:36px 0 28px}
+  body.home-v2 .hp-how h2,
+  body.home-v2 .hp-why h2,
+  body.home-v2 .hp-blog h2,
+  body.home-v2 .hp-backlinks h2,
+  body.home-v2 .hp-faq .section-title{font-size:22px}
+  body.home-v2 .hp-steps{flex-direction:column;align-items:center;gap:22px}
+  body.home-v2 .hp-step{max-width:100%;width:100%}
 }
 @media(max-width:560px){
-  body.home-v2 .nav{height:64px}
+  body.home-v2 .nav{height:64px;overflow:visible}
   body.home-v2 .nav-inner{min-height:64px}
+  body.home-v2 .brand-wordmark small{display:none}
   body.home-v2 .links{
     top:var(--epdf-nav-h,64px);
     height:calc(100dvh - var(--epdf-nav-h,64px));
     max-height:calc(100dvh - var(--epdf-nav-h,64px));
+    padding-bottom:max(32px,env(safe-area-inset-bottom));
   }
+}
+@media(max-width:400px){
+  body.home-v2 .hp-card{gap:10px;padding:14px 12px}
+  body.home-v2 .hp-card .ico{width:42px;height:42px}
+  body.home-v2 .hp-card h3{font-size:15px}
 }
 
 html[data-theme="dark"] body.home-v2{background:#0b1220;color:#e7ebf4}

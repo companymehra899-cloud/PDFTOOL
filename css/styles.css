@@ -758,7 +758,30 @@ body.ve-open{ overflow: hidden; }
 /* ---------- Organise pages ---------- */
 
 @media (max-width: 720px) {
-
   .opt-label{ min-width: 100%; }
-  .ve-thumbs{ width: 110px; padding: 8px; }
+  .opt-row{ align-items: stretch; }
+  .input,.select{ max-width: 100%; width: 100%; }
+  input[type="range"]{ width: 100%; }
+  .page-grid,.preview-grid{ grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+  .cr-item{ flex-direction: column; align-items: flex-start; gap: 10px; }
+  .cr-info{ min-width: 0; width: 100%; }
+  .cr-pct{ min-width: 0; }
+  .chip{ max-width: 100%; }
+  .ve-body{ flex-direction: column; }
+  .ve-thumbs{
+    width: 100%;
+    max-height: 108px;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ve-thumb{ flex: 0 0 auto; white-space: nowrap; }
+  .ve-header,.ve-toolbar{ padding: 8px 10px; }
+  .ve-hint{ display: none; }
+  .ve-stage-wrap{ padding: 10px; }
+  .editor-title{ font-size: 16px; }
 }
