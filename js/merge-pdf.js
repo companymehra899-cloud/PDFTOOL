@@ -65,6 +65,20 @@
     });
   }
 
+  function closest(el, sel) {
+    if (!el) return null;
+    if (el.nodeType !== 1) el = el.parentElement;
+    return el && el.closest ? el.closest(sel) : null;
+  }
+
+  function capturePointer(el, id) {
+    try { if (el && el.setPointerCapture) el.setPointerCapture(id); } catch (err) {}
+  }
+
+  function releasePointer(el, id) {
+    try { if (el && el.releasePointerCapture) el.releasePointerCapture(id); } catch (err) {}
+  }
+
   function dropAfter(el, clientX, clientY) {
     var r = el.getBoundingClientRect();
     if (r.width >= r.height) return clientX > r.left + r.width / 2;
@@ -80,6 +94,7 @@
 
   function renderChips(containerSel, items, opts) {
     var wrap = $(containerSel);
+    if (!wrap) return;
     wrap.innerHTML = '';
     var dragFrom = -1;
     items.forEach(function (it, idx) {
@@ -103,7 +118,7 @@
 
       if (items.length > 1) {
         chip.addEventListener('dragstart', function (e) {
-          if (e.target.closest('.chip-x')) {
+          if (closest(e.target, '.chip-x')) {
             e.preventDefault();
             return;
           }
@@ -147,7 +162,7 @@
 
         chip.addEventListener('pointerdown', function (e) {
           if (e.pointerType !== 'touch' && e.pointerType !== 'pen') return;
-          if (e.target.closest('.chip-x')) return;
+          if (closest(e.target, '.chip-x')) return;
           var startX = e.clientX;
           var startY = e.clientY;
           var started = false;
@@ -163,11 +178,11 @@
             if (!started) {
               started = true;
               chip.classList.add('dragging');
-              chip.setPointerCapture(e.pointerId);
+              capturePointer(chip, e.pointerId);
             }
             ev.preventDefault();
             var el = document.elementFromPoint(ev.clientX, ev.clientY);
-            var over = el && el.closest ? el.closest('#mg-files .chip') : null;
+            var over = closest(el, '#mg-files .chip');
             Array.prototype.forEach.call(wrap.querySelectorAll('.drop-before, .drop-after'), function (c) {
               c.classList.remove('drop-before', 'drop-after');
             });
@@ -176,13 +191,13 @@
             }
           }
           function onUp(ev) {
-            chip.releasePointerCapture(e.pointerId);
+            releasePointer(chip, e.pointerId);
             chip.removeEventListener('pointermove', onMove);
             chip.removeEventListener('pointerup', onUp);
             chip.removeEventListener('pointercancel', onUp);
             if (!started) return;
             var el = document.elementFromPoint(ev.clientX, ev.clientY);
-            var over = el && el.closest ? el.closest('#mg-files .chip') : null;
+            var over = closest(el, '#mg-files .chip');
             clearMarks();
             if (!over || over === chip) return;
             var targetIndex = parseInt(over.dataset.index, 10);
@@ -252,15 +267,17 @@
         moveFile(from, to);
       },
     });
-    $('#mg-run').disabled = mg.files.length < 2;
+    var runBtn = $('#mg-run');
+    if (runBtn) runBtn.disabled = mg.files.length < 2;
     var hasFiles = mg.files.length > 0;
     var was = document.body.classList.contains('mg-work-on');
     document.body.classList.toggle('mg-work-on', hasFiles);
     if (hasFiles && !was) window.scrollTo(0, 0);
-    $('#mg-options').classList.toggle('show', hasFiles);
+    var opts = $('#mg-options');
+    if (opts) opts.classList.toggle('show', hasFiles);
   }
 
-  $('#mg-run').addEventListener('click', async function () {
+  if ($('#mg-run')) $('#mg-run').addEventListener('click', async function () {
     if (mg.files.length < 2) return toast('Add at least 2 PDFs', true);
     busy('Merging PDFs...');
     try {
@@ -284,5 +301,5 @@
     }
   });
 
-  $('#mg-run').disabled = true;
+  if ($('#mg-run')) $('#mg-run').disabled = true;
 })();
