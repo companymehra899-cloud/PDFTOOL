@@ -1564,6 +1564,10 @@ html[data-theme="dark"] body.cp-page #cp-dropzone{background:#0f1729 !important;
     justify-content:center !important;
     border-radius:8px !important;
   }
+  body.mg-page.mg-work-on .file-list .chip.mg-chip{cursor:grab !important}
+  body.mg-page.mg-work-on .file-list .chip.mg-chip.dragging{opacity:.45 !important;cursor:grabbing !important}
+  body.mg-page.mg-work-on .file-list .chip.mg-chip.drop-before{box-shadow:inset 3px 0 0 0 var(--primary,#5134f4) !important}
+  body.mg-page.mg-work-on .file-list .chip.mg-chip.drop-after{box-shadow:inset -3px 0 0 0 var(--primary,#5134f4) !important}
 
   /* right column: full-height action panel */
   body.mg-page.mg-work-on .tool-area > .options-card{

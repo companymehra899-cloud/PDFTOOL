@@ -23,9 +23,9 @@
 
 <link rel="canonical" href="https://epdfconverter.com/merge-pdf">
 <script src="js/canonical.js?v=4"></script>
-<link rel="stylesheet" href="css/styles.css?v=13">
+<link rel="stylesheet" href="css/styles.css?v=14">
 <link rel="stylesheet" href="css/home.css?v=8">
-<link rel="stylesheet" href="css/reference.css?v=47">
+<link rel="stylesheet" href="css/reference.css?v=48">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -78,7 +78,7 @@
       "name": "Can I change the order of PDFs before merging?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Use the up and down arrows on each file to set the order they appear in the final document."
+        "text": "Yes. Drag and drop each PDF card to set the order they appear in the final document."
       }
     },
     {
@@ -621,7 +621,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <div class="options-card" id="mg-options">
       <div class="opt-row">
         <button class="btn primary" id="mg-run" type="button">Merge &amp; Download</button>
-        <span class="opt-hint">Use the up/down arrows to set the order.</span>
+        <span class="opt-hint">Drag and drop the PDF cards to set the order.</span>
       </div>
     </div>
   </section>
@@ -656,13 +656,13 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
         <span class="step-num">2</span>
         <span class="step-icon indigo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span>
         <h3>Add at least two PDFs</h3>
-        <p>Each file appears as a chip with up and down arrows for reordering.</p>
+        <p>Each file appears as a card you can drag to reorder.</p>
       </div>
       <div class="step reveal">
         <span class="step-num">3</span>
         <span class="step-icon green"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2 12h4l3-9 4 18 3-9h6"/></svg></span>
         <h3>Reorder the files</h3>
-        <p>Use the arrows to set the order the pages appear in the merged document.</p>
+        <p>Drag and drop the PDF cards to set the order they appear in the merged document.</p>
       </div>
       <div class="step reveal">
         <span class="step-num">4</span>
@@ -720,7 +720,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><span class="faq-q-inner">Can I change the order of PDFs before merging?<span class="faq-chev">&#8964;</span></span></summary>
-        <div class="faq-a"><p>Yes. Use the up and down arrows on each file to set the order they appear in the final document.</p></div>
+        <div class="faq-a"><p>Yes. Drag and drop each PDF card to set the order they appear in the final document.</p></div>
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><span class="faq-q-inner">Are my PDF files uploaded?<span class="faq-chev">&#8964;</span></span></summary>
@@ -796,7 +796,7 @@ function saveAs(blob, name) {
   setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
 }
 </script>
-<script src="js/merge-pdf.js?v=3"></script>
+<script src="js/merge-pdf.js?v=4"></script>
 <script src="js/home.js?v=9"></script>
 <script src="js/reference.js?v=14"></script>
 <div id="google_translate_element" style="display:none"></div>

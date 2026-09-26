@@ -65,31 +65,140 @@
     });
   }
 
+  function dropAfter(el, clientX, clientY) {
+    var r = el.getBoundingClientRect();
+    if (r.width >= r.height) return clientX > r.left + r.width / 2;
+    return clientY > r.top + r.height / 2;
+  }
+
+  function moveFile(from, to) {
+    if (from === to || from < 0 || to < 0 || from >= mg.files.length || to >= mg.files.length) return;
+    var item = mg.files.splice(from, 1)[0];
+    mg.files.splice(to, 0, item);
+    renderMergeChips();
+  }
+
   function renderChips(containerSel, items, opts) {
     var wrap = $(containerSel);
     wrap.innerHTML = '';
+    var dragFrom = -1;
     items.forEach(function (it, idx) {
       var chip = document.createElement('div');
-      chip.className = 'chip';
+      chip.className = 'chip mg-chip';
+      chip.draggable = items.length > 1;
+      chip.dataset.index = String(idx);
       if (opts.numbers) chip.appendChild(mkEl('span', 'chip-num', String(idx + 1)));
       chip.appendChild(mkEl('span', 'chip-name', it.name));
       if (it.size != null) chip.appendChild(mkEl('span', 'chip-size', fmtBytes(it.size)));
       var x = document.createElement('button');
       x.className = 'chip-x';
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Remove ' + it.name);
       x.textContent = '\u00d7';
-      x.addEventListener('click', function () { opts.onRemove && opts.onRemove(idx); });
+      x.addEventListener('click', function (e) {
+        e.stopPropagation();
+        opts.onRemove && opts.onRemove(idx);
+      });
       chip.appendChild(x);
-      if (opts.onUp && opts.onDown && items.length > 1) {
-        var up = document.createElement('button');
-        up.className = 'chip-x';
-        up.textContent = '\u2191';
-        up.addEventListener('click', function () { opts.onUp(idx); });
-        var down = document.createElement('button');
-        down.className = 'chip-x';
-        down.textContent = '\u2193';
-        down.addEventListener('click', function () { opts.onDown(idx); });
-        chip.insertBefore(up, x);
-        chip.insertBefore(down, x);
+
+      if (items.length > 1) {
+        chip.addEventListener('dragstart', function (e) {
+          if (e.target.closest('.chip-x')) {
+            e.preventDefault();
+            return;
+          }
+          dragFrom = idx;
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', String(idx));
+          chip.setAttribute('aria-grabbed', 'true');
+          setTimeout(function () { chip.classList.add('dragging'); }, 0);
+        });
+        chip.addEventListener('dragend', function () {
+          dragFrom = -1;
+          chip.classList.remove('dragging');
+          chip.setAttribute('aria-grabbed', 'false');
+          Array.prototype.forEach.call(wrap.querySelectorAll('.drop-before, .drop-after'), function (c) {
+            c.classList.remove('drop-before', 'drop-after');
+          });
+        });
+        chip.addEventListener('dragover', function (e) {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          var after = dropAfter(chip, e.clientX, e.clientY);
+          Array.prototype.forEach.call(wrap.querySelectorAll('.drop-before, .drop-after'), function (c) {
+            c.classList.remove('drop-before', 'drop-after');
+          });
+          chip.classList.add(after ? 'drop-after' : 'drop-before');
+        });
+        chip.addEventListener('drop', function (e) {
+          e.preventDefault();
+          var sourceIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
+          if (isNaN(sourceIndex)) sourceIndex = dragFrom;
+          chip.classList.remove('drop-before', 'drop-after');
+          if (isNaN(sourceIndex) || sourceIndex === idx) return;
+          var after = dropAfter(chip, e.clientX, e.clientY);
+          var dest = after
+            ? (sourceIndex < idx ? idx : idx + 1)
+            : (sourceIndex < idx ? idx - 1 : idx);
+          if (dest < 0) dest = 0;
+          if (dest >= mg.files.length) dest = mg.files.length - 1;
+          opts.onReorder && opts.onReorder(sourceIndex, dest);
+        });
+
+        chip.addEventListener('pointerdown', function (e) {
+          if (e.pointerType !== 'touch' && e.pointerType !== 'pen') return;
+          if (e.target.closest('.chip-x')) return;
+          var startX = e.clientX;
+          var startY = e.clientY;
+          var started = false;
+          function clearMarks() {
+            Array.prototype.forEach.call(wrap.querySelectorAll('.drop-before, .drop-after, .dragging'), function (c) {
+              c.classList.remove('drop-before', 'drop-after', 'dragging');
+            });
+          }
+          function onMove(ev) {
+            var dx = ev.clientX - startX;
+            var dy = ev.clientY - startY;
+            if (!started && (Math.abs(dx) + Math.abs(dy) < 8)) return;
+            if (!started) {
+              started = true;
+              chip.classList.add('dragging');
+              chip.setPointerCapture(e.pointerId);
+            }
+            ev.preventDefault();
+            var el = document.elementFromPoint(ev.clientX, ev.clientY);
+            var over = el && el.closest ? el.closest('#mg-files .chip') : null;
+            Array.prototype.forEach.call(wrap.querySelectorAll('.drop-before, .drop-after'), function (c) {
+              c.classList.remove('drop-before', 'drop-after');
+            });
+            if (over && over !== chip) {
+              over.classList.add(dropAfter(over, ev.clientX, ev.clientY) ? 'drop-after' : 'drop-before');
+            }
+          }
+          function onUp(ev) {
+            chip.releasePointerCapture(e.pointerId);
+            chip.removeEventListener('pointermove', onMove);
+            chip.removeEventListener('pointerup', onUp);
+            chip.removeEventListener('pointercancel', onUp);
+            if (!started) return;
+            var el = document.elementFromPoint(ev.clientX, ev.clientY);
+            var over = el && el.closest ? el.closest('#mg-files .chip') : null;
+            clearMarks();
+            if (!over || over === chip) return;
+            var targetIndex = parseInt(over.dataset.index, 10);
+            if (isNaN(targetIndex) || targetIndex === idx) return;
+            var after = dropAfter(over, ev.clientX, ev.clientY);
+            var dest = after
+              ? (idx < targetIndex ? targetIndex : targetIndex + 1)
+              : (idx < targetIndex ? targetIndex - 1 : targetIndex);
+            if (dest < 0) dest = 0;
+            if (dest >= mg.files.length) dest = mg.files.length - 1;
+            opts.onReorder && opts.onReorder(idx, dest);
+          }
+          chip.addEventListener('pointermove', onMove);
+          chip.addEventListener('pointerup', onUp);
+          chip.addEventListener('pointercancel', onUp);
+        });
       }
       wrap.appendChild(chip);
     });
@@ -139,19 +248,8 @@
         mg.files.splice(i, 1);
         renderMergeChips();
       },
-      onUp: function (i) {
-        if (i === 0) return;
-        var t = mg.files[i - 1];
-        mg.files[i - 1] = mg.files[i];
-        mg.files[i] = t;
-        renderMergeChips();
-      },
-      onDown: function (i) {
-        if (i >= mg.files.length - 1) return;
-        var t = mg.files[i + 1];
-        mg.files[i + 1] = mg.files[i];
-        mg.files[i] = t;
-        renderMergeChips();
+      onReorder: function (from, to) {
+        moveFile(from, to);
       },
     });
     $('#mg-run').disabled = mg.files.length < 2;

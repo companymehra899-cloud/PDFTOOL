@@ -112,6 +112,10 @@ a.btn{ text-decoration: none; }
   flex-shrink: 0;
 }
 .chip .chip-x:hover{ background: #fee2e2; color: var(--danger); }
+.chip.mg-chip{ cursor: grab; user-select: none; touch-action: none; }
+.chip.mg-chip.dragging{ opacity: .45; cursor: grabbing; }
+.chip.mg-chip.drop-before{ box-shadow: inset 3px 0 0 0 var(--primary); }
+.chip.mg-chip.drop-after{ box-shadow: inset -3px 0 0 0 var(--primary); }
 .chip .chip-num{
   background: var(--primary);
   color: #fff;
