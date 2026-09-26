@@ -23,7 +23,7 @@
 
 <link rel="canonical" href="https://epdfconverter.com/edit-pdf">
 <script src="js/canonical.js?v=4"></script>
-<link rel="stylesheet" href="css/styles.css?v=13">
+<link rel="stylesheet" href="css/styles.css?v=15">
 <link rel="stylesheet" href="css/home.css?v=8">
 <link rel="stylesheet" href="css/reference.css?v=47">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -763,6 +763,14 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <label class="ve-inp">Size <input type="number" id="ve-size" min="6" max="200" value="18" title="Font size"></label>
     <label class="ve-inp">Color <input type="color" id="ve-color" value="#111111" title="Text / shape color"></label>
     <label class="ve-inp ve-fill"><input type="checkbox" id="ve-fill" title="Fill shape"> Fill</label>
+    <span class="ve-sep"></span>
+    <span class="ve-tool-label">Zoom:</span>
+    <button type="button" class="ve-tool" id="ve-zoom-out" title="Zoom out">-</button>
+    <label class="ve-inp ve-zoom">
+      <input type="range" id="ve-zoom" min="0" max="100" value="40" step="1" title="Preview zoom 0 to 100 percent">
+      <span id="ve-zoom-val">40%</span>
+    </label>
+    <button type="button" class="ve-tool" id="ve-zoom-in" title="Zoom in">+</button>
     <span class="ve-hint">Click existing text to replace it. Double-click new text to edit. Drag to move. Delete key removes.</span>
   </div>
   <div class="ve-body">
@@ -831,7 +839,7 @@ function saveAs(blob, name) {
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
-<script src="js/edit-pdf.min.js?v=2"></script>
+<script src="js/edit-pdf.min.js?v=3"></script>
 <script>
 (function () {
   'use strict';

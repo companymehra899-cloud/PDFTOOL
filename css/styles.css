@@ -466,6 +466,23 @@ body.ve-open{ overflow: hidden; }
   cursor: pointer;
 }
 .ve-inp.ve-fill{ gap: 4px; cursor: pointer; }
+.ve-inp.ve-zoom{
+  gap: 8px;
+}
+.ve-inp.ve-zoom input[type="range"]{
+  width: 110px;
+  height: 6px;
+  padding: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+#ve-zoom-val{
+  min-width: 38px;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
 .ve-hint{ font-size: 12px; color: var(--muted); margin-left: 6px; }
 
 .ve-body{ flex: 1; display: flex; min-height: 0; }
