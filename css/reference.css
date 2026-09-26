@@ -1316,6 +1316,15 @@ body[class*="-page"] .seo-keyword-box{
   max-width:880px !important;border-radius:16px !important;
   border-color:#f0f0f4 !important;background:#fafafb !important;
 }
+/* Bottom sections (How to / Why use) must not stretch past the tool width */
+@media (min-width:1024px){
+  body[class*="-page"] .steps,
+  body[class*="-page"] .feature-grid{
+    max-width:880px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+}
 
 /* ---------- Dark mode ---------- */
 html[data-theme="dark"] body[class*="-page"]{background:#0b1220 !important}
