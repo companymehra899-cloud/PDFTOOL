@@ -1,4 +1,4 @@
-/* ePDFConverter - Image & Signature Resizer (standalone page).
+/* ePDFConverter - Photo & Signature Resizer (standalone page).
    Resize and compress photos/signatures to an exact KB target with
    optional width/height in cm or px. All processing is local. */
 (function () {

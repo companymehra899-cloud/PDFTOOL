@@ -7,6 +7,8 @@
 
 # Legacy / typo aliases
 /image-compresser  /image-compressor  301
+/image-resizer     /photo-signature-resizer  301
+/image-resizer.html /photo-signature-resizer  301
 
 # .html -> clean URL
 /index.html                   /                             301
@@ -28,7 +30,7 @@
 /contact.html                 /contact                      301
 /edit-pdf.html                /edit-pdf                     301
 /image-compressor.html        /image-compressor             301
-/image-resizer.html           /image-resizer                301
+/photo-signature-resizer.html /photo-signature-resizer  301
 /jpg-to-pdf.html              /jpg-to-pdf                   301
 /merge-pdf.html               /merge-pdf                    301
 /organise-pdf.html            /organise-pdf                 301

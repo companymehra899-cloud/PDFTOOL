@@ -23,7 +23,8 @@ const ASSET_EXT = /\.(css|js|mjs|png|jpe?g|gif|svg|ico|webp|xml|txt|json|woff2?|
 const RESERVED_PATHS = new Set(["/404", "/404.html"]);
 
 const ALIASES = {
-  "/image-compresser": "/image-compressor"
+  "/image-compresser": "/image-compressor",
+  "/image-resizer": "/photo-signature-resizer"
 };
 
 export async function onRequest(context) {

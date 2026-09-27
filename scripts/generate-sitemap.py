@@ -14,7 +14,7 @@ PREFERRED_ORDER = [
     "/jpg-to-pdf",
     "/merge-pdf",
     "/image-compressor",
-    "/image-resizer",
+    "/photo-signature-resizer",
     "/resize-image",
     "/edit-pdf",
     "/sign-pdf",
@@ -42,7 +42,7 @@ PREFERRED_ORDER = [
 PRIORITY = {
     "/": 1.0,
     "/image-compressor": 0.9,
-    "/image-resizer": 0.9,
+    "/photo-signature-resizer": 0.9,
     "/blog": 0.7,
     "/about": 0.4,
     "/contact": 0.3,

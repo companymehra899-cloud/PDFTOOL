@@ -10,6 +10,7 @@ os.chdir(ROOT)
 
 ALIASES = {
     "/image-compresser": "/image-compressor",
+    "/image-resizer": "/photo-signature-resizer",
 }
 
 TRACKING_PARAMS = {
