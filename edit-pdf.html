@@ -23,7 +23,7 @@
 
 <link rel="canonical" href="https://epdfconverter.com/edit-pdf">
 <script src="js/canonical.js?v=4"></script>
-<<link rel="stylesheet" href="css/styles.css?v=15">
+<link rel="stylesheet" href="css/styles.css?v=16">
 <link rel="stylesheet" href="css/reference.css?v=48">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -840,10 +840,39 @@ function saveAs(blob, name) {
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
-<script src="js/edit-pdf.min.js?v=5"></script>
+<script src="js/edit-pdf.min.js?v=7"></script>
 <script>
 (function () {
   'use strict';
+  var overlay = document.getElementById('visual-editor');
+  var startBtn = document.getElementById('ed-start');
+  var fileList = document.getElementById('ed-files');
+  var opening = false;
+
+  function showOverlay() {
+    if (!overlay) return;
+    overlay.hidden = false;
+    overlay.removeAttribute('hidden');
+    overlay.style.display = 'flex';
+    overlay.classList.add('ve-show');
+    document.body.classList.add('ve-open');
+  }
+
+  function openWorkspace() {
+    if (opening || document.body.classList.contains('ve-open')) return;
+    if (!fileList || !fileList.children.length) return;
+    opening = true;
+    showOverlay();
+    if (startBtn && !startBtn.disabled) startBtn.click();
+    setTimeout(function () { opening = false; }, 400);
+  }
+
+  if (fileList) {
+    new MutationObserver(function () {
+      if (fileList.children.length) setTimeout(openWorkspace, 20);
+    }).observe(fileList, { childList: true });
+  }
+
   var editorView = document.getElementById('view-editor');
   var editView = document.getElementById('view-edit');
   if (!editorView) return;

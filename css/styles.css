@@ -380,6 +380,10 @@ input[type="range"]{ accent-color: var(--primary); width: 180px; }
 }
 .editor-overlay[hidden]{ display: none; }
 body.ve-open{ overflow: hidden; }
+body.ve-open .editor-overlay,
+.editor-overlay.ve-show{
+  display: flex !important;
+}
 
 .ve-header{
   display: flex;
