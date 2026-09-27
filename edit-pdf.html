@@ -23,7 +23,7 @@
 
 <link rel="canonical" href="https://epdfconverter.com/edit-pdf">
 <script src="js/canonical.js?v=4"></script>
-<link rel="stylesheet" href="css/styles.css?v=16">
+<link rel="stylesheet" href="css/styles.css?v=17">
 <link rel="stylesheet" href="css/reference.css?v=48">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -739,16 +739,10 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 
 <!-- ============ VISUAL PDF EDITOR ============ -->
 <div class="editor-overlay" id="visual-editor" hidden>
-  <div class="ve-header">
-    <button class="ve-btn" id="ve-back" title="Back">&#8592;</button>
-    <span class="ve-title" id="ve-title">Editing PDF</span>
-    <div class="ve-spacer"></div>
-    <button class="ve-btn" id="ve-undo" title="Undo (Ctrl+Z)">&#8630;</button>
-    <button class="ve-btn" id="ve-redo" title="Redo (Ctrl+Y)">&#8631;</button>
-    <button class="ve-btn danger" id="ve-delete" title="Delete selected">&#10005; Delete</button>
-    <button class="btn primary" id="ve-save">Download PDF</button>
-  </div>
   <div class="ve-toolbar" id="ve-toolbar">
+    <button class="ve-btn ve-back-btn" id="ve-back" title="Back">&#8592; Back</button>
+    <span class="ve-title" id="ve-title">Editing PDF</span>
+    <span class="ve-sep"></span>
     <span class="ve-tool-label">Add:</span>
     <button class="ve-tool" data-tool="text" title="Add text">T</button>
     <button class="ve-tool" data-tool="rect" title="Rectangle">&#9633;</button>
@@ -773,6 +767,11 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     </label>
     <button type="button" class="ve-tool" id="ve-zoom-in" title="Zoom in">+</button>
     <span class="ve-hint">Click existing text to replace it. Double-click new text to edit. Drag to move. Delete key removes.</span>
+    <div class="ve-spacer"></div>
+    <button class="ve-btn" id="ve-undo" title="Undo (Ctrl+Z)">&#8630;</button>
+    <button class="ve-btn" id="ve-redo" title="Redo (Ctrl+Y)">&#8631;</button>
+    <button class="ve-btn danger" id="ve-delete" title="Delete selected">&#10005; Delete</button>
+    <button class="btn primary" id="ve-save">Download PDF</button>
   </div>
   <div class="ve-body">
     <div class="ve-thumbs" id="ve-thumbs"></div>
