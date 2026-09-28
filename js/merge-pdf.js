@@ -92,19 +92,73 @@
     renderMergeChips();
   }
 
+  var thumbQueue = Promise.resolve();
+  var thumbGen = 0;
+  function enqueueThumb(fn) {
+    thumbQueue = thumbQueue.then(fn).catch(function (err) { console.error(err); });
+    return thumbQueue;
+  }
+
+  async function renderMergeThumb(item, canvasEl, gen) {
+    if (gen !== thumbGen) return;
+    if (typeof pdfjsLib === 'undefined') return;
+    try {
+      var buf = item.buf || (item.buf = await item.file.arrayBuffer());
+      if (gen !== thumbGen) return;
+      var pdf = await pdfjsLib.getDocument({
+        data: new Uint8Array(buf.slice(0)),
+        disableRange: true,
+        disableStream: true
+      }).promise;
+      if (gen !== thumbGen) return;
+      item.pageCount = pdf.numPages || 0;
+      var page = await pdf.getPage(1);
+      if (gen !== thumbGen) return;
+      var vp1 = page.getViewport({ scale: 1 });
+      var scale = 180 / Math.max(vp1.width, vp1.height);
+      var viewport = page.getViewport({ scale: scale });
+      var off = document.createElement('canvas');
+      off.width = Math.max(1, Math.floor(viewport.width));
+      off.height = Math.max(1, Math.floor(viewport.height));
+      var ctx = off.getContext('2d', { alpha: false });
+      if (ctx) {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, off.width, off.height);
+      }
+      await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+      if (gen !== thumbGen) return;
+      item.thumbUrl = off.toDataURL('image/jpeg', 0.78);
+      if (!canvasEl || !canvasEl.isConnected) return;
+      var img = document.createElement('img');
+      img.className = 'page-preview';
+      img.alt = item.name;
+      img.src = item.thumbUrl;
+      canvasEl.replaceWith(img);
+    } catch (err) {
+      console.warn('Merge PDF preview failed', err);
+    }
+  }
+
   function renderChips(containerSel, items, opts) {
     var wrap = $(containerSel);
     if (!wrap) return;
     wrap.innerHTML = '';
+    thumbGen++;
+    var gen = thumbGen;
     var dragFrom = -1;
     items.forEach(function (it, idx) {
       var chip = document.createElement('div');
       chip.className = 'chip mg-chip';
       chip.draggable = items.length > 1;
       chip.dataset.index = String(idx);
-      if (opts.numbers) chip.appendChild(mkEl('span', 'chip-num', String(idx + 1)));
-      chip.appendChild(mkEl('span', 'chip-name', it.name));
-      if (it.size != null) chip.appendChild(mkEl('span', 'chip-size', fmtBytes(it.size)));
+      var preview = document.createElement(it.thumbUrl ? 'img' : 'canvas');
+      preview.className = 'page-preview';
+      preview.setAttribute('alt', it.name);
+      if (it.thumbUrl) preview.src = it.thumbUrl;
+      chip.appendChild(preview);
+      var nameEl = mkEl('span', 'chip-name', it.name);
+      nameEl.title = it.name;
+      chip.appendChild(nameEl);
       var x = document.createElement('button');
       x.className = 'chip-x';
       x.type = 'button';
@@ -115,6 +169,12 @@
         opts.onRemove && opts.onRemove(idx);
       });
       chip.appendChild(x);
+      if (!it.thumbUrl) {
+        enqueueThumb(function () {
+          if (gen !== thumbGen) return;
+          return renderMergeThumb(it, preview, gen);
+        });
+      }
 
       if (items.length > 1) {
         chip.addEventListener('dragstart', function (e) {
@@ -246,7 +306,7 @@
     if (!pdfs.length) return toast('Please add PDF files', true);
     if (checkSize(pdfs)) return;
     mg.files.push.apply(mg.files, pdfs.map(function (f) {
-      return { name: f.name, size: f.size, file: f, buf: null };
+      return { name: f.name, size: f.size, file: f, buf: null, thumbUrl: null, pageCount: 0 };
     }));
     renderMergeChips();
   });
