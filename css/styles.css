@@ -1,19 +1,19 @@
 :root{
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --primary-soft: #eff6ff;
+  --primary: #0f766e;
+  --primary-dark: #0b5e58;
+  --primary-soft: #e7f7f4;
   --bg: #ffffff;
-  --bg-soft: #f8fafc;
+  --bg-soft: #f6f3ec;
   --card: #ffffff;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --muted: #64748b;
+  --border: #e4ebe8;
+  --text: #12211f;
+  --muted: #5b6b68;
   --danger: #dc2626;
   --success: #16a34a;
-  --radius: 12px;
-  --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
-  --shadow: 0 4px 12px rgba(15,23,42,.08);
-  --shadow-lg: 0 16px 40px rgba(15,23,42,.14);
+  --radius: 18px;
+  --shadow-sm: 0 1px 2px rgba(18,33,31,.05);
+  --shadow: 0 10px 28px rgba(18,33,31,.08);
+  --shadow-lg: 0 18px 40px rgba(18,33,31,.12);
 }
 
 *{ box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,7 +21,7 @@
 html{ scroll-behavior: smooth; }
 
 body{
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Plus Jakarta Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -77,10 +77,10 @@ a.btn{ text-decoration: none; }
   background: var(--primary);
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, .35);
+  box-shadow: 0 4px 14px rgba(15, 118, 110, .35);
   transition: background .15s, transform .1s, box-shadow .15s;
 }
-.dz-btn:hover{ background: var(--primary-dark); box-shadow: 0 6px 18px rgba(37, 99, 235, .4); }
+.dz-btn:hover{ background: var(--primary-dark); box-shadow: 0 6px 18px rgba(15, 118, 110, .4); }
 .dz-btn:active{ transform: scale(.97); }
 
 /* ---------- File list / chips ---------- */
@@ -189,7 +189,7 @@ a.btn{ text-decoration: none; }
   outline: none;
   max-width: 140px;
 }
-.input:focus,.select:focus{ border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
+.input:focus,.select:focus{ border-color: var(--primary); box-shadow: 0 0 0 3px rgba(15,118,110,.15); }
 input[type="range"]{ accent-color: var(--primary); width: 180px; }
 
 .btn{
@@ -446,7 +446,7 @@ body.ve-open .editor-overlay,
   background: #e0e7ff;
   border-color: var(--primary);
   color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, .15);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, .15);
 }
 .ve-tool:disabled{ opacity: .4; cursor: not-allowed; }
 .ve-sep{ width: 1px; height: 26px; background: var(--border); margin: 0 4px; }
