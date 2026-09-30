@@ -109,7 +109,7 @@ def main():
     path_to_html = {}
     for html in ROOT.glob("*.html"):
         path = html_to_path(html)
-        if not path or path in seen or has_query_or_hash(path):
+        if not path or path in seen or has_query_or_hash(path) or path == "/404":
             continue
         seen.add(path)
         discovered.append(path)

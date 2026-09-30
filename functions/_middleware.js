@@ -15,7 +15,10 @@ const TRACKING_PARAMS = new Set([
   "mc_cid",
   "mc_eid",
   "_ga",
-  "yclid"
+  "yclid",
+  "g_fsrc",
+  "gad_source",
+  "gad_campaignid"
 ]);
 
 const ASSET_EXT = /\.(css|js|mjs|png|jpe?g|gif|svg|ico|webp|xml|txt|json|woff2?|map|webmanifest)$/i;
