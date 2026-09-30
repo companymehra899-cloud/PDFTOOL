@@ -81,11 +81,16 @@
   });
 
   fileListSection.addEventListener('dragover', function (e) {
+    if (dragFrom >= 0) return;
     var types = e.dataTransfer && e.dataTransfer.types;
     var hasFiles = types && (types.contains ? types.contains('Files') : Array.prototype.indexOf.call(types, 'Files') !== -1);
     if (hasFiles) e.preventDefault();
   });
   fileListSection.addEventListener('drop', function (e) {
+    if (dragFrom >= 0) {
+      e.preventDefault();
+      return;
+    }
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       e.preventDefault();
       handleFiles(e.dataTransfer.files);
@@ -141,7 +146,7 @@
         }
       }
       if (added) toast('Loaded ' + added + ' page(s)');
-      else toast('Please add a PDF file', true);
+      else if (files && files.length) toast('Please add a PDF file', true);
       updateUI();
     } finally {
       unbusy();
@@ -214,6 +219,7 @@
         dragFrom = index;
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/plain', String(index));
+        e.stopPropagation();
         setTimeout(function () { thumbCard.classList.add('dragging'); }, 0);
       });
       thumbCard.addEventListener('dragend', function () {
@@ -225,6 +231,7 @@
       });
       thumbCard.addEventListener('dragover', function (e) {
         e.preventDefault();
+        e.stopPropagation();
         e.dataTransfer.dropEffect = 'move';
         var r = thumbCard.getBoundingClientRect();
         var after = e.clientX > r.left + r.width / 2;
@@ -235,6 +242,7 @@
       });
       thumbCard.addEventListener('drop', function (e) {
         e.preventDefault();
+        e.stopPropagation();
         var sourceIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
         if (isNaN(sourceIndex)) sourceIndex = dragFrom;
         var targetIndex = index;
@@ -267,7 +275,7 @@
     if (gen !== renderGen) return;
     var rotation = (pageItem.rot || 0) % 360;
     var vp1 = page.getViewport({ scale: 1, rotation: rotation });
-    var scale = 180 / Math.max(vp1.width, vp1.height);
+    var scale = 140 / Math.max(vp1.width, vp1.height);
     var viewport = page.getViewport({ scale: scale, rotation: rotation });
     var off = document.createElement('canvas');
     off.width = Math.max(1, Math.floor(viewport.width));

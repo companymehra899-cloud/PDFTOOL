@@ -1968,11 +1968,31 @@ html[data-theme="dark"] body.mg-page.mg-work-on .file-list .chip-x{
     max-width:100% !important;
     margin:0 !important;
     padding:0 !important;
+    height:calc(100vh - 88px) !important;
     min-height:calc(100vh - 88px) !important;
+    max-height:calc(100vh - 88px) !important;
+    overflow:hidden !important;
     background:linear-gradient(to right,
       transparent calc(100% - 380px),
       #e8eaf0 calc(100% - 380px), #e8eaf0 calc(100% - 379px),
       #ffffff calc(100% - 379px)) !important;
+  }
+
+  html:has(body.og-page.og-work-on),
+  body.og-page.og-work-on{
+    overflow:hidden !important;
+    height:100% !important;
+  }
+  body.og-page.og-work-on main.container{
+    max-width:none !important;
+    padding:0 !important;
+    height:calc(100vh - 88px) !important;
+    overflow:hidden !important;
+  }
+  body.og-page.og-work-on .tool-area{
+    margin:0 !important;
+    padding:0 !important;
+    height:100% !important;
   }
 
   /* left column: page thumbnails */
@@ -1981,8 +2001,21 @@ html[data-theme="dark"] body.mg-page.mg-work-on .file-list .chip-x{
     grid-row:1 / span 2 !important;
     align-self:stretch !important;
     align-content:start !important;
-    padding:22px 24px 40px !important;
-    gap:14px !important;
+    min-height:0 !important;
+    overflow-y:auto !important;
+    padding:18px 20px 24px !important;
+    gap:10px !important;
+    grid-template-columns:repeat(auto-fill,minmax(118px,1fr)) !important;
+  }
+  body.og-page.og-work-on .thumbnail-card{
+    padding:7px !important;
+  }
+  body.og-page.og-work-on .thumbnail-card canvas,
+  body.og-page.og-work-on .thumbnail-card .page-preview{
+    min-height:0 !important;
+    max-height:138px !important;
+    height:auto !important;
+    object-fit:contain !important;
   }
 
   /* right column header: title + tools + hint */
@@ -2034,18 +2067,19 @@ html[data-theme="dark"] body.mg-page.mg-work-on .file-list .chip-x{
     padding:12px 8px !important;
   }
 
-  /* right column bottom: clear + save */
+  /* right column bottom: clear + save — pinned in first viewport */
   body.og-page.og-work-on .bottom-actions{
     grid-column:2 !important;
     grid-row:2 !important;
-    align-self:end !important;
+    align-self:stretch !important;
     display:flex !important;
     flex-direction:column !important;
     align-items:stretch !important;
     justify-content:flex-end !important;
     gap:12px !important;
     margin:0 !important;
-    padding:18px 26px 30px !important;
+    padding:18px 26px 24px !important;
+    min-height:0 !important;
   }
   body.og-page.og-work-on .bottom-actions .action-btn,
   body.og-page.og-work-on .bottom-actions .btn-merge{
