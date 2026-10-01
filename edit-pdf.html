@@ -749,7 +749,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <button class="ve-tool" data-tool="ellipse" title="Ellipse">&#9675;</button>
     <button class="ve-tool" data-tool="line" title="Line">&#9553;</button>
     <span class="ve-sep"></span>
-    <button class="ve-tool" id="ve-text-mode" title="Edit Text: highlight existing text and click to replace it">Edit Text</button>
+    <button class="ve-tool" id="ve-text-mode" title="Edit Text: change existing wording while keeping original font, size and color">Edit Text</button>
     <span class="ve-sep"></span>
     <span class="ve-tool-label">Style:</span>
     <button class="ve-tool" id="ve-bold" title="Bold"><b>B</b></button>
@@ -766,7 +766,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       <span id="ve-zoom-val">40%</span>
     </label>
     <button type="button" class="ve-tool" id="ve-zoom-in" title="Zoom in">+</button>
-    <span class="ve-hint">Click existing text to replace it. Double-click new text to edit. Drag to move. Delete key removes.</span>
+    <span class="ve-hint">Click existing text to edit wording only. Original font, size and color stay the same. Double-click new text to edit. Drag to move. Delete key removes.</span>
     <div class="ve-spacer"></div>
     <button class="ve-btn" id="ve-undo" title="Undo (Ctrl+Z)">&#8630;</button>
     <button class="ve-btn" id="ve-redo" title="Redo (Ctrl+Y)">&#8631;</button>
@@ -841,7 +841,7 @@ function saveAs(blob, name) {
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
-<script src="js/edit-pdf.min.js?v=8"></script>
+<script src="js/edit-pdf.min.js?v=9"></script>
 <script>
 (function () {
   'use strict';
