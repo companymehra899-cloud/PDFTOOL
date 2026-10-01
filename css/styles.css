@@ -479,14 +479,14 @@ body.ve-open .editor-overlay,
   gap: 8px;
 }
 .ve-inp.ve-zoom input[type="range"]{
-  width: 110px;
+  width: 140px;
   height: 6px;
   padding: 0;
   accent-color: var(--primary);
   cursor: pointer;
 }
 #ve-zoom-val{
-  min-width: 38px;
+  min-width: 44px;
   font-variant-numeric: tabular-nums;
   font-size: 12px;
   font-weight: 700;
