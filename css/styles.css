@@ -416,7 +416,7 @@ body.ve-open .editor-overlay,
 }
 .ve-btn.danger:hover{ background: #991b1b; border-color: #991b1b; }
 .ve-btn.danger:disabled{ background: #4c1d1d; border-color: #4c1d1d; }
-.ve-back-btn{ flex: 0 0 auto; }
+.ve-back-btn{ flex: 0 0 auto; position: relative; z-index: 8; pointer-events: auto; }
 
 .ve-toolbar{
   display: flex;

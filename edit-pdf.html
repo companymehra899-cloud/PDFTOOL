@@ -23,7 +23,7 @@
 
 <link rel="canonical" href="https://epdfconverter.com/edit-pdf">
 <script src="js/canonical.js?v=4"></script>
-<link rel="stylesheet" href="css/styles.css?v=18">
+<link rel="stylesheet" href="css/styles.css?v=19">
 <link rel="stylesheet" href="css/reference.css?v=49">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -740,7 +740,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 <!-- ============ VISUAL PDF EDITOR ============ -->
 <div class="editor-overlay" id="visual-editor" hidden>
   <div class="ve-toolbar" id="ve-toolbar">
-    <button class="ve-btn ve-back-btn" id="ve-back" title="Back">&#8592; Back</button>
+    <button type="button" class="ve-btn ve-back-btn" id="ve-back" title="Back">&#8592; Back</button>
     <span class="ve-title" id="ve-title">Editing PDF</span>
     <span class="ve-sep"></span>
     <span class="ve-tool-label">Add:</span>
@@ -841,14 +841,28 @@ function saveAs(blob, name) {
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
-<script src="js/edit-pdf.min.js?v=9"></script>
+<script src="js/edit-pdf.min.js?v=10"></script>
 <script>
 (function () {
   'use strict';
   var overlay = document.getElementById('visual-editor');
   var startBtn = document.getElementById('ed-start');
   var fileList = document.getElementById('ed-files');
+  var backBtn = document.getElementById('ve-back');
   var opening = false;
+  var closedByUser = false;
+  var lastCount = fileList ? fileList.children.length : 0;
+
+  function hideOverlay() {
+    closedByUser = true;
+    opening = false;
+    if (!overlay) return;
+    overlay.hidden = true;
+    overlay.setAttribute('hidden', '');
+    overlay.style.display = 'none';
+    overlay.classList.remove('ve-show');
+    document.body.classList.remove('ve-open');
+  }
 
   function showOverlay() {
     if (!overlay) return;
@@ -860,7 +874,7 @@ function saveAs(blob, name) {
   }
 
   function openWorkspace() {
-    if (opening || document.body.classList.contains('ve-open')) return;
+    if (opening || closedByUser || document.body.classList.contains('ve-open')) return;
     if (!fileList || !fileList.children.length) return;
     opening = true;
     showOverlay();
@@ -868,9 +882,20 @@ function saveAs(blob, name) {
     setTimeout(function () { opening = false; }, 400);
   }
 
+  if (backBtn) {
+    backBtn.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      hideOverlay();
+    });
+  }
+
   if (fileList) {
     new MutationObserver(function () {
-      if (fileList.children.length) setTimeout(openWorkspace, 20);
+      var count = fileList.children.length;
+      if (!count) closedByUser = false;
+      if (count > 0 && lastCount === 0) setTimeout(openWorkspace, 20);
+      lastCount = count;
     }).observe(fileList, { childList: true });
   }
 
