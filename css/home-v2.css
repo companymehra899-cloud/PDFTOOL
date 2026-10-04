@@ -1,6 +1,6 @@
 /* Homepage redesign — iLovePDF-style layout, scoped so tool pages stay unchanged */
 body.home-v2{
-  background:#f6f3ec;
+  background:#fff;
   color:#12211f;
 }
 body.home-v2 .nav{
@@ -41,7 +41,7 @@ body.home-v2 .nav-actions .btn{
 
 /* Hero */
 body.home-v2 .hp-hero{
-  background:radial-gradient(circle at 12% 18%,rgba(20,185,166,.16),transparent 34%),radial-gradient(circle at 88% 0%,rgba(245,158,11,.12),transparent 32%),linear-gradient(180deg,#fff 0%,#f6f3ec 100%);
+  background:#fff;
   text-align:center;
   padding:10px 0 8px;
 }
@@ -182,7 +182,7 @@ body.home-v2 .hp-dots{
 }
 
 /* Why / trust */
-body.home-v2 .hp-why{padding:48px 0 40px;background:#f6f3ec;text-align:center}
+body.home-v2 .hp-why{padding:48px 0 40px;background:#fff;text-align:center}
 body.home-v2 .hp-why .container{text-align:center}
 body.home-v2 .hp-why h2{font-size:28px;margin:0 auto 12px;letter-spacing:-.6px;color:#1a1a1a;text-align:center}
 body.home-v2 .hp-why-lead{max-width:720px;margin:0 auto 32px;font-size:16px;line-height:1.7;color:#5c5c5c;text-align:center}
@@ -225,7 +225,7 @@ body.home-v2 .hp-blog-card p{font-size:14px;line-height:1.6;color:#6b6b6b;margin
 body.home-v2 .hp-blog-more{margin:22px 0 0;font-size:15px;font-weight:700}
 body.home-v2 .hp-blog-more a{color:var(--primary,#0f766e)}
 
-body.home-v2 .hp-faq{background:#f6f3ec;padding:40px 0 24px;position:relative;z-index:5}
+body.home-v2 .hp-faq{background:#fff;padding:40px 0 24px;position:relative;z-index:5}
 body.home-v2 .hp-faq .container{text-align:center}
 body.home-v2 .hp-faq .section-title{font-size:28px !important;letter-spacing:-.6px;margin:0 auto 20px;text-align:center !important}
 body.home-v2 .hp-faq .section-title:before{content:none !important}
