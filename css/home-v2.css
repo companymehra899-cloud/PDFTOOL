@@ -10,7 +10,7 @@ body.home-v2 .nav{
   border-bottom:1px solid #eef2ff;
   box-shadow:0 1px 0 rgba(79,70,229,.04);
 }
-body.home-v2 .nav-inner{min-height:68px;gap:20px}
+body.home-v2 .nav-inner{min-height:68px;gap:12px}
 body.home-v2 .container,
 body.home-v2 .nav-inner.container{
   width:100%;
@@ -24,10 +24,10 @@ body.home-v2 .logo-mark{width:40px;height:40px;border-radius:12px;box-shadow:0 6
 body.home-v2 .logo-mark img{width:40px;height:40px}
 body.home-v2 .brand-wordmark{font-size:20px;letter-spacing:-.5px}
 body.home-v2 .brand-wordmark small{display:block;margin-top:3px;font-size:10px;font-weight:500;color:#6b7280}
-body.home-v2 .links{gap:28px;margin-left:8px;justify-content:flex-start;flex:1;height:auto;max-height:none}
+body.home-v2 .links{gap:6px;margin-left:4px;justify-content:flex-start;flex:1;height:auto;max-height:none}
 body.home-v2 .links>a,
-body.home-v2 .links .drop-toggle{font-size:14.5px;font-weight:600;color:#333}
-body.home-v2 .nav-actions{gap:10px}
+body.home-v2 .links .drop-toggle{font-size:14.5px;font-weight:600;color:#333;padding:6px 8px}
+body.home-v2 .nav-actions{gap:6px}
 body.home-v2 .nav-actions .btn{
   display:inline-flex;
   min-width:0;
