@@ -210,22 +210,23 @@
 
       var grid = $('#p2j-result');
       grid.innerHTML = '';
-      for (var i = 0; i < blobs.length; i++) {
+      blobs.forEach(function (file) {
         var item = mkEl('div', 'preview-item');
         var img = document.createElement('img');
-        img.src = URL.createObjectURL(blobs[i].blob);
-        img.alt = blobs[i].name;
+        img.src = URL.createObjectURL(file.blob);
+        img.alt = file.name;
         item.appendChild(img);
-        item.appendChild(mkEl('div', 'pv-name', blobs[i].name));
-        var link = mkEl('a', null, 'Download');
-        link.href = img.src;
-        link.download = blobs[i].name;
+        item.appendChild(mkEl('div', 'pv-name', file.name));
+        var link = mkEl('button', null, 'Download');
+        link.type = 'button';
         link.addEventListener('click', function (ev) {
+          ev.preventDefault();
           ev.stopPropagation();
+          saveAs(file.blob, file.name);
         });
         item.appendChild(link);
         grid.appendChild(item);
-      }
+      });
       toast('Converted ' + p2j.pageCount + ' page(s)');
     } catch (err) {
       console.error(err);

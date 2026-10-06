@@ -774,19 +774,9 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   </div>
 </div>
 
-<script>
-function saveAs(blob, name) {
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = name || 'download';
-  a.rel = 'noopener';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
-}
-</script>
+<script src="js/save-as.js?v=1"></script>
 <script src="js/vendor/qpdf/qpdf.js"></script>
-<script src="js/unlock-protect-pdf.js?v=6"></script>
+<script src="js/unlock-protect-pdf.js?v=7"></script>
 <script src="js/home.js?v=9"></script>
 <script src="js/reference.js?v=14"></script>
 <div id="google_translate_element" style="display:none"></div>

@@ -357,17 +357,8 @@
         mergedPdf.addPage(copiedPage);
       }
       var mergedPdfBytes = await mergedPdf.save();
-      var blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
-      var link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'organized_document_' + Date.now() + '.pdf';
-      document.body.appendChild(link);
-      link.click();
-      setTimeout(function () {
-        URL.revokeObjectURL(link.href);
-        link.remove();
-      }, 1500);
-      toast('Saved ' + allPagesList.length + ' page(s)');
+      saveAs(new Blob([mergedPdfBytes], { type: 'application/pdf' }), 'organized_document_' + Date.now() + '.pdf');
+      toast('Downloaded ' + allPagesList.length + ' page(s)');
     } catch (err) {
       console.error(err);
       toast('Error while generating PDF. Please check your files and try again.', true);
