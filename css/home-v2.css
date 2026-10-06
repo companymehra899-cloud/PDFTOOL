@@ -79,9 +79,7 @@ body.home-v2 .hp-hero h1{
 body.home-v2 .hp-hero h1 .hp-h1-top,
 body.home-v2 .hp-hero h1 .hp-h1-bot{display:block}
 body.home-v2 .hp-hero h1 .hp-h1-bot{color:#4f46e5}
-@media(min-width:1101px){
-  body.home-v2 .hp-hero h1 .hp-h1-top{white-space:nowrap}
-}
+body.home-v2 .hp-hero h1 .hp-h1-top{white-space:nowrap}
 body.home-v2 .hp-hero-copy > p{
   max-width:480px;
   margin:0 0 22px;
@@ -592,7 +590,8 @@ body.home-v2 .copyright-links a:hover{color:#fff}
   body.home-v2 .hp-why-grid{grid-template-columns:1fr}
   body.home-v2 .hp-dir{grid-template-columns:1fr;gap:22px}
   body.home-v2 .hp-hero{padding:24px 0 18px}
-  body.home-v2 .hp-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.8px;white-space:normal}
+  body.home-v2 .hp-hero h1{font-size:clamp(18px,5.4vw,28px);letter-spacing:-.5px;white-space:normal}
+  body.home-v2 .hp-hero h1 .hp-h1-top{white-space:nowrap}
   body.home-v2 .hp-hero-copy > p{font-size:15px;line-height:1.55}
   body.home-v2 .hp-hero-feats{flex-wrap:wrap}
   body.home-v2 .hp-hero-cta{flex-wrap:wrap}
