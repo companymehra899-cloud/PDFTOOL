@@ -2,9 +2,12 @@
   var CANONICAL_ORIGIN = "https://epdfconverter.com";
   var PAGES_BASE = "/PDFTOOL";
 
+  function isGithubPages() {
+    return /\.github\.io$/i.test(window.location.hostname || "");
+  }
+
   function siteBase() {
-    var host = window.location.hostname || "";
-    if (/\.github\.io$/i.test(host)) return PAGES_BASE;
+    if (isGithubPages()) return PAGES_BASE;
     return "";
   }
 
@@ -24,10 +27,14 @@
     return pathname || "/";
   }
 
+  function isErrorPath() {
+    var raw = String(window.location.pathname || "");
+    var path = cleanPath(raw);
+    return path === "/404" || /\/404\.html$/i.test(raw);
+  }
+
   function canonicalHref() {
-    var path = cleanPath(window.location.pathname);
-    if (path === "/404") path = "/";
-    return CANONICAL_ORIGIN + path;
+    return CANONICAL_ORIGIN + cleanPath(window.location.pathname);
   }
 
   function upsertMeta(attr, key, value) {
@@ -46,10 +53,21 @@
   }
 
   function applyCanonical() {
-    var href = canonicalHref();
     var head = document.head || document.getElementsByTagName("head")[0];
     if (!head) return;
 
+    if (isErrorPath()) {
+      upsertMeta("name", "robots", "noindex, follow");
+      var errLink = head.querySelector('link[rel="canonical"]');
+      if (errLink && errLink.parentNode) errLink.parentNode.removeChild(errLink);
+      return;
+    }
+
+    if (isGithubPages()) {
+      upsertMeta("name", "robots", "noindex, follow");
+    }
+
+    var href = canonicalHref();
     var link = head.querySelector('link[rel="canonical"]');
     if (!link) {
       link = document.createElement("link");

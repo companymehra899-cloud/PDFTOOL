@@ -23,12 +23,22 @@ const TRACKING_PARAMS = new Set([
 
 const ASSET_EXT = /\.(css|js|mjs|png|jpe?g|gif|svg|ico|webp|xml|txt|json|woff2?|map|webmanifest)$/i;
 
-const RESERVED_PATHS = new Set(["/404", "/404.html"]);
-
 const ALIASES = {
   "/image-compresser": "/image-compressor",
   "/image-resizer": "/photo-signature-resizer"
 };
+
+async function notFound(context) {
+  const res = await context.next();
+  const headers = new Headers(res.headers);
+  headers.set("X-Robots-Tag", "noindex, follow");
+  headers.set("Cache-Control", "no-store");
+  return new Response(res.body, {
+    status: 404,
+    statusText: "Not Found",
+    headers: headers
+  });
+}
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
@@ -44,8 +54,8 @@ export async function onRequest(context) {
     redirect = true;
   }
 
-  if (RESERVED_PATHS.has(path)) {
-    return context.next();
+  if (path === "/404" || path === "/404.html") {
+    return notFound(context);
   }
 
   if (/\/index\.html$/i.test(path)) {

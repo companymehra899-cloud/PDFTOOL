@@ -1,0 +1,7 @@
+/404
+  X-Robots-Tag: noindex, follow
+  Cache-Control: no-store
+
+/404.html
+  X-Robots-Tag: noindex, follow
+  Cache-Control: no-store
