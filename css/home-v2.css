@@ -364,7 +364,7 @@ body.home-v2 .hp-why-card p{font-size:13.5px;line-height:1.6;color:#6b6b6b;margi
 body.home-v2 .hp-blog{padding:48px 0 56px;background:#fff;text-align:center;border-top:0}
 body.home-v2 .hp-blog .container{text-align:center}
 body.home-v2 .hp-blog h2{font-size:32px;margin:0 auto 18px;letter-spacing:-.6px;color:#111827;text-align:center;font-weight:800}
-body.home-v2 .hp-blog-prose{max-width:920px;width:100%;margin:0 auto 28px;text-align:left}
+body.home-v2 .hp-blog-prose{max-width:none;width:100%;margin:0 0 28px;text-align:left}
 body.home-v2 .hp-blog-prose p{font-size:14.5px;line-height:1.85;color:#6b7280;margin:0}
 body.home-v2 .hp-blog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;text-align:left}
 body.home-v2 .hp-blog-card{
@@ -400,7 +400,7 @@ body.home-v2 .hp-backlinks{
   text-align:left;
   border-top:1px solid #eef2ff;
 }
-body.home-v2 .hp-dir-head{max-width:560px;margin:0 0 32px}
+body.home-v2 .hp-dir-head{max-width:none;margin:0 0 32px}
 body.home-v2 .hp-dir-kicker{
   display:inline-flex;
   margin:0 0 12px;
@@ -414,18 +414,19 @@ body.home-v2 .hp-dir-kicker{
   text-transform:uppercase;
 }
 body.home-v2 .hp-backlinks h2{
-  font-size:clamp(28px,3.2vw,40px);
+  font-size:clamp(26px,3vw,36px);
   margin:0 0 12px;
-  letter-spacing:-.8px;
+  letter-spacing:-.7px;
   color:#111827;
   text-align:left;
   font-weight:800;
-  line-height:1.15;
-  max-width:420px;
+  line-height:1.2;
+  max-width:none;
+  white-space:nowrap;
 }
 body.home-v2 .hp-backlinks .hp-dir-head p,
 body.home-v2 .hp-backlinks > .container > p{
-  max-width:560px;
+  max-width:none;
   margin:0;
   text-align:left;
   font-size:16px;
@@ -608,6 +609,7 @@ body.home-v2 .copyright-links a:hover{color:#fff}
   body.home-v2 .hp-blog h2,
   body.home-v2 .hp-backlinks h2,
   body.home-v2 .hp-faq .section-title{font-size:22px}
+  body.home-v2 .hp-backlinks h2{white-space:normal}
   body.home-v2 .hp-steps{flex-direction:column;align-items:flex-start;gap:18px}
   body.home-v2 .hp-step{max-width:100%;width:100%}
   body.home-v2 .hp-privacy-box{padding:18px 16px}
