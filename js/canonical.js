@@ -25,7 +25,9 @@
   }
 
   function canonicalHref() {
-    return CANONICAL_ORIGIN + cleanPath(window.location.pathname);
+    var path = cleanPath(window.location.pathname);
+    if (path === "/404") path = "/";
+    return CANONICAL_ORIGIN + path;
   }
 
   function upsertMeta(attr, key, value) {
