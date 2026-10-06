@@ -831,7 +831,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 </script>
-<script src="js/edit-pdf.min.js?v=11"></script>
+<script src="js/edit-pdf.min.js?v=12"></script>
 <script>
 (function () {
   'use strict';
@@ -843,8 +843,21 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   var closedByUser = false;
   var lastCount = fileList ? fileList.children.length : 0;
 
+  function resetUpload() {
+    var clearBtn = document.getElementById('ed-clear');
+    if (clearBtn) clearBtn.click();
+    var input = document.getElementById('ed-input');
+    if (input) input.value = '';
+    if (fileList) fileList.innerHTML = '';
+    var opts = document.getElementById('ed-upload-options');
+    if (opts) opts.classList.remove('show');
+    if (startBtn) startBtn.disabled = true;
+    lastCount = 0;
+    closedByUser = false;
+    opening = false;
+  }
+
   function hideOverlay() {
-    closedByUser = true;
     opening = false;
     if (!overlay) return;
     overlay.hidden = true;
@@ -872,13 +885,16 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     setTimeout(function () { opening = false; }, 400);
   }
 
-  if (backBtn) {
-    backBtn.addEventListener('click', function (ev) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      hideOverlay();
-    });
+  function onBack(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    hideOverlay();
+    resetUpload();
   }
+
+  if (backBtn) backBtn.addEventListener('click', onBack, true);
+  var pageBack = document.getElementById('ed-back');
+  if (pageBack) pageBack.addEventListener('click', onBack, true);
 
   if (fileList) {
     new MutationObserver(function () {
