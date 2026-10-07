@@ -385,7 +385,6 @@ body.ve-open .editor-overlay,
   display: flex !important;
 }
 
-.ve-header{ display: none; }
 .ve-title{
   font-weight: 700;
   font-size: 14px;

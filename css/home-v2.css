@@ -389,10 +389,6 @@ body.home-v2 .hp-faq .faq-item{background:#fff;border:1px solid #e4ebe8;border-r
 body.home-v2 .hp-faq .faq-q{padding:0}
 body.home-v2 .hp-faq .faq-q-inner{padding:12px 16px;min-height:0}
 body.home-v2 .hp-faq .faq-answer p{padding:0 16px 12px}
-body.home-v2 .hp-empty{
-  display:none;text-align:center;padding:28px;color:#6b7280;font-weight:600;
-}
-body.home-v2 .hp-empty.show{display:block}
 
 body.home-v2 .hp-backlinks{
   padding:64px 0 72px;
@@ -469,8 +465,6 @@ body.home-v2 .hp-dir-ico svg{width:18px;height:18px;stroke:currentColor;fill:non
 body.home-v2 .hp-dir-copy{min-width:0;display:flex;flex-direction:column;gap:2px}
 body.home-v2 .hp-dir-copy strong{font-size:15px;color:#111827;font-weight:700;letter-spacing:-.2px}
 body.home-v2 .hp-dir-copy em{font-style:normal;font-size:13px;line-height:1.4;color:#6b7280;font-weight:500}
-body.home-v2 .hp-backlink-grid,
-body.home-v2 .hp-backlink-card{display:none}
 body.home-v2 .hp-hero-copy > p a{white-space:nowrap}
 body.home-v2 .hp-hero a,
 body.home-v2 .hp-why-lead a,
@@ -657,7 +651,6 @@ html[data-theme="dark"] body.home-v2 .hp-pop h3,
 html[data-theme="dark"] body.home-v2 .hp-step h3,
 html[data-theme="dark"] body.home-v2 .hp-why-card h3,
 html[data-theme="dark"] body.home-v2 .hp-blog-card h3,
-html[data-theme="dark"] body.home-v2 .hp-backlink-grid h3,
 html[data-theme="dark"] body.home-v2 .hp-hero-feats strong,
 html[data-theme="dark"] body.home-v2 .hp-dir-copy strong{color:#e7ebf4}
 html[data-theme="dark"] body.home-v2 .hp-hero-copy > p,
@@ -672,8 +665,7 @@ html[data-theme="dark"] body.home-v2 .hp-privacy-copy p,
 html[data-theme="dark"] body.home-v2 .hp-hero-feats em,
 html[data-theme="dark"] body.home-v2 .hp-backlinks > .container > p,
 html[data-theme="dark"] body.home-v2 .hp-dir-head p,
-html[data-theme="dark"] body.home-v2 .hp-dir-copy em,
-html[data-theme="dark"] body.home-v2 .hp-backlink-grid li{color:#97a2b9}
+html[data-theme="dark"] body.home-v2 .hp-dir-copy em{color:#97a2b9}
 html[data-theme="dark"] body.home-v2 .hp-popular,
 html[data-theme="dark"] body.home-v2 .hp-explore,
 html[data-theme="dark"] body.home-v2 .hp-privacy,
@@ -702,14 +694,11 @@ html[data-theme="dark"] body.home-v2 .hp-faq .faq-item{background:#102422;border
 html[data-theme="dark"] body.home-v2 .hp-why,
 html[data-theme="dark"] body.home-v2 .hp-faq{background:#071412}
 html[data-theme="dark"] body.home-v2 .hp-why-card,
-html[data-theme="dark"] body.home-v2 .hp-blog-card,
-html[data-theme="dark"] body.home-v2 .hp-backlink-grid > div,
-html[data-theme="dark"] body.home-v2 .hp-backlink-card{background:#17132c;border-color:transparent}
+html[data-theme="dark"] body.home-v2 .hp-blog-card{background:#17132c;border-color:transparent}
 html[data-theme="dark"] body.home-v2 .hp-backlinks{background:#0b1220;border-top-color:#24403c}
 html[data-theme="dark"] body.home-v2 .hp-dir-kicker{background:#17132c;color:#c4b5fd}
 html[data-theme="dark"] body.home-v2 .hp-dir-col h3{color:#c4b5fd;border-bottom-color:#27314a}
 html[data-theme="dark"] body.home-v2 .hp-dir-row:hover{background:#17132c}
-html[data-theme="dark"] body.home-v2 .hp-backlink-grid a,
 html[data-theme="dark"] body.home-v2 .hp-hero a,
 html[data-theme="dark"] body.home-v2 .hp-why-lead a,
 html[data-theme="dark"] body.home-v2 .hp-why-card a,

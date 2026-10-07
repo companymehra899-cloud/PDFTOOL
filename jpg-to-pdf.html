@@ -23,8 +23,8 @@
 
 <link rel="canonical" href="https://epdfconverter.com/jpg-to-pdf">
 <script src="js/canonical.js?v=6"></script>
-<link rel="stylesheet" href="css/styles.css?v=21">
-<link rel="stylesheet" href="css/reference.css?v=55">
+<link rel="stylesheet" href="css/styles.css?v=22">
+<link rel="stylesheet" href="css/reference.css?v=56">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -269,53 +269,12 @@
   }
   .j2p-page #j2p-options{max-width:920px;margin-left:auto;margin-right:auto}
 
-  .j2p-features{
-    position:relative;
-    z-index:1;
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    background:#fff;
-    border:1px solid #efeafc;
-    border-radius:22px;
-    margin:18px 0 8px;
-    box-shadow:0 12px 36px rgba(81,52,244,.06);
-    overflow:hidden;
-  }
-  .j2p-feat{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:22px 16px 22px 18px;
-    border-right:1px solid #f1edfa;
-    min-width:0;
-  }
-  .j2p-feat > div{
-    min-width:0;
-    flex:1 1 auto;
-  }
-  .j2p-feat:last-child{border-right:0}
-  .j2p-feat-ico{
-    width:42px;height:42px;border-radius:50%;flex:none;
-    display:grid;place-items:center;
-  }
-  .j2p-feat-ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .j2p-feat-ico.g{background:#eef2ff;color:#2563eb}
-  .j2p-feat-ico.p{background:#f3e8ff;color:#7c3aed}
-  .j2p-feat-ico.b{background:#eef4ff;color:#3b82f6}
-  .j2p-feat-ico.o{background:#f5f3ff;color:#7c3aed}
-  .j2p-feat b{display:block;font-size:14.5px;color:#16122c;margin-bottom:4px;letter-spacing:-.2px;white-space:nowrap}
-  .j2p-feat > div span{display:block;font-size:12.5px;line-height:1.45;color:#6b7280;font-weight:500}
-
   @media(max-width:980px){
     .j2p-deco-pdf-l,.j2p-deco-pdf-r,.j2p-deco-curve-l,.j2p-deco-curve-r{opacity:.28}
     .j2p-leaf-l,.j2p-leaf-r{width:150px;opacity:.4}
     .j2p-upload-stage{width:85%;max-width:85%}
     #j2p-dropzone{padding:28px 13px 22px;border-radius:28px;min-height:210px}
     #j2p-dropzone .dz-title{font-size:18px}
-    .j2p-features{grid-template-columns:1fr 1fr}
-    .j2p-feat:nth-child(2){border-right:0}
-    .j2p-feat{border-bottom:1px solid #f1edfa}
-    .j2p-feat:nth-last-child(-n+2){border-bottom:0}
   }
   @media(max-width:640px){
     .j2p-deco{display:none}
@@ -323,9 +282,6 @@
     #j2p-dropzone{padding:22px 10px 18px;min-height:0}
     #j2p-dropzone .dz-title{font-size:16px}
     #j2p-dropzone .j2p-illu svg{width:118px;height:66px}
-    .j2p-features{grid-template-columns:1fr}
-    .j2p-feat{border-right:0;border-bottom:1px solid #f1edfa}
-    .j2p-feat:last-child{border-bottom:0}
      .j2p-page .home-hero.tool-hero h1{font-size:clamp(26px,8vw,40px);letter-spacing:-.6px;overflow-wrap:break-word}
   }
 
@@ -344,17 +300,10 @@
   }
   html[data-theme="dark"] #j2p-dropzone .dz-title{color:#eef1ff}
   html[data-theme="dark"] #j2p-dropzone .dz-sub,html[data-theme="dark"] #j2p-dropzone .j2p-or{color:#97a2b9}
-  html[data-theme="dark"] .j2p-features{background:#131b2f;border-color:#27314a}
-  html[data-theme="dark"] .j2p-feat{border-color:#27314a}
-  html[data-theme="dark"] .j2p-feat b{color:#e7ebf4}
-  html[data-theme="dark"] .j2p-feat span{color:#97a2b9}
 
   /* Focus mode: show only the workspace after files are loaded */
   body.j2p-work-on .home-hero,
   body.j2p-work-on .home-section,
-  body.j2p-work-on .privacy-banner,
-  body.j2p-work-on .cta-banner,
-  body.j2p-work-on .j2p-features,
   body.j2p-work-on .page-meta,
   body.j2p-work-on footer{display:none}
   body.j2p-work-on .tool-area{margin-top:22px;padding-bottom:40px}
