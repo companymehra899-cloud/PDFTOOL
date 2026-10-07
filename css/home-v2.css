@@ -380,13 +380,15 @@ body.home-v2 .hp-blog-card p{font-size:14px;line-height:1.6;color:#6b6b6b;margin
 body.home-v2 .hp-blog-more{margin:22px 0 0;font-size:15px;font-weight:700}
 body.home-v2 .hp-blog-more a{color:var(--primary,#4f46e5)}
 
-body.home-v2 .hp-faq{background:#fff;padding:64px 0 48px;position:relative;z-index:5}
+body.home-v2 .hp-faq{background:#fff;padding:48px 0 40px;position:relative;z-index:5}
 body.home-v2 .hp-faq .container{text-align:center}
-body.home-v2 .hp-faq .section-title{font-size:32px !important;letter-spacing:-.6px;margin:0 auto 28px;text-align:center !important;color:#0b1f1c}
+body.home-v2 .hp-faq .section-title{font-size:32px !important;letter-spacing:-.6px;margin:0 auto 22px;text-align:center !important;color:#0b1f1c}
 body.home-v2 .hp-faq .section-title:before{content:none !important}
-body.home-v2 .hp-faq .faq{text-align:left;background:transparent;border:0;border-radius:0;max-width:820px;margin:0 auto}
-body.home-v2 .hp-faq .faq-item{background:#fff;border:1px solid #e4ebe8;border-radius:14px;margin:0 0 10px;overflow:hidden}
-body.home-v2 .hp-faq .faq-q{padding:16px 18px}
+body.home-v2 .hp-faq .faq{text-align:left;background:transparent;border:0;border-radius:0;width:100%;max-width:680px;margin:0 auto}
+body.home-v2 .hp-faq .faq-item{background:#fff;border:1px solid #e4ebe8;border-radius:12px;margin:0 0 8px;overflow:hidden}
+body.home-v2 .hp-faq .faq-q{padding:0}
+body.home-v2 .hp-faq .faq-q-inner{padding:12px 16px;min-height:0}
+body.home-v2 .hp-faq .faq-answer p{padding:0 16px 12px}
 body.home-v2 .hp-empty{
   display:none;text-align:center;padding:28px;color:#6b7280;font-weight:600;
 }
