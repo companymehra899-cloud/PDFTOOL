@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KD52QW4H58"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -11,8 +13,6 @@
   <meta name="google-site-verification" content="7SfoxK9uObn5FbYZsQmLXBCYrcOpK3nkLQhVJ5PUyHA" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4950591805545835"
      crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Us – Get Support | ePDFConverter</title>
 
 <meta name="description" content="Contact ePDFConverter. Send us your questions, feedback or support requests using the form below or email support@epdfconverter.com.">
@@ -21,7 +21,7 @@
 
 <link rel="canonical" href="https://epdfconverter.com/contact">
 <script src="js/canonical.js?v=6"></script>
-<link rel="stylesheet" href="css/reference.css?v=58">
+<link rel="stylesheet" href="css/reference.css?v=59">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -81,6 +81,9 @@
   }
   .form-row .input.invalid, .form-row textarea.invalid { border-color: var(--danger); }
   .contact-form-card .btn { width: 100%; }
+  .cf-status { margin: 0 0 14px; padding: 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 600; }
+  .cf-status.is-ok { background: #ecfdf5; color: #047857; }
+  .cf-status.is-err { background: #fef2f2; color: #b91c1c; }
   .contact-info-card h2 { font-size: 21px; margin-bottom: 6px; }
   .contact-info-card > p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
   .info-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
@@ -168,6 +171,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
 <!-- SEO-SCHEMA:END -->
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <header class="nav">
   <div class="container nav-inner">
@@ -216,7 +220,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   </div>
 </header>
 
-<main class="container">
+<main id="main-content" class="container">
 
   <!-- Hero -->
   <section class="home-hero contact-hero" aria-labelledby="contact-h1">
@@ -247,6 +251,8 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
           <label for="cf-message">Message</label>
           <textarea id="cf-message" name="message" placeholder="Write your message here..." required></textarea>
         </div>
+        <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="cf-status" id="cf-status" role="status" aria-live="polite" hidden></p>
         <button type="submit" class="btn primary" id="cf-submit">Send Message</button>
       </form>
     </div>
@@ -356,23 +362,61 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       field.addEventListener('input', function () { field.classList.remove('invalid'); });
     });
 
+    var statusEl = document.getElementById('cf-status');
+    function setStatus(msg, isErr) {
+      if (!statusEl) return;
+      statusEl.hidden = !msg;
+      statusEl.textContent = msg || '';
+      statusEl.classList.toggle('is-ok', !!msg && !isErr);
+      statusEl.classList.toggle('is-err', !!msg && isErr);
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!validate()) {
+        setStatus('Please fill in all fields with a valid email address.', true);
         toast('Please fill in all fields with a valid email address', true);
         return;
       }
-      var body = 'Name: ' + name.value.trim() + '\n\nEmail: ' + email.value.trim() + '\n\nSubject: ' + subject.value.trim() + '\n\nMessage:\n' + message.value.trim();
+      var honey = form.querySelector('input[name="_honey"]');
+      if (honey && honey.value) {
+        setStatus('Message sent. We will reply soon.', false);
+        form.reset();
+        return;
+      }
+      var payload = {
+        name: name.value.trim(),
+        email: email.value.trim(),
+        subject: subject.value.trim(),
+        message: message.value.trim(),
+        _subject: 'ePDFConverter contact: ' + subject.value.trim(),
+        _replyto: email.value.trim(),
+        _honey: ''
+      };
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Opening your email app...';
-      var mailto = 'mailto:support@epdfconverter.com?subject=' + encodeURIComponent(subject.value.trim()) + '&body=' + encodeURIComponent(body);
-      window.location.href = mailto;
-      setTimeout(function () {
-        toast('Thank you! Your email draft has been opened. If it did not open, email us directly at support@epdfconverter.com.');
+      submitBtn.textContent = 'Sending...';
+      setStatus('');
+      fetch('https://formsubmit.co/ajax/support@epdfconverter.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        if (!res.ok) throw new Error('send-failed');
+        return res.json();
+      }).then(function () {
+        toast('Message sent. We will reply to ' + email.value.trim() + '.');
+        setStatus('Message sent. We will reply to ' + email.value.trim() + '.', false);
+        form.reset();
+      }).catch(function () {
+        var body = 'Name: ' + payload.name + '\n\nEmail: ' + payload.email + '\n\nSubject: ' + payload.subject + '\n\nMessage:\n' + payload.message;
+        var mailto = 'mailto:support@epdfconverter.com?subject=' + encodeURIComponent(payload.subject) + '&body=' + encodeURIComponent(body);
+        setStatus('Could not send from this browser. Email us at support@epdfconverter.com, or use the mail link below.', true);
+        toast('Could not send automatically. Opening your email app as a backup.', true);
+        window.location.href = mailto;
+      }).then(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Message';
-        form.reset();
-      }, 1200);
+      });
     });
   })();
 </script>

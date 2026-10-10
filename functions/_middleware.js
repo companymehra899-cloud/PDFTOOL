@@ -28,9 +28,29 @@ const ALIASES = {
   "/image-resizer": "/photo-signature-resizer"
 };
 
+function withSecurityHeaders(headers) {
+  const next = new Headers(headers);
+  if (!next.has("Strict-Transport-Security")) {
+    next.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+  }
+  if (!next.has("X-Content-Type-Options")) {
+    next.set("X-Content-Type-Options", "nosniff");
+  }
+  if (!next.has("X-Frame-Options")) {
+    next.set("X-Frame-Options", "SAMEORIGIN");
+  }
+  if (!next.has("Referrer-Policy")) {
+    next.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  }
+  if (!next.has("Permissions-Policy")) {
+    next.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  }
+  return next;
+}
+
 async function notFound(context) {
   const res = await context.next();
-  const headers = new Headers(res.headers);
+  const headers = withSecurityHeaders(res.headers);
   headers.set("X-Robots-Tag", "noindex, follow");
   headers.set("Cache-Control", "no-store");
   return new Response(res.body, {
@@ -91,7 +111,12 @@ export async function onRequest(context) {
   });
 
   if (!redirect) {
-    return context.next();
+    const res = await context.next();
+    return new Response(res.body, {
+      status: res.status,
+      statusText: res.statusText,
+      headers: withSecurityHeaders(res.headers)
+    });
   }
 
   const search = kept.toString();

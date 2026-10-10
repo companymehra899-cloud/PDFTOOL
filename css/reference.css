@@ -31,6 +31,9 @@ html{scrollbar-gutter:stable}
 body{font-family:"Plus Jakarta Sans",Inter,Arial,sans-serif;color:var(--text);background:#fff;line-height:1.55;overflow-x:clip}
 a{text-decoration:none;color:inherit}
 .container{width:100%;max-width:1440px;margin:0 auto;padding:0 24px;box-sizing:border-box}
+.skip-link{position:absolute;left:16px;top:-48px;z-index:1000;padding:10px 16px;border-radius:10px;background:#4f46e5;color:#fff;font-weight:700;font-size:14px}
+.skip-link:focus{top:12px;outline:2px solid #fff;outline-offset:2px}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* NAV */
 .nav{height:72px;border-bottom:1px solid #eef2ff;background:#fff;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:center;position:sticky;top:0;z-index:20;box-shadow:0 1px 0 rgba(79,70,229,.04)}

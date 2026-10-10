@@ -5,7 +5,7 @@
   var empty = document.getElementById('tool-empty');
   if (!input || !cards.length) return;
 
-  function filter() {
+  function filter(scroll) {
     var q = (input.value || '').trim().toLowerCase();
     var shown = 0;
     cards.forEach(function (card) {
@@ -14,22 +14,28 @@
       card.classList.toggle('is-hidden', !ok);
       if (ok) shown += 1;
     });
-    if (empty) empty.classList.toggle('show', !!q && shown === 0);
+    if (empty) {
+      var none = !!q && shown === 0;
+      empty.hidden = !none;
+      empty.classList.toggle('show', none);
+    }
+    if (scroll && q) {
+      var tools = document.getElementById('all-tools');
+      if (tools) tools.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
-  input.addEventListener('input', filter);
+  input.addEventListener('input', function () { filter(false); });
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      filter();
-      var tools = document.getElementById('all-tools');
-      if (tools) tools.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      filter(true);
     });
   }
 
   var params = new URLSearchParams(window.location.search);
   if (params.get('q')) {
     input.value = params.get('q');
-    filter();
+    filter(true);
   }
 })();

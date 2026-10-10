@@ -39,6 +39,21 @@ body.home-v2 .nav-actions .btn{
   box-shadow:none;
 }
 
+body.home-v2 .hp-tool-search{display:flex;gap:8px;margin:0 0 18px;max-width:520px}
+body.home-v2 .hp-tool-search input{
+  flex:1;min-width:0;height:44px;padding:0 14px;border:1px solid #e4e7f5;border-radius:10px;
+  background:#fff;color:#12211f;font:inherit;font-size:14.5px
+}
+body.home-v2 .hp-tool-search input:focus{outline:2px solid #4f46e5;outline-offset:1px;border-color:#4f46e5}
+body.home-v2 .hp-tool-search button{
+  height:44px;padding:0 16px;border:0;border-radius:10px;background:#4f46e5;color:#fff;
+  font:inherit;font-size:14px;font-weight:700;cursor:pointer
+}
+body.home-v2 .hp-search-empty{margin:0 0 14px;color:#b45309;font-size:14px;font-weight:600}
+body.home-v2 .hp-card.is-hidden{display:none}
+html[data-theme="dark"] body.home-v2 .hp-tool-search input{background:#17132c;border-color:#2a2d45;color:#eef0f8}
+html[data-theme="dark"] body.home-v2 .hp-search-empty{color:#fbbf24}
+
 /* Hero — two-column */
 body.home-v2 .hp-hero{
   background:

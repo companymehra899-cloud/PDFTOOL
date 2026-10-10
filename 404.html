@@ -44,13 +44,16 @@ p{color:var(--muted);margin:0 auto 24px;max-width:420px}
 .tools{margin-top:26px;font-size:14px;color:var(--muted)}
 .tools a{color:var(--brand);text-decoration:none;margin:0 6px}
 .tools a:hover{text-decoration:underline}
+.skip-link{position:absolute;left:16px;top:-48px;z-index:1000;padding:10px 16px;border-radius:10px;background:var(--brand);color:#fff;font-weight:700;font-size:14px;text-decoration:none}
+.skip-link:focus{top:12px;outline:2px solid #fff;outline-offset:2px}
 </style>
 <script>
 try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}
 </script>
 </head>
 <body>
-<main class="wrap">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<main id="main-content" class="wrap">
   <a class="logo" href="/" aria-label="ePDFConverter home">
     <img src="icons/logo-mark-2x.png" width="40" height="40" alt="">
     ePDFConverter
