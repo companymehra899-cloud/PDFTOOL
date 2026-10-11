@@ -379,7 +379,10 @@
     syncOptions();
   });
 
-  var targetParam = (new URLSearchParams(window.location.search).get('target') || '').trim().toLowerCase();
+  var targetParam = (window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
+  if (!targetParam) {
+    targetParam = (new URLSearchParams(window.location.search).get('target') || '').trim().toLowerCase();
+  }
   var m = targetParam.match(/^(\d+(?:\.\d+)?)(kb|mb)$/);
   if (m) {
     var bytes = parseFloat(m[1]) * (m[2] === 'mb' ? 1024 * 1024 : 1024);

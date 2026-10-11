@@ -3,7 +3,7 @@ import os
 import re
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qsl, unquote, urlencode
+from urllib.parse import parse_qsl, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 os.chdir(ROOT)
@@ -11,27 +11,13 @@ os.chdir(ROOT)
 ALIASES = {
     "/image-compresser": "/image-compressor",
     "/image-resizer": "/photo-signature-resizer",
+    "/blog-image-resizer": "/blog-resize-images",
 }
 
-TRACKING_PARAMS = {
-    "utm_source",
-    "utm_medium",
-    "utm_campaign",
-    "utm_term",
-    "utm_content",
-    "utm_id",
-    "gclid",
-    "gbraid",
-    "wbraid",
-    "fbclid",
-    "msclkid",
-    "ttclid",
-    "ref",
-    "mc_cid",
-    "mc_eid",
-    "_ga",
-    "yclid",
-}
+ASSET_EXT = re.compile(
+    r"\.(css|js|mjs|png|jpe?g|gif|svg|ico|webp|xml|txt|json|woff2?|map|webmanifest)$",
+    re.I,
+)
 
 
 class RewriteHandler(SimpleHTTPRequestHandler):
@@ -67,17 +53,25 @@ class RewriteHandler(SimpleHTTPRequestHandler):
             path = alias
             redirect = True
 
-        kept = [(k, v) for k, v in query if k.lower() not in TRACKING_PARAMS]
-        if len(kept) != len(query):
+        if ASSET_EXT.search(path):
+            return None
+
+        fragment = ""
+        if query:
             redirect = True
+            for key, value in query:
+                lower = key.lower()
+                if lower == "target" and value:
+                    fragment = "#" + value.lower()
+                elif lower == "kb" and value:
+                    fragment = "#" + value.lower() + "kb"
+                elif lower == "mb" and value:
+                    fragment = "#" + value.lower() + "mb"
 
         if not redirect:
             return None
 
-        dest = path
-        if kept:
-            dest += "?" + urlencode(kept)
-        return dest
+        return path + fragment
 
     def send_canonical_redirect(self):
         dest = self.canonical_location()
@@ -132,7 +126,8 @@ class RewriteHandler(SimpleHTTPRequestHandler):
                 self.send_response(404)
                 self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.send_header("Content-Length", str(len(body)))
-                self.send_header("Cache-Control", "no-cache")
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("X-Robots-Tag", "noindex, follow")
                 self.end_headers()
                 if self.command != "HEAD":
                     self.wfile.write(body)

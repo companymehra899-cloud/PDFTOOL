@@ -9,6 +9,8 @@
 /image-compresser  /image-compressor  301
 /image-resizer     /photo-signature-resizer  301
 /image-resizer.html /photo-signature-resizer  301
+/blog-image-resizer /blog-resize-images  301
+/blog-image-resizer.html /blog-resize-images  301
 
 # .html -> clean URL
 /index.html                   /                             301

@@ -417,20 +417,35 @@
   });
 
   var params = new URLSearchParams(window.location.search);
+  var hash = (window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
+  var hashMatch = hash.match(/^(\d+(?:\.\d+)?)(kb|mb)$/);
   var kbParam = parseInt(params.get('kb'), 10);
-  if (!isNaN(kbParam) && kbParam > 0) {
+  var mbParam = parseInt(params.get('mb'), 10);
+  if (hashMatch) {
+    var amount = parseFloat(hashMatch[1]);
+    if (hashMatch[2] === 'mb') {
+      selectKb(amount * 1024);
+      var mbTitle = 'Resize Image to ' + amount + 'MB Online';
+      document.title = mbTitle;
+      var mbH1 = document.getElementById('ir-h1');
+      if (mbH1) mbH1.textContent = mbTitle;
+    } else {
+      selectKb(amount);
+      document.title = 'Resize Image to ' + amount + 'KB Online';
+      var h1 = document.getElementById('ir-h1');
+      if (h1) h1.textContent = 'Resize Image to ' + amount + 'KB Online';
+    }
+  } else if (!isNaN(kbParam) && kbParam > 0) {
     selectKb(kbParam);
     document.title = 'Resize Image to ' + kbParam + 'KB Online';
-    var h1 = document.getElementById('ir-h1');
-    if (h1) h1.textContent = 'Resize Image to ' + kbParam + 'KB Online';
-  }
-  var mbParam = parseInt(params.get('mb'), 10);
-  if (!isNaN(mbParam) && mbParam > 0) {
+    var kbH1 = document.getElementById('ir-h1');
+    if (kbH1) kbH1.textContent = 'Resize Image to ' + kbParam + 'KB Online';
+  } else if (!isNaN(mbParam) && mbParam > 0) {
     selectKb(mbParam * 1024);
-    var mbTitle = 'Resize Image to ' + mbParam + 'MB Online';
-    document.title = mbTitle;
-    var mbH1 = document.getElementById('ir-h1');
-    if (mbH1) mbH1.textContent = mbTitle;
+    var mbFallbackTitle = 'Resize Image to ' + mbParam + 'MB Online';
+    document.title = mbFallbackTitle;
+    var mbFallbackH1 = document.getElementById('ir-h1');
+    if (mbFallbackH1) mbFallbackH1.textContent = mbFallbackTitle;
   }
 
   $('#ir-run').disabled = true;

@@ -1,31 +1,9 @@
-const TRACKING_PARAMS = new Set([
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_term",
-  "utm_content",
-  "utm_id",
-  "gclid",
-  "gbraid",
-  "wbraid",
-  "fbclid",
-  "msclkid",
-  "ttclid",
-  "ref",
-  "mc_cid",
-  "mc_eid",
-  "_ga",
-  "yclid",
-  "g_fsrc",
-  "gad_source",
-  "gad_campaignid"
-]);
-
 const ASSET_EXT = /\.(css|js|mjs|png|jpe?g|gif|svg|ico|webp|xml|txt|json|woff2?|map|webmanifest)$/i;
 
 const ALIASES = {
   "/image-compresser": "/image-compressor",
-  "/image-resizer": "/photo-signature-resizer"
+  "/image-resizer": "/photo-signature-resizer",
+  "/blog-image-resizer": "/blog-resize-images"
 };
 
 function withSecurityHeaders(headers) {
@@ -101,17 +79,29 @@ export async function onRequest(context) {
     path = "/" + path;
   }
 
-  const kept = new URLSearchParams();
-  url.searchParams.forEach(function (value, key) {
-    if (!TRACKING_PARAMS.has(key.toLowerCase())) {
-      kept.append(key, value);
-    } else {
-      redirect = true;
-    }
-  });
+  let hash = "";
+  if (url.search) {
+    redirect = true;
+    url.searchParams.forEach(function (value, key) {
+      const k = key.toLowerCase();
+      if (k === "target" && value) hash = "#" + String(value).toLowerCase();
+      if (k === "kb" && value) hash = "#" + String(value).toLowerCase() + "kb";
+      if (k === "mb" && value) hash = "#" + String(value).toLowerCase() + "mb";
+    });
+  }
 
   if (!redirect) {
     const res = await context.next();
+    if (res.status === 404) {
+      const headers = withSecurityHeaders(res.headers);
+      headers.set("X-Robots-Tag", "noindex, follow");
+      headers.set("Cache-Control", "no-store");
+      return new Response(res.body, {
+        status: 404,
+        statusText: "Not Found",
+        headers: headers
+      });
+    }
     return new Response(res.body, {
       status: res.status,
       statusText: res.statusText,
@@ -119,7 +109,6 @@ export async function onRequest(context) {
     });
   }
 
-  const search = kept.toString();
-  const dest = path + (search ? "?" + search : "");
+  const dest = path + hash;
   return Response.redirect(new URL(dest, url.origin).href, 301);
 }

@@ -10,4 +10,3 @@ Disallow: /404
 Disallow: /404.html
 
 Sitemap: https://epdfconverter.com/sitemap.xml
-Host: https://epdfconverter.com

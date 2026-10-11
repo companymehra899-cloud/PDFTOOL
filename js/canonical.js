@@ -56,15 +56,14 @@
     var head = document.head || document.getElementsByTagName("head")[0];
     if (!head) return;
 
-    if (isErrorPath()) {
+    if (isErrorPath() || isGithubPages()) {
       upsertMeta("name", "robots", "noindex, follow");
-      var errLink = head.querySelector('link[rel="canonical"]');
-      if (errLink && errLink.parentNode) errLink.parentNode.removeChild(errLink);
-      return;
-    }
-
-    if (isGithubPages()) {
-      upsertMeta("name", "robots", "noindex, follow");
+      upsertMeta("name", "googlebot", "noindex, follow");
+      if (isErrorPath()) {
+        var errLink = head.querySelector('link[rel="canonical"]');
+        if (errLink && errLink.parentNode) errLink.parentNode.removeChild(errLink);
+        return;
+      }
     }
 
     var href = canonicalHref();
