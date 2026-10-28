@@ -89,7 +89,7 @@ a{text-decoration:none;color:inherit}
 .lang-drop .caret svg{width:14px;height:14px;display:block;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .lang-drop .drop-menu{left:auto;right:0;transform:translateY(6px);min-width:180px}
 .lang-drop.open .drop-menu{transform:translateY(0)}
-.lang-option{display:flex;align-items:center;gap:8px;cursor:pointer}
+.lang-option{display:flex;align-items:center;gap:8px;cursor:pointer;width:100%;border:0;background:transparent;font:inherit;text-align:left;color:inherit}
 .lang-option.active{background:#eef2ff;color:var(--primary)}
 .lang-option.active::after{content:"\2713";margin-left:auto;font-size:12px;font-weight:800}
 html[data-theme="dark"] .lang-drop .drop-toggle{color:#dfe4ee}

@@ -1,9 +1,18 @@
 (function () {
   var CANONICAL_ORIGIN = "https://epdfconverter.com";
   var PAGES_BASE = "/PDFTOOL";
+  var INDEXABLE_HOSTS = { "epdfconverter.com": 1, "www.epdfconverter.com": 1 };
+
+  function hostName() {
+    return String(window.location.hostname || "").toLowerCase();
+  }
 
   function isGithubPages() {
-    return /\.github\.io$/i.test(window.location.hostname || "");
+    return /\.github\.io$/i.test(hostName());
+  }
+
+  function isIndexableHost() {
+    return !!INDEXABLE_HOSTS[hostName()];
   }
 
   function siteBase() {
@@ -56,7 +65,7 @@
     var head = document.head || document.getElementsByTagName("head")[0];
     if (!head) return;
 
-    if (isErrorPath() || isGithubPages()) {
+    if (isErrorPath() || !isIndexableHost()) {
       upsertMeta("name", "robots", "noindex, follow");
       upsertMeta("name", "googlebot", "noindex, follow");
       if (isErrorPath()) {

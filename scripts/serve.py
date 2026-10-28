@@ -58,15 +58,17 @@ class RewriteHandler(SimpleHTTPRequestHandler):
 
         fragment = ""
         if query:
-            redirect = True
             for key, value in query:
                 lower = key.lower()
                 if lower == "target" and value:
                     fragment = "#" + value.lower()
+                    redirect = True
                 elif lower == "kb" and value:
                     fragment = "#" + value.lower() + "kb"
+                    redirect = True
                 elif lower == "mb" and value:
                     fragment = "#" + value.lower() + "mb"
+                    redirect = True
 
         if not redirect:
             return None

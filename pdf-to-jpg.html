@@ -22,9 +22,9 @@
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://epdfconverter.com/pdf-to-jpg">
-<script src="js/canonical.js?v=7"></script>
+<script src="js/canonical.js?v=8"></script>
 <link rel="stylesheet" href="css/styles.css?v=22">
-<link rel="stylesheet" href="css/reference.css?v=59">
+<link rel="stylesheet" href="css/reference.css?v=60">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -61,7 +61,7 @@
       "name": "How do I convert PDF to JPG?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Select or drag your PDF into the box above, then click Convert to JPG. Every page is extracted as a JPG image."
+        "text": "Drop a PDF into the box, choose 72-300 DPI and JPEG quality, then click Convert to JPG. Each page downloads as its own .jpg. 150 DPI is enough for screens; use 300 DPI for print."
       }
     },
     {
@@ -69,7 +69,7 @@
       "name": "Is the PDF to JPG converter free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. It is completely free with no sign-up, no paywall and no limits."
+        "text": "Yes. No account or watermark. Pages are rendered with PDF.js in your browser, so the only limit is your device memory — not a daily quota."
       }
     },
     {
@@ -433,7 +433,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       <a href="/about">About</a>
     </nav>
     <div class="nav-actions">
-      <button type="button" class="theme-btn" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false"><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button><div class="drop lang-drop"><button type="button" class="drop-toggle lang-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="lang-menu"><svg class="lang-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/><path d="M2 12h20"/></svg><span class="lang-label">English</span><span class="caret"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div class="drop-menu lang-menu" id="lang-menu"><a href="#" class="lang-option active" data-lang="en">English</a><a href="#" class="lang-option" data-lang="hi">हिन्दी</a><a href="#" class="lang-option" data-lang="es">Español</a><a href="#" class="lang-option" data-lang="fr">Français</a><a href="#" class="lang-option" data-lang="ar">العربية</a></div></div>
+      <button type="button" class="theme-btn" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false"><svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg><svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button><div class="drop lang-drop"><button type="button" class="drop-toggle lang-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="lang-menu"><svg class="lang-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/><path d="M2 12h20"/></svg><span class="lang-label">English</span><span class="caret"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div class="drop-menu lang-menu" id="lang-menu"><button type="button" class="lang-option active" data-lang="en">English</button><button type="button" class="lang-option" data-lang="hi">हिन्दी</button><button type="button" class="lang-option" data-lang="es">Español</button><button type="button" class="lang-option" data-lang="fr">Français</button><button type="button" class="lang-option" data-lang="ar">العربية</button></div></div>
       <a class="btn btn-primary" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg> All Tools</a>
       <span class="menu" id="nav-menu" role="button" tabindex="0" aria-label="Toggle navigation menu">&#9776;</span>
     </div>
@@ -569,9 +569,9 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
       <p>A quick look at what PDF to JPG conversion does and when it helps.</p>
     </div>
     <div class="seo-prose">
-      <p>PDF to JPG conversion takes each page of a PDF and renders it as a separate JPG image. Instead of one document, you get one picture per page, ready to use anywhere images work.</p>
-      <p>People convert PDF pages to JPG when they want to post a single page on a website or social media, insert it into a slideshow or document, or send just one page of a longer file. The tool keeps the original PDF untouched and only creates new JPG images from its pages.</p>
-      <p>Everything is processed locally in your browser using a PDF renderer, so your file never leaves your device. There is no upload and no waiting on a server.</p>
+      <p>This tool renders every PDF page as its own JPG. Use it when a portal, WhatsApp chat or CMS will not accept a PDF, or when you only need one page from a longer file as a picture.</p>
+      <p>Pick 72 to 300 DPI before converting. 150 DPI is enough for screens and most forms; 300 DPI is better for print. Quality is a JPEG slider, so you can trade file size against sharpness without opening another app.</p>
+      <p>Pages are drawn locally with PDF.js. The source PDF is never uploaded, and each page downloads as a separate <code>.jpg</code>. To go the other way and bind images back into one file, open <a href="/jpg-to-pdf">JPG to PDF</a>.</p>
     </div>
   </section>
 
@@ -613,7 +613,7 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
   <section class="home-section">
     <div class="home-section-head">
       <h2>Why use ePDFConverter for PDF to JPG?</h2>
-      <p>Simple, safe and completely free — built around your privacy.</p>
+      <p>Built for extracting pages as pictures, with DPI and quality you control.</p>
     </div>
     <div class="feature-grid">
       <div class="feature reveal">
@@ -648,11 +648,11 @@ try{var _t=localStorage.getItem("epdf-theme");if(_t==="dark"||(!_t&&window.match
     <div class="faq-list">
       <details class="faq-item reveal">
         <summary class="faq-q"><span class="faq-q-inner">How do I convert PDF to JPG?<span class="faq-chev">&#8964;</span></span></summary>
-        <div class="faq-a"><p>Select or drag your PDF into the box above, then click Convert to JPG. Every page is extracted as a JPG image.</p></div>
+        <div class="faq-a"><p>Drop a PDF into the box, choose 72–300 DPI and JPEG quality, then click Convert to JPG. Each page downloads as its own <code>.jpg</code>. 150 DPI is enough for screens; use 300 DPI for print.</p></div>
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><span class="faq-q-inner">Is the PDF to JPG converter free?<span class="faq-chev">&#8964;</span></span></summary>
-        <div class="faq-a"><p>Yes. It is completely free with no sign-up, no paywall and no limits.</p></div>
+        <div class="faq-a"><p>Yes. No account or watermark. Pages are rendered with PDF.js in your browser, so the only limit is your device memory — not a daily quota.</p></div>
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><span class="faq-q-inner">Are my PDF files uploaded?<span class="faq-chev">&#8964;</span></span></summary>

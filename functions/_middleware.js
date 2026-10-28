@@ -81,13 +81,13 @@ export async function onRequest(context) {
 
   let hash = "";
   if (url.search) {
-    redirect = true;
     url.searchParams.forEach(function (value, key) {
       const k = key.toLowerCase();
       if (k === "target" && value) hash = "#" + String(value).toLowerCase();
       if (k === "kb" && value) hash = "#" + String(value).toLowerCase() + "kb";
       if (k === "mb" && value) hash = "#" + String(value).toLowerCase() + "mb";
     });
+    if (hash) redirect = true;
   }
 
   if (!redirect) {
