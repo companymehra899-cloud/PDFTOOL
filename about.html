@@ -23,7 +23,7 @@
 
 <link rel="canonical" href="https://epdfconverter.com/about">
 <script src="js/canonical.js?v=8"></script>
-<link rel="stylesheet" href="css/reference.css?v=60">
+<link rel="stylesheet" href="css/reference.css?v=61">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,7 +51,36 @@
 <meta name="twitter:description" content="Learn about ePDFConverter — a free, privacy-first suite of browser-based PDF and image tools. Your files never leave your device.">
 
 <style>
-  .about-hero { padding-bottom: 26px; }
+  main.container {
+    max-width: 1200px !important;
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+  footer > .container {
+    max-width: 1200px !important;
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+  .about-hero { padding-bottom: 26px; text-align: center; }
+  .home-hero.about-hero .hero-sub {
+    display: block;
+    width: 100%;
+    max-width: 100% !important;
+    margin: 0 auto 8px !important;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 15.5px !important;
+  }
+  @media (max-width: 1180px) {
+    .home-hero.about-hero .hero-sub { white-space: normal; }
+  }
+  @media (max-width: 640px) {
+    main.container,
+    footer > .container {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+  }
   .about-wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 26px; margin-bottom: 30px; align-items: start; }
   .about-card {
     background: var(--card);
